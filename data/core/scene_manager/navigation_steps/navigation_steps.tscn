@@ -7,8 +7,13 @@
 [ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/editor_step.png" type="Texture" id=5]
 [ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/menu_step.png" type="Texture" id=6]
 
-[node name="NavigationSteps" type="Node"]
+[node name="NavigationSteps" type="ReferenceRect"]
+anchor_bottom = 1.0
+margin_right = 80.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ExitButton" parent="." instance=ExtResource( 2 )]
 hint_tooltip = "Exit the programm"
