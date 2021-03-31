@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/plant_models/RoadConstructionSite/SpatialElements/Meshes/Import/HighCar_Red.mesh" type="ArrayMesh" id=1]
+
+
+
+
+[node name="HighCar_Red" type="MeshInstance"]
+mesh = ExtResource( 1 )
+skeleton = NodePath("")
+material/0 = null

@@ -1,0 +1,7 @@
+{
+    "Title": "[center]Temporary\nTraffic\nLights[/center]",
+    "Description": "Temporary traffic lights are installed on construction sites to control the traffic. Depending on the degree of maturity, the traffic light detects a waiting car and can react to the situation or simply switches through a fixed-time program.",
+    "Goal": "Program the traffic light on the construction site.",
+	"Simulation": "res://Data/Model/SfcSimulation/PlantModels/RoadConstructionSite/RoadConstructionSite.tscn",
+	"Test": "res://Data/Model/SfcSimulation/PlantModels/RoadConstructionSite/RoadConstructionSiteTest.tscn"
+}
