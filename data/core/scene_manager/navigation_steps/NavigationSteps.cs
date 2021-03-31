@@ -1,10 +1,11 @@
 using Godot;
-using SfcSandbox.Data.Model;
 
-namespace SfcSandbox.Data.Main
+
+namespace Osls.Navigation
 {
     /// <summary>
     /// Controls the access to the navigation steps and notifies the upper node.
+    /// Careful: With the update of 3.2+ the button behaviour changed with the events.
     /// </summary>
     public class NavigationSteps : Node
     {
@@ -18,7 +19,7 @@ namespace SfcSandbox.Data.Main
         #endregion
         
         
-        #region ==================== Updates ====================
+        #region ==================== Public Methods ====================
         public override void _Ready()
         {
             _mainNode = GetNode<MainNode>("..");
@@ -33,79 +34,61 @@ namespace SfcSandbox.Data.Main
             _exitButton = GetNode<Button>("ExitButton");
             _exitButton.Connect("toggled", this, nameof(ExitButtonToggled));
         }
-        #endregion
         
-        
-        #region ==================== Updates ====================
         /// <summary>
         /// Updates the navigation step button visibility to the given view.
         /// </summary>
-        public void VisibleViewIs(EditorView view)
+        public void VisibleViewIs(PageCategory view)
         {
-            _landingPageButton.Pressed = view == EditorView.LandingPage;
-            _sfcStepButton.Pressed = view == EditorView.SfcStep;
-            _sfcStepButton.Disabled = view == EditorView.LandingPage;
-            _simulationStepButton.Pressed = view == EditorView.SimulationStep;
-            _simulationStepButton.Disabled = view == EditorView.LandingPage;
-            _examinationStepButton.Pressed = view == EditorView.ExaminationStep;
-            _examinationStepButton.Disabled = view == EditorView.LandingPage;
-            _exitButton.Pressed = view == EditorView.Exit;
+            _landingPageButton.Pressed = view == PageCategory.LandingPage;
+            _sfcStepButton.Pressed = view == PageCategory.LogicEditor;
+            _sfcStepButton.Disabled = view == PageCategory.LandingPage;
+            _simulationStepButton.Pressed = view == PageCategory.Simulation;
+            _simulationStepButton.Disabled = view == PageCategory.LandingPage;
+            _examinationStepButton.Pressed = view == PageCategory.Examination;
+            _examinationStepButton.Disabled = view == PageCategory.LandingPage;
+            _exitButton.Pressed = view == PageCategory.Exit;
         }
         #endregion
         
         
-        #region ==================== Private Methods ====================
+        #region ==================== Helpers ====================
         private void LandingPageButtonToggled(bool pressed)
         {
-            if (pressed)
-            {
-                _mainNode.UserRequestsChangeTo(EditorView.LandingPage);
-            }
-            else
-            {
-                _landingPageButton.Pressed = true; // Simple visual effect
-            }
+            UpdateButtonState(_landingPageButton, PageCategory.LandingPage, pressed);
         }
         
         private void SfcStepButtonToggled(bool pressed)
         {
-            if (pressed)
-            {
-                _mainNode.UserRequestsChangeTo(EditorView.SfcStep);
-            }
-            else
-            {
-                _sfcStepButton.Pressed = true; // Simple visual effect
-            }
+            UpdateButtonState(_sfcStepButton, PageCategory.LogicEditor, pressed);
         }
         
         private void SimulationStepButtonToggled(bool pressed)
         {
-            if (pressed)
-            {
-                _mainNode.UserRequestsChangeTo(EditorView.SimulationStep);
-            }
-            else
-            {
-                _simulationStepButton.Pressed = true; // Simple visual effect
-            }
+            UpdateButtonState(_simulationStepButton, PageCategory.Simulation, pressed);
         }
         
         private void ExaminationStepButtonToggled(bool pressed)
         {
-            if (pressed)
-            {
-                _mainNode.UserRequestsChangeTo(EditorView.ExaminationStep);
-            }
-            else
-            {
-                _examinationStepButton.Pressed = true; // Simple visual effect
-            }
+            UpdateButtonState(_examinationStepButton, PageCategory.Examination, pressed);
         }
         
         private void ExitButtonToggled(bool pressed)
         {
-            _mainNode.UserRequestsChangeTo(EditorView.Exit);
+            UpdateButtonState(_exitButton, PageCategory.Exit, pressed);
+        }
+        
+        private void UpdateButtonState(Button button, PageCategory pages, bool pressed)
+        {
+            if (pressed)
+            {
+                _mainNode.UserRequestsChangeTo(pages);
+                button.MouseFilter = Control.MouseFilterEnum.Ignore;
+            }
+            else
+            {
+                button.MouseFilter = Control.MouseFilterEnum.Stop;
+            }
         }
         #endregion
     }

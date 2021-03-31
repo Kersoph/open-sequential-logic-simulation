@@ -7,11 +7,6 @@
 [ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/editor_step.png" type="Texture" id=5]
 [ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/menu_step.png" type="Texture" id=6]
 
-
-
-
-
-
 [node name="NavigationSteps" type="Node"]
 script = ExtResource( 1 )
 
@@ -58,7 +53,6 @@ anchor_bottom = 0.0
 margin_top = 60.0
 margin_bottom = 134.277
 hint_tooltip = "Return to the menu"
-pressed = true
 icon = ExtResource( 6 )
 
 [node name="HeaderButton" parent="." instance=ExtResource( 2 )]

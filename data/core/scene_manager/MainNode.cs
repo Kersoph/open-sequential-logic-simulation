@@ -1,7 +1,9 @@
 using Godot;
-using SfcSandbox.Data.Model;
+using Osls.Navigation;
+using Osls.Lesson;
 
-namespace SfcSandbox.Data.Main
+
+namespace Osls
 {
     /// <summary>
     /// Top node connected to the main tree. It will be rendered to the main window.
@@ -15,66 +17,56 @@ namespace SfcSandbox.Data.Main
         #endregion
         
         
-        #region ==================== Updates ====================
+        #region ==================== Public Methods ====================
         public override void _Ready()
         {
             _lessonController = new LessonController(this);
             _navigationSteps = GetNode<NavigationSteps>("NavigationSteps");
-            ChangeEditorTo(EditorView.LandingPage);
+            ChangePageTo(PageCategory.LandingPage);
         }
         
         public override void _Notification(int id)
         {
             if (id == MainLoop.NotificationWmQuitRequest)
             {
-                QuitSfcSandbox();
+                UserRequestsChangeTo(PageCategory.Exit);
             }
         }
-        #endregion
         
-        
-        #region ==================== Public Methods ====================
         /// <summary>
-        /// Opens up a new lesson and changes the view to the SfcEditor step.
+        /// Opens up a new lesson and changes the view to the editor step.
         /// </summary>
         public void OpenNewLesson(LessonEntity lessonData)
         {
             _lessonController.ApplyNewLesson(lessonData);
-            ChangeEditorTo(EditorView.SfcStep);
+            ChangePageTo(PageCategory.LogicEditor);
         }
         
         /// <summary>
-        /// Requests a change of the current editor to the new editor.
+        /// Requests a change of the current page to the new page.
         /// Used to privide the possibility for the user to save or cancel the action.
         /// </summary>
-        public void UserRequestsChangeTo(EditorView editorView)
+        public void UserRequestsChangeTo(PageCategory page)
         {
-            switch (editorView)
-            {
-                case EditorView.Exit:
-                    QuitSfcSandbox();
-                    break;
-                default:
-                    ChangeEditorTo(editorView);
-                    break;
-            }
+            _lessonController.UserRequestsChangeTo(page);
         }
         
         /// <summary>
-        /// Changes the main editor to the given view. Forced.
+        /// Changes the main page to the given view. Forced.
         /// </summary>
-        public void ChangeEditorTo(EditorView editorView)
+        public void ChangePageTo(PageCategory page)
         {
-            _lessonController.ChangeEditorTo(editorView);
-            _navigationSteps.VisibleViewIs(editorView);
+            _lessonController.ApplyPage(page);
+            _navigationSteps.VisibleViewIs(page);
+            if (page == PageCategory.Exit) QuitSfcSandbox();
         }
         #endregion
         
         
-        #region ==================== Public Methods ====================
+        #region ==================== Helpers ====================
         private void QuitSfcSandbox()
         {
-            this.GetTree().Quit();
+            GetTree().Quit();
         }
         #endregion
     }
