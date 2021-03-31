@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://data/core/scene_manager/navigation_steps/NavigationSteps.cs" type="Script" id=1]
+[ext_resource path="res://data/core/scene_manager/navigation_steps/navigation_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/examination_step.png" type="Texture" id=3]
+[ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/simulation_step.png" type="Texture" id=4]
+[ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/editor_step.png" type="Texture" id=5]
+[ext_resource path="res://data/core/scene_manager/navigation_steps/symbols/menu_step.png" type="Texture" id=6]
+
+
+
+
+
+
+[node name="NavigationSteps" type="Node"]
+script = ExtResource( 1 )
+
+[node name="ExitButton" parent="." instance=ExtResource( 2 )]
+hint_tooltip = "Exit the programm"
+
+[node name="FillerButton" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.0
+margin_top = 380.0
+margin_bottom = -80.0
+disabled = true
+icon = null
+
+[node name="ExaminationStepButton" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_top = 300.0
+margin_bottom = 380.0
+hint_tooltip = "Open the test site"
+disabled = true
+icon = ExtResource( 3 )
+
+[node name="SimulationStepButton" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_top = 220.0
+margin_bottom = 300.0
+hint_tooltip = "Open simulation"
+disabled = true
+icon = ExtResource( 4 )
+
+[node name="SfcStepButton" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_top = 140.0
+margin_bottom = 220.0
+hint_tooltip = "Open SFC editor"
+disabled = true
+icon = ExtResource( 5 )
+
+[node name="LandingPageButton" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_top = 60.0
+margin_bottom = 134.277
+hint_tooltip = "Return to the menu"
+pressed = true
+icon = ExtResource( 6 )
+
+[node name="HeaderButton" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_top = 0.0
+margin_bottom = 60.0
+hint_tooltip = "Return to the menu"
+disabled = true
+toggle_mode = false
+text = "NW"
+icon = null

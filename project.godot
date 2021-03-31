@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="open_sequential_logic_sandbox"
+run/main_scene="res://data/core/scene_manager/main.tscn"
 
 [rendering]
 

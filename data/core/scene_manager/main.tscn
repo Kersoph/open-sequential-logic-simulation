@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/core/scene_manager/MainNode.cs" type="Script" id=1]
+[ext_resource path="res://data/core/scene_manager/navigation_steps/navigation_steps.tscn" type="PackedScene" id=2]
+
+[node name="MainNode" type="Node"]
+script = ExtResource( 1 )
+
+[node name="NavigationSteps" parent="." instance=ExtResource( 2 )]
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71206, 0.195395, -0.227105 )
