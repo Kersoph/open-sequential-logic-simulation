@@ -42,7 +42,7 @@ namespace Osls.Lesson
         /// </summary>
         public void UserRequestsChangeTo(PageCategory page)
         {
-            if (_currentPage.ScenePage == page) return;
+            if (_currentPage == null || _currentPage.ScenePage == page) return;
             _currentPage.OnUserRequestsChange(_mainNode, page);
         }
         
