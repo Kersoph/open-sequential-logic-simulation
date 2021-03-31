@@ -1,6 +1,5 @@
 using Godot;
 using Osls.Navigation;
-using Osls.Lesson;
 
 
 namespace Osls

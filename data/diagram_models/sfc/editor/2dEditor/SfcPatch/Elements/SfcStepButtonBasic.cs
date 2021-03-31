@@ -1,6 +1,6 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Abstract class for sfc step buttons as we can not use an interface

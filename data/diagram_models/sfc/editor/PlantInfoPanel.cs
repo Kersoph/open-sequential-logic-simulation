@@ -1,9 +1,10 @@
 using Godot;
-using SfcSandbox.Data.Model.SfcSimulation;
 using System.Text;
 using System.Collections.Generic;
+using Osls.Plants;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Provides an info panel with the inputs and outputs of the simulated plant.
@@ -11,7 +12,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
     public class PlantInfoPanel : ColorRect
     {
         #region ==================== Fields Properties ====================
-        private SimulationControlNode _simulationControlNode;
+        private SimulationPage _simulationControlNode;
         #endregion;
         
         
@@ -19,7 +20,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
         /// <summary>
         /// Creates the text for the plant info panel according to the simulation interface
         /// </summary>
-        public void SetSimulationInfo(SimulationControlNode simulationControlNode)
+        public void SetSimulationInfo(SimulationPage simulationControlNode)
         {
             _simulationControlNode = simulationControlNode;
             UpdateText(false);

@@ -1,14 +1,14 @@
 using Godot;
-using SfcSandbox.Data.Model.SfcEditor;
+using Osls.SfcEditor;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.EditorControls
+namespace Osls.SfcSimulation.EditorControls
 {
     public class EditorZoomOut : Button
     {
         public override void _Ready()
         {
-            this.Connect("button_up", this, nameof(ButtonUpEvent));
+            Connect("button_up", this, nameof(ButtonUpEvent));
         }
         
         public void ButtonUpEvent()

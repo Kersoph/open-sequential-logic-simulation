@@ -18,6 +18,15 @@ _global_script_class_icons={
 config/name="open_sequential_logic_sandbox"
 run/main_scene="res://data/core/scene_manager/main.tscn"
 
+[display]
+
+window/size/width=1920
+window/size/height=1017
+
+[filesystem]
+
+import/open_asset_import/use_fbx=false
+
 [rendering]
 
 environment/default_environment="res://data/core/environment/default.tres"

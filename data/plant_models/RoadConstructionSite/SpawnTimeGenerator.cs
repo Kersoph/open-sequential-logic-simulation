@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcSimulation.PlantModels.RoadConstructionSite
+namespace Osls.SfcSimulation.PlantModels.RoadConstructionSite
 {
     public static class SpawnTimeGenerator
     {
@@ -44,7 +44,7 @@ namespace SfcSandbox.Data.Model.SfcSimulation.PlantModels.RoadConstructionSite
         {
             LastSpawnNumber = (LastSpawnNumber + SpawnSeed) % SpawnModulator;
             float spawnTime = Godot.Mathf.Exp(LastSpawnNumber * Lambda) + Offset;
-            return (int)(spawnTime * (float)SfcSandbox.Data.Model.SfcSimulation.Engine.Master.StepUpdateFrequency);
+            return (int)(spawnTime * (float)Osls.SfcSimulation.Engine.Master.StepUpdateFrequency);
         }
         
         /// <summary>

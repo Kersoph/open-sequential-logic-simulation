@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcSimulation.PlantModels.RoadConstructionSite
+namespace Osls.SfcSimulation.PlantModels.RoadConstructionSite
 {
     public class DynamicCarReport
     {

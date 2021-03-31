@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Boolean
+namespace Osls.SfcEditor.Interpreter.Boolean
 {
     /// <summary>
     /// Used to link boolean outputs of the plant to the transition

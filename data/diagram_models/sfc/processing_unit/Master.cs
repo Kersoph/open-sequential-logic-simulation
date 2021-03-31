@@ -1,7 +1,7 @@
-using SfcSandbox.Data.Model.SfcEditor;
+using Osls.SfcEditor;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.Engine
+namespace Osls.SfcSimulation.Engine
 {
     /// <summary>
     /// The simulation engine master which controls and updates the plant and the PLC.

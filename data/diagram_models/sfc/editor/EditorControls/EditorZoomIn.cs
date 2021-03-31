@@ -1,8 +1,8 @@
 using Godot;
-using SfcSandbox.Data.Model.SfcEditor;
+using Osls.SfcEditor;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.EditorControls
+namespace Osls.SfcSimulation.EditorControls
 {
     public class EditorZoomIn : Button
     {

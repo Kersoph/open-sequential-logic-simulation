@@ -1,7 +1,7 @@
 using Godot;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.PlantModels.RoadConstructionSite
+namespace Osls.SfcSimulation.PlantModels.RoadConstructionSite
 {
     /// <summary>
     /// First implementation with an area collider.

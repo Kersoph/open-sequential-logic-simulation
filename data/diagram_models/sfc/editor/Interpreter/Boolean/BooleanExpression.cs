@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Boolean
+namespace Osls.SfcEditor.Interpreter.Boolean
 {
     /// <summary>
     /// Base class for all boolean expressions

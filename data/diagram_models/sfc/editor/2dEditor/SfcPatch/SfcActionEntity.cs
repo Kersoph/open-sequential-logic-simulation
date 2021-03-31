@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcEditor
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Entity class for the data in one action description in a patch field

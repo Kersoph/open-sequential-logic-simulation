@@ -1,7 +1,8 @@
 using Godot;
 using System.IO;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Topmost node for the Sfc2dEditorNode.tscn
@@ -97,7 +98,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
         
         public void ApplyDiagramScale(Vector2 scale)
         {
-            _renderViewportReferenceRect.SetScale(scale);
+            _renderViewportReferenceRect.RectScale = scale;
         }
         
         public void ApplyDiagramOffset(Vector2 position)

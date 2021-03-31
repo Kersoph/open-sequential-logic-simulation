@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-namespace SfcSandbox.Data.Model.LandingPage
+
+namespace Osls.LandingPage
 {
     /// <summary>
     /// Controls the simulations shown in the LessonPreviewViewport

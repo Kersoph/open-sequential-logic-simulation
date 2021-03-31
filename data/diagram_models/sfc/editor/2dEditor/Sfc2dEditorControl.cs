@@ -1,9 +1,10 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter;
+using Osls.SfcEditor.Interpreter;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Control class to the Sfc2dEditorNode

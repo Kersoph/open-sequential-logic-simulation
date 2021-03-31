@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using SfcSandbox.Data.Model.SfcEditor;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter;
+using Osls.SfcEditor;
+using Osls.SfcEditor.Interpreter;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.Engine
+namespace Osls.SfcSimulation.Engine
 {
     public static class SfcStepBuilder
     {

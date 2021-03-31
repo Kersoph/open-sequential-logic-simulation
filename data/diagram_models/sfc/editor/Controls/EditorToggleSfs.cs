@@ -1,6 +1,7 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.SfcEditor.Controls
+
+namespace Osls.SfcEditor.Controls
 {
     public class EditorToggleSfs : Button
     {

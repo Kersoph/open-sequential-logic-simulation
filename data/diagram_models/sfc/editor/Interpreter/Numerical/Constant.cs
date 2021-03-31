@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Numerical
+namespace Osls.SfcEditor.Interpreter.Numerical
 {
     /// <summary>
     /// Represents an constant integer

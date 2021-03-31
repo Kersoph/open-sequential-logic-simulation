@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter.Numerical;
+using Osls.SfcEditor.Interpreter.Numerical;
 
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Boolean
+namespace Osls.SfcEditor.Interpreter.Boolean
 {
     /// <summary>
     /// Preforms an relational operation on the given data

@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcSimulation.Engine
+namespace Osls.SfcSimulation.Engine
 {
     public class ProgrammableLogicController
     {

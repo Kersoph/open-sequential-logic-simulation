@@ -1,8 +1,9 @@
 using Godot;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter.Assignment;
+using Osls.SfcEditor.Interpreter;
+using Osls.SfcEditor.Interpreter.Assignment;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     public class ActionEditor : Control
     {
@@ -36,7 +37,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
             _actionDescriptionNode.Text = action.Action;
             _isRelevant = !string.IsNullOrEmpty(_actionDescriptionNode.Text);
             AssignmentExpression expression = ActionMaster.InterpretTransitionText(action.Action);
-            _actionDescriptionNode.SetTooltip(expression == null ? "???" : expression.ToString());
+            _actionDescriptionNode.HintTooltip = expression == null ? "???" : expression.ToString();
             bool validExpression = expression != null && expression.IsValid();
             Color background = validExpression ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);
             _actionDescriptionNode.AddColorOverride("background_color", background);
@@ -61,14 +62,14 @@ namespace SfcSandbox.Data.Model.SfcEditor
         private void OnTextEditorFocusExited()
         {
             CheckRelevancy();
-            if(_isRelevant) _controller.UserChangedData(this, _selectedQualifier, _actionDescriptionNode.Text);
+            if (_isRelevant) _controller.UserChangedData(this, _selectedQualifier, _actionDescriptionNode.Text);
         }
         
         private void OnPopupElementSelected(int id)
         {
             _selectedQualifier = (ActionQualifier)id;
             SetQualifierText(id);
-            if(_isRelevant) _controller.UserChangedData(this, _selectedQualifier, _actionDescriptionNode.Text);
+            if (_isRelevant) _controller.UserChangedData(this, _selectedQualifier, _actionDescriptionNode.Text);
         }
         
         private void SetQualifierText(int qualifierId)

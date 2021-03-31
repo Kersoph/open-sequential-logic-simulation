@@ -1,8 +1,8 @@
-using SfcSandbox.Data.Model.SfcEditor;
+using Osls.SfcEditor;
 using System.Collections.Generic;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.Engine
+namespace Osls.SfcSimulation.Engine
 {
     public class SfcProgramm
     {

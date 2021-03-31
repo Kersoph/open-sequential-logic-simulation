@@ -1,7 +1,7 @@
 using Godot;
-using SfcSandbox.Data.Model.LandingPage.LessonSourceController;
 
-namespace SfcSandbox.Data.Model.LandingPage
+
+namespace Osls.LandingPage
 {
     /// <summary>
     /// Represents the LessonsNode in the godot UI.

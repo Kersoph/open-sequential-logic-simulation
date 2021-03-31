@@ -1,30 +1,31 @@
 using Godot;
-using SfcSandbox.Data.Model;
-using SfcSandbox.Data.Main;
 
-namespace SfcSandbox.Data.Model.LandingPage
+
+namespace Osls.LandingPage
 {
     /// <summary>
-    /// Topmost node for the lesson langing page.
+    /// Topmost node for the lesson landing page.
     /// Notifies the main node which lesson should be started.
     /// </summary>
-    public class LandingPageNode : Node
+    public class LandingPageNode : PageModule
     {
-        #region ==================== Fields ====================
+        #region ==================== Fields / Properties ====================
         private const string MainViewPath = "..";
         private MainNode _mainNode;
-        #endregion
         
-        
-        #region ==================== Updates ====================
-        public override void _Ready()
-        {
-            _mainNode = GetNode<MainNode>(MainViewPath);
-        }
+        /// <summary>
+        /// Gets the scene page type
+        /// </summary>
+        public override PageCategory ScenePage { get { return PageCategory.LandingPage; } }
         #endregion
         
         
         #region ==================== Public Methods ====================
+        public override void _Ready()
+        {
+            _mainNode = GetNode<MainNode>(MainViewPath);
+        }
+        
         /// <summary>
         /// The currently selected lesson will be told tho the main view to
         /// switch from the landing page to the SFC editor.

@@ -1,8 +1,8 @@
 using Godot;
-using SfcSandbox.Data.Environment;
-using SfcSandbox.Data.Model.LandingPage.LessonSourceController;
+using Osls.Environment;
 
-namespace SfcSandbox.Data.Model.LandingPage
+
+namespace Osls.LandingPage
 {
     /// <summary>
     /// Represents the LessonSelectionGridNode in the godot UI.

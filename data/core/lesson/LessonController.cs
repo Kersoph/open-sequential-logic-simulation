@@ -1,7 +1,7 @@
 using Godot;
 
 
-namespace Osls.Lesson
+namespace Osls
 {
     /// <summary>
     /// Control calass to the active lesson entity.

@@ -1,7 +1,7 @@
 using Godot;
-using SfcSandbox.Data.Main;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Top node for the whole sfc editor view.

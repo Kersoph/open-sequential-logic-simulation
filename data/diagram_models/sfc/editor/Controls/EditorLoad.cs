@@ -1,12 +1,13 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.SfcEditor.Controls
+
+namespace Osls.SfcEditor
 {
     public class EditorLoad : Button
     {
         public override void _Ready()
         {
-            this.Connect("button_up", this, nameof(ButtonUpEvent));
+            Connect("button_up", this, nameof(ButtonUpEvent));
         }
         
         public void ButtonUpEvent()

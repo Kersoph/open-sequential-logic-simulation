@@ -23,19 +23,19 @@ margin_right = -514.0
 margin_bottom = -302.0
 
 [node name="Background" type="ColorRect" parent="LessonsNode/LessonSelectorContainer"]
-margin_right = 430.0
-margin_bottom = 298.0
+margin_right = 1326.0
+margin_bottom = 715.0
 color = Color( 0.784314, 0.784314, 0.784314, 1 )
 
 [node name="LessonCenterContainer" type="CenterContainer" parent="LessonsNode/LessonSelectorContainer"]
-margin_right = 430.0
-margin_bottom = 298.0
+margin_right = 1326.0
+margin_bottom = 715.0
 
 [node name="LessonSelectionGridNode" type="GridContainer" parent="LessonsNode/LessonSelectorContainer/LessonCenterContainer"]
-margin_left = 215.0
-margin_top = 149.0
-margin_right = 215.0
-margin_bottom = 149.0
+margin_left = 663.0
+margin_top = 357.0
+margin_right = 663.0
+margin_bottom = 357.0
 custom_constants/vseparation = 100
 custom_constants/hseparation = 100
 columns = 4
@@ -50,21 +50,21 @@ margin_top = -300.0
 margin_right = -514.0
 
 [node name="Background" type="ColorRect" parent="LessonsNode/LessonStartContainer"]
-margin_right = 430.0
+margin_right = 1326.0
 margin_bottom = 300.0
 color = Color( 0.784314, 0.784314, 0.784314, 1 )
 
 [node name="LessonStartController" type="CenterContainer" parent="LessonsNode/LessonStartContainer"]
-margin_right = 430.0
+margin_right = 1326.0
 margin_bottom = 300.0
 script = ExtResource( 4 )
 
 [node name="LessonStartButton" parent="LessonsNode/LessonStartContainer/LessonStartController" instance=ExtResource( 5 )]
 anchor_top = 0.0
 anchor_bottom = 0.0
-margin_left = 15.0
+margin_left = 463.0
 margin_top = 100.0
-margin_right = 415.0
+margin_right = 863.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 400, 100 )
 disabled = true

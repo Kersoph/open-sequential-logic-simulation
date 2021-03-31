@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using SfcSandbox.Data.Model.SfcEditor;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter.Assignment;
+using Osls.SfcEditor;
+using Osls.SfcEditor.Interpreter;
+using Osls.SfcEditor.Interpreter.Assignment;
 
-namespace SfcSandbox.Data.Model.SfcSimulation.Engine
+namespace Osls.SfcSimulation.Engine
 {
     public class SfcStep
     {

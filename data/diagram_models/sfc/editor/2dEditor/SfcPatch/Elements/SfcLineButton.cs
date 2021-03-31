@@ -1,6 +1,6 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Topmost node for the SFC line.

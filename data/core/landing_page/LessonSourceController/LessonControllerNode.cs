@@ -1,6 +1,7 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.LandingPage.LessonSourceController
+
+namespace Osls.LandingPage
 {
     /// <summary>
     /// Topmost node for the lesson patch fields.
@@ -44,7 +45,7 @@ namespace SfcSandbox.Data.Model.LandingPage.LessonSourceController
         public void ResetButtonStatus()
         {
             Button lessonButton = GetNode<Button>("LessonButton");
-            lessonButton.SetPressed(false);
+            lessonButton.Pressed = false;
         }
         #endregion
         

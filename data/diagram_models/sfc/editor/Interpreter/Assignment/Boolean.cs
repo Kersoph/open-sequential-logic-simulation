@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Assignment
+namespace Osls.SfcEditor.Interpreter.Assignment
 {
     /// <summary>
     /// Represents an boolean assignment

@@ -1,4 +1,4 @@
-namespace Osls.Models
+namespace Osls
 {
     /// <summary>
     /// Top node for the model editor view.

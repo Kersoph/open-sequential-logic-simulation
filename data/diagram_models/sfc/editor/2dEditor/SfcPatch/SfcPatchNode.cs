@@ -1,7 +1,7 @@
 using Godot;
-using System;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Topmost node for the SfcPatchNode.tscn

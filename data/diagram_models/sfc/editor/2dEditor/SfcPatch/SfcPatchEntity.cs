@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Entity calss to store the informations for a SFC patch

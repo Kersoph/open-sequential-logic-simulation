@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.PlantModels.RoadConstructionSite
+namespace Osls.SfcSimulation.PlantModels.RoadConstructionSite
 {
     /// <summary>
     /// Controls the cars in the simulation

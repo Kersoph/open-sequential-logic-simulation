@@ -1,8 +1,8 @@
 using Godot;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter.Boolean;
+using Osls.SfcEditor.Interpreter;
+using Osls.SfcEditor.Interpreter.Boolean;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Topmost node for the SfcTransitionNode.tscn
@@ -38,7 +38,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
                 if (!string.IsNullOrEmpty(transitionText))
                 {
                     BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText);
-                    _textEdit.SetTooltip(expression == null ? "???" : expression.ToString());
+                    _textEdit.HintTooltip = expression == null ? "???" : expression.ToString();
                     bool validExpression = expression != null && expression.IsValid();
                     Color background = validExpression ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);
                     _textEdit.AddColorOverride("background_color", background);

@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Numerical
+namespace Osls.SfcEditor.Interpreter.Numerical
 {
     /// <summary>
     /// Base class for all numerical expressions

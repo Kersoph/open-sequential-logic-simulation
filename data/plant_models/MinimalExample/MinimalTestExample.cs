@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcSimulation.MinimalExample
+namespace Osls.SfcSimulation.MinimalExample
 {
     /// <summary>
     /// Minimal example calss for a test viewer.

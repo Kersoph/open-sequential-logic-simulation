@@ -1,6 +1,6 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Topmost node for the SfcStepButton.tscn
@@ -18,7 +18,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
         /// </summary>
         public override void SetEditorText(string text)
         {
-            GetNode<TextEdit>("StepNameEditor").SetText(text);
+            GetNode<TextEdit>("StepNameEditor").Text = text;
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
         /// </summary>
         private void OnTextEditorFocusExited()
         {
-            string stepName = GetNode<TextEdit>("StepNameEditor").GetText();
+            string stepName = GetNode<TextEdit>("StepNameEditor").Text;
             GetNode<SfcStepNode>("..").NotifyUserUpdatedName(stepName);
         }
         #endregion

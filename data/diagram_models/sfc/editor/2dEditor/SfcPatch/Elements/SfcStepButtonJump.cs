@@ -1,7 +1,7 @@
 using Godot;
-using SfcSandbox.Data.Model.SfcEditor.Interpreter;
+using Osls.SfcEditor.Interpreter;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+namespace Osls.SfcEditor
 {
     public class SfcStepButtonJump : SfcStepButtonBasic
     {
@@ -17,7 +17,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
         public override void SetEditorText(string text)
         {
             TextEdit node = GetNode<TextEdit>("StepNameEditor");
-            node.SetText(text);
+            node.Text = text;
             bool validReference = StepMaster.ContainsStep(text);
             Color background = validReference ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);
             node.AddColorOverride("background_color", background);
@@ -32,7 +32,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
         /// </summary>
         private void OnTextEditorFocusExited()
         {
-            string stepName = GetNode<TextEdit>("StepNameEditor").GetText();
+            string stepName = GetNode<TextEdit>("StepNameEditor").Text;
             GetNode<SfcStepNode>("..").NotifyUserUpdatedName(stepName);
         }
         #endregion

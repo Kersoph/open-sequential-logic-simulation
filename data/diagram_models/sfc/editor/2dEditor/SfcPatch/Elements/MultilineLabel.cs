@@ -1,6 +1,6 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Represents the MultilineLabel in Godot used fot the SfcStepButton.

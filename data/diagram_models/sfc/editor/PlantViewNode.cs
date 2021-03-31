@@ -1,8 +1,8 @@
 using Godot;
-using System;
-using SfcSandbox.Data.Model.SfcSimulation;
+using Osls.Plants;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Controls the palant view to the simulation through the viewport.
@@ -14,7 +14,7 @@ namespace SfcSandbox.Data.Model.SfcEditor
         /// The entity loaded by the PlantViewNode to provide access to the simulation interface.
         /// Can be null or Godot Invalid if no simulation is assigned to this lesson.
         /// </summary>
-        public static SimulationControlNode LoadedSimulationNode { get; private set; }
+        public static SimulationPage LoadedSimulationNode { get; private set; }
         #endregion
         
         
@@ -30,9 +30,9 @@ namespace SfcSandbox.Data.Model.SfcEditor
                 LoadedSimulationNode.QueueFree();
                 LoadedSimulationNode = null;
             }
-            if (!String.IsNullOrEmpty(lessonEntity.SimulationPath))
+            if (!string.IsNullOrEmpty(lessonEntity.SimulationPath))
             {
-                LoadedSimulationNode = (SimulationControlNode)((PackedScene)GD.Load(lessonEntity.SimulationPath)).Instance();
+                LoadedSimulationNode = (SimulationPage)((PackedScene)GD.Load(lessonEntity.SimulationPath)).Instance();
                 GetNode("PlantViewportContainer/PlantViewport").AddChild(LoadedSimulationNode);
             }
         }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter
+namespace Osls.SfcEditor.Interpreter
 {
     public static class StepMaster
     {

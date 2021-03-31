@@ -1,7 +1,8 @@
 using Godot;
 using System.Collections.Generic;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     public class ActionEditorBox : Control
     {

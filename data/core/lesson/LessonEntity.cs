@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-namespace Osls.Lesson
+namespace Osls
 {
     /// <summary>
     /// Deserialized lesson entity class.

@@ -1,6 +1,7 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.SfcEditor
+
+namespace Osls.SfcEditor
 {
     /// <summary>
     /// Control class for a SFC patch

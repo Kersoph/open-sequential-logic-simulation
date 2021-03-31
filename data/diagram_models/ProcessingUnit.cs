@@ -1,4 +1,4 @@
-namespace Osls.Models
+namespace Oslss
 {
     public interface IProcessingUnit
     {

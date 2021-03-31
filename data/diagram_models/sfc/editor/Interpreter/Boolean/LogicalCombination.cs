@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Boolean
+namespace Osls.SfcEditor.Interpreter.Boolean
 {
     /// <summary>
     /// Preforms an logical operation on the left and right expression

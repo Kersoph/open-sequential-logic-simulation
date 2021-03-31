@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using SfcSandbox.Data.Model.SfcSimulation.Engine;
+using Osls.SfcSimulation.Engine;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.PlantModels.RoadConstructionSite
+namespace Osls.SfcSimulation.PlantModels.RoadConstructionSite
 {
     /// <summary>
     /// Topmost node for the test viewer scene

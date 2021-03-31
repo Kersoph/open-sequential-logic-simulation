@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Model.SfcEditor.Interpreter.Numerical
+namespace Osls.SfcEditor.Interpreter.Numerical
 {
     /// <summary>
     /// Used to link integer outputs of the plant to the transition

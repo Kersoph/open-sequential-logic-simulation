@@ -1,4 +1,4 @@
-namespace SfcSandbox.Data.Environment
+namespace Osls.Environment
 {
     public static class EnvironmentPaths
     {

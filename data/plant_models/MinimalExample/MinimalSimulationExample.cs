@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 
-namespace SfcSandbox.Data.Model.SfcSimulation.MinimalExample
+namespace Osls.SfcSimulation.MinimalExample
 {
     /// <summary>
     /// Minimal example calss for a simulation controller
@@ -12,9 +12,9 @@ namespace SfcSandbox.Data.Model.SfcSimulation.MinimalExample
         /// <summary>
         /// Returns the input definition for the simulation
         /// </summary>
-        protected override InputTable DefineInputs()
+        protected override StateTable DefineInputs()
         {
-            return new InputTable(
+            return new StateTable(
                 new Dictionary<string, bool>()
                 {
                     {"Foo", true},
@@ -32,9 +32,9 @@ namespace SfcSandbox.Data.Model.SfcSimulation.MinimalExample
         /// Returns the output definition for the simulation
         /// </summary>
         /// <returns></returns>
-        protected override OutputTable DefineOutput()
+        protected override StateTable DefineOutput()
         {
-            return new OutputTable(
+            return new StateTable(
                 new Dictionary<string, bool>()
                 {
                     {"Zumsl", false},

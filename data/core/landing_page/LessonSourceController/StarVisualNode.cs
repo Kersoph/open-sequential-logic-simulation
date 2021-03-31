@@ -1,6 +1,7 @@
 using Godot;
 
-namespace SfcSandbox.Data.Model.LandingPage.LessonSourceController
+
+namespace Osls.LandingPage
 {
     /// <summary>
     /// Sets the star visuals of this node.

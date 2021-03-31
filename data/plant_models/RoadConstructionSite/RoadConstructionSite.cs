@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SfcSandbox.Data.Model.SfcSimulation.PlantModels.RoadConstructionSite
+namespace Osls.SfcSimulation.PlantModels.RoadConstructionSite
 {
     /// <summary>
     /// Boundary class between the simulation and the SFC Controllers
