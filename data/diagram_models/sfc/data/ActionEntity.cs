@@ -1,15 +1,16 @@
 namespace Osls.SfcEditor
 {
     /// <summary>
-    /// Entity class for the data in one action description in a patch field
+    /// Entity of one action description in a patch field
     /// </summary>
-    public class SfcActionEntity
+    public class ActionEntity
     {
         #region ==================== Fields / Properties ====================
         /// <summary>
         /// The Qualifier of the action. (Execution time and setting)
         /// </summary>
         public ActionQualifier Qualifier { get; set; }
+        
         /// <summary>
         /// The action to be executed. (Can be invalid)
         /// </summary>
@@ -17,13 +18,13 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Persistence ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Loads the data from the stream. Written in "WriteTo".
         /// </summary>
-        public static SfcActionEntity CreateFrom(System.IO.BinaryReader reader)
+        public static ActionEntity CreateFrom(System.IO.BinaryReader reader)
         {
-            SfcActionEntity entity = new SfcActionEntity();
+            ActionEntity entity = new ActionEntity();
             entity.Qualifier = (ActionQualifier)reader.ReadInt32();
             entity.Action = reader.ReadString();
             return entity;
@@ -38,15 +39,5 @@ namespace Osls.SfcEditor
             writer.Write(Action);
         }
         #endregion
-    }
-    
-    /// <summary>
-    /// The way an action should be executed.
-    /// </summary>
-    public enum ActionQualifierOld
-    {
-        N,
-        PPlus,
-        PMinus
     }
 }
