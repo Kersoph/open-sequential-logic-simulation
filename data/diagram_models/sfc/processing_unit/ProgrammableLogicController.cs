@@ -3,8 +3,8 @@ namespace Osls.SfcSimulation.Engine
     public class ProgrammableLogicController
     {
         #region ==================== Fields Properties ====================
-        public InputTable InputRegisters { get; private set; }
-        public OutputTable OutputRegisters { get; private set; }
+        public ResettingStateTable InputRegisters { get; private set; }
+        public ResettingStateTable OutputRegisters { get; private set; }
         public Master Master { get; private set; }
         
         private readonly SfcProgramm _sfcProgramm;
@@ -26,8 +26,8 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void Startup()
         {
-            InputRegisters = Master.SimulationControlNode.SimulationOutput.CloneToInputTable();
-            OutputRegisters = Master.SimulationControlNode.SimulationInput.CloneToOutputTable();
+            InputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationOutput);
+            OutputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationInput);
         }
         
         /// <summary>

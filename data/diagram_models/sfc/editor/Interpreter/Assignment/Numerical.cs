@@ -17,7 +17,7 @@ namespace Osls.SfcEditor.Interpreter.Assignment
             _target = target;
             _source = source;
         }
-
+        
         /// <summary>
         /// Executes the assignment according to the model.
         /// </summary>

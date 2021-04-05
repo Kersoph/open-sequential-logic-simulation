@@ -1,4 +1,5 @@
 using Osls.SfcEditor;
+using Osls.Plants;
 
 
 namespace Osls.SfcSimulation.Engine
@@ -22,7 +23,7 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// The loaded simulation scene with the controller
         /// </summary>
-        public SimulationControlNode SimulationControlNode {get; private set; }
+        public SimulationPage SimulationControlNode {get; private set; }
         
         /// <summary>
         /// Holds the referenced sfc 2d editor control with the logical diagram
@@ -34,7 +35,7 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Constructor ====================
-        public Master(Sfc2dEditorControl sfc2dEditorControl, SimulationControlNode simulationControl)
+        public Master(Sfc2dEditorControl sfc2dEditorControl, SimulationPage simulationControl)
         {
             Sfc2dEditorControl = sfc2dEditorControl;
             SimulationControlNode = simulationControl;

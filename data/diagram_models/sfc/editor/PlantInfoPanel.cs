@@ -13,7 +13,7 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields Properties ====================
         private SimulationPage _simulationControlNode;
-        #endregion;
+        #endregion
         
         
         #region ==================== Constructor ====================
@@ -33,7 +33,7 @@ namespace Osls.SfcEditor
         {
             if (_simulationControlNode == null)
             {
-                this.GetNode<RichTextLabel>("PlantInfoText").BbcodeText = string.Empty;
+                GetNode<RichTextLabel>("PlantInfoText").BbcodeText = string.Empty;
             }
             else
             {
@@ -45,7 +45,7 @@ namespace Osls.SfcEditor
                 {
                     builder.Append(key);
                     builder.Append("    [i]bool[/i]   ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationInput.PollBooleanInput(key));
+                    if (withStates) builder.Append(_simulationControlNode.SimulationInput.PollBoolean(key));
                     builder.Append("\n");
                 }
                 List<string> integerInputKeys = _simulationControlNode.SimulationInput.IntegerKeys;
@@ -53,7 +53,7 @@ namespace Osls.SfcEditor
                 {
                     builder.Append(key);
                     builder.Append("    [i]int[/i]    ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationInput.PollIntegerInput(key));
+                    if (withStates) builder.Append(_simulationControlNode.SimulationInput.PollInteger(key));
                     builder.Append("\n");
                 }
                 
@@ -63,7 +63,7 @@ namespace Osls.SfcEditor
                 {
                     builder.Append(key);
                     builder.Append("    [i]bool[/i]   ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationOutput.PollBooleanOutput(key));
+                    if (withStates) builder.Append(_simulationControlNode.SimulationOutput.PollBoolean(key));
                     builder.Append("\n");
                 }
                 List<string> integerOutputKeys = _simulationControlNode.SimulationOutput.IntegerKeys;
@@ -71,11 +71,11 @@ namespace Osls.SfcEditor
                 {
                     builder.Append(key);
                     builder.Append("    [i]int[/i]    ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationOutput.PollIntegerOutput(key));
+                    if (withStates) builder.Append(_simulationControlNode.SimulationOutput.PollInteger(key));
                     builder.Append("\n");
                 }
                 
-                this.GetNode<RichTextLabel>("PlantInfoText").BbcodeText = builder.ToString();
+                GetNode<RichTextLabel>("PlantInfoText").BbcodeText = builder.ToString();
             }
         }
         #endregion

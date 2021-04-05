@@ -24,7 +24,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// </summary>
         public override bool Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
         {
-            return sfcProgramm.Plc.InputRegisters.PollBooleanInput(_key);
+            return sfcProgramm.Plc.InputRegisters.PollBoolean(_key);
         }
         
         /// <summary>

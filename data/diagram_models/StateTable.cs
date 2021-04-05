@@ -11,33 +11,46 @@ namespace Osls
     public class StateTable
     {
         #region ==================== Fields ====================
-        private readonly Dictionary<string, bool> _booleans;
-        private readonly Dictionary<string, int> _integers;
+        protected readonly Dictionary<string, bool> Booleans;
+        protected readonly Dictionary<string, int> Integers;
         #endregion
         
         
         #region ==================== Properties ====================
-        public List<string> BooleanKeys { get { return _booleans.Keys.ToList(); } }
-        public List<string> IntegerKeys { get { return _integers.Keys.ToList(); } }
+        public List<string> BooleanKeys { get; private set; }
+        public List<string> IntegerKeys { get; private set; }
         #endregion
         
         
         #region ==================== Constructor ====================
         public StateTable(Dictionary<string, bool> booleans, Dictionary<string, int> integers)
         {
-            _booleans = booleans;
-            _integers = integers;
+            Booleans = booleans;
+            Integers = integers;
+            BooleanKeys = Booleans.Keys.ToList();
+            IntegerKeys = Integers.Keys.ToList();
+        }
+        
+        /// <summary>
+        /// Initialises a resettig state table from the booleans and integers of the given one
+        /// </summary>
+        public StateTable(StateTable other)
+        {
+            Booleans = new Dictionary<string, bool>(other.Booleans);
+            Integers = new Dictionary<string, int>(other.Integers);
+            BooleanKeys = Booleans.Keys.ToList();
+            IntegerKeys = Integers.Keys.ToList();
         }
         #endregion
         
         
-        #region ==================== Constructor ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Looks up the key in the plant output description
         /// </summary>
         public bool ContainsBoolean(string key)
         {
-            return _booleans.ContainsKey(key);
+            return Booleans.ContainsKey(key);
         }
         
         /// <summary>
@@ -45,7 +58,7 @@ namespace Osls
         /// </summary>
         public bool ContainsInteger(string key)
         {
-            return _integers.ContainsKey(key);
+            return Integers.ContainsKey(key);
         }
         
         /// <summary>
@@ -53,7 +66,7 @@ namespace Osls
         /// </summary>
         public bool PollBoolean(string key)
         {
-            _booleans.TryGetValue(key, out bool value);
+            Booleans.TryGetValue(key, out bool value);
             return value;
         }
         
@@ -62,7 +75,7 @@ namespace Osls
         /// </summary>
         public int PollInteger(string key)
         {
-            _integers.TryGetValue(key, out int value);
+            Integers.TryGetValue(key, out int value);
             return value;
         }
         
@@ -75,20 +88,12 @@ namespace Osls
             List<string> integerKeys = IntegerKeys;
             foreach (var entry in booleanKeys)
             {
-                _booleans[entry] = outputs.PollBoolean(entry);
+                Booleans[entry] = outputs.PollBoolean(entry);
             }
             foreach (var entry in integerKeys)
             {
-                _integers[entry] = outputs.PollInteger(entry);
+                Integers[entry] = outputs.PollInteger(entry);
             }
-        }
-        
-        /// <summary>
-        /// Used to synchronize the tables between the PLC and the plant
-        /// </summary>
-        internal StateTable CloneTable()
-        {
-            return new StateTable(new Dictionary<string, bool>(_booleans), new Dictionary<string, int>(_integers));
         }
         #endregion
     }

@@ -1,9 +1,9 @@
-namespace Osls.SfcSimulation.MinimalExample
+namespace Osls.Plants.MinimalExample
 {
     /// <summary>
     /// Minimal example calss for a test viewer.
     /// </summary>
-    public class MinimalTestExample : SfcTestViewer
+    public class MinimalTestExample : TestPage
     {
     }
 }

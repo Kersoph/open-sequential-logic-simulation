@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 
 
-namespace Osls.SfcSimulation.MinimalExample
+namespace Osls.Plants.MinimalExample
 {
     /// <summary>
     /// Minimal example calss for a simulation controller
     /// </summary>
-    public class MinimalSimulationExample : SimulationControlNode
+    public class MinimalSimulationExample : SimulationPage
     {
-        #region ==================== Methods ====================
+        #region ==================== Helpers ====================
         /// <summary>
         /// Returns the input definition for the simulation
         /// </summary>

@@ -24,7 +24,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// </summary>
         public override int Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
         {
-            return PlantViewNode.LoadedSimulationNode.SimulationOutput.PollIntegerOutput(_key);
+            return PlantViewNode.LoadedSimulationNode.SimulationOutput.PollInteger(_key);
         }
         
         /// <summary>
