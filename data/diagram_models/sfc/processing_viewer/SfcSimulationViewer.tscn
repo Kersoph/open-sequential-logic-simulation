@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://data/diagram_models/sfc/editor/EditorControls/Sfc2dControls.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/core/landing_page/RichTextLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/Sfc2dEditor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/diagram_models/sfc/editor/PlantInfoPanel.cs" type="Script" id=4]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/SfcSimulationViewer.cs" type="Script" id=5]
+
+[node name="SfcSimulationViewer" type="Node"]
+script = ExtResource( 5 )
+
+[node name="PlantViewNode" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -512.0
+color = Color( 0.784314, 0.784314, 0.784314, 1 )
+
+[node name="PlantViewportContainer" type="ViewportContainer" parent="PlantViewNode"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+
+[node name="PlantViewport" type="Viewport" parent="PlantViewNode/PlantViewportContainer"]
+size = Vector2( 512, 512 )
+transparent_bg = true
+handle_input_locally = false
+hdr = false
+render_target_update_mode = 3
+shadow_atlas_size = 1024
+
+[node name="PlantInfoPanel" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_bottom = -514.0
+color = Color( 0.784314, 0.784314, 0.784314, 1 )
+script = ExtResource( 4 )
+
+[node name="PlantInfoText" parent="PlantInfoPanel" instance=ExtResource( 2 )]
+bbcode_text = "[b][u]Plant Inputs[/u][/b]
+
+[b][u]Plant Outputs[/u][/b]"
+text = "Plant Inputs
+
+Plant Outputs"
+
+[node name="Sfc2dViewer" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 80.0
+margin_right = -514.0
+color = Color( 0.784314, 0.784314, 0.784314, 1 )
+
+[node name="Sfc2dEditor" parent="Sfc2dViewer" instance=ExtResource( 3 )]
+scroll_horizontal_enabled = false
+scroll_vertical_enabled = false
+
+[node name="MouseFilter" type="ColorRect" parent="Sfc2dViewer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_default_cursor_shape = 8
+color = Color( 1, 1, 1, 0 )
+
+[node name="Sfc2dControls" parent="Sfc2dViewer" instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_bottom = 0.0
+margin_top = 0.0
+margin_right = 0.0
+mouse_default_cursor_shape = 8
+
+[node name="ErrorLabel" type="Label" parent="Sfc2dViewer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 38.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "SFC contains errors!"
