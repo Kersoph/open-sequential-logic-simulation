@@ -1,5 +1,5 @@
 using Godot;
-using Osls.SfcEditor.Interpreter;
+
 
 namespace Osls.SfcEditor
 {
@@ -14,11 +14,11 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Displays the text as a multi line string in the editor if possible.
         /// </summary>
-        public override void SetEditorText(string text)
+        public override void SetEditorText(string text, Sfc2dEditorControl context)
         {
             TextEdit node = GetNode<TextEdit>("StepNameEditor");
             node.Text = text;
-            bool validReference = StepMaster.ContainsStep(text);
+            bool validReference = context.StepMaster.ContainsStep(text);
             Color background = validReference ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);
             node.AddColorOverride("background_color", background);
         }

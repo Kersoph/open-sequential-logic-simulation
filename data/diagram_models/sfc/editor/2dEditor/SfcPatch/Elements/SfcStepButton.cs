@@ -16,7 +16,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Displays the text as a multi line string in the editor if possible.
         /// </summary>
-        public override void SetEditorText(string text)
+        public override void SetEditorText(string text, Sfc2dEditorControl context)
         {
             GetNode<TextEdit>("StepNameEditor").Text = text;
         }

@@ -54,7 +54,7 @@ namespace Osls.SfcEditor
         /// Contains the action entries for the step in this patch.
         /// </summary>
         public List<ActionEntity> ActionEntries { get; private set; }
-        #endregion;
+        #endregion
         
         
         #region ==================== Public Methods ====================

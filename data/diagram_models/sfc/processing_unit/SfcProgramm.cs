@@ -8,24 +8,15 @@ namespace Osls.SfcSimulation.Engine
     {
         #region ==================== Fields / Properties ====================
         public ProgrammableLogicController Plc { get; private set; }
-        
-        private readonly Dictionary<int, SfcPatchControl> _visualControlMap;
-        private readonly Dictionary<int, SfcStep> _controlMap;
-        
-        private HashSet<SfcStep> _soonActiveSteps;
-        private HashSet<SfcStep> _activeSteps;
-        private HashSet<SfcStep> _soonInactiveSteps;
-        private HashSet<SfcStep> _inactiveSteps;
+        public SfcProgrammData Data { get; private set; }
         #endregion
-
-
+        
+        
         #region ==================== Constructor ====================
-        public SfcProgramm(ProgrammableLogicController plc)
+        public SfcProgramm(ProgrammableLogicController plc, SfcProgrammData data)
         {
             Plc = plc;
-            _visualControlMap = plc.Master.Sfc2dEditorControl.CloneControlMap();
-            _controlMap = new Dictionary<int, SfcStep>(_visualControlMap.Count);
-            InitializeSfcSteps();
+            Data = data;
         }
         #endregion
         
@@ -36,40 +27,31 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void UpdateProcess()
         {
-            _inactiveSteps.UnionWith(_soonInactiveSteps);
-            _activeSteps.ExceptWith(_soonInactiveSteps);
-            _soonInactiveSteps.Clear();
-            foreach (var SfcStep in _soonActiveSteps)
+            Data.InactiveSteps.UnionWith(Data.SoonInactiveSteps);
+            Data.ActiveSteps.ExceptWith(Data.SoonInactiveSteps);
+            Data.SoonInactiveSteps.Clear();
+            foreach (var sfcStep in Data.SoonActiveSteps)
             {
-                SfcStep.ExecuteActions(ActionQualifier.PPlus);
+                sfcStep.ExecuteActions(this, ActionQualifier.PPlus);
             }
-            _activeSteps.UnionWith(_soonActiveSteps);
-            _inactiveSteps.ExceptWith(_soonActiveSteps);
-            _soonActiveSteps.Clear();
+            Data.ActiveSteps.UnionWith(Data.SoonActiveSteps);
+            Data.InactiveSteps.ExceptWith(Data.SoonActiveSteps);
+            Data.SoonActiveSteps.Clear();
             
-            foreach (var SfcStep in _activeSteps)
+            foreach (var sfcStep in Data.ActiveSteps)
             {
-                SfcStep.ExecuteActions(ActionQualifier.N);
-            }
-            
-            foreach (var SfcStep in _activeSteps)
-            {
-                SfcStep.CalculateTransition();
+                sfcStep.ExecuteActions(this, ActionQualifier.N);
             }
             
-            foreach (var SfcStep in _soonInactiveSteps)
+            foreach (var sfcStep in Data.ActiveSteps)
             {
-                SfcStep.ExecuteActions(ActionQualifier.PMinus);
+                sfcStep.CalculateTransition(this);
             }
-        }
-        
-        /// <summary>
-        /// True if the step is contained in the active steps set.
-        /// Used while checking the sfc transitions.
-        /// </summary>
-        public bool IsStepActive(SfcStep step)
-        {
-            return _activeSteps.Contains(step);
+            
+            foreach (var sfcStep in Data.SoonInactiveSteps)
+            {
+                sfcStep.ExecuteActions(this, ActionQualifier.PMinus);
+            }
         }
         
         /// <summary>
@@ -77,28 +59,8 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void UpdateStepStatus(List<SfcStep> toActive, List<SfcStep> toInactive)
         {
-            _soonActiveSteps.UnionWith(toActive);
-            _soonInactiveSteps.UnionWith(toInactive);
-        }
-        
-        /// <summary>
-        /// Visualises the achtive or inactive status of the step.
-        /// </summary>
-        public void VisualiseStatus()
-        {
-            foreach (var SfcStep in _activeSteps)
-            {
-                _visualControlMap[SfcStep.Id].SfcPatchNode.MarkStep(true);
-            }
-            foreach (var SfcStep in _inactiveSteps)
-            {
-                 _visualControlMap[SfcStep.Id].SfcPatchNode.MarkStep(false);
-            }
-        }
-        
-        public SfcStep GetStepFromMapKey(int key)
-        {
-            return _controlMap[key];
+            Data.SoonActiveSteps.UnionWith(toActive);
+            Data.SoonInactiveSteps.UnionWith(toInactive);
         }
         
         /// <summary>
@@ -106,40 +68,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public bool IsProgrammLogicValid()
         {
-            foreach(SfcStep step in _controlMap.Values)
-            {
-                if(!step.IsStepValid()) return false;
-            }
-            return true;
-        }
-        #endregion
-        
-        
-        #region ==================== Helpers ====================
-        private void InitializeSfcSteps()
-        {
-            _soonActiveSteps = new HashSet<SfcStep>();
-            _activeSteps = new HashSet<SfcStep>();
-            _soonInactiveSteps = new HashSet<SfcStep>();
-            _inactiveSteps = new HashSet<SfcStep>();
-            
-            foreach (var entry in _visualControlMap)
-            {
-                SfcStep step = new SfcStep(entry.Value.Data, this, entry.Key);
-                _inactiveSteps.Add(step);
-                _controlMap.Add(entry.Key, step);
-            }
-            foreach (var step in _inactiveSteps)
-            {
-                if (step.SourceReference.ContainsRealStep())
-                {
-                    step.InitializeTransitions(_controlMap);
-                    if (step.SourceReference.SfcStepType == StepType.StartingStep)
-                    {
-                        _soonActiveSteps.Add(step);
-                    }
-                }
-            }
+            return Data.AreStepsValid();
         }
         #endregion
     }

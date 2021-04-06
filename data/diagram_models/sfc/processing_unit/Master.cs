@@ -45,7 +45,7 @@ namespace Osls.SfcSimulation.Engine
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Is called every frame to calculate the next steps of the simulation.
         /// We update n times first the simulation and then the controller.
@@ -54,7 +54,22 @@ namespace Osls.SfcSimulation.Engine
         {
             SimulationControlNode.UpdateModel();
             _programmableLogicController.Update();
-            _programmableLogicController.VisualiseStatus();
+            VisualiseStatus();
+        }
+        
+        /// <summary>
+        /// Visualises the achtive or inactive status of the steps.
+        /// </summary>
+        public void VisualiseStatus()
+        {
+            foreach (var SfcStep in _programmableLogicController.SfcProgramm.Data.ActiveSteps)
+            {
+                Sfc2dEditorControl.MarkStep(SfcStep.Id, true);
+            }
+            foreach (var SfcStep in _programmableLogicController.SfcProgramm.Data.InactiveSteps)
+            {
+                Sfc2dEditorControl.MarkStep(SfcStep.Id, false);
+            }
         }
         
         /// <summary>

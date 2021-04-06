@@ -11,7 +11,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Displays the text as a multi line string in the editor if possible.
         /// </summary>
-        public virtual void SetEditorText(string text)
+        public virtual void SetEditorText(string text, Sfc2dEditorControl context)
         {
         }
         

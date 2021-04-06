@@ -4,39 +4,48 @@ using Osls.SfcEditor;
 using Osls.SfcEditor.Interpreter;
 using Osls.SfcEditor.Interpreter.Assignment;
 
+
 namespace Osls.SfcSimulation.Engine
 {
     public class SfcStep
     {
         #region ==================== Fields Properties ====================
-        public PatchEntity SourceReference { get; private set; }
         public int Id { get; private set; }
         public int StepCounter { get; private set; }
         
-        private readonly SfcProgramm _controler;
         private Dictionary<ActionQualifier, List<AssignmentExpression>> _actions;
         private List<SfcTransition> _transitions;
         #endregion
         
         
         #region ==================== Constructor ====================
-        public SfcStep(PatchEntity source, SfcProgramm controler, int id)
+        public SfcStep(PatchEntity source)
         {
-            SourceReference = source;
-            _controler = controler;
-            Id = id;
-            AssignActionsFrom(source);
+            Id = source.Key;
         }
         #endregion
         
         
         #region ==================== Public Methods ====================
-        public void ExecuteActions(ActionQualifier qualifier)
+        /// <summary>
+        /// Parses the diagram and sets up the transitions reached by this step.
+        /// </summary>
+        public void Initialise(SfcProgrammData data)
+        {
+            AssignActionsFrom(data.SfcEntity.Lookup(Id));
+            _transitions = SfcStepBuilder.CollectTransitionSources(this, data);
+            foreach (SfcTransition transition in _transitions)
+            {
+                SfcStepBuilder.AssignTransitionDestinations(transition, this, data);
+            }
+        }
+        
+        public void ExecuteActions(SfcProgramm context, ActionQualifier qualifier)
         {
             List<AssignmentExpression> actions = _actions[qualifier];
             foreach (AssignmentExpression action in actions)
             {
-                action.Execute(_controler);
+                action.Execute(context);
             }
             UpdateStepCounter(qualifier);
         }
@@ -44,27 +53,15 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Calculatest the transitions and updates the step status according to the result
         /// </summary>
-        public void CalculateTransition()
+        public void CalculateTransition(SfcProgramm context)
         {
             foreach (SfcTransition transition in _transitions)
             {
-                if (transition.CalculateTransition(_controler))
+                if (transition.CalculateTransition(context))
                 {
-                    _controler.UpdateStepStatus(transition.NextSteps, transition.DependingSteps);
+                    context.UpdateStepStatus(transition.NextSteps, transition.DependingSteps);
                     return; // If multiple transitions could fire due to user error, we use the first mode.
                 }
-            }
-        }
-        
-        /// <summary>
-        /// Parses the diagram and sets up the transitions reached by this step.
-        /// </summary>
-        public void InitializeTransitions(Dictionary<int, SfcStep> allSteps)
-        {
-            _transitions = SfcStepBuilder.CollectTransitionSources(this, allSteps);
-            foreach (SfcTransition transition in _transitions)
-            {
-                SfcStepBuilder.AssignTransitionDestinations(transition, allSteps);
             }
         }
         
@@ -73,20 +70,20 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public bool IsStepValid()
         {
-            foreach(List<AssignmentExpression> assignments in _actions.Values)
+            foreach (List<AssignmentExpression> assignments in _actions.Values)
             {
-                foreach(AssignmentExpression expression in assignments)
+                foreach (AssignmentExpression expression in assignments)
                 {
-                    if(expression == null || !expression.IsValid())
+                    if (expression == null || !expression.IsValid())
                     {
                         return false;
                     }
                 }
             }
-            if(_transitions == null) return true;
-            foreach(SfcTransition transition in _transitions)
+            if (_transitions == null) return true;
+            foreach (SfcTransition transition in _transitions)
             {
-                if(!transition.IsTransitionValid()) return false;
+                if (!transition.IsTransitionValid()) return false;
             }
             return true;
         }
@@ -116,7 +113,7 @@ namespace Osls.SfcSimulation.Engine
                 case ActionQualifier.PPlus:
                     break;
                 case ActionQualifier.N:
-                    if(StepCounter != Int32.MaxValue) StepCounter += (int)(1000f * Master.StepUpdateTime);
+                    if(StepCounter != int.MaxValue) StepCounter += (int)(1000f * Master.StepUpdateTime);
                     break;
                 case ActionQualifier.PMinus:
                     StepCounter = 0;

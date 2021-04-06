@@ -29,16 +29,16 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called when the model has changed or is initialized.
         /// </summary>
-        public void UpdateTransition(string transitionText)
+        public void UpdateTransition(string transitionText, Sfc2dEditorControl contex)
         {
             if (_textEdit != null)
             {
-                TransitionMaster.UpdateColorKeys(_textEdit);
+                TransitionMaster.UpdateColorKeys(_textEdit, contex.StepMaster);
                 _textEdit.Text = transitionText;
                 UpdateVisualRepresentation();
                 if (!string.IsNullOrEmpty(transitionText))
                 {
-                    BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText);
+                    BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, contex.StepMaster);
                     _textEdit.HintTooltip = expression == null ? "???" : expression.ToString();
                     bool validExpression = expression != null && expression.IsValid();
                     Color background = validExpression ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);

@@ -9,8 +9,12 @@ namespace Osls.SfcEditor
     public class SfcPatchControl
     {
         #region ==================== Fields / Properties ====================
-        private Sfc2dEditorControl _control;
         private const string _patchReferencePath = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/SfcPatch.tscn";
+        
+        /// <summary>
+        /// The editor master holding all patch controls
+        /// </summary>
+        public Sfc2dEditorControl Master { get; private set; }
         
         /// <summary>
         /// The patch model entity.
@@ -31,11 +35,11 @@ namespace Osls.SfcEditor
         public SfcPatchControl(PatchEntity data, Sfc2dEditorControl control)
         {
             Data = data;
+            Master = control;
             Node node = ((PackedScene)GD.Load(_patchReferencePath)).Instance();
             SfcPatchNode = (SfcPatchNode)node;
             SfcPatchNode.InitializeWith(this, data);
             control.ReferenceRect.AddChild(SfcPatchNode);
-            _control = control;
         }
         
         /// <summary>
@@ -52,7 +56,7 @@ namespace Osls.SfcEditor
         public void UpdateNameTo(string name)
         {
             Data.StepName = name;
-            _control.UpdateGrid();
+            Master.UpdateGrid();
         }
         
         /// <summary>
@@ -114,7 +118,7 @@ namespace Osls.SfcEditor
         public void UpdateSfcSetpTo(StepType sfcStepType)
         {
             Data.SfcStepType = sfcStepType;
-            _control.UpdateGrid();
+            Master.UpdateGrid();
         }
         
         /// <summary>
@@ -151,11 +155,11 @@ namespace Osls.SfcEditor
         /// </summary>
         public void RemovePatch()
         {
-            _control.ReferenceRect.RemoveChild(SfcPatchNode);
+            Master.ReferenceRect.RemoveChild(SfcPatchNode);
             SfcPatchNode.QueueFree();
             SfcPatchNode = null;
             Data = null;
-            _control = null;
+            Master = null;
         }
         #endregion
     }

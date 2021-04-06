@@ -6,8 +6,7 @@ namespace Osls.SfcSimulation.Engine
         public ResettingStateTable InputRegisters { get; private set; }
         public ResettingStateTable OutputRegisters { get; private set; }
         public Master Master { get; private set; }
-        
-        private readonly SfcProgramm _sfcProgramm;
+        public SfcProgramm SfcProgramm { get; private set; }
         #endregion
         
         
@@ -15,7 +14,8 @@ namespace Osls.SfcSimulation.Engine
         public ProgrammableLogicController(Master master)
         {
             Master = master;
-            _sfcProgramm = new SfcProgramm(this);
+            SfcProgrammData data = new SfcProgrammData(master.Sfc2dEditorControl.LinkSfcData());
+            SfcProgramm = new SfcProgramm(this, data);
         }
         #endregion
         
@@ -42,17 +42,12 @@ namespace Osls.SfcSimulation.Engine
             UpdateOutputs();
         }
         
-        public void VisualiseStatus()
-        {
-            _sfcProgramm.VisualiseStatus();
-        }
-        
         /// <summary>
         /// Returns true if the simulation can be executed
         /// </summary>
         public bool IsPlcLogicValid()
         {
-            return _sfcProgramm.IsProgrammLogicValid();
+            return SfcProgramm.IsProgrammLogicValid();
         }
         #endregion
         
@@ -79,7 +74,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         private void UpdateProcess()
         {
-            _sfcProgramm.UpdateProcess();
+            SfcProgramm.UpdateProcess();
         }
         
         /// <summary>

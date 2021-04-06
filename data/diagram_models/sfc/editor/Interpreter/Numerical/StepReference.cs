@@ -24,7 +24,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// </summary>
         public override int Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
         {
-            return sfcProgramm.GetStepFromMapKey(StepMaster.GetStepTimeKey(_key)).StepCounter;
+            return sfcProgramm.Data.GetStepFromMapKey(sfcProgramm.Data.StepMaster.GetStepTimeKey(_key)).StepCounter;
         }
         
         /// <summary>
@@ -32,7 +32,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// </summary>
         public override bool IsValid()
         {
-            return StepMaster.ContainsStepTime(_key);
+            return true;
         }
         
         public override string ToString()

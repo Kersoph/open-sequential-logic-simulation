@@ -52,7 +52,15 @@ namespace Osls.SfcEditor
         public PatchEntity Lookup(int x, int y)
         {
             int mapKey = CalculateMapKey(x, y);
-            _patchMap.TryGetValue(mapKey, out PatchEntity value);
+            return Lookup(mapKey);
+        }
+        
+        /// <summary>
+        /// Tries to get the entity with the given key. Null if there is none.
+        /// </summary>
+        public PatchEntity Lookup(int key)
+        {
+            _patchMap.TryGetValue(key, out PatchEntity value);
             return value;
         }
         

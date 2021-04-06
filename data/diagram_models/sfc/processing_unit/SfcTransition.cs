@@ -1,17 +1,12 @@
 using System.Collections.Generic;
 using Osls.SfcEditor.Interpreter.Boolean;
-using Osls.SfcEditor.Interpreter;
+
 
 namespace Osls.SfcSimulation.Engine
 {
     public class SfcTransition
     {
         #region ==================== Fields Properties ====================
-        /// <summary>
-        /// The Step patch this transition is located
-        /// </summary>
-        public SfcStep Holder { get; private set; }
-        
         /// <summary>
         /// The step IDs we have to wait to until we can check the transition.
         /// Multiple -> "Zusammenführung simulater Verzweigung" in documentation.
@@ -32,12 +27,11 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Constructor ====================
-        public SfcTransition(SfcStep holder)
+        public SfcTransition(BooleanExpression transition)
         {
-            Holder = holder;
             DependingSteps = new List<SfcStep>();
             NextSteps = new List<SfcStep>();
-            Transition = TransitionMaster.InterpretTransitionText(Holder.SourceReference.TransitionText);
+            Transition = transition;
         }
         #endregion
         
@@ -51,7 +45,7 @@ namespace Osls.SfcSimulation.Engine
             // All dependent steps must be active
             foreach (SfcStep step in DependingSteps)
             {
-                if(!programm.IsStepActive(step)) return false;
+                if (!programm.Data.IsStepActive(step)) return false;
             }
             return Transition.Result(programm);
         }
@@ -61,9 +55,9 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public bool IsTransitionValid()
         {
-            if(DependingSteps == null) return false;
-            if(NextSteps == null) return false;
-            if(Transition == null) return false;
+            if (DependingSteps == null) return false;
+            if (NextSteps == null) return false;
+            if (Transition == null) return false;
             return Transition.IsValid();
         }
         #endregion

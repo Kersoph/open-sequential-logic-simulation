@@ -23,14 +23,14 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Updates the visivle nodes according to the given step type.
         /// </summary>
-        public void UpdateStep(PatchEntity data)
+        public void UpdateStep(PatchEntity data, Sfc2dEditorControl context)
         {
             if (data.SfcStepType != _currentStepType || _stepNode == null)
             {
                 ShowStepAs(data.SfcStepType);
                 _currentStepType = data.SfcStepType;
             }
-            _stepNode.SetEditorText(data.StepName);
+            _stepNode.SetEditorText(data.StepName, context);
         }
         
         /// <summary>

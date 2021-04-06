@@ -33,10 +33,10 @@ namespace Osls.SfcEditor
         /// </summary>
         public void UpdateNodes(PatchEntity data)
         {
-            GetNode<SfcStepNode>("SfcStepNode").UpdateStep(data);
+            GetNode<SfcStepNode>("SfcStepNode").UpdateStep(data, SfcPatchControl.Master);
             GetNode<SfcLineButton>("SfcLineButtonTop").UpdateBranchLine(data.UpperBranch);
             GetNode<SfcLineButton>("SfcLineButtonBot").UpdateBranchLine(data.LowerBranch);
-            GetNode<SfcTransitionNode>("SfcTransition").UpdateTransition(data.TransitionText);
+            GetNode<SfcTransitionNode>("SfcTransition").UpdateTransition(data.TransitionText, SfcPatchControl.Master);
             GetNode<ActionEditorBox>("ActionEditorBox").UpdateActions(data);
             GetNode<SfcConnectionLine>("SfcConnectionLine").UpdateLine(data);
         }

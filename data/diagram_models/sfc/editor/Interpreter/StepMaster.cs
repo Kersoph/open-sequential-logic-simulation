@@ -2,20 +2,20 @@ using System.Collections.Generic;
 
 namespace Osls.SfcEditor.Interpreter
 {
-    public static class StepMaster
+    public class StepMaster
     {
         #region ==================== Fields Properties ====================
-        private static readonly Dictionary<string, int> _patchNameMap = new Dictionary<string, int>();
-        private static readonly Dictionary<string, int> _patchStepTimeMap = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> _patchNameMap = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> _patchStepTimeMap = new Dictionary<string, int>();
         
         /// <summary>
         /// Contains the Step to patch id dictionary
         /// </summary>
-        public static Dictionary<string, int> PatchNameMap { get { return _patchNameMap; } }
+        public IReadOnlyDictionary<string, int> PatchNameMap { get { return _patchNameMap; } }
         /// <summary>
         /// Contains the Step Time to patch id dictionary
         /// </summary>
-        public static Dictionary<string, int> PatchStepTimeMap { get { return _patchStepTimeMap; } }
+        public IReadOnlyDictionary<string, int> PatchStepTimeMap { get { return _patchStepTimeMap; } }
         #endregion
         
         
@@ -23,19 +23,18 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// The step name must be unique to create step references
         /// </summary>
-        public static void UpdateStepNames(SfcPatchControl[] controls)
+        public void UpdateStepNames(SfcEntity sfcEntity)
         {
             _patchNameMap.Clear();
             _patchStepTimeMap.Clear();
-            foreach (SfcPatchControl patchControl in controls)
+            foreach (PatchEntity entity in sfcEntity.Patches)
             {
-                PatchEntity data = patchControl.Data;
-                if (data.ContainsRealStep())
+                if (entity.ContainsRealStep())
                 {
-                    EnsureUniqueStepKey(data);
-                    int mapKey = data.Key;
-                    _patchNameMap.Add(data.StepName, mapKey);
-                    _patchStepTimeMap.Add(data.StepName + ".T", mapKey);
+                    EnsureUniqueStepKey(entity);
+                    int mapKey = entity.Key;
+                    _patchNameMap.Add(entity.StepName, mapKey);
+                    _patchStepTimeMap.Add(entity.StepName + ".T", mapKey);
                 }
             }
         }
@@ -43,7 +42,7 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// Returns true if the name is a valid Step name
         /// </summary>
-        public static bool ContainsStep(string name)
+        public bool ContainsStep(string name)
         {
             return _patchNameMap.ContainsKey(name);
         }
@@ -51,7 +50,7 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// Returns the numeric key in the map.
         /// </summary>
-        public static int GetNameKey(string name)
+        public int GetNameKey(string name)
         {
             return _patchNameMap[name];
         }
@@ -59,15 +58,15 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// Returns true if a STEP.T exists.
         /// </summary>
-        public static bool ContainsStepTime(string name)
+        public bool ContainsStepTime(string name)
         {
             return PatchStepTimeMap.ContainsKey(name);
         }
         
         /// <summary>
-        /// Returns true if a STEP.T exists.
+        /// Returns numeric key of the STEP.T.
         /// </summary>
-        public static int GetStepTimeKey(string name)
+        public int GetStepTimeKey(string name)
         {
             return PatchStepTimeMap[name];
         }
@@ -78,7 +77,7 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// The step name must be unique to create step references
         /// </summary>
-        private static void EnsureUniqueStepKey(PatchEntity data)
+        private void EnsureUniqueStepKey(PatchEntity data)
         {
             if (_patchNameMap.ContainsKey(data.StepName))
             {

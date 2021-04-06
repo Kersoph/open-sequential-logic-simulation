@@ -17,7 +17,7 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// Fills in the defined color keys of the opened simulation
         /// </summary>
-        public static void UpdateColorKeys(TextEdit textEdit)
+        public static void UpdateColorKeys(TextEdit textEdit, StepMaster stepMaster)
         {
             textEdit.ClearColors();
             List<string> booleanKeys = PlantViewNode.LoadedSimulationNode.SimulationOutput.BooleanKeys;
@@ -53,7 +53,7 @@ namespace Osls.SfcEditor.Interpreter
             // Godot forces member variable color according to member_variable_color
             // Godot also forces the "class" color and access without any known possibility to change or override them.
             textEdit.AddColorOverride("member_variable_color", IntegerInputColor);
-            foreach (string key in StepMaster.PatchNameMap.Keys)
+            foreach (string key in stepMaster.PatchNameMap.Keys)
             {
                 textEdit.AddKeywordColor(key, StepInputColor);
             }
@@ -62,11 +62,11 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// Converts the string to a logical model.
         /// </summary>
-        public static Boolean.BooleanExpression InterpretTransitionText(string transition)
+        public static Boolean.BooleanExpression InterpretTransitionText(string transition, StepMaster stepMaster)
         {
             string[] words = transition.Split(" ");
             Data data = new Data(words);
-            Boolean.BooleanExpression mainExpression = InterpretBooleanExpression(data);
+            Boolean.BooleanExpression mainExpression = InterpretBooleanExpression(data, stepMaster);
             return mainExpression;
         }
         #endregion
@@ -78,7 +78,7 @@ namespace Osls.SfcEditor.Interpreter
         /// As there are different possible approaches, we choose a left to right packing method to provide
         /// a readable debug string for the user.
         /// </summary>
-        private static Boolean.BooleanExpression InterpretBooleanExpression(Data data)
+        private static Boolean.BooleanExpression InterpretBooleanExpression(Data data, StepMaster stepMaster)
         {
             if(data.IsEndRechaed) return null;
             string currentWord = data.GetNext();
@@ -87,7 +87,7 @@ namespace Osls.SfcEditor.Interpreter
             // B -> I B
             if (Boolean.LogicalInverter.Values.Contains(currentWord))
             {
-                Boolean.BooleanExpression nextExpression = InterpretBooleanExpression(data);
+                Boolean.BooleanExpression nextExpression = InterpretBooleanExpression(data, stepMaster);
                 currentExpression = new Boolean.LogicalInverter(nextExpression);
                 if(data.IsEndRechaed) return currentExpression;
                 currentWord = data.GetNext();
@@ -100,10 +100,10 @@ namespace Osls.SfcEditor.Interpreter
                 currentWord = data.GetNext();
             }
             // B -> N V N
-            else if (IsRepresentingNumerical(currentWord))
+            else if (IsRepresentingNumerical(currentWord, stepMaster))
             {
                 // N -> n
-                Numerical.NumericalExpression leftNumber = InterpretNumerical(currentWord);
+                Numerical.NumericalExpression leftNumber = InterpretNumerical(currentWord, stepMaster);
                 if (data.IsEndRechaed) return null;
                 string relation = data.GetNext();
                 // V -> v
@@ -111,8 +111,8 @@ namespace Osls.SfcEditor.Interpreter
                 if (data.IsEndRechaed) return null;
                 currentWord = data.GetNext();
                 // N -> n
-                if (!IsRepresentingNumerical(currentWord)) return null;
-                Numerical.NumericalExpression rightNumber = InterpretNumerical(currentWord);
+                if (!IsRepresentingNumerical(currentWord, stepMaster)) return null;
+                Numerical.NumericalExpression rightNumber = InterpretNumerical(currentWord, stepMaster);
                 currentExpression = new Boolean.RelationalOperation(relation, leftNumber, rightNumber);
                 if (data.IsEndRechaed) return currentExpression;
                 currentWord = data.GetNext();
@@ -120,7 +120,7 @@ namespace Osls.SfcEditor.Interpreter
             // B -> B E B
             if (Boolean.LogicalCombination.Values.Contains(currentWord))
             {
-                Boolean.BooleanExpression nextExpression = InterpretBooleanExpression(data);
+                Boolean.BooleanExpression nextExpression = InterpretBooleanExpression(data, stepMaster);
                 return new Boolean.LogicalCombination(currentWord, currentExpression, nextExpression);
             }
             return currentExpression; // Partial failure
@@ -138,19 +138,19 @@ namespace Osls.SfcEditor.Interpreter
             return new Boolean.PlantReference(word);
         }
         
-        private static bool IsRepresentingNumerical(string word)
+        private static bool IsRepresentingNumerical(string word, StepMaster stepMaster)
         {
             int number;
             return int.TryParse(word, out number)
             || PlantViewNode.LoadedSimulationNode.SimulationOutput.ContainsInteger(word)
-            || StepMaster.ContainsStepTime(word);
+            || stepMaster.ContainsStepTime(word);
         }
         
-        private static Numerical.NumericalExpression InterpretNumerical(string word)
+        private static Numerical.NumericalExpression InterpretNumerical(string word, StepMaster stepMaster)
         {
             int number = 0;
             if (int.TryParse(word, out number)) return new Numerical.Constant(number);
-            if (StepMaster.ContainsStepTime(word)) return new Numerical.StepReference(word);
+            if (stepMaster.ContainsStepTime(word)) return new Numerical.StepReference(word);
             return new Numerical.PlantReference(word);
         }
         #endregion

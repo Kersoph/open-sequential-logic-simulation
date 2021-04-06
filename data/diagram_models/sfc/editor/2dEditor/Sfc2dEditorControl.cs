@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using Osls.SfcEditor.Interpreter;
 
 
 namespace Osls.SfcEditor
@@ -13,6 +14,7 @@ namespace Osls.SfcEditor
         #region ==================== Fields Properties ====================
         public ReferenceRect ReferenceRect { get; private set; }
         protected SfcEntity Data { get; private set; }
+        public StepMaster StepMaster { get; private set; }
         private readonly Dictionary<int, SfcPatchControl> _controlMap = new Dictionary<int, SfcPatchControl>();
         #endregion
         
@@ -22,6 +24,7 @@ namespace Osls.SfcEditor
         {
             ReferenceRect = referenceRect;
             Data = new SfcEntity();
+            StepMaster = new StepMaster();
         }
         
         /// <summary>
@@ -39,9 +42,17 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Clones the control map into a new dicionary.
         /// </summary>
-        public Dictionary<int, SfcPatchControl> CloneControlMap()
+        public SfcEntity LinkSfcData()
         {
-            return new Dictionary<int, SfcPatchControl>(); // todo
+            return Data; // todo: Read from file?
+        }
+        
+        /// <summary>
+        /// Marks or unmarks the step with the given id
+        /// </summary>
+        public void MarkStep(int id, bool setMark)
+        {
+            _controlMap[id].SfcPatchNode.MarkStep(setMark);
         }
         
         /// <summary>
@@ -50,6 +61,11 @@ namespace Osls.SfcEditor
         public void ReadFrom(System.IO.BinaryReader reader)
         {
             Data.ReadFrom(reader);
+            foreach (SfcPatchControl patch in _controlMap.Values)
+            {
+                patch.RemovePatch();
+            }
+            _controlMap.Clear();
             IReadOnlyCollection<PatchEntity> patches = Data.Patches;
             foreach (PatchEntity entity in patches)
             {
@@ -99,7 +115,7 @@ namespace Osls.SfcEditor
                     EnsureNeighbours(patch);
                 }
             }
-            // StepMaster.UpdateStepNames(patch); TODO
+            StepMaster.UpdateStepNames(Data);
         }
         
         /// <summary>
