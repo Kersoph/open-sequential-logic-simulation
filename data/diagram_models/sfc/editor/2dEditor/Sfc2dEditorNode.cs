@@ -10,17 +10,17 @@ namespace Osls.SfcEditor
     public class Sfc2dEditorNode : Node
     {
         #region ==================== Fields Properties ====================
-        public Sfc2dEditorControl Sfc2dEditorControl { get; private set; }
-        
         private ReferenceRect _renderViewportReferenceRect;
         private int _zoomLevel = 3;
         private static readonly float[] zoomLevels = new float[] { 0.34f, 0.5f, 0.7f, 1f, 1.5f, 2f, 3f };
         private bool _isDragging;
         private Vector2 _lastDragPosition;
+        
+        public Sfc2dEditorControl Sfc2dEditorControl { get; private set; }
         #endregion
-
-
-        #region ==================== Public ====================
+        
+        
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Creates a controller and initializes the patch fields.
         /// </summary>
@@ -28,11 +28,6 @@ namespace Osls.SfcEditor
         {
             _renderViewportReferenceRect = GetNode<ReferenceRect>("RenderViewportReferenceRect");
             Sfc2dEditorControl = new Sfc2dEditorControl(_renderViewportReferenceRect);
-            // Todo: Later we will load the entity
-            SfcPatchEntity entity = new SfcPatchEntity(1, 0);
-            entity.SfcStepType = SfcStepType.StartingStep;
-            Sfc2dEditorControl.CreatePatchAt(entity);
-            Sfc2dEditorControl.UpdateGrid();
         }
         
         public override void _Process(float delta)
@@ -62,10 +57,15 @@ namespace Osls.SfcEditor
         
         /// <summary>
         /// Loads the file and builds the SFC diagram if the file exists
+        /// Creates a default diagram if it could not be loaded
         /// </summary>
         public bool TryLoadDiagram(string filepath)
         {
-            if(!System.IO.File.Exists(filepath)) return false;
+            if (!System.IO.File.Exists(filepath))
+            {
+                Sfc2dEditorControl.CreateDefaultDiagram();
+                return false;
+            }
             using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
             {
                 using (BinaryReader reader = new BinaryReader(stream))
@@ -105,10 +105,7 @@ namespace Osls.SfcEditor
         {
             _renderViewportReferenceRect.SetPosition(position);
         }
-        #endregion
         
-        
-        #region ==================== Input Events ====================
         public override void _Input(InputEvent @event)
         {
             if (@event.IsActionPressed("ui_MiddleMouseButton"))

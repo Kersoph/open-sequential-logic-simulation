@@ -14,14 +14,14 @@ namespace Osls.SfcEditor
         /// The controller for this node
         /// </summary>
         public SfcPatchControl SfcPatchControl { get; private set; }
-        #endregion;
+        #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Called only once when the node is created by the patch control.
         /// </summary>
-        public void InitializeWith(SfcPatchControl sfcPatchControl, SfcPatchEntity data)
+        public void InitializeWith(SfcPatchControl sfcPatchControl, PatchEntity data)
         {
             SfcPatchControl = sfcPatchControl;
             SetCellPosition(data.X, data.Y);
@@ -31,7 +31,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Updates the noced according to the given data
         /// </summary>
-        public void UpdateNodes(SfcPatchEntity data)
+        public void UpdateNodes(PatchEntity data)
         {
             GetNode<SfcStepNode>("SfcStepNode").UpdateStep(data);
             GetNode<SfcLineButton>("SfcLineButtonTop").UpdateBranchLine(data.UpperBranch);
@@ -54,10 +54,10 @@ namespace Osls.SfcEditor
         #region ==================== Private ====================
         private void SetCellPosition(int x, int y)
         {
-            Vector2 sizeOffset = this.RectMinSize;
+            Vector2 sizeOffset = RectMinSize;
             float xOffset = sizeOffset.x * x;
             float yOffset = sizeOffset.y * y;
-            this.SetPosition(new Vector2(xOffset, yOffset));
+            SetPosition(new Vector2(xOffset, yOffset));
         }
         #endregion
     }

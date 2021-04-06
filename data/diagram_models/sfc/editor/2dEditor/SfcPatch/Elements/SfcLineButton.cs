@@ -19,7 +19,7 @@ namespace Osls.SfcEditor
         /// True, if it is the top line. Otherwise it is the bottom branch/merge
         /// </summary>
         [Export] public bool TopLine;
-        private SfcBranchLineType _sfcLineType = SfcBranchLineType.Unused;
+        private BranchType _sfcLineType = BranchType.Unused;
         private TextureRect _sfcLineTextureNode;
         #endregion
         
@@ -29,7 +29,7 @@ namespace Osls.SfcEditor
         {
             get
             {
-                if (_sfcLineTextureNode == null) _sfcLineTextureNode = this.GetNode<TextureRect>("SfcLineTexture");
+                if (_sfcLineTextureNode == null) _sfcLineTextureNode = GetNode<TextureRect>("SfcLineTexture");
                 return _sfcLineTextureNode;
             }
         }
@@ -39,8 +39,8 @@ namespace Osls.SfcEditor
         #region ==================== Updates ====================
         public override void _Ready()
         {
-            this.Connect("mouse_entered", this, nameof(MouseEntered));
-            this.Connect("mouse_exited", this, nameof(MouseExited));
+            Connect("mouse_entered", this, nameof(OnMouseEntered));
+            Connect("mouse_exited", this, nameof(OnMouseExited));
             
         }
         #endregion
@@ -65,11 +65,11 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Changes the sfc line type to the given type.
         /// </summary>
-        public void UpdateBranchLine(SfcBranchLineType type)
+        public void UpdateBranchLine(BranchType type)
         {
             if (_sfcLineType != type)
             {
-                if (type != SfcBranchLineType.Unused)
+                if (type != BranchType.Unused)
                 {
                     SetLineTexture(type);
                 }
@@ -84,7 +84,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called when a mouse enters the rect
         /// </summary>
-        private void MouseEntered()
+        private void OnMouseEntered()
         {
             SfcLineTextureNode.SelfModulate = TiltColor;
         }
@@ -92,14 +92,14 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called when a mouse leaves the rect
         /// </summary>
-        private void MouseExited()
+        private void OnMouseExited()
         {
             UpdateLineVisibility();
         }
         
         private void UpdateLineVisibility()
         {
-            if (_sfcLineType == SfcBranchLineType.Unused)
+            if (_sfcLineType == BranchType.Unused)
             {
                 SfcLineTextureNode.SelfModulate = HiddenColor;
             }
@@ -109,10 +109,10 @@ namespace Osls.SfcEditor
             }
         }
         
-        private void SetLineTexture(SfcBranchLineType sfcLineType)
+        private void SetLineTexture(BranchType sfcLineType)
         {
             Texture texture;
-            if (sfcLineType == SfcBranchLineType.Single)
+            if (sfcLineType == BranchType.Single)
             {
                 texture = GD.Load<Texture>(SingleLineText);
             }

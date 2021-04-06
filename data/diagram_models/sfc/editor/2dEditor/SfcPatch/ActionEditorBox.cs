@@ -6,20 +6,15 @@ namespace Osls.SfcEditor
 {
     public class ActionEditorBox : Control
     {
-        #region ==================== Properties ====================
+        #region ==================== Fields / Properties ====================
         private const string _editorScenePath = "res://Data/Model/SfcEditor/2dEditor/SfcPatch/Elements/ActionEditor.tscn";
         
         private SfcPatchControl _patchController;
-        private readonly List<ActionEditor> _actionEditors;
+        private readonly List<ActionEditor> _actionEditors = new List<ActionEditor>();
         #endregion
         
         
-        #region ==================== Public ====================
-        public ActionEditorBox()
-        {
-            _actionEditors = new List<ActionEditor>();
-        }
-        
+        #region ==================== Public Methods ====================
         public override void _Ready()
         {
             _patchController = GetNode<SfcPatchNode>("..").SfcPatchControl;
@@ -28,7 +23,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called when the model has changed or is initialized.
         /// </summary>
-        public void UpdateActions(SfcPatchEntity entity)
+        public void UpdateActions(PatchEntity entity)
         {
             UpdateVisibility(entity);
             for (int i = 0; i < entity.ActionEntries.Count; i++)
@@ -75,7 +70,7 @@ namespace Osls.SfcEditor
         
         
         #region ==================== Private Methods ====================
-        private void UpdateVisibility(SfcPatchEntity entity)
+        private void UpdateVisibility(PatchEntity entity)
         {
             this.Visible = entity.ContainsRealStep();
         }

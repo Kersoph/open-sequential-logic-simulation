@@ -9,12 +9,12 @@ namespace Osls.SfcEditor
     /// </summary>
     public class SfcEditorNode : Node
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
+        private LessonEntity _opendLesson;
+        
         public MainNode MainNode { get; private set; }
         public PlantViewNode PlantViewNode { get; private set; }
         public Sfc2dEditorNode Sfc2dEditorNode { get; private set; }
-        
-        private LessonEntity _opendLesson;
         #endregion;
         
         

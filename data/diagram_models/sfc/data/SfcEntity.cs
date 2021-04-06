@@ -11,6 +11,11 @@ namespace Osls.SfcEditor
         #region ==================== Fields / Properties ====================
         public const int XKeyShift = 16;
         private readonly Dictionary<int, PatchEntity> _patchMap = new Dictionary<int, PatchEntity>();
+        
+        /// <summary>
+        /// Gets the current patch collection of the sfc data
+        /// </summary>
+        public IReadOnlyCollection<PatchEntity> Patches { get { return _patchMap.Values; } }
         #endregion
         
         

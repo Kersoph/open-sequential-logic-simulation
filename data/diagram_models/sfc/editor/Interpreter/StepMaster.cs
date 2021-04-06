@@ -29,11 +29,11 @@ namespace Osls.SfcEditor.Interpreter
             _patchStepTimeMap.Clear();
             foreach (SfcPatchControl patchControl in controls)
             {
-                SfcPatchEntity data = patchControl.Data;
+                PatchEntity data = patchControl.Data;
                 if (data.ContainsRealStep())
                 {
                     EnsureUniqueStepKey(data);
-                    int mapKey = Sfc2dEditorControl.CalculateMapKey(data.X, data.Y);
+                    int mapKey = data.Key;
                     _patchNameMap.Add(data.StepName, mapKey);
                     _patchStepTimeMap.Add(data.StepName + ".T", mapKey);
                 }
@@ -78,7 +78,7 @@ namespace Osls.SfcEditor.Interpreter
         /// <summary>
         /// The step name must be unique to create step references
         /// </summary>
-        private static void EnsureUniqueStepKey(SfcPatchEntity data)
+        private static void EnsureUniqueStepKey(PatchEntity data)
         {
             if (_patchNameMap.ContainsKey(data.StepName))
             {

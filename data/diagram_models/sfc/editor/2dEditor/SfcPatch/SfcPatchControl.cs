@@ -8,26 +8,27 @@ namespace Osls.SfcEditor
     /// </summary>
     public class SfcPatchControl
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
+        private Sfc2dEditorControl _control;
+        private const string _patchReferencePath = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/SfcPatch.tscn";
+        
         /// <summary>
         /// The patch model entity.
         /// </summary>
-        public SfcPatchEntity Data { get; private set; }
+        public PatchEntity Data { get; private set; }
+        
         /// <summary>
         /// The connected node controlled by this class
         /// </summary>
         public SfcPatchNode SfcPatchNode { get; private set; }
-        
-        private Sfc2dEditorControl _control;
-        private const string _patchReferencePath = "res://Data/Model/SfcEditor/2dEditor/SfcPatch/SfcPatch.tscn";
-        #endregion;
+        #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Contstuctor. It will add the patch to the 2d editor.
         /// </summary>
-        public SfcPatchControl(SfcPatchEntity data, Sfc2dEditorControl control)
+        public SfcPatchControl(PatchEntity data, Sfc2dEditorControl control)
         {
             Data = data;
             Node node = ((PackedScene)GD.Load(_patchReferencePath)).Instance();
@@ -60,15 +61,19 @@ namespace Osls.SfcEditor
         /// </summary>
         public void TopLineToggled()
         {
-            if (Data.UpperBranch == SfcBranchLineType.Unused)
+            if (Data.UpperBranch == BranchType.Unused)
             {
-                Data.UpperBranch = SfcBranchLineType.Single;
+                Data.UpperBranch = BranchType.Single;
+            }
+            else if (Data.UpperBranch == BranchType.Single)
+            {
+                Data.UpperBranch = BranchType.Double;
             }
             else
             {
-                Data.UpperBranch = SfcBranchLineType.Unused;
+                Data.UpperBranch = BranchType.Unused;
             }
-            _control.UpdateGrid();
+            UpdatePatchNodes();
         }
         
         /// <summary>
@@ -77,15 +82,19 @@ namespace Osls.SfcEditor
         /// </summary>
         public void BotLineToggled()
         {
-            if (Data.LowerBranch == SfcBranchLineType.Unused)
+            if (Data.LowerBranch == BranchType.Unused)
             {
-                Data.LowerBranch = SfcBranchLineType.Single;
+                Data.LowerBranch = BranchType.Single;
+            }
+            else if (Data.LowerBranch == BranchType.Single)
+            {
+                Data.UpperBranch = BranchType.Double;
             }
             else
             {
-                Data.LowerBranch = SfcBranchLineType.Unused;
+                Data.LowerBranch = BranchType.Unused;
             }
-            _control.UpdateGrid();
+            UpdatePatchNodes();
         }
         
         /// <summary>
@@ -102,7 +111,7 @@ namespace Osls.SfcEditor
         /// Called if the user changed the step.
         /// This will update the model.
         /// </summary>
-        public void UpdateSfcSetpTo(SfcStepType sfcStepType)
+        public void UpdateSfcSetpTo(StepType sfcStepType)
         {
             Data.SfcStepType = sfcStepType;
             _control.UpdateGrid();
@@ -124,7 +133,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void AddNewAction()
         {
-            Data.ActionEntries.Add(new SfcActionEntity());
+            Data.ActionEntries.Add(new ActionEntity());
             // No need to call for an update here, as it propagates the data via UpdateActionTo.
         }
         

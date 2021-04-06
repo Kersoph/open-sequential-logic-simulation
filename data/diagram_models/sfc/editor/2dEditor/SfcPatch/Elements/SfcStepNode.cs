@@ -14,7 +14,7 @@ namespace Osls.SfcEditor
         private const string StepButton = "res://Data/Model/SfcEditor/2dEditor/SfcPatch/Elements/SfcStepButton.tscn";
         private const string StartStepButton = "res://Data/Model/SfcEditor/2dEditor/SfcPatch/Elements/SfcStepButtonStart.tscn";
         private const string StepJump = "res://Data/Model/SfcEditor/2dEditor/SfcPatch/Elements/SfcStepButtonJump.tscn";
-        private SfcStepType _currentStepType;
+        private StepType _currentStepType;
         private SfcStepButtonBasic _stepNode;
         #endregion
         
@@ -23,7 +23,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Updates the visivle nodes according to the given step type.
         /// </summary>
-        public void UpdateStep(SfcPatchEntity data)
+        public void UpdateStep(PatchEntity data)
         {
             if (data.SfcStepType != _currentStepType || _stepNode == null)
             {
@@ -42,20 +42,20 @@ namespace Osls.SfcEditor
             SfcPatchControl controller = GetNode<SfcPatchNode>("..").SfcPatchControl;
             switch (_currentStepType)
             {
-                case SfcStepType.Unused:
-                    controller.UpdateSfcSetpTo(SfcStepType.Step);
+                case StepType.Unused:
+                    controller.UpdateSfcSetpTo(StepType.Step);
                     break;
-                case SfcStepType.Step:
-                    controller.UpdateSfcSetpTo(SfcStepType.StartingStep);
+                case StepType.Step:
+                    controller.UpdateSfcSetpTo(StepType.StartingStep);
                     break;
-                case SfcStepType.StartingStep:
-                    controller.UpdateSfcSetpTo(SfcStepType.Pass);
+                case StepType.StartingStep:
+                    controller.UpdateSfcSetpTo(StepType.Pass);
                     break;
-                case SfcStepType.Pass:
-                    controller.UpdateSfcSetpTo(SfcStepType.Jump);
+                case StepType.Pass:
+                    controller.UpdateSfcSetpTo(StepType.Jump);
                     break;
-                case SfcStepType.Jump:
-                    controller.UpdateSfcSetpTo(SfcStepType.Unused);
+                case StepType.Jump:
+                    controller.UpdateSfcSetpTo(StepType.Unused);
                     break;
             }
         }
@@ -79,7 +79,7 @@ namespace Osls.SfcEditor
         
         
         #region ==================== Private ====================
-        private void ShowStepAs(SfcStepType type)
+        private void ShowStepAs(StepType type)
         {
             if (_stepNode != null)
             {
@@ -89,24 +89,24 @@ namespace Osls.SfcEditor
             string reference = StepButton;
             switch (type)
             {
-                case SfcStepType.Unused:
+                case StepType.Unused:
                     reference = UnusedStepButton;
                     break;
-                case SfcStepType.Pass:
+                case StepType.Pass:
                     reference = PassStepButton;
                     break;
-                case SfcStepType.Step:
+                case StepType.Step:
                     reference = StepButton;
                     break;
-                case SfcStepType.StartingStep:
+                case StepType.StartingStep:
                     reference = StartStepButton;
                     break;
-                case SfcStepType.Jump:
+                case StepType.Jump:
                     reference = StepJump;
                     break;
             }
             _stepNode = (SfcStepButtonBasic)((PackedScene)GD.Load(reference)).Instance();
-            this.AddChild(_stepNode);
+            AddChild(_stepNode);
         }
         #endregion
     }

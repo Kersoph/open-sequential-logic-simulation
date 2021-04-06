@@ -9,7 +9,7 @@ namespace Osls.SfcSimulation.Engine
     public class SfcStep
     {
         #region ==================== Fields Properties ====================
-        public SfcPatchEntity SourceReference { get; private set; }
+        public PatchEntity SourceReference { get; private set; }
         public int Id { get; private set; }
         public int StepCounter { get; private set; }
         
@@ -20,7 +20,7 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Constructor ====================
-        public SfcStep(SfcPatchEntity source, SfcProgramm controler, int id)
+        public SfcStep(PatchEntity source, SfcProgramm controler, int id)
         {
             SourceReference = source;
             _controler = controler;
@@ -94,7 +94,7 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Helpers ====================
-        private void AssignActionsFrom(SfcPatchEntity source)
+        private void AssignActionsFrom(PatchEntity source)
         {
             _actions = new Dictionary<ActionQualifier, List<AssignmentExpression>>();
             foreach (ActionQualifier qualifier in (ActionQualifier[]) Enum.GetValues(typeof(ActionQualifier)))

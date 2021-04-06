@@ -20,6 +20,11 @@ namespace Osls.SfcEditor
         public short Y { get; private set; }
         
         /// <summary>
+        /// returns an unique key for this patch
+        /// </summary>
+        public int Key { get { return SfcEntity.CalculateMapKey(X, Y); } }
+        
+        /// <summary>
         /// The logical step type. "eg Square"
         /// </summary>
         public StepType SfcStepType { get; set; }

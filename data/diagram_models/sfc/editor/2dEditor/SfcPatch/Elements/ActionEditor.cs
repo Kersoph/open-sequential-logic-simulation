@@ -30,7 +30,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called when the model has changed or is initialized.
         /// </summary>
-        public void UpdateAction(SfcActionEntity action)
+        public void UpdateAction(ActionEntity action)
         {
             _selectedQualifier = action.Qualifier;
             SetQualifierText((int)_selectedQualifier);

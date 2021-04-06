@@ -61,8 +61,8 @@ namespace Osls.SfcSimulation.Engine
         {
             List<SfcTransition> transitions = new List<SfcTransition>();
             List<SfcStep> collectedUpperAlternatingSteps = new List<SfcStep>() { owner };
-            CollectLeftDependingSteps(owner, allSteps, collectedUpperAlternatingSteps, SfcBranchLineType.Single, true);
-            CollectRightDependingSteps(owner, allSteps, collectedUpperAlternatingSteps, SfcBranchLineType.Single, true);
+            CollectLeftDependingSteps(owner, allSteps, collectedUpperAlternatingSteps, BranchType.Single, true);
+            CollectRightDependingSteps(owner, allSteps, collectedUpperAlternatingSteps, BranchType.Single, true);
             if (collectedUpperAlternatingSteps.Count > 0)
             {
                 foreach (SfcStep step in collectedUpperAlternatingSteps)
@@ -86,8 +86,8 @@ namespace Osls.SfcSimulation.Engine
         {
             SfcTransition transition = null;
             List<SfcStep> collectedUpperSimultaneousSteps = new List<SfcStep>() { owner };
-            CollectLeftDependingSteps(owner, allSteps, collectedUpperSimultaneousSteps, SfcBranchLineType.Double, true);
-            CollectRightDependingSteps(owner, allSteps, collectedUpperSimultaneousSteps, SfcBranchLineType.Double, true);
+            CollectLeftDependingSteps(owner, allSteps, collectedUpperSimultaneousSteps, BranchType.Double, true);
+            CollectRightDependingSteps(owner, allSteps, collectedUpperSimultaneousSteps, BranchType.Double, true);
             // TODO: Sucher auch tiefere
             if (collectedUpperSimultaneousSteps.Count > 1)
             {
@@ -124,8 +124,8 @@ namespace Osls.SfcSimulation.Engine
         private static List<SfcStep> CollectLowerSimultaneousBranches(SfcStep source, Dictionary<int, SfcStep> allSteps)
         {
             List<SfcStep> connectedLowerSimultaneousSteps = new List<SfcStep>() { source };
-            CollectLeftDependingSteps(source, allSteps, connectedLowerSimultaneousSteps, SfcBranchLineType.Double, false);
-            CollectRightDependingSteps(source, allSteps, connectedLowerSimultaneousSteps, SfcBranchLineType.Double, false);
+            CollectLeftDependingSteps(source, allSteps, connectedLowerSimultaneousSteps, BranchType.Double, false);
+            CollectRightDependingSteps(source, allSteps, connectedLowerSimultaneousSteps, BranchType.Double, false);
             List<SfcStep> targetSteps = new List<SfcStep>();
             foreach (SfcStep step in connectedLowerSimultaneousSteps)
             {
@@ -135,11 +135,11 @@ namespace Osls.SfcSimulation.Engine
                 {
                     switch (lowerStep.SourceReference.SfcStepType)
                     {
-                        case SfcStepType.StartingStep:
-                        case SfcStepType.Step:
+                        case StepType.StartingStep:
+                        case StepType.Step:
                             targetSteps.Add(lowerStep);
                             break;
-                        case SfcStepType.Jump:
+                        case StepType.Jump:
                             if(StepMaster.ContainsStep(lowerStep.SourceReference.StepName))
                             {
                                 int reference = StepMaster.GetNameKey(lowerStep.SourceReference.StepName);
@@ -150,14 +150,14 @@ namespace Osls.SfcSimulation.Engine
                                 return null;
                             }
                             break;
-                        case SfcStepType.Pass:
+                        case StepType.Pass:
                             SfcStep foundStep = FindLowerConnectedStep(lowerStep, allSteps);
                             if(foundStep != null)
                             {
                                 targetSteps.Add(foundStep);
                             }
                             break;
-                        case SfcStepType.Unused:
+                        case StepType.Unused:
                             break;
                     }
                 }
@@ -168,8 +168,8 @@ namespace Osls.SfcSimulation.Engine
         private static SfcStep FindAlternativeMergeTarget(SfcStep source, Dictionary<int, SfcStep> allSteps)
         {
             List<SfcStep> connectedLowerAlternativeSteps = new List<SfcStep>() { source };
-            CollectLeftDependingSteps(source, allSteps, connectedLowerAlternativeSteps, SfcBranchLineType.Single, false);
-            CollectRightDependingSteps(source, allSteps, connectedLowerAlternativeSteps, SfcBranchLineType.Single, false);
+            CollectLeftDependingSteps(source, allSteps, connectedLowerAlternativeSteps, BranchType.Single, false);
+            CollectRightDependingSteps(source, allSteps, connectedLowerAlternativeSteps, BranchType.Single, false);
             foreach (SfcStep step in connectedLowerAlternativeSteps)
             {
                 int subId = step.Id + 1;
@@ -178,20 +178,20 @@ namespace Osls.SfcSimulation.Engine
                 {
                     switch (lowerStep.SourceReference.SfcStepType)
                     {
-                        case SfcStepType.StartingStep:
-                        case SfcStepType.Step:
+                        case StepType.StartingStep:
+                        case StepType.Step:
                             return lowerStep;
-                        case SfcStepType.Jump:
+                        case StepType.Jump:
                             int reference = StepMaster.GetNameKey(lowerStep.SourceReference.StepName);
                             return allSteps[reference];
-                        case SfcStepType.Pass:
+                        case StepType.Pass:
                             SfcStep foundStep = FindAlternativeMergeTarget(lowerStep, allSteps);
                             if(foundStep != null)
                             {
                                 return foundStep;
                             }
                             break;
-                        case SfcStepType.Unused:
+                        case StepType.Unused:
                             break;
                     }
                 }
@@ -202,9 +202,9 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Looks for left depending steps.
         /// </summary>
-        private static void CollectLeftDependingSteps(SfcStep currentStep, Dictionary<int, SfcStep> allSteps, List<SfcStep> collectedSteps, SfcBranchLineType targetType, bool upperBranch)
+        private static void CollectLeftDependingSteps(SfcStep currentStep, Dictionary<int, SfcStep> allSteps, List<SfcStep> collectedSteps, BranchType targetType, bool upperBranch)
         {
-            int leftId = currentStep.Id - (1 << Sfc2dEditorControl.XKeyShift);
+            int leftId = currentStep.Id - (1 << SfcEntity.XKeyShift);
             SfcStep leftStep;
             if (allSteps.TryGetValue(leftId, out leftStep))
             {
@@ -220,12 +220,12 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Looks for right depending steps.
         /// </summary>
-        private static void CollectRightDependingSteps(SfcStep currentStep, Dictionary<int, SfcStep> allSteps, List<SfcStep> collectedSteps, SfcBranchLineType targetType, bool upperBranch)
+        private static void CollectRightDependingSteps(SfcStep currentStep, Dictionary<int, SfcStep> allSteps, List<SfcStep> collectedSteps, BranchType targetType, bool upperBranch)
         {
             if ((upperBranch && currentStep.SourceReference.UpperBranch == targetType)
             || (!upperBranch && currentStep.SourceReference.LowerBranch == targetType))
             {
-                int rightId = currentStep.Id + (1 << Sfc2dEditorControl.XKeyShift);
+                int rightId = currentStep.Id + (1 << SfcEntity.XKeyShift);
                 SfcStep rightStep;
                 if (allSteps.TryGetValue(rightId, out rightStep))
                 {
@@ -244,7 +244,7 @@ namespace Osls.SfcSimulation.Engine
             {
                 return step;
             }
-            else if(step.SourceReference.SfcStepType == SfcStepType.Pass)
+            else if(step.SourceReference.SfcStepType == StepType.Pass)
             {
                 int upperId = step.Id -1;
                 SfcStep upperStep;
@@ -269,11 +269,11 @@ namespace Osls.SfcSimulation.Engine
                 {
                     return lowerStep;
                 }
-                else if(step.SourceReference.SfcStepType == SfcStepType.Pass)
+                else if(step.SourceReference.SfcStepType == StepType.Pass)
                 {
                     return FindLowerConnectedStep(lowerStep, allSteps);
                 }
-                else if(step.SourceReference.SfcStepType == SfcStepType.Jump)
+                else if(step.SourceReference.SfcStepType == StepType.Jump)
                 {
                     int reference = StepMaster.GetNameKey(lowerStep.SourceReference.StepName);
                     return allSteps[reference];

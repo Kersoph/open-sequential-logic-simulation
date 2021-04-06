@@ -7,12 +7,14 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcLineButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/ActionEditorBox.cs" type="Script" id=6]
 
-
 [node name="SfcPatchNode" type="ReferenceRect"]
 margin_right = 500.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 500, 300 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SfcStepNode" parent="." instance=ExtResource( 2 )]
 
@@ -38,7 +40,6 @@ margin_right = 500.0
 margin_bottom = 282.0
 
 [node name="ActionEditorBox" type="ColorRect" parent="."]
-editor/display_folded = true
 margin_left = 200.0
 margin_top = 21.0
 margin_right = 214.0

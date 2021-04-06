@@ -4,19 +4,15 @@ namespace Osls.SfcEditor
 {
     public class SfcConnectionLine : Control
     {
-        #region ==================== Properties ====================
-        #endregion
-        
-        
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Called when the model has changed or is initialized.
         /// </summary>
-        public void UpdateLine(SfcPatchEntity entity)
+        public void UpdateLine(PatchEntity entity)
         {
-            GetNode<ColorRect>("TransitionLineTop").Visible = entity.SfcStepType != SfcStepType.Unused && entity.SfcStepType != SfcStepType.Jump;
-            GetNode<ColorRect>("TransitionLineMid").Visible = entity.ContainsTransition() || entity.SfcStepType == SfcStepType.Pass;
-            GetNode<ColorRect>("TransitionLineBot").Visible = entity.SfcStepType != SfcStepType.Unused;
+            GetNode<ColorRect>("TransitionLineTop").Visible = entity.SfcStepType != StepType.Unused && entity.SfcStepType != StepType.Jump;
+            GetNode<ColorRect>("TransitionLineMid").Visible = entity.ContainsTransition() || entity.SfcStepType == StepType.Pass;
+            GetNode<ColorRect>("TransitionLineBot").Visible = entity.SfcStepType != StepType.Unused;
         }
         
         #endregion

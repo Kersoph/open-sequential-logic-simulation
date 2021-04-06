@@ -134,7 +134,7 @@ namespace Osls.SfcSimulation.Engine
                 if (step.SourceReference.ContainsRealStep())
                 {
                     step.InitializeTransitions(_controlMap);
-                    if (step.SourceReference.SfcStepType == SfcStepType.StartingStep)
+                    if (step.SourceReference.SfcStepType == StepType.StartingStep)
                     {
                         _soonActiveSteps.Add(step);
                     }
