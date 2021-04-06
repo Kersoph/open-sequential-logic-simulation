@@ -1,13 +1,10 @@
-using Godot;
-
-
 namespace Osls.SfcEditor
 {
     /// <summary>
     /// Top node for the whole sfc editor view.
     /// We expect to be a child of the MainNode
     /// </summary>
-    public class SfcEditorNode : Node
+    public class SfcEditorNode : PageModule
     {
         #region ==================== Fields / Properties ====================
         private LessonEntity _opendLesson;
@@ -15,14 +12,19 @@ namespace Osls.SfcEditor
         public MainNode MainNode { get; private set; }
         public PlantViewNode PlantViewNode { get; private set; }
         public Sfc2dEditorNode Sfc2dEditorNode { get; private set; }
-        #endregion;
         
-        
-        #region ==================== Public ====================
         /// <summary>
-        /// Initializes the whole sfc editor
+        /// Gets the scene page type
         /// </summary>
-        public void InitializeEditor(MainNode mainNode, LessonEntity opendLesson)
+        public override PageCategory ScenePage { get { return PageCategory.LogicEditor; } }
+        #endregion
+        
+        
+        #region ==================== Public Methods ====================
+        /// <summary>
+        /// Initializes the whole page. Called bevore the node is added to the tree by the lesson controller.
+        /// </summary>
+        public override void InitialiseWith(MainNode mainNode, LessonEntity opendLesson)
         {
             MainNode = mainNode;
             _opendLesson = opendLesson;

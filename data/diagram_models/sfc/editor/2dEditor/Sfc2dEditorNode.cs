@@ -108,12 +108,12 @@ namespace Osls.SfcEditor
         
         public override void _Input(InputEvent @event)
         {
-            if (@event.IsActionPressed("ui_MiddleMouseButton"))
+            if (@event.IsActionPressed("ui_translate"))
             {
                 _lastDragPosition = GetViewport().GetMousePosition();
                 _isDragging = true;
             }
-            else if (@event.IsActionReleased("ui_MiddleMouseButton"))
+            else if (@event.IsActionReleased("ui_translate"))
             {
                 _isDragging = false;
             }

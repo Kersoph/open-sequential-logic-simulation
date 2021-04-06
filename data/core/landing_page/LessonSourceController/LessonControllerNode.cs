@@ -9,25 +9,22 @@ namespace Osls.LandingPage
     /// </summary>
     public class LessonControllerNode : ReferenceRect
     {
-        #region ==================== Fields ====================
+        #region ==================== Fields / Properties ====================
+        private LessonSelectionGridNode _gridController;
+        
         /// <summary>
         /// Gets the lesson information savend in the lesson folder.
         /// </summary>
         public LessonEntity LessonEntity { get; private set; }
-        
-        private LessonSelectionGridNode _gridController;
-        #endregion
-
-
-        #region ==================== Updates ====================
-        public override void _Ready()
-        {
-            GetNode<Button>("LessonButton").Connect("toggled", this, nameof(LessonButtonToggled));
-        }
         #endregion
         
         
         #region ==================== Public Methods ====================
+        public override void _Ready()
+        {
+            GetNode<Button>("LessonButton").Connect("toggled", this, nameof(LessonButtonToggled));
+        }
+        
         /// <summary>
         /// Sets the texts and stores the lesson entity
         /// </summary>

@@ -2,6 +2,6 @@
     "Title": "[center]Basics[/center]",
     "Description": "My Description.",
     "Goal": "Goal Text.",
-	"Simulation": "res://Data/Model/SfcSimulation/PlantModels/MinimalExample/MinimalSimulationExample.tscn",
-	"Test": "res://Data/Model/SfcSimulation/PlantModels/MinimalExample/MinimalTestExample.tscn"
+	"Simulation": "res://data/plant_models/MinimalExample/MinimalSimulationExample.tscn",
+	"Test": "res://data/plant_models/MinimalExample/MinimalTestExample.tscn"
 }

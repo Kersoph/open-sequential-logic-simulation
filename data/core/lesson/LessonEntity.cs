@@ -144,7 +144,7 @@ namespace Osls
             using (File descriptionFile = new File())
             {
                 Error e = descriptionFile.Open(FolderPath + UserResultFilePath, File.ModeFlags.Read);
-                if(e != Error.Ok) return;
+                if (e != Error.Ok) return;
                 JSONParseResult result = JSON.Parse(descriptionFile.GetAsText());
                 _loadedJsonResultDictionary = (Dictionary) result.Result;
                 result.Dispose();

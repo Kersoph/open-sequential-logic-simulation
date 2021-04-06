@@ -7,7 +7,6 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/Sfc2dEditor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/Controls/Sfc2dControls.tscn" type="PackedScene" id=6]
 
-
 [node name="SfcEditorNode" type="Node"]
 script = ExtResource( 1 )
 
@@ -76,7 +75,7 @@ margin_right = -534.0
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1286, 938 )
+size = Vector2( 1286, 937 )
 transparent_bg = true
 handle_input_locally = false
 hdr = false

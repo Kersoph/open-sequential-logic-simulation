@@ -9,7 +9,7 @@ namespace Osls.LandingPage
     public class LessonInfo : ColorRect
     {
         #region ==================== Fields ====================
-        private const string LessonInfoLabelPath = "LessonInfoLabel";
+        [Export] private NodePath _lessonInfoLabelPath = "LessonInfoLabel";
         private RichTextLabel _richTextLabel;
         #endregion
         
@@ -17,7 +17,7 @@ namespace Osls.LandingPage
         #region ==================== Updates ====================
         public override void _Ready()
         {
-            _richTextLabel = GetNode<RichTextLabel>(LessonInfoLabelPath);
+            _richTextLabel = GetNode<RichTextLabel>(_lessonInfoLabelPath);
         }
         #endregion
         

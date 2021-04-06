@@ -9,7 +9,8 @@ namespace Osls.LandingPage
     /// </summary>
     public class LessonStartController : CenterContainer
     {
-        #region ==================== Fields ====================
+        #region ==================== Fields / Properties ====================
+        [Export] private NodePath _lessonsNodePath = "../..";
         private Button _startButton;
         private LessonsNode _lessonsNode;
         #endregion
@@ -20,7 +21,7 @@ namespace Osls.LandingPage
         {
             _startButton = GetNode<Button>("LessonStartButton");
             _startButton.Connect("pressed", this, nameof(LessonStartButtonPressed));
-            _lessonsNode = GetNode<LessonsNode>("../..");
+            _lessonsNode = GetNode<LessonsNode>(_lessonsNodePath);
         }
         #endregion
         

@@ -11,7 +11,7 @@ namespace Osls.LandingPage
     public class LessonSelectionGridNode : GridContainer
     {
         #region ==================== Fields ====================
-        private const string LessonControllerScene = "res://Data/Model/LandingPage/LessonSourceController/LessonController.tscn";
+        private const string LessonControllerScene = "res://data/core/landing_page/LessonSourceController/LessonController.tscn";
         private LessonControllerNode[] _lessonNodes;
         #endregion
         
@@ -23,7 +23,8 @@ namespace Osls.LandingPage
             {
                 LessonEntity[] lessons = LoadLessons();
                 CreateButtons(lessons);
-            } catch (System.Exception e)
+            }
+            catch (System.Exception e)
             {
                 // After around 48 loads the Godot JSON parser can fail
                 // Its not clear atm why, but generally a user needs 2-3 loads so it is

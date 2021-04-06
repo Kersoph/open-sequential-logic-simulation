@@ -9,12 +9,12 @@ namespace Osls.LandingPage
     /// </summary>
     public class LessonsNode : Node
     {
-        #region ==================== Fields ====================
-        private const string LandingPagePath = "..";
-        private const string LessonSelectionGridPath = "LessonSelectorContainer/LessonCenterContainer/LessonSelectionGridNode";
-        private const string LessonStartControllerPath = "LessonStartContainer/LessonStartController";
-        private const string LessonInfoPath = "LessonInfo";
-        private const string LessonPreviewPath = "LessonPreview";
+        #region ==================== Fields / Properties ====================
+        [Export] private NodePath _landingPagePath = "..";
+        [Export] private NodePath _lessonSelectionGridPath = "LessonSelectorContainer/LessonCenterContainer/LessonSelectionGridNode";
+        [Export] private NodePath _lessonStartControllerPath = "LessonStartContainer/LessonStartController";
+        [Export] private NodePath _lessonInfoPath = "LessonInfo";
+        [Export] private NodePath _lessonPreviewPath = "LessonPreview";
         
         private LandingPageNode _landingPageNode;
         private LessonSelectionGridNode _lessonSelectionGrid;
@@ -28,11 +28,11 @@ namespace Osls.LandingPage
         #region ==================== Updates ====================
         public override void _Ready()
         {
-            _landingPageNode = GetNode<LandingPageNode>(LandingPagePath);
-            _lessonSelectionGrid = GetNode<LessonSelectionGridNode>(LessonSelectionGridPath);
-            _lessonStartController = GetNode<LessonStartController>(LessonStartControllerPath);
-            _lessonInfo = GetNode<LessonInfo>(LessonInfoPath);
-            _lessonPreview = GetNode<LessonPreview>(LessonPreviewPath);
+            _landingPageNode = GetNode<LandingPageNode>(_landingPagePath);
+            _lessonSelectionGrid = GetNode<LessonSelectionGridNode>(_lessonSelectionGridPath);
+            _lessonStartController = GetNode<LessonStartController>(_lessonStartControllerPath);
+            _lessonInfo = GetNode<LessonInfo>(_lessonInfoPath);
+            _lessonPreview = GetNode<LessonPreview>(_lessonPreviewPath);
         }
         #endregion
         

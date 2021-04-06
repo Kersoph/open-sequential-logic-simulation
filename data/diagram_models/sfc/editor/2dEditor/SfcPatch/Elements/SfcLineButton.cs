@@ -9,8 +9,8 @@ namespace Osls.SfcEditor
     public class SfcLineButton : TextureButton
     {
         #region ==================== Fields ====================
-        private const string SingleLineText = "res://Data/Model/SfcEditor/2dEditor/SfcPatch/Elements/SfcLine.png";
-        private const string DoubleLineText = "res://Data/Model/SfcEditor/2dEditor/SfcPatch/Elements/SfcLineDouble.png";
+        [Export] private Texture _singleLineTexture;
+        [Export] private Texture _doubleLineTexture;
         private static Color VisibleColor = new Color(1f, 1f, 1f, 1f);
         private static Color TiltColor = new Color(1f, 1f, 1f, 0.4f);
         private static Color HiddenColor = new Color(1f, 1f, 1f, 0.0f);
@@ -111,16 +111,18 @@ namespace Osls.SfcEditor
         
         private void SetLineTexture(BranchType sfcLineType)
         {
-            Texture texture;
             if (sfcLineType == BranchType.Single)
             {
-                texture = GD.Load<Texture>(SingleLineText);
+                SfcLineTextureNode.Texture = _singleLineTexture;
+            }
+            else if (sfcLineType == BranchType.Double)
+            {
+                SfcLineTextureNode.Texture = _doubleLineTexture;
             }
             else
             {
-                texture = GD.Load<Texture>(DoubleLineText);
+                SfcLineTextureNode.Texture = null;
             }
-            SfcLineTextureNode.Texture = texture;
         }
         #endregion
     }

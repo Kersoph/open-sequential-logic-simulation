@@ -9,8 +9,8 @@ namespace Osls
     public class LessonController
     {
         #region ==================== Fields ====================
-        private const string LandingPagePath = "res://data/core/landing_page/landing_page.tscn";
-        private const string EditorPath = "res://Data/Model/SfcEditor/SfcEditor.tscn";
+        private const string LandingPagePath = "res://data/core/landing_page/LandingPage.tscn";
+        private const string EditorPath = "res://data/diagram_models/sfc/editor/SfcEditor.tscn";
         private const string SimulationPath = "res://Data/Model/SfcSimulation/SfcSimulationViewer.tscn";
         private readonly MainNode _mainNode;
         private LessonEntity _opendLesson;

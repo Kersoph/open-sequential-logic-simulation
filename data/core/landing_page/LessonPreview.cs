@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 
 namespace Osls.LandingPage
@@ -26,7 +25,7 @@ namespace Osls.LandingPage
                 _simulationNode.QueueFree();
                 _simulationNode = null;
             }
-            if (!String.IsNullOrEmpty(lessonEntity.SimulationPath))
+            if (!string.IsNullOrEmpty(lessonEntity.SimulationPath))
             {
                 _simulationNode = ((PackedScene)GD.Load(lessonEntity.SimulationPath)).Instance();
                 GetNode("LessonPreviewViewport").AddChild(_simulationNode);
