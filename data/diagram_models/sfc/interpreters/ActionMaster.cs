@@ -95,8 +95,7 @@ namespace Osls.SfcEditor.Interpreter
         
         private static Numerical.NumericalExpression InterpretNumerical(string word)
         {
-            int number = 0;
-            if (int.TryParse(word, out number)) return new Numerical.Constant(number);
+            if (int.TryParse(word, out int number)) return new Numerical.Constant(number);
             return new Numerical.PlantReference(word);
         }
         #endregion

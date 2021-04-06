@@ -58,7 +58,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
                 case FASLE:
                     return false;
             }
-            Godot.GD.Print("LOL"); // TODO
+            Godot.GD.Print("Unknown value " + value);
             return false;
         }
         #endregion

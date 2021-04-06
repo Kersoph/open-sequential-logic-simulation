@@ -80,7 +80,7 @@ namespace Osls.SfcEditor.Interpreter
         /// </summary>
         private static Boolean.BooleanExpression InterpretBooleanExpression(Data data, StepMaster stepMaster)
         {
-            if(data.IsEndRechaed) return null;
+            if (data.IsEndRechaed) return null;
             string currentWord = data.GetNext();
             
             Boolean.BooleanExpression currentExpression = null;
@@ -89,14 +89,14 @@ namespace Osls.SfcEditor.Interpreter
             {
                 Boolean.BooleanExpression nextExpression = InterpretBooleanExpression(data, stepMaster);
                 currentExpression = new Boolean.LogicalInverter(nextExpression);
-                if(data.IsEndRechaed) return currentExpression;
+                if (data.IsEndRechaed) return currentExpression;
                 currentWord = data.GetNext();
             }
             // B -> b
             if (IsRepresentingBoolean(currentWord))
             {
                 currentExpression = InterpretBoolean(currentWord);
-                if(data.IsEndRechaed) return currentExpression;
+                if (data.IsEndRechaed) return currentExpression;
                 currentWord = data.GetNext();
             }
             // B -> N V N
@@ -140,16 +140,14 @@ namespace Osls.SfcEditor.Interpreter
         
         private static bool IsRepresentingNumerical(string word, StepMaster stepMaster)
         {
-            int number;
-            return int.TryParse(word, out number)
+            return int.TryParse(word, out _)
             || PlantViewNode.LoadedSimulationNode.SimulationOutput.ContainsInteger(word)
             || stepMaster.ContainsStepTime(word);
         }
         
         private static Numerical.NumericalExpression InterpretNumerical(string word, StepMaster stepMaster)
         {
-            int number = 0;
-            if (int.TryParse(word, out number)) return new Numerical.Constant(number);
+            if (int.TryParse(word, out int number)) return new Numerical.Constant(number);
             if (stepMaster.ContainsStepTime(word)) return new Numerical.StepReference(word);
             return new Numerical.PlantReference(word);
         }
