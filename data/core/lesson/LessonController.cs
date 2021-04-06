@@ -11,7 +11,7 @@ namespace Osls
         #region ==================== Fields ====================
         private const string LandingPagePath = "res://data/core/landing_page/LandingPage.tscn";
         private const string EditorPath = "res://data/diagram_models/sfc/editor/SfcEditor.tscn";
-        private const string SimulationPath = "res://Data/Model/SfcSimulation/SfcSimulationViewer.tscn";
+        private const string SimulationPath = "res://data/diagram_models/sfc/processing_viewer/SfcSimulationViewer.tscn";
         private readonly MainNode _mainNode;
         private LessonEntity _opendLesson;
         

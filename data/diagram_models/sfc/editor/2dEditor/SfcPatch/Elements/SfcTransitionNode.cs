@@ -15,9 +15,10 @@ namespace Osls.SfcEditor
         private TextEdit _textEdit;
         private SfcPatchControl _patchController;
         #endregion
-
+        
+        
         #region ==================== Public Methods ====================
-        public override void _Ready()
+        public void Initialise()
         {
             _textEdit = GetNode<TextEdit>("TransitionTextEditor");
             _patchController = GetNode<SfcPatchNode>("..").SfcPatchControl;

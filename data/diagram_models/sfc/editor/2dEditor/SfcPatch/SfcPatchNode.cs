@@ -25,6 +25,7 @@ namespace Osls.SfcEditor
         {
             SfcPatchControl = sfcPatchControl;
             SetCellPosition(data.X, data.Y);
+            GetNode<SfcTransitionNode>("SfcTransition").Initialise();
             UpdateNodes(data);
         }
         
