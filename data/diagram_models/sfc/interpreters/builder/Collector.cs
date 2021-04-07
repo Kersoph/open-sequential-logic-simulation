@@ -10,17 +10,29 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Looks for left depending steps.
         /// </summary>
-        public static void CollectLeftDependingSteps(int currentId, SfcProgrammData data, List<int> collectedSteps, BranchType targetType, bool upperBranch)
+        public static List<int> CollectToTransition(int currentId, CollectorEntity entity)
+        {
+            /*
+            CollectLeftDependingSteps(currentId, data, connectedLowerAlternativeSteps, BranchType.Single, false);
+            CollectRightDependingSteps(currentId, data, connectedLowerAlternativeSteps, BranchType.Single, false);
+            */
+            return null;
+        }
+        
+        /// <summary>
+        /// Looks for left depending steps.
+        /// </summary>
+        public static void CollectLeftDependingSteps(int currentId, CollectorEntity entity)
         {
             int leftId = currentId - (1 << SfcEntity.XKeyShift);
-            PatchEntity leftStep = data.SfcEntity.Lookup(leftId);
+            PatchEntity leftStep = entity.Data.SfcEntity.Lookup(leftId);
             if (leftStep != null)
             {
-                if ((upperBranch && leftStep.UpperBranch == targetType)
-                || (!upperBranch && leftStep.LowerBranch == targetType))
+                if ((entity.UpperBranch && leftStep.UpperBranch == entity.TargetType)
+                || (!entity.UpperBranch && leftStep.LowerBranch == entity.TargetType))
                 {
-                    collectedSteps.Add(leftId);
-                    CollectLeftDependingSteps(leftId, data, collectedSteps, targetType, upperBranch);
+                    entity.CollectedSteps.Add(leftId);
+                    CollectLeftDependingSteps(leftId, entity);
                 }
             }
         }
@@ -28,17 +40,17 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Looks for right depending steps.
         /// </summary>
-        public static void CollectRightDependingSteps(int currentId, SfcProgrammData data, List<int> collectedSteps, BranchType targetType, bool upperBranch)
+        public static void CollectRightDependingSteps(int currentId, CollectorEntity entity)
         {
-            PatchEntity step = data.SfcEntity.Lookup(currentId);
-            if ((upperBranch && step.UpperBranch == targetType)
-            || (!upperBranch && step.LowerBranch == targetType))
+            PatchEntity step = entity.Data.SfcEntity.Lookup(currentId);
+            if ((entity.UpperBranch && step.UpperBranch == entity.TargetType)
+            || (!entity.UpperBranch && step.LowerBranch == entity.TargetType))
             {
                 int rightId = currentId + (1 << SfcEntity.XKeyShift);
-                if (data.SfcEntity.Lookup(rightId) != null)
+                if (entity.Data.SfcEntity.Lookup(rightId) != null)
                 {
-                    collectedSteps.Add(rightId);
-                    CollectRightDependingSteps(rightId, data, collectedSteps, targetType, upperBranch);
+                    entity.CollectedSteps.Add(rightId);
+                    CollectRightDependingSteps(rightId, entity);
                 }
             }
         }

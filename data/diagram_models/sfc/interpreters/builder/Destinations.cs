@@ -35,11 +35,12 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// </summary>
         private static List<SfcStep> CollectLowerSimultaneousBranches(int holder, SfcProgrammData data)
         {
-            List<int> connectedLowerSimultaneousSteps = new List<int>() { holder };
-            Collector.CollectLeftDependingSteps(holder, data, connectedLowerSimultaneousSteps, BranchType.Double, false);
-            Collector.CollectRightDependingSteps(holder, data, connectedLowerSimultaneousSteps, BranchType.Double, false);
+            CollectorEntity entity = new CollectorEntity(data, BranchType.Double, false);
+            entity.CollectedSteps.Add(holder);
+            Collector.CollectLeftDependingSteps(holder, entity);
+            Collector.CollectRightDependingSteps(holder, entity);
             List<SfcStep> targetSteps = new List<SfcStep>();
-            foreach (int step in connectedLowerSimultaneousSteps)
+            foreach (int step in entity.CollectedSteps)
             {
                 int subId = step + 1;
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
@@ -79,10 +80,11 @@ namespace Osls.SfcSimulation.Engine.Builder
         
         private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
         {
-            List<int> connectedLowerAlternativeSteps = new List<int>() { holder };
-            Collector.CollectLeftDependingSteps(holder, data, connectedLowerAlternativeSteps, BranchType.Single, false);
-            Collector.CollectRightDependingSteps(holder, data, connectedLowerAlternativeSteps, BranchType.Single, false);
-            foreach (int step in connectedLowerAlternativeSteps)
+            CollectorEntity entity = new CollectorEntity(data, BranchType.Single, false);
+            entity.CollectedSteps.Add(holder);
+            Collector.CollectLeftDependingSteps(holder, entity);
+            Collector.CollectRightDependingSteps(holder, entity);
+            foreach (int step in entity.CollectedSteps)
             {
                 int subId = step + 1;
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);

@@ -42,12 +42,13 @@ namespace Osls.SfcSimulation.Engine.Builder
         private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, SfcProgrammData data)
         {
             List<SfcTransition> transitions = new List<SfcTransition>();
-            List<int> collectedUpperAlternatingSteps = new List<int>() { source.Id };
-            Collector.CollectLeftDependingSteps(source.Id, data, collectedUpperAlternatingSteps, BranchType.Single, true);
-            Collector.CollectRightDependingSteps(source.Id, data, collectedUpperAlternatingSteps, BranchType.Single, true);
-            if (collectedUpperAlternatingSteps.Count > 0)
+            CollectorEntity entity = new CollectorEntity(data, BranchType.Single, true);
+            entity.CollectedSteps.Add(source.Id);
+            Collector.CollectLeftDependingSteps(source.Id, entity);
+            Collector.CollectRightDependingSteps(source.Id, entity);
+            if (entity.CollectedSteps.Count > 0)
             {
-                foreach (int step in collectedUpperAlternatingSteps)
+                foreach (int step in entity.CollectedSteps)
                 {
                     if (data.SfcEntity.Lookup(step).ContainsTransition())
                     {
@@ -78,13 +79,14 @@ namespace Osls.SfcSimulation.Engine.Builder
         private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
         {
             List<SfcTransition> transitions = null;
-            List<int> collectedUpperSimultaneousSteps = new List<int>() { source.Id };
-            Collector.CollectLeftDependingSteps(source.Id, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
-            Collector.CollectRightDependingSteps(source.Id, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
-            if (collectedUpperSimultaneousSteps.Count > 1)
+            CollectorEntity entity = new CollectorEntity(data, BranchType.Double, true);
+            entity.CollectedSteps.Add(source.Id);
+            Collector.CollectLeftDependingSteps(source.Id, entity);
+            Collector.CollectRightDependingSteps(source.Id, entity);
+            if (entity.CollectedSteps.Count > 1)
             {
                 PatchEntity transitionPatch = null;
-                foreach (int step in collectedUpperSimultaneousSteps)
+                foreach (int step in entity.CollectedSteps)
                 {
                     transitionPatch = data.SfcEntity.Lookup(step);
                     if (transitionPatch != null && transitionPatch.ContainsTransition()) break;
@@ -92,7 +94,7 @@ namespace Osls.SfcSimulation.Engine.Builder
                 if (transitionPatch == null) Godot.GD.PushError("It is not allowed wo have Simultaneous branches without one transition! " + source.Id);
                 List<SfcStep> connectedSteps = new List<SfcStep>();
                 int minimalConnectedId = int.MaxValue;
-                foreach (int step in collectedUpperSimultaneousSteps)
+                foreach (int step in entity.CollectedSteps)
                 {
                     SfcStep connectedStep = Collector.FindUpperConnectedStep(step, data);
                     if (connectedStep != null)
@@ -118,10 +120,11 @@ namespace Osls.SfcSimulation.Engine.Builder
         
         private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
         {
-            List<int> connectedLowerAlternativeSteps = new List<int>() { holder };
-            Collector.CollectLeftDependingSteps(holder, data, connectedLowerAlternativeSteps, BranchType.Single, false);
-            Collector.CollectRightDependingSteps(holder, data, connectedLowerAlternativeSteps, BranchType.Single, false);
-            foreach (int step in connectedLowerAlternativeSteps)
+            CollectorEntity entity = new CollectorEntity(data, BranchType.Single, false);
+            entity.CollectedSteps.Add(holder);
+            Collector.CollectLeftDependingSteps(holder, entity);
+            Collector.CollectRightDependingSteps(holder, entity);
+            foreach (int step in entity.CollectedSteps)
             {
                 int subId = step + 1;
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
