@@ -56,6 +56,58 @@ namespace Osls.SfcSimulation.Engine.Builder
         }
         
         /// <summary>
+        /// Collects all Simultaneous branches to merge from this step.
+        /// null if there is none.
+        /// </summary>
+        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
+        {
+            List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Double, true);
+            if (collected.Count <= 1) return null;
+            PatchEntity transitionPatch = FindSimultaneousTransition(collected, data);
+            List<SfcStep> connectedSteps = CollectConnectedSteps(collected, data);
+            if (!IsMinimalId(connectedSteps, source.Id)) return new List<SfcTransition> { };
+            SfcTransition transition = CreateTransition(transitionPatch.Key, data);
+            transition.DependingSteps = connectedSteps;
+            return new List<SfcTransition> { transition };
+        }
+        
+        private static PatchEntity FindSimultaneousTransition(List<int> patches, SfcProgrammData data)
+        {
+            PatchEntity transitionPatch = null;
+            foreach (int step in patches)
+            {
+                transitionPatch = data.SfcEntity.Lookup(step);
+                if (transitionPatch != null && transitionPatch.ContainsTransition()) break;
+            }
+            if (transitionPatch == null) Godot.GD.PushError("It is not allowed wo have Simultaneous branches without one transition!");
+            return transitionPatch;
+        }
+        
+        private static List<SfcStep> CollectConnectedSteps(List<int> patches, SfcProgrammData data)
+        {
+            List<SfcStep> connectedSteps = new List<SfcStep>();
+            foreach (int step in patches)
+            {
+                SfcStep connectedStep = Collector.FindUpperConnectedStep(step, data);
+                if (connectedStep != null)
+                {
+                    connectedSteps.Add(connectedStep);
+                }
+            }
+            if (connectedSteps.Count < 2) Godot.GD.PushError("It does not make sense to merge one branch.");
+            return connectedSteps;
+        }
+        
+        private static bool IsMinimalId(List<SfcStep> steps, int id)
+        {
+            for (int i = 0; i < steps.Count; i++)
+            {
+                if (steps[i].Id < id) return false;
+            }
+            return true;
+        }
+        
+        /// <summary>
         /// Creates a new SfcTransition with the given transitionPatchId
         /// </summary>
         private static SfcTransition CreateTransition(int transitionPatchId, SfcProgrammData data)
@@ -64,81 +116,6 @@ namespace Osls.SfcSimulation.Engine.Builder
             BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, data.StepMaster);
             SfcTransition transition = new SfcTransition(expression, transitionPatchId);
             return transition;
-        }
-        
-        /// <summary>
-        /// Collects all Simultaneous branches to merge from this step.
-        /// null if there is none.
-        /// </summary>
-        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
-        {
-            List<SfcTransition> transitions = null;
-            List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Double, true);
-            if (collected.Count > 1)
-            {
-                PatchEntity transitionPatch = null;
-                foreach (int step in collected)
-                {
-                    transitionPatch = data.SfcEntity.Lookup(step);
-                    if (transitionPatch != null && transitionPatch.ContainsTransition()) break;
-                }
-                if (transitionPatch == null) Godot.GD.PushError("It is not allowed wo have Simultaneous branches without one transition! " + source.Id);
-                List<SfcStep> connectedSteps = new List<SfcStep>();
-                int minimalConnectedId = int.MaxValue;
-                foreach (int step in collected)
-                {
-                    SfcStep connectedStep = Collector.FindUpperConnectedStep(step, data);
-                    if (connectedStep != null)
-                    {
-                        connectedSteps.Add(connectedStep);
-                        if (minimalConnectedId > connectedStep.Id) minimalConnectedId = connectedStep.Id;
-                    }
-                }
-                if (connectedSteps.Count < 2) Godot.GD.PushError("It does not make sense to merge one branch. " + source.Id);
-                if (minimalConnectedId == source.Id)
-                {
-                    SfcTransition transition = CreateTransition(transitionPatch.Key, data);
-                    transition.DependingSteps = connectedSteps;
-                    transitions = new List<SfcTransition> { transition };
-                }
-                else
-                {
-                    transitions = new List<SfcTransition> { };
-                }
-            }
-            return transitions;
-        }
-        
-        private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
-        {
-            List<int> collected = Collector.CollectHorizontal(holder, data, BranchType.Single, false);
-            foreach (int step in collected)
-            {
-                int subId = step + 1;
-                PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
-                if (lowerStep != null)
-                {
-                    switch (lowerStep.SfcStepType)
-                    {
-                        case StepType.StartingStep:
-                        case StepType.Step:
-                            return data.ControlMap[lowerStep.Key];
-                        case StepType.Jump:
-                            int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
-                            return data.ControlMap[reference];
-                        case StepType.Pass:
-                            SfcStep foundStep = FindAlternativeMergeTarget(lowerStep.Key, data);
-                            if (foundStep != null)
-                            {
-                                return foundStep;
-                            }
-                            break;
-                        case StepType.Unused:
-                            break;
-                    }
-                }
-            }
-            return null;
         }
         #endregion
     }
