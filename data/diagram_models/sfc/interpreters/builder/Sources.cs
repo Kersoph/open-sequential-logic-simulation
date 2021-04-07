@@ -42,20 +42,14 @@ namespace Osls.SfcSimulation.Engine.Builder
         private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, SfcProgrammData data)
         {
             List<SfcTransition> transitions = new List<SfcTransition>();
-            CollectorEntity entity = new CollectorEntity(data, BranchType.Single, true);
-            entity.CollectedSteps.Add(source.Id);
-            Collector.CollectLeftDependingSteps(source.Id, entity);
-            Collector.CollectRightDependingSteps(source.Id, entity);
-            if (entity.CollectedSteps.Count > 0)
+            List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Single, true);
+            foreach (int step in collected)
             {
-                foreach (int step in entity.CollectedSteps)
+                if (data.SfcEntity.Lookup(step).ContainsTransition())
                 {
-                    if (data.SfcEntity.Lookup(step).ContainsTransition())
-                    {
-                        SfcTransition transition = CreateTransition(step, data);
-                        transition.DependingSteps.Add(source);
-                        transitions.Add(transition);
-                    }
+                    SfcTransition transition = CreateTransition(step, data);
+                    transition.DependingSteps.Add(source);
+                    transitions.Add(transition);
                 }
             }
             return transitions;
@@ -79,14 +73,11 @@ namespace Osls.SfcSimulation.Engine.Builder
         private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
         {
             List<SfcTransition> transitions = null;
-            CollectorEntity entity = new CollectorEntity(data, BranchType.Double, true);
-            entity.CollectedSteps.Add(source.Id);
-            Collector.CollectLeftDependingSteps(source.Id, entity);
-            Collector.CollectRightDependingSteps(source.Id, entity);
-            if (entity.CollectedSteps.Count > 1)
+            List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Double, true);
+            if (collected.Count > 1)
             {
                 PatchEntity transitionPatch = null;
-                foreach (int step in entity.CollectedSteps)
+                foreach (int step in collected)
                 {
                     transitionPatch = data.SfcEntity.Lookup(step);
                     if (transitionPatch != null && transitionPatch.ContainsTransition()) break;
@@ -94,7 +85,7 @@ namespace Osls.SfcSimulation.Engine.Builder
                 if (transitionPatch == null) Godot.GD.PushError("It is not allowed wo have Simultaneous branches without one transition! " + source.Id);
                 List<SfcStep> connectedSteps = new List<SfcStep>();
                 int minimalConnectedId = int.MaxValue;
-                foreach (int step in entity.CollectedSteps)
+                foreach (int step in collected)
                 {
                     SfcStep connectedStep = Collector.FindUpperConnectedStep(step, data);
                     if (connectedStep != null)
@@ -120,11 +111,8 @@ namespace Osls.SfcSimulation.Engine.Builder
         
         private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
         {
-            CollectorEntity entity = new CollectorEntity(data, BranchType.Single, false);
-            entity.CollectedSteps.Add(holder);
-            Collector.CollectLeftDependingSteps(holder, entity);
-            Collector.CollectRightDependingSteps(holder, entity);
-            foreach (int step in entity.CollectedSteps)
+            List<int> collected = Collector.CollectHorizontal(holder, data, BranchType.Single, false);
+            foreach (int step in collected)
             {
                 int subId = step + 1;
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);

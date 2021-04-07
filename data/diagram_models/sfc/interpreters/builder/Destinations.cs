@@ -35,12 +35,9 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// </summary>
         private static List<SfcStep> CollectLowerSimultaneousBranches(int holder, SfcProgrammData data)
         {
-            CollectorEntity entity = new CollectorEntity(data, BranchType.Double, false);
-            entity.CollectedSteps.Add(holder);
-            Collector.CollectLeftDependingSteps(holder, entity);
-            Collector.CollectRightDependingSteps(holder, entity);
+            List<int> collected = Collector.CollectHorizontal(holder, data, BranchType.Double, false);
             List<SfcStep> targetSteps = new List<SfcStep>();
-            foreach (int step in entity.CollectedSteps)
+            foreach (int step in collected)
             {
                 int subId = step + 1;
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
@@ -80,11 +77,8 @@ namespace Osls.SfcSimulation.Engine.Builder
         
         private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
         {
-            CollectorEntity entity = new CollectorEntity(data, BranchType.Single, false);
-            entity.CollectedSteps.Add(holder);
-            Collector.CollectLeftDependingSteps(holder, entity);
-            Collector.CollectRightDependingSteps(holder, entity);
-            foreach (int step in entity.CollectedSteps)
+            List<int> collected = Collector.CollectHorizontal(holder, data, BranchType.Single, false);
+            foreach (int step in collected)
             {
                 int subId = step + 1;
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
