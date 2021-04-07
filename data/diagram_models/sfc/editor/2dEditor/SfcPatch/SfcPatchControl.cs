@@ -92,7 +92,7 @@ namespace Osls.SfcEditor
             }
             else if (Data.LowerBranch == BranchType.Single)
             {
-                Data.UpperBranch = BranchType.Double;
+                Data.LowerBranch = BranchType.Double;
             }
             else
             {
