@@ -15,14 +15,14 @@ namespace Osls.SfcSimulation.Engine
         public static List<SfcTransition> CollectTransitionSources(SfcStep source, SfcProgrammData data)
         {
             List<SfcTransition> alternativeBranches = CollectUpperAlternativeBranches(source, data);
-            SfcTransition SimultaneousMerge = CollectUpperSimultaneousMerge(source, data);
+            List<SfcTransition> SimultaneousMerge = CollectUpperSimultaneousMerge(source, data);
             if (alternativeBranches.Count > 1)
             {
                 return alternativeBranches;
             }
             else if (SimultaneousMerge != null)
             {
-                return new List<SfcTransition>() { SimultaneousMerge };
+                return SimultaneousMerge;
             }
             else if (alternativeBranches.Count > 0)
             {
@@ -56,7 +56,7 @@ namespace Osls.SfcSimulation.Engine
         #region ==================== Helpers ====================
         /// <summary>
         /// Collects all alternative branches from this step.
-        /// if it returns only one transition is not an alternative branch.
+        /// If it returns only one transition is not an alternative branch but a normal transition.
         /// </summary>
         private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, SfcProgrammData data)
         {
@@ -80,13 +80,13 @@ namespace Osls.SfcSimulation.Engine
         }
         
         /// <summary>
-        /// Creates a new SfcTransition
+        /// Creates a new SfcTransition with the given transitionPatchId
         /// </summary>
-        private static SfcTransition CreateTransition(int id, SfcProgrammData data)
+        private static SfcTransition CreateTransition(int transitionPatchId, SfcProgrammData data)
         {
-            string transitionText = data.SfcEntity.Lookup(id).TransitionText;
+            string transitionText = data.SfcEntity.Lookup(transitionPatchId).TransitionText;
             BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, data.StepMaster);
-            SfcTransition transition = new SfcTransition(expression, id);
+            SfcTransition transition = new SfcTransition(expression, transitionPatchId);
             return transition;
         }
         
@@ -94,36 +94,45 @@ namespace Osls.SfcSimulation.Engine
         /// Collects all Simultaneous branches to merge from this step.
         /// null if there is none.
         /// </summary>
-        private static SfcTransition CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
+        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
         {
-            SfcTransition transition = null;
+            List<SfcTransition> transitions = null;
             List<int> collectedUpperSimultaneousSteps = new List<int>() { source.Id };
             CollectLeftDependingSteps(source.Id, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
             CollectRightDependingSteps(source.Id, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
-            // TODO: Sucher auch tiefere
             if (collectedUpperSimultaneousSteps.Count > 1)
             {
-                PatchEntity transitionStep = null;
+                PatchEntity transitionPatch = null;
                 foreach (int step in collectedUpperSimultaneousSteps)
                 {
-                    transitionStep = data.SfcEntity.Lookup(step);
-                    if (transitionStep != null) break;
+                    transitionPatch = data.SfcEntity.Lookup(step);
+                    if (transitionPatch != null && transitionPatch.ContainsTransition()) break;
                 }
-                if (transitionStep == null) Godot.GD.PushError("It is not allowed wo have Simultaneous branches without one transition! " + source.Id);
+                if (transitionPatch == null) Godot.GD.PushError("It is not allowed wo have Simultaneous branches without one transition! " + source.Id);
                 List<SfcStep> connectedSteps = new List<SfcStep>();
+                int minimalConnectedId = int.MaxValue;
                 foreach (int step in collectedUpperSimultaneousSteps)
                 {
                     SfcStep connectedStep = FindUpperConnectedStep(step, data);
                     if (connectedStep != null)
                     {
                         connectedSteps.Add(connectedStep);
+                        if (minimalConnectedId > connectedStep.Id) minimalConnectedId = connectedStep.Id;
                     }
                 }
                 if (connectedSteps.Count < 2) Godot.GD.PushError("It does not make sense to merge one branch. " + source.Id);
-                transition = CreateTransition(transitionStep.Key, data);
-                transition.DependingSteps = connectedSteps;
+                if (minimalConnectedId == source.Id)
+                {
+                    SfcTransition transition = CreateTransition(transitionPatch.Key, data);
+                    transition.DependingSteps = connectedSteps;
+                    transitions = new List<SfcTransition> { transition };
+                }
+                else
+                {
+                    transitions = new List<SfcTransition> { };
+                }
             }
-            return transition;
+            return transitions;
         }
 
         /// <summary>

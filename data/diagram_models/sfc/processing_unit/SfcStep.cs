@@ -83,7 +83,10 @@ namespace Osls.SfcSimulation.Engine
             if (_transitions == null) return true;
             foreach (SfcTransition transition in _transitions)
             {
-                if (!transition.IsTransitionValid()) return false;
+                if (!transition.IsTransitionValid())
+                {
+                    return false;
+                }
             }
             return true;
         }
