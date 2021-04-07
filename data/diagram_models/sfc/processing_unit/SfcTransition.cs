@@ -8,6 +8,11 @@ namespace Osls.SfcSimulation.Engine
     {
         #region ==================== Fields Properties ====================
         /// <summary>
+        /// returns the unique patch id this transition is on
+        /// </summary>
+        public int Id { get; private set; }
+        
+        /// <summary>
         /// The step IDs we have to wait to until we can check the transition.
         /// Multiple -> "Zusammenführung simulater Verzweigung" in documentation.
         /// </summary>
@@ -27,11 +32,12 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Constructor ====================
-        public SfcTransition(BooleanExpression transition)
+        public SfcTransition(BooleanExpression transition, int id)
         {
             DependingSteps = new List<SfcStep>();
             NextSteps = new List<SfcStep>();
             Transition = transition;
+            Id = id;
         }
         #endregion
         

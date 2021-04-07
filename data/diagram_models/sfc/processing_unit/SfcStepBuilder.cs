@@ -35,16 +35,16 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Assigns all destinations to this transition
         /// </summary>
-        public static void AssignTransitionDestinations(SfcTransition transition, SfcStep holder, SfcProgrammData data)
+        public static void AssignTransitionDestinations(SfcTransition transition, SfcProgrammData data)
         {
-            List<SfcStep> lowerTargets = CollectLowerSimultaneousBranches(holder, data);
+            List<SfcStep> lowerTargets = CollectLowerSimultaneousBranches(transition.Id, data);
             if (lowerTargets == null || lowerTargets.Count > 0)
             {
                 transition.NextSteps = lowerTargets;
             }
             else
             {
-                SfcStep alternativeStep = FindAlternativeMergeTarget(holder, data);
+                SfcStep alternativeStep = FindAlternativeMergeTarget(transition.Id, data);
                 List<SfcStep> alternativeList = new List<SfcStep>(1);
                 if (alternativeStep != null) alternativeList.Add(alternativeStep);
                 transition.NextSteps = alternativeList;
@@ -55,20 +55,20 @@ namespace Osls.SfcSimulation.Engine
         
         #region ==================== Helpers ====================
         /// <summary>
-        /// Collects all alternative branches to this step.
+        /// Collects all alternative branches from this step.
         /// if it returns only one transition is not an alternative branch.
         /// </summary>
         private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, SfcProgrammData data)
         {
             List<SfcTransition> transitions = new List<SfcTransition>();
-            List<SfcStep> collectedUpperAlternatingSteps = new List<SfcStep>() { source };
-            CollectLeftDependingSteps(source, data, collectedUpperAlternatingSteps, BranchType.Single, true);
-            CollectRightDependingSteps(source, data, collectedUpperAlternatingSteps, BranchType.Single, true);
+            List<int> collectedUpperAlternatingSteps = new List<int>() { source.Id };
+            CollectLeftDependingSteps(source.Id, data, collectedUpperAlternatingSteps, BranchType.Single, true);
+            CollectRightDependingSteps(source.Id, data, collectedUpperAlternatingSteps, BranchType.Single, true);
             if (collectedUpperAlternatingSteps.Count > 0)
             {
-                foreach (SfcStep step in collectedUpperAlternatingSteps)
+                foreach (int step in collectedUpperAlternatingSteps)
                 {
-                    if (data.SfcEntity.Lookup(step.Id).ContainsTransition())
+                    if (data.SfcEntity.Lookup(step).ContainsTransition())
                     {
                         SfcTransition transition = CreateTransition(step, data);
                         transition.DependingSteps.Add(source);
@@ -82,39 +82,36 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Creates a new SfcTransition
         /// </summary>
-        private static SfcTransition CreateTransition(SfcStep source, SfcProgrammData data)
+        private static SfcTransition CreateTransition(int id, SfcProgrammData data)
         {
-            string transitionText = data.SfcEntity.Lookup(source.Id).TransitionText;
+            string transitionText = data.SfcEntity.Lookup(id).TransitionText;
             BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, data.StepMaster);
-            SfcTransition transition = new SfcTransition(expression);
+            SfcTransition transition = new SfcTransition(expression, id);
             return transition;
         }
         
         /// <summary>
-        /// Collects all Simultaneous branches to merge to this step.
+        /// Collects all Simultaneous branches to merge from this step.
         /// null if there is none.
         /// </summary>
         private static SfcTransition CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
         {
             SfcTransition transition = null;
-            List<SfcStep> collectedUpperSimultaneousSteps = new List<SfcStep>() { source };
-            CollectLeftDependingSteps(source, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
-            CollectRightDependingSteps(source, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
+            List<int> collectedUpperSimultaneousSteps = new List<int>() { source.Id };
+            CollectLeftDependingSteps(source.Id, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
+            CollectRightDependingSteps(source.Id, data, collectedUpperSimultaneousSteps, BranchType.Double, true);
             // TODO: Sucher auch tiefere
             if (collectedUpperSimultaneousSteps.Count > 1)
             {
-                SfcStep transitionStep = null;
-                foreach (SfcStep step in collectedUpperSimultaneousSteps)
+                PatchEntity transitionStep = null;
+                foreach (int step in collectedUpperSimultaneousSteps)
                 {
-                    if (data.SfcEntity.Lookup(source.Id).ContainsTransition())
-                    {
-                        transitionStep = step;
-                        break;
-                    }
+                    transitionStep = data.SfcEntity.Lookup(step);
+                    if (transitionStep != null) break;
                 }
                 if (transitionStep == null) Godot.GD.PushError("It is not allowed wo have Simultaneous branches without one transition! " + source.Id);
                 List<SfcStep> connectedSteps = new List<SfcStep>();
-                foreach (SfcStep step in collectedUpperSimultaneousSteps)
+                foreach (int step in collectedUpperSimultaneousSteps)
                 {
                     SfcStep connectedStep = FindUpperConnectedStep(step, data);
                     if (connectedStep != null)
@@ -123,7 +120,7 @@ namespace Osls.SfcSimulation.Engine
                     }
                 }
                 if (connectedSteps.Count < 2) Godot.GD.PushError("It does not make sense to merge one branch. " + source.Id);
-                transition = CreateTransition(transitionStep, data);
+                transition = CreateTransition(transitionStep.Key, data);
                 transition.DependingSteps = connectedSteps;
             }
             return transition;
@@ -133,28 +130,28 @@ namespace Osls.SfcSimulation.Engine
         /// Collects the list of lower simultanuous branches if possible.
         /// Null if there is an error in the diagram
         /// </summary>
-        private static List<SfcStep> CollectLowerSimultaneousBranches(SfcStep holder, SfcProgrammData data)
+        private static List<SfcStep> CollectLowerSimultaneousBranches(int holder, SfcProgrammData data)
         {
-            List<SfcStep> connectedLowerSimultaneousSteps = new List<SfcStep>() { holder };
+            List<int> connectedLowerSimultaneousSteps = new List<int>() { holder };
             CollectLeftDependingSteps(holder, data, connectedLowerSimultaneousSteps, BranchType.Double, false);
             CollectRightDependingSteps(holder, data, connectedLowerSimultaneousSteps, BranchType.Double, false);
             List<SfcStep> targetSteps = new List<SfcStep>();
-            foreach (SfcStep step in connectedLowerSimultaneousSteps)
+            foreach (int step in connectedLowerSimultaneousSteps)
             {
-                int subId = step.Id + 1;
-                SfcStep lowerStep;
-                if (data.ControlMap.TryGetValue(subId, out lowerStep))
+                int subId = step + 1;
+                PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
+                if (lowerStep != null)
                 {
-                    switch (data.SfcEntity.Lookup(lowerStep.Id).SfcStepType)
+                    switch (lowerStep.SfcStepType)
                     {
                         case StepType.StartingStep:
                         case StepType.Step:
-                            targetSteps.Add(lowerStep);
+                            targetSteps.Add(data.ControlMap[lowerStep.Key]);
                             break;
                         case StepType.Jump:
-                            if (data.StepMaster.ContainsStep(data.SfcEntity.Lookup(lowerStep.Id).StepName))
+                            if (data.StepMaster.ContainsStep(lowerStep.StepName))
                             {
-                                int reference = data.StepMaster.GetNameKey(data.SfcEntity.Lookup(lowerStep.Id).StepName);
+                                int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
                                 targetSteps.Add(data.ControlMap[reference]);
                             }
                             else
@@ -163,8 +160,8 @@ namespace Osls.SfcSimulation.Engine
                             }
                             break;
                         case StepType.Pass:
-                            SfcStep foundStep = FindLowerConnectedStep(lowerStep, data);
-                            if(foundStep != null)
+                            SfcStep foundStep = FindLowerConnectedStep(lowerStep.Key, data);
+                            if (foundStep != null)
                             {
                                 targetSteps.Add(foundStep);
                             }
@@ -177,28 +174,28 @@ namespace Osls.SfcSimulation.Engine
             return targetSteps;
         }
         
-        private static SfcStep FindAlternativeMergeTarget(SfcStep holder, SfcProgrammData data)
+        private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
         {
-            List<SfcStep> connectedLowerAlternativeSteps = new List<SfcStep>() { holder };
+            List<int> connectedLowerAlternativeSteps = new List<int>() { holder };
             CollectLeftDependingSteps(holder, data, connectedLowerAlternativeSteps, BranchType.Single, false);
             CollectRightDependingSteps(holder, data, connectedLowerAlternativeSteps, BranchType.Single, false);
-            foreach (SfcStep step in connectedLowerAlternativeSteps)
+            foreach (int step in connectedLowerAlternativeSteps)
             {
-                int subId = step.Id + 1;
-                SfcStep lowerStep;
-                if (data.ControlMap.TryGetValue(subId, out lowerStep))
+                int subId = step + 1;
+                PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
+                if (lowerStep != null)
                 {
-                    switch (data.SfcEntity.Lookup(lowerStep.Id).SfcStepType)
+                    switch (lowerStep.SfcStepType)
                     {
                         case StepType.StartingStep:
                         case StepType.Step:
-                            return lowerStep;
+                            return data.ControlMap[lowerStep.Key];
                         case StepType.Jump:
-                            int reference = data.StepMaster.GetNameKey(data.SfcEntity.Lookup(lowerStep.Id).StepName);
+                            int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
                             return data.ControlMap[reference];
                         case StepType.Pass:
-                            SfcStep foundStep = FindAlternativeMergeTarget(lowerStep, data);
-                            if(foundStep != null)
+                            SfcStep foundStep = FindAlternativeMergeTarget(lowerStep.Key, data);
+                            if (foundStep != null)
                             {
                                 return foundStep;
                             }
@@ -214,17 +211,17 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Looks for left depending steps.
         /// </summary>
-        private static void CollectLeftDependingSteps(SfcStep currentStep, SfcProgrammData data, List<SfcStep> collectedSteps, BranchType targetType, bool upperBranch)
+        private static void CollectLeftDependingSteps(int currentId, SfcProgrammData data, List<int> collectedSteps, BranchType targetType, bool upperBranch)
         {
-            int leftId = currentStep.Id - (1 << SfcEntity.XKeyShift);
-            SfcStep leftStep;
-            if (data.ControlMap.TryGetValue(leftId, out leftStep))
+            int leftId = currentId - (1 << SfcEntity.XKeyShift);
+            PatchEntity leftStep = data.SfcEntity.Lookup(leftId);
+            if (leftStep != null)
             {
-                if ((upperBranch && data.SfcEntity.Lookup(leftStep.Id).UpperBranch == targetType)
-                || (!upperBranch && data.SfcEntity.Lookup(leftStep.Id).LowerBranch == targetType))
+                if ((upperBranch && leftStep.UpperBranch == targetType)
+                || (!upperBranch && leftStep.LowerBranch == targetType))
                 {
-                    collectedSteps.Add(leftStep);
-                    CollectLeftDependingSteps(leftStep, data, collectedSteps, targetType, upperBranch);
+                    collectedSteps.Add(leftId);
+                    CollectLeftDependingSteps(leftId, data, collectedSteps, targetType, upperBranch);
                 }
             }
         }
@@ -232,17 +229,17 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Looks for right depending steps.
         /// </summary>
-        private static void CollectRightDependingSteps(SfcStep currentStep, SfcProgrammData data, List<SfcStep> collectedSteps, BranchType targetType, bool upperBranch)
+        private static void CollectRightDependingSteps(int currentId, SfcProgrammData data, List<int> collectedSteps, BranchType targetType, bool upperBranch)
         {
-            if ((upperBranch && data.SfcEntity.Lookup(currentStep.Id).UpperBranch == targetType)
-            || (!upperBranch && data.SfcEntity.Lookup(currentStep.Id).LowerBranch == targetType))
+            PatchEntity step = data.SfcEntity.Lookup(currentId);
+            if ((upperBranch && step.UpperBranch == targetType)
+            || (!upperBranch && step.LowerBranch == targetType))
             {
-                int rightId = currentStep.Id + (1 << SfcEntity.XKeyShift);
-                SfcStep rightStep;
-                if (data.ControlMap.TryGetValue(rightId, out rightStep))
+                int rightId = currentId + (1 << SfcEntity.XKeyShift);
+                if (data.SfcEntity.Lookup(rightId) != null)
                 {
-                    collectedSteps.Add(rightStep);
-                    CollectRightDependingSteps(rightStep, data, collectedSteps, targetType, upperBranch);
+                    collectedSteps.Add(rightId);
+                    CollectRightDependingSteps(rightId, data, collectedSteps, targetType, upperBranch);
                 }
             }
         }
@@ -250,44 +247,43 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Looks for an connection from this patch to any upper connected step (including itself).
         /// </summary>
-        private static SfcStep FindUpperConnectedStep(SfcStep step, SfcProgrammData data)
+        private static SfcStep FindUpperConnectedStep(int id, SfcProgrammData data)
         {
-            if (data.SfcEntity.Lookup(step.Id).ContainsRealStep()) // todo: or passing node
+            if (data.SfcEntity.Lookup(id).ContainsRealStep())
             {
-                return step;
+                return data.ControlMap[id];
             }
-            else if(data.SfcEntity.Lookup(step.Id).SfcStepType == StepType.Pass)
+            else if (data.SfcEntity.Lookup(id).SfcStepType == StepType.Pass)
             {
-                int upperId = step.Id -1;
-                SfcStep upperStep;
-                if (data.ControlMap.TryGetValue(upperId, out upperStep))
+                int upperId = id -1;
+                if (data.SfcEntity.Lookup(upperId) != null)
                 {
-                    return FindUpperConnectedStep(upperStep, data);
+                    return FindUpperConnectedStep(upperId, data);
                 }
             }
             return null;
         }
         
         /// <summary>
-        /// Looks for an connected lower step from this patch
+        /// Looks for a connected lower step from this patch
         /// </summary>
-        private static SfcStep FindLowerConnectedStep(SfcStep step, SfcProgrammData data)
+        private static SfcStep FindLowerConnectedStep(int id, SfcProgrammData data)
         {
-            int subId = step.Id + 1;
-            SfcStep lowerStep;
-            if (data.ControlMap.TryGetValue(subId, out lowerStep))
+            int subId = id + 1;
+            PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
+            if (lowerStep != null)
             {
-                if(data.SfcEntity.Lookup(lowerStep.Id).ContainsRealStep())
+                if (data.SfcEntity.Lookup(lowerStep.Key).ContainsRealStep())
                 {
-                    return lowerStep;
+                    return data.ControlMap[lowerStep.Key];
                 }
-                else if(data.SfcEntity.Lookup(step.Id).SfcStepType == StepType.Pass)
+                else if (lowerStep.SfcStepType == StepType.Pass)
                 {
-                    return FindLowerConnectedStep(lowerStep, data);
+                    return FindLowerConnectedStep(lowerStep.Key, data);
                 }
-                else if(data.SfcEntity.Lookup(step.Id).SfcStepType == StepType.Jump)
+                else if (lowerStep.SfcStepType == StepType.Jump)
                 {
-                    int reference = data.StepMaster.GetNameKey(data.SfcEntity.Lookup(lowerStep.Id).StepName);
+                    int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
                     return data.ControlMap[reference];
                 }
             }

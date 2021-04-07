@@ -36,7 +36,7 @@ namespace Osls.SfcSimulation.Engine
             _transitions = SfcStepBuilder.CollectTransitionSources(this, data);
             foreach (SfcTransition transition in _transitions)
             {
-                SfcStepBuilder.AssignTransitionDestinations(transition, this, data);
+                SfcStepBuilder.AssignTransitionDestinations(transition, data);
             }
         }
         
