@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Osls.SfcEditor;
 using Osls.SfcEditor.Interpreter;
 using Osls.SfcEditor.Interpreter.Assignment;
+using Osls.SfcSimulation.Engine.Builder;
 
 
 namespace Osls.SfcSimulation.Engine
@@ -33,10 +34,10 @@ namespace Osls.SfcSimulation.Engine
         public void Initialise(SfcProgrammData data)
         {
             AssignActionsFrom(data.SfcEntity.Lookup(Id));
-            _transitions = SfcStepBuilder.CollectTransitionSources(this, data);
+            _transitions = Sources.CollectTransitionSources(this, data);
             foreach (SfcTransition transition in _transitions)
             {
-                SfcStepBuilder.AssignTransitionDestinations(transition, data);
+                Destinations.AssignTransitionDestinations(transition, data);
             }
         }
         
