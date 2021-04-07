@@ -43,36 +43,45 @@ namespace Osls.SfcSimulation.Engine.Builder
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
                 if (lowerStep != null)
                 {
-                    switch (lowerStep.SfcStepType)
-                    {
-                        case StepType.StartingStep:
-                        case StepType.Step:
-                            targetSteps.Add(data.ControlMap[lowerStep.Key]);
-                            break;
-                        case StepType.Jump:
-                            if (data.StepMaster.ContainsStep(lowerStep.StepName))
-                            {
-                                int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
-                                targetSteps.Add(data.ControlMap[reference]);
-                            }
-                            else
-                            {
-                                return null;
-                            }
-                            break;
-                        case StepType.Pass:
-                            SfcStep foundStep = Collector.FindLowerConnectedStep(lowerStep.Key, data);
-                            if (foundStep != null)
-                            {
-                                targetSteps.Add(foundStep);
-                            }
-                            break;
-                        case StepType.Unused:
-                            break;
-                    }
+                    if (!FillSimultaneous(lowerStep, targetSteps, data)) return null;
                 }
             }
             return targetSteps;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private static bool FillSimultaneous(PatchEntity lowerStep, List<SfcStep> targetSteps, SfcProgrammData data)
+        {
+            switch (lowerStep.SfcStepType)
+            {
+                case StepType.StartingStep:
+                case StepType.Step:
+                    targetSteps.Add(data.ControlMap[lowerStep.Key]);
+                    break;
+                case StepType.Jump:
+                    if (data.StepMaster.ContainsStep(lowerStep.StepName))
+                    {
+                        int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
+                        targetSteps.Add(data.ControlMap[reference]);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case StepType.Pass:
+                    SfcStep foundStep = Collector.FindLowerConnectedStep(lowerStep.Key, data);
+                    if (foundStep != null)
+                    {
+                        targetSteps.Add(foundStep);
+                    }
+                    break;
+                case StepType.Unused:
+                    break;
+            }
+            return true;
         }
         
         private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
@@ -84,25 +93,32 @@ namespace Osls.SfcSimulation.Engine.Builder
                 PatchEntity lowerStep = data.SfcEntity.Lookup(subId);
                 if (lowerStep != null)
                 {
-                    switch (lowerStep.SfcStepType)
-                    {
-                        case StepType.StartingStep:
-                        case StepType.Step:
-                            return data.ControlMap[lowerStep.Key];
-                        case StepType.Jump:
-                            int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
-                            return data.ControlMap[reference];
-                        case StepType.Pass:
-                            SfcStep foundStep = FindAlternativeMergeTarget(lowerStep.Key, data);
-                            if (foundStep != null)
-                            {
-                                return foundStep;
-                            }
-                            break;
-                        case StepType.Unused:
-                            break;
-                    }
+                    SfcStep target = CheckAlternative(lowerStep, data);
+                    if (target != null) return target;
                 }
+            }
+            return null;
+        }
+        
+        private static SfcStep CheckAlternative(PatchEntity lowerStep, SfcProgrammData data)
+        {
+            switch (lowerStep.SfcStepType)
+            {
+                case StepType.StartingStep:
+                case StepType.Step:
+                    return data.ControlMap[lowerStep.Key];
+                case StepType.Jump:
+                    int reference = data.StepMaster.GetNameKey(lowerStep.StepName);
+                    return data.ControlMap[reference];
+                case StepType.Pass:
+                    SfcStep foundStep = FindAlternativeMergeTarget(lowerStep.Key, data);
+                    if (foundStep != null)
+                    {
+                        return foundStep;
+                    }
+                    break;
+                case StepType.Unused:
+                    break;
             }
             return null;
         }
