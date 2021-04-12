@@ -78,7 +78,13 @@ namespace Osls.Plants.RoadConstructionSite
         
         /// <summary>
         /// The result calculation excepts _lambdaState [0.01, 0.0002, 0.1] with 300 simulation cycles per step.
+        /// 
         /// </summary>
+        /// <remarks>
+        /// One Line Blocked: 21000 av; 2157900 max
+        /// Ok Timing: 7568 av; 12600 max
+        /// Ok Sensor: 6032 av; 12600 max
+        /// </remarks>
         private void CalculateResults()
         {
             _testState = TestState.Done;
@@ -112,7 +118,7 @@ namespace Osls.Plants.RoadConstructionSite
             string headline = GetHeadline(hadAnAccident, averageWaitingMs);
             string infoText = GetInfoText(averageWaitingMs, maximumWaitingCycles);
             string quoteText = GetNewsQuote(hadAnAccident, averageWaitingMs);
-            int stars = CalculateStars(hadAnAccident, averageWaitingMs, maximumWaitingCycles, completedSimulations);
+            int stars = CalculateStars(hadAnAccident, averageWaitingMs, maximumWaitingCycles);
             _openedLesson.SetAndSaveStars(stars);
             string starQuote = GetStarText(stars);
             GetNode<Newspaper>("Newspaper").SetTexts(headline, infoText, quoteText, starQuote);
@@ -129,15 +135,15 @@ namespace Osls.Plants.RoadConstructionSite
             {
                 return "A Death Due To Faulty Control";
             }
-            if (averageWaitingMs > 600)
+            if (averageWaitingMs > 10000)
             {
                 return "Annoyance About Horrific Waiting Times";
             }
-            if (averageWaitingMs > 400)
+            if (averageWaitingMs > 7500)
             {
                 return "Annoyance About Long Waiting Times";
             }
-            if (averageWaitingMs > 330)
+            if (averageWaitingMs > 6000)
             {
                 return "Ongoing Discussions About Traffic Light";
             }
@@ -148,7 +154,7 @@ namespace Osls.Plants.RoadConstructionSite
         {
             string averageSeconds = ((float)averageWaitingMs * 0.001f).ToString("F1");
             string maximumSeconds = (maximumWaitingCycles * SimulatedCycleTime * 0.001).ToString("F1");
-            return "The average waiting time is " + averageSeconds + "s.\n"
+            return "The average waiting time is " + averageSeconds + "s.\n\n"
             + "Some had to wait up to " + maximumSeconds + "s.";
         }
         
@@ -158,30 +164,30 @@ namespace Osls.Plants.RoadConstructionSite
             {
                 return "\"It should never have been put into operation.\"";
             }
-            if (averageWaitingMs > 1000)
+            if (averageWaitingMs > 18000)
             {
                 return "\"It's Like One Side Is Always Red!\"";
             }
-            if (averageWaitingMs > 600)
+            if (averageWaitingMs > 8500)
             {
                 return "\"Any Snail Is Faster!\"";
             }
-            if (averageWaitingMs > 400)
+            if (averageWaitingMs > 7500)
             {
                 return "\"I Could Do It Better\"";
             }
-            if (averageWaitingMs > 330)
+            if (averageWaitingMs > 6000)
             {
                 return "\"It's Not That Bad\"";
             }
             return "\"My Most Favourite Signal Light!\"";
         }
         
-        private int CalculateStars(int hadAnAccident, float averageWaitingCycles, int maximumWaitingCycles, int completedSimulations)
+        private int CalculateStars(int hadAnAccident, float averageWaitingCycles, int maximumWaitingCycles)
         {
-            if (maximumWaitingCycles > 700 || hadAnAccident > 0) return 0;
-            if (averageWaitingCycles > 380) return 1;
-            if (averageWaitingCycles > 320 || maximumWaitingCycles > 650 || completedSimulations < 590) return 2;
+            if (maximumWaitingCycles > 100000 || hadAnAccident > 0) return 0;
+            if (averageWaitingCycles > 7400) return 1;
+            if (averageWaitingCycles > 6000 || maximumWaitingCycles > 780) return 2;
             return 3;
         }
         

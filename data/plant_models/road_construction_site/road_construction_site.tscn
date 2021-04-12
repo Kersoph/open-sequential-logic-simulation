@@ -251,3 +251,6 @@ rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Spawn delay"
+__meta__ = {
+"_edit_use_anchors_": false
+}

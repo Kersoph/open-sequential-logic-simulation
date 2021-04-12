@@ -61,6 +61,7 @@ namespace Osls.Plants.RoadConstructionSite
             PathController botPath = GetNode<PathController>("DynamicCars/BotPath");
             botPath.Setup(_botTrafficLight);
             _trafficController = new TrafficController(topPath, botPath);
+            SpawnTimeGenerator.ResetGenerator();
         }
         #endregion
         

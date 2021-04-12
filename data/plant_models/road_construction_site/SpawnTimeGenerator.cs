@@ -69,6 +69,7 @@ namespace Osls.Plants.RoadConstructionSite
         public static void ResetGenerator()
         {
             LastSpawnNumber = 0;
+            Lambda = 0.05f;
         }
         #endregion
     }
