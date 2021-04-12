@@ -12,6 +12,7 @@ margin_right = 600.0
 margin_bottom = 50.0
 script = ExtResource( 2 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -20,6 +21,9 @@ margin_right = 1400.0
 margin_bottom = 1800.0
 rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Headline" type="Label" parent="."]
 margin_left = 50.0
@@ -31,9 +35,11 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Annoyance About Horrific Waiting Times"
 align = 1
+valign = 1
 autowrap = true
 clip_text = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -52,6 +58,7 @@ valign = 1
 autowrap = true
 clip_text = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -65,9 +72,11 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "\"It should never have been put into operation.\""
 align = 1
+valign = 1
 autowrap = true
 clip_text = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -82,7 +91,11 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "\"0 Star Experience\"
 - Marco Burri"
 align = 1
+valign = 1
 autowrap = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="News3" type="Label" parent="."]
 margin_left = 465.0
@@ -98,5 +111,6 @@ valign = 1
 autowrap = true
 clip_text = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
