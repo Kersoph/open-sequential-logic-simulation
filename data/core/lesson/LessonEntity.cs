@@ -100,10 +100,8 @@ namespace Osls
             using (File descriptionFile = new File())
             {
                 Error e = descriptionFile.Open(FolderPath + UserResultFilePath, File.ModeFlags.WriteRead);
-                if(e != Error.Ok) return;
+                if (e != Error.Ok) return;
                 _loadedJsonResultDictionary["Stars"] = stars;
-                GD.Print(_loadedJsonResultDictionary);
-                GD.Print(JSON.Print(_loadedJsonResultDictionary));
                 descriptionFile.StoreLine(JSON.Print(_loadedJsonResultDictionary, "\t"));
                 descriptionFile.Close(); // Godot is not handling it with the using pattern atm...
             }

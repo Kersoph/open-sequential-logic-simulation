@@ -17,7 +17,7 @@ namespace Osls.Plants.MinimalExample
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Initializes the whole sfc editor
+        /// Initializes the whole twat viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
         public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {

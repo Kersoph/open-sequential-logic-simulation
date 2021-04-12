@@ -4,13 +4,13 @@ namespace Osls.Plants.RoadConstructionSite
     {
         #region ==================== Fields / Properties ====================
         /// <summary>
-        /// Must be a prime number to generate all numbers from 0 to SpawnTimeModulator
+        /// Must be a prime number to generate all numbers from 0 to SpawnModulator
         /// </summary>
         private const int SpawnSeed = 17;
         
         /// <summary>
         /// Half the value is the expected value of the generator
-        /// Must be a prime number to generate all numbers from 0 to SpawnTimeModulator
+        /// Must be a prime number to generate all numbers from 0 to SpawnModulator
         /// </summary>
         private const int SpawnModulator = 73;
         
@@ -36,7 +36,7 @@ namespace Osls.Plants.RoadConstructionSite
         #region ==================== Public Methods ====================
         /// <summary>
         /// Calculates the next spawn time of a car in update cycles by:
-        /// 1. Get a deterministic number between 0 and SpawnTimeModulator with an uniform distribution.
+        /// 1. Get a deterministic number between 0 and SpawnModulator with an uniform distribution.
         /// 2. Calculate the exponential waiting time with the generated number.
         /// 3. Add a minimal waiting time TimeOffset.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Osls.Plants.RoadConstructionSite
         {
             Lambda = lambda;
         }
-
+        
         /// <summary>
         /// Gets the current lambda to the Exp([0..SpawnModulator] * Lambda) + Offset
         /// </summary>

@@ -19,37 +19,7 @@ namespace Osls.Plants.RoadConstructionSite
         #endregion
         
         
-        #region ==================== Initializing ====================
-        /// <summary>
-        /// Returns the input definition for the simulation
-        /// </summary>
-        protected override StateTable DefineInputs()
-        {
-            return new StateTable(
-                new Dictionary<string, bool>()
-                {
-                    {_topTrafficLightKey, false},
-                    {_botTrafficLightKey, false}
-                },
-                new Dictionary<string, int>()
-            );
-        }
-        
-        /// <summary>
-        /// Returns the output definition for the simulation
-        /// </summary>
-        protected override StateTable DefineOutput()
-        {
-            return new StateTable(
-                new Dictionary<string, bool>()
-                {
-                    {_topTrafficSensorKey, false},
-                    {_botTrafficSensorKey, false}
-                },
-                new Dictionary<string, int>()
-            );
-        }
-        
+        #region ==================== Public Methods ====================
         public override void _Ready()
         {
             _topTrafficLight = GetNode<TrafficControlSystem>("Signalisation/TrafficControlSystemTop");
@@ -63,10 +33,48 @@ namespace Osls.Plants.RoadConstructionSite
             _trafficController = new TrafficController(topPath, botPath);
             SpawnTimeGenerator.ResetGenerator();
         }
+        
+        /// <summary>
+        /// Returns the collected reports for the simulated cars
+        /// </summary>
+        public List<DynamicCarReport> CollectReports()
+        {
+            return _trafficController.CollectReports();
+        }
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Helpers ====================
+        /// <summary>
+        /// Returns the input definition for the simulation
+        /// </summary>
+        protected override StateTable DefineInputs()
+        {
+            return new StateTable(
+                new Dictionary<string, bool>()
+                {
+                    { _topTrafficLightKey, false },
+                    { _botTrafficLightKey, false }
+                },
+                new Dictionary<string, int>()
+            );
+        }
+        
+        /// <summary>
+        /// Returns the output definition for the simulation
+        /// </summary>
+        protected override StateTable DefineOutput()
+        {
+            return new StateTable(
+                new Dictionary<string, bool>()
+                {
+                    { _topTrafficSensorKey, false },
+                    { _botTrafficSensorKey, false }
+                },
+                new Dictionary<string, int>()
+            );
+        }
+        
         /// <summary>
         /// Calculates the next simulation step.
         /// It will read the SimulationInput values and stores in the end the new values to the SimulationOutput.
@@ -78,14 +86,6 @@ namespace Osls.Plants.RoadConstructionSite
             _trafficController.CalculateNextStep(timeMs);
             SimulationOutput.SetValue(_topTrafficSensorKey, _topTrafficLight.IsCarInRange());
             SimulationOutput.SetValue(_botTrafficSensorKey, _botTrafficLight.IsCarInRange());
-        }
-        
-        /// <summary>
-        /// Returns the collected Reports for the simulated cars
-        /// </summary>
-        public List<DynamicCarReport> CollectReports()
-        {
-            return _trafficController.CollectReports();
         }
         #endregion
     }

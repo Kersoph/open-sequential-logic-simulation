@@ -3,23 +3,23 @@ using Godot;
 namespace Osls.Plants.RoadConstructionSite
 {
     /// <summary>
-    /// Topmost node for the TrafficControlSystem.tscn
+    /// Topmost node for the TrafficControlSystem
     /// </summary>
     public class TrafficControlSystem : Spatial
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private static Color Red = Color.Color8(255, 0, 0, 255);
         private static Color Green = Color.Color8(0, 255, 0, 255);
-        
-        public PathController Controller { get; private set; }
         
         private bool _isGreen;
         private float _lightDistance;
         private bool _carInRange;
+        
+        public PathController Controller { get; private set; }
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         public void SetDistances(PathController controller)
         {
             Controller = controller;
@@ -40,7 +40,7 @@ namespace Osls.Plants.RoadConstructionSite
         /// </summary>
         public bool CheckStopSignal(float carOffsetDistance, float stopDistance)
         {
-            if(carOffsetDistance < _lightDistance) _carInRange = true;
+            if (carOffsetDistance < _lightDistance) _carInRange = true;
             return (carOffsetDistance > _lightDistance - stopDistance && carOffsetDistance < _lightDistance) && !_isGreen;
         }
         

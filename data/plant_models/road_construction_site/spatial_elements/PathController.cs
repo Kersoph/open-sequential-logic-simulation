@@ -7,7 +7,7 @@ namespace Osls.Plants.RoadConstructionSite
     {
         #region ==================== Fields / Properties ====================
         /// <summary>
-        /// The minimum distance in m the previous car needs that a new car can be spawned
+        /// The minimum distance in m the previous car needs to spawn a new car
         /// </summary>
         [Export] public float MinimumSpawnDistance = 5f;
         
@@ -32,7 +32,7 @@ namespace Osls.Plants.RoadConstructionSite
         }
         
         /// <summary>
-        /// Returns true if a new car can be spawned. (Enough space for a new car)
+        /// Returns true if a new car can be spawned (Enough space for a new car).
         /// </summary>
         public bool SpawnPossible()
         {

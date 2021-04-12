@@ -10,6 +10,7 @@ namespace Osls.Plants.RoadConstructionSite
     /// calculate millions of steps in one frame but want the collision detection as well.
     /// We focus on a manual approach for now.
     /// </summary>
+    [System.Obsolete("CarCollisionDetector is deprecated. Use range approximation instead.")]
     public class CarCollisionDetector : Area
     {
         #region ==================== Fields Properties ====================

@@ -2,7 +2,6 @@ namespace Osls.Plants
 {
     /// <summary>
     /// Top node for the whole simulation view.
-    /// We expect to be a child of the MainNode
     /// </summary>
     public abstract class SimulationPage : PageModule
     {

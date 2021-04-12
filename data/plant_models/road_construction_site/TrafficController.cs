@@ -52,7 +52,7 @@ namespace Osls.Plants.RoadConstructionSite
         }
         
         /// <summary>
-        /// Returns the collected Reports for the simulated cars
+        /// Returns the collected reports for the simulated cars
         /// </summary>
         public List<DynamicCarReport> CollectReports()
         {

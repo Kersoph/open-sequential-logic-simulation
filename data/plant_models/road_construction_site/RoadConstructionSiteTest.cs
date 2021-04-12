@@ -10,11 +10,11 @@ namespace Osls.Plants.RoadConstructionSite
     /// </summary>
     public class RoadConstructionSiteTest : TestPage
     {
-        #region ==================== Public ====================
+        #region ==================== Fields / Properties ====================
         private const int SimulatedCycleTime = 16;
         
-        private LessonEntity _openedLesson;
         private enum TestState { Simulate, CalculateResults, Done };
+        private LessonEntity _openedLesson;
         private TestState _testState;
         private float _lambdaState = 0.01f;
         private bool _isExecutable;
@@ -23,9 +23,9 @@ namespace Osls.Plants.RoadConstructionSite
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
-        /// Initializes the whole viewer. Called before the node is added to the tree by the lesson controller.
+        /// Initializes the whole twat viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
         public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {
@@ -78,7 +78,6 @@ namespace Osls.Plants.RoadConstructionSite
         
         /// <summary>
         /// The result calculation excepts _lambdaState [0.01, 0.0002, 0.1] with 300 simulation cycles per step.
-        /// 
         /// </summary>
         /// <remarks>
         /// One Line Blocked: 21000 av; 2157900 max
@@ -187,7 +186,7 @@ namespace Osls.Plants.RoadConstructionSite
         {
             if (maximumWaitingCycles > 100000 || hadAnAccident > 0) return 0;
             if (averageWaitingCycles > 7400) return 1;
-            if (averageWaitingCycles > 6000 || maximumWaitingCycles > 780) return 2;
+            if (averageWaitingCycles > 6000 || maximumWaitingCycles > 790) return 2;
             return 3;
         }
         
