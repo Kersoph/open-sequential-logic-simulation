@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using Osls.SfcEditor;
 
 
 namespace Osls.SfcEditor
@@ -67,7 +69,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Loads the data from the stream. Written in "WriteTo".
         /// </summary>
-        public void ReadFrom(System.IO.BinaryReader reader)
+        public void ReadFrom(BinaryReader reader)
         {
             PersistenceCheckHelper.CheckSectionNumber(reader, 0x11111111);
             _patchMap.Clear();
@@ -82,7 +84,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Writes the data from the stream. Read by "ReadFrom".
         /// </summary>
-        public void WriteTo(System.IO.BinaryWriter writer)
+        public void WriteTo(BinaryWriter writer)
         {
             writer.Write(0x11111111);
             writer.Write(_patchMap.Count);
@@ -90,6 +92,34 @@ namespace Osls.SfcEditor
             {
                 entity.WriteTo(writer);
             }
+        }
+        
+        /// <summary>
+        /// Tries to load a new entity from the given filepath. Null if the path is invalid
+        /// </summary>
+        public static SfcEntity TryLoadFromFile(string filepath)
+        {
+            if (!File.Exists(filepath))
+            {
+                return null;
+            }
+            return LoadFromFile(filepath);
+        }
+        
+        /// <summary>
+        /// Loads a new entity from the given filepath. The path has to be valid.
+        /// </summary>
+        public static SfcEntity LoadFromFile(string filepath)
+        {
+            SfcEntity entity = new SfcEntity();
+            using (FileStream stream = File.Open(filepath, FileMode.OpenOrCreate))
+            {
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    entity.ReadFrom(reader);
+                }
+            }
+            return entity;
         }
         #endregion
     }

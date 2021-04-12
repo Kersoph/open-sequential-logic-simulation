@@ -2,6 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using Osls.SfcEditor.Interpreter;
+using System.IO;
 
 
 namespace Osls.SfcEditor
@@ -40,7 +41,7 @@ namespace Osls.SfcEditor
         }
         
         /// <summary>
-        /// Clones the control map into a new dicionary.
+        /// Clones the control map into a new dictionary.
         /// </summary>
         public SfcEntity LinkSfcData()
         {
@@ -56,11 +57,54 @@ namespace Osls.SfcEditor
         }
         
         /// <summary>
+        /// Loads the file and builds the SFC diagram if the file exists
+        /// Creates a default diagram if it could not be loaded
+        /// </summary>
+        public void LoadDiagramOrDefault(string filepath)
+        {
+            if (!System.IO.File.Exists(filepath))
+            {
+                PatchEntity entity = new PatchEntity(1, 0)
+                {
+                    SfcStepType = StepType.StartingStep
+                };
+                Data.AddPatch(entity);
+            }
+            else
+            {
+                using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
+                {
+                    using (BinaryReader reader = new BinaryReader(stream))
+                    {
+                        Data.ReadFrom(reader);
+                    }
+                }
+            }
+            InitialiseFromData();
+        }
+        
+        /// <summary>
+        /// Saves the SFC diagram to a file
+        /// </summary>
+        public void SaveDiagram(string filepath)
+        {
+            using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    Data.WriteTo(writer);
+                }
+            }
+        }
+        #endregion
+        
+        
+        #region ==================== Helpers ====================
+        /// <summary>
         /// Loads the data from the stream. Written in "WriteTo".
         /// </summary>
-        public void ReadFrom(System.IO.BinaryReader reader)
+        private void InitialiseFromData()
         {
-            Data.ReadFrom(reader);
             foreach (SfcPatchControl patch in _controlMap.Values)
             {
                 patch.RemovePatch();
@@ -75,32 +119,6 @@ namespace Osls.SfcEditor
             UpdateGrid();
         }
         
-        /// <summary>
-        /// Writes the data from the stream. Read by "ReadFrom".
-        /// </summary>
-        public void WriteTo(System.IO.BinaryWriter writer)
-        {
-            Data.WriteTo(writer);
-        }
-        
-        /// <summary>
-        /// Creates a starting step at 1, 0.
-        /// </summary>
-        public void CreateDefaultDiagram()
-        {
-            PatchEntity entity = new PatchEntity(1, 0)
-            {
-                SfcStepType = StepType.StartingStep
-            };
-            Data.AddPatch(entity);
-            SfcPatchControl control = new SfcPatchControl(entity, this);
-            _controlMap.Add(entity.Key, control);
-            UpdateGrid();
-        }
-        #endregion
-        
-        
-        #region ==================== Helpers ====================
         /// <summary>
         /// Updates the whole logical data model.
         /// </summary>

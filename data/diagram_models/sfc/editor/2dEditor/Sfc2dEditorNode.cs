@@ -1,5 +1,4 @@
 using Godot;
-using System.IO;
 
 
 namespace Osls.SfcEditor
@@ -46,34 +45,16 @@ namespace Osls.SfcEditor
         /// </summary>
         public void SaveDiagram(string filepath)
         {
-            using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    Sfc2dEditorControl.WriteTo(writer);
-                }
-            }
+            Sfc2dEditorControl.SaveDiagram(filepath);
         }
         
         /// <summary>
         /// Loads the file and builds the SFC diagram if the file exists
         /// Creates a default diagram if it could not be loaded
         /// </summary>
-        public bool TryLoadDiagram(string filepath)
+        public void TryLoadDiagram(string filepath)
         {
-            if (!System.IO.File.Exists(filepath))
-            {
-                Sfc2dEditorControl.CreateDefaultDiagram();
-                return false;
-            }
-            using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
-            {
-                using (BinaryReader reader = new BinaryReader(stream))
-                {
-                    Sfc2dEditorControl.ReadFrom(reader);
-                }
-            }
-            return true;
+            Sfc2dEditorControl.LoadDiagramOrDefault(filepath);
         }
         
         public void ZoomIn()

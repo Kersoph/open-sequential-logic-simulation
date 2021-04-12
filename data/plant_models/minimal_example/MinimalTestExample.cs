@@ -1,4 +1,3 @@
-using System.IO;
 using Osls.SfcEditor;
 
 
@@ -23,9 +22,9 @@ namespace Osls.Plants.MinimalExample
         public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {
             _simulation = GetNode<MinimalSimulationExample>("MinimalSimulationExample");
-            SfcEntity sfcEntity = new SfcEntity();
             string filepath = openedLesson.FolderPath + "/User/Diagram.sfc";
-            if (TryLoadDiagram(filepath, sfcEntity))
+            SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
+            if (sfcEntity != null)
             {
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
@@ -34,25 +33,6 @@ namespace Osls.Plants.MinimalExample
             {
                 _isExecutable = false;
             }
-        }
-        
-        /// <summary>
-        /// Loads the file into the sfc entity
-        /// </summary>
-        public bool TryLoadDiagram(string filepath, SfcEntity sfcEntity)
-        {
-            if (!File.Exists(filepath))
-            {
-                return false;
-            }
-            using (FileStream stream = File.Open(filepath, FileMode.OpenOrCreate))
-            {
-                using (BinaryReader reader = new BinaryReader(stream))
-                {
-                    sfcEntity.ReadFrom(reader);
-                }
-            }
-            return true;
         }
         
         public override void _Process(float delta)
