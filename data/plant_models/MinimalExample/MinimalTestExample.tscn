@@ -2,7 +2,6 @@
 
 [ext_resource path="res://data/plant_models/MinimalExample/MinimalTestExample.cs" type="Script" id=1]
 
-
 [node name="MinimalTestExample" type="Node"]
 script = ExtResource( 1 )
 

@@ -1,4 +1,4 @@
-namespace Oslss
+namespace Osls
 {
     public interface IProcessingUnit
     {
@@ -6,12 +6,12 @@ namespace Oslss
         /// <summary>
         /// Holds the input registers of the processing unit
         /// </summary>
-        int InputRegisters { get; }
+        StateTable InputRegisters { get; }
         
         /// <summary>
         /// Holds the output registers of the processing unit
         /// </summary>
-        int OutputRegisters { get; }
+        StateTable OutputRegisters { get; }
         #endregion
         
         
@@ -25,6 +25,11 @@ namespace Oslss
         /// Is called every simulation step to update the PU.
         /// </summary>
         void Update();
+
+        /// <summary>
+        /// Returns true if the simulation can be executed
+        /// </summary>
+        bool IsLogicValid();
         #endregion
     }
 }

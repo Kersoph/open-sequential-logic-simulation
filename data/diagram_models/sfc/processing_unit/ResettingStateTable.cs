@@ -23,22 +23,6 @@ namespace Osls.SfcSimulation.Engine
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Sets a value by the given key.
-        /// </summary>
-        public void SetValue(string key, bool value)
-        {
-            Booleans[key] = value;
-        }
-        
-        /// <summary>
-        /// Sets a value by the given key.
-        /// </summary>
-        public void SetValue(string key, int value)
-        {
-            Integers[key] = value;
-        }
-        
-        /// <summary>
         /// Resets the registers to the default value
         /// </summary>
         public void ResetRegisters()

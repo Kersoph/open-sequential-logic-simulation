@@ -77,7 +77,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public bool IsProgramSimulationValid()
         {
-            return _programmableLogicController.IsPlcLogicValid();
+            return _programmableLogicController.IsLogicValid();
         }
         #endregion
     }

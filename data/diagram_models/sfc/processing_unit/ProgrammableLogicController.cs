@@ -1,10 +1,13 @@
 namespace Osls.SfcSimulation.Engine
 {
-    public class ProgrammableLogicController
+    public class ProgrammableLogicController : IProcessingUnit
     {
         #region ==================== Fields Properties ====================
-        public ResettingStateTable InputRegisters { get; private set; }
-        public ResettingStateTable OutputRegisters { get; private set; }
+        private ResettingStateTable _inputRegisters;
+        private ResettingStateTable _outputRegisters;
+        
+        public StateTable InputRegisters { get { return _inputRegisters; } }
+        public StateTable OutputRegisters { get { return _outputRegisters; } }
         public Master Master { get; private set; }
         public SfcProgramm SfcProgramm { get; private set; }
         #endregion
@@ -26,8 +29,8 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void Startup()
         {
-            InputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationOutput);
-            OutputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationInput);
+            _inputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationOutput);
+            _outputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationInput);
         }
         
         /// <summary>
@@ -45,7 +48,7 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Returns true if the simulation can be executed
         /// </summary>
-        public bool IsPlcLogicValid()
+        public bool IsLogicValid()
         {
             return SfcProgramm.IsProgrammLogicValid();
         }
@@ -58,7 +61,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         private void ResetOutputRegisters()
         {
-            OutputRegisters.ResetRegisters();
+            _outputRegisters.ResetRegisters();
         }
         
         /// <summary>
@@ -66,7 +69,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         private void UpdateInputs()
         {
-            InputRegisters.AssignValuesFrom(Master.SimulationControlNode.SimulationOutput);
+            _inputRegisters.AssignValuesFrom(Master.SimulationControlNode.SimulationOutput);
         }
         
         /// <summary>

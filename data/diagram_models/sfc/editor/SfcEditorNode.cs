@@ -4,7 +4,7 @@ namespace Osls.SfcEditor
     /// Top node for the whole sfc editor view.
     /// We expect to be a child of the MainNode
     /// </summary>
-    public class SfcEditorNode : PageModule
+    public class SfcEditorNode : ModelEditor
     {
         #region ==================== Fields / Properties ====================
         private LessonEntity _opendLesson;
@@ -12,11 +12,6 @@ namespace Osls.SfcEditor
         public MainNode MainNode { get; private set; }
         public PlantViewNode PlantViewNode { get; private set; }
         public Sfc2dEditorNode Sfc2dEditorNode { get; private set; }
-        
-        /// <summary>
-        /// Gets the scene page type
-        /// </summary>
-        public override PageCategory ScenePage { get { return PageCategory.LogicEditor; } }
         #endregion
         
         

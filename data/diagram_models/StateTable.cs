@@ -80,6 +80,22 @@ namespace Osls
         }
         
         /// <summary>
+        /// Sets a value by the given key.
+        /// </summary>
+        public void SetValue(string key, bool value)
+        {
+            Booleans[key] = value;
+        }
+        
+        /// <summary>
+        /// Sets a value by the given key.
+        /// </summary>
+        public void SetValue(string key, int value)
+        {
+            Integers[key] = value;
+        }
+        
+        /// <summary>
         /// Copies the whole output table to our input table
         /// </summary>
         public void AssignValuesFrom(StateTable outputs)
