@@ -22,9 +22,9 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override int Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
+        public override int Result(SfcSimulation.Engine.SfcProgram sfcProgram)
         {
-            return sfcProgramm.Data.GetStepFromMapKey(sfcProgramm.Data.StepMaster.GetStepTimeKey(_key)).StepCounter;
+            return sfcProgram.Data.GetStepFromMapKey(sfcProgram.Data.StepMaster.GetStepTimeKey(_key)).StepCounter;
         }
         
         /// <summary>

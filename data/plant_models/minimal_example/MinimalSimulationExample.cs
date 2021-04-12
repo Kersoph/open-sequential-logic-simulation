@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Osls.Plants.MinimalExample
 {
     /// <summary>
-    /// Minimal example calss for a simulation controller
+    /// Minimal example class for a simulation controller
     /// </summary>
     public class MinimalSimulationExample : SimulationPage
     {
@@ -49,7 +49,7 @@ namespace Osls.Plants.MinimalExample
         }
         
         /// <summary>
-        /// Claculate sthe next simulation step.
+        /// Calculates the next simulation step.
         /// It will read the SimulationInput values and stores in the end the new values to the SimulationOutput.
         /// </summary>
         protected override void CalculateNextStep() { }

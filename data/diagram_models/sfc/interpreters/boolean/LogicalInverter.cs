@@ -27,9 +27,9 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
+        public override bool Result(SfcSimulation.Engine.SfcProgram sfcProgram)
         {
-            return !_target.Result(sfcProgramm);
+            return !_target.Result(sfcProgram);
         }
         
         /// <summary>

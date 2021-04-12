@@ -10,7 +10,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// <summary>
         /// Calculates the result of this numerical expression
         /// </summary>
-        public abstract int Result(SfcSimulation.Engine.SfcProgramm sfcProgramm);
+        public abstract int Result(SfcSimulation.Engine.SfcProgram sfcProgram);
         
         /// <summary>
         /// returns true, if this or sub-expressions are valid.

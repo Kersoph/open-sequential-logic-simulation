@@ -9,7 +9,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         #region ==================== Nested ====================
         private class CollectorEntity
         {
-            public SfcProgrammData Data { get; }
+            public SfcProgramData Data { get; }
             public List<int> CollectedSteps { get; }
             public BranchType TargetType { get; }
             public bool UpperBranch { get; }
@@ -18,9 +18,9 @@ namespace Osls.SfcSimulation.Engine.Builder
             /// Creates a new collextor entity to hold the data
             /// </summary>
             /// <param name="data">program reference</param>
-            /// <param name="targetType">whoch branch type to search</param>
+            /// <param name="targetType">which branch type to search</param>
             /// <param name="upperBranch">true for upper, false for lower</param>
-            public CollectorEntity(SfcProgrammData data, BranchType targetType, bool upperBranch)
+            public CollectorEntity(SfcProgramData data, BranchType targetType, bool upperBranch)
             {
                 Data = data;
                 CollectedSteps = new List<int>();
@@ -35,7 +35,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Collects all steps horizontally connected with the given targetType from sourceId
         /// </summary>
-        public static List<int> CollectHorizontal(int sourceId, SfcProgrammData data, BranchType targetType, bool upperBranch)
+        public static List<int> CollectHorizontal(int sourceId, SfcProgramData data, BranchType targetType, bool upperBranch)
         {
             CollectorEntity entity = new CollectorEntity(data, targetType, upperBranch);
             entity.CollectedSteps.Add(sourceId);
@@ -47,7 +47,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Looks for an connection from this patch to any upper connected step (including itself).
         /// </summary>
-        public static SfcStep FindUpperConnectedStep(int id, SfcProgrammData data)
+        public static SfcStep FindUpperConnectedStep(int id, SfcProgramData data)
         {
             if (data.SfcEntity.Lookup(id).ContainsRealStep())
             {
@@ -67,7 +67,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Looks for a connected lower step from this patch
         /// </summary>
-        public static SfcStep FindLowerConnectedStep(int id, SfcProgrammData data)
+        public static SfcStep FindLowerConnectedStep(int id, SfcProgramData data)
         {
             int subId = id + 1;
             PatchEntity lowerStep = data.SfcEntity.Lookup(subId);

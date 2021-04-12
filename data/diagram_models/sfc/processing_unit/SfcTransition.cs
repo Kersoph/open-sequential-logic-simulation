@@ -46,14 +46,14 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Calculates if this transition fires or not.
         /// </summary>
-        public bool CalculateTransition(SfcProgramm programm)
+        public bool CalculateTransition(SfcProgram program)
         {
             // All dependent steps must be active
             foreach (SfcStep step in DependingSteps)
             {
-                if (!programm.Data.IsStepActive(step)) return false;
+                if (!program.Data.IsStepActive(step)) return false;
             }
-            return Transition.Result(programm);
+            return Transition.Result(program);
         }
         
         /// <summary>

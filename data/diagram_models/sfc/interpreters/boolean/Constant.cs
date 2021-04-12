@@ -9,8 +9,8 @@ namespace Osls.SfcEditor.Interpreter.Boolean
     {
         #region ==================== Fields Properties ====================
         public const string TRUE = "true";
-        public const string FASLE = "false";
-        public static HashSet<string> Values = new HashSet<string>(){ TRUE, FASLE };
+        public const string FALSE = "false";
+        public static HashSet<string> Values = new HashSet<string>(){ TRUE, FALSE };
         
         private readonly bool _value;
         #endregion
@@ -28,7 +28,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
+        public override bool Result(SfcSimulation.Engine.SfcProgram sfcProgram)
         {
             return _value;
         }
@@ -43,7 +43,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         
         public override string ToString()
         {
-            return _value ? TRUE : FASLE;
+            return _value ? TRUE : FALSE;
         }
         #endregion
         
@@ -55,7 +55,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
             {
                 case TRUE:
                     return true;
-                case FASLE:
+                case FALSE:
                     return false;
             }
             Godot.GD.Print("Unknown value " + value);

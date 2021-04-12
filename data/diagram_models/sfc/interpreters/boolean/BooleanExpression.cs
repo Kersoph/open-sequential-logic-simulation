@@ -9,7 +9,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public abstract bool Result(SfcSimulation.Engine.SfcProgramm sfcProgramm);
+        public abstract bool Result(SfcSimulation.Engine.SfcProgram sfcProgram);
         
         /// <summary>
         /// returns true, if this or sub-expressions are valid.

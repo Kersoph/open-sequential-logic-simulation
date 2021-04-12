@@ -54,7 +54,7 @@ namespace Osls.Plants
         /// <summary>
         /// Calculates the next simulation step.
         /// </summary>
-        public void UpdateModel()
+        public void UpdateModel(int timeMs)
         {
             CalculateNextStep();
         }

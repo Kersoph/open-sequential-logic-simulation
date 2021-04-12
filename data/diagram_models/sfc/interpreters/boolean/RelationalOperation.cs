@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Osls.SfcEditor.Interpreter.Numerical;
 
+
 namespace Osls.SfcEditor.Interpreter.Boolean
 {
     /// <summary>
@@ -33,14 +34,14 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
+        public override bool Result(SfcSimulation.Engine.SfcProgram sfcProgram)
         {
             switch (_operator)
             {
                 case GreaterThan:
-                    return _left.Result(sfcProgramm) > _right.Result(sfcProgramm);
+                    return _left.Result(sfcProgram) > _right.Result(sfcProgram);
                 case SmallerThan:
-                    return _left.Result(sfcProgramm) < _right.Result(sfcProgramm);
+                    return _left.Result(sfcProgram) < _right.Result(sfcProgram);
             }
             Godot.GD.PushError("Unknown operator " + _operator);
             return false;

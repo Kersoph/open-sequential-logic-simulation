@@ -10,7 +10,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Assigns all destinations to this transition
         /// </summary>
-        public static void AssignTransitionDestinations(SfcTransition transition, SfcProgrammData data)
+        public static void AssignTransitionDestinations(SfcTransition transition, SfcProgramData data)
         {
             List<SfcStep> lowerTargets = CollectLowerSimultaneousBranches(transition.Id, data);
             if (lowerTargets == null || lowerTargets.Count > 0)
@@ -30,10 +30,10 @@ namespace Osls.SfcSimulation.Engine.Builder
         
         #region ==================== Helpers ====================
         /// <summary>
-        /// Collects the list of lower simultanuous branches if possible.
+        /// Collects the list of lower simultaneous branches if possible.
         /// Null if there is an error in the diagram
         /// </summary>
-        private static List<SfcStep> CollectLowerSimultaneousBranches(int holder, SfcProgrammData data)
+        private static List<SfcStep> CollectLowerSimultaneousBranches(int holder, SfcProgramData data)
         {
             List<int> collected = Collector.CollectHorizontal(holder, data, BranchType.Double, false);
             List<SfcStep> targetSteps = new List<SfcStep>();
@@ -49,10 +49,7 @@ namespace Osls.SfcSimulation.Engine.Builder
             return targetSteps;
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        private static bool FillSimultaneous(PatchEntity lowerStep, List<SfcStep> targetSteps, SfcProgrammData data)
+        private static bool FillSimultaneous(PatchEntity lowerStep, List<SfcStep> targetSteps, SfcProgramData data)
         {
             switch (lowerStep.SfcStepType)
             {
@@ -84,7 +81,7 @@ namespace Osls.SfcSimulation.Engine.Builder
             return true;
         }
         
-        private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgrammData data)
+        private static SfcStep FindAlternativeMergeTarget(int holder, SfcProgramData data)
         {
             List<int> collected = Collector.CollectHorizontal(holder, data, BranchType.Single, false);
             foreach (int step in collected)
@@ -100,7 +97,7 @@ namespace Osls.SfcSimulation.Engine.Builder
             return null;
         }
         
-        private static SfcStep CheckAlternative(PatchEntity lowerStep, SfcProgrammData data)
+        private static SfcStep CheckAlternative(PatchEntity lowerStep, SfcProgramData data)
         {
             switch (lowerStep.SfcStepType)
             {

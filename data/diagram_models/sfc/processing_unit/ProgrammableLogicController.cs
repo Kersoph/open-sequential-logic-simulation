@@ -1,3 +1,7 @@
+using Osls.Plants;
+using Osls.SfcEditor;
+
+
 namespace Osls.SfcSimulation.Engine
 {
     public class ProgrammableLogicController : IProcessingUnit
@@ -5,20 +9,21 @@ namespace Osls.SfcSimulation.Engine
         #region ==================== Fields Properties ====================
         private ResettingStateTable _inputRegisters;
         private ResettingStateTable _outputRegisters;
+        private SimulationPage _simulationPage;
         
         public StateTable InputRegisters { get { return _inputRegisters; } }
         public StateTable OutputRegisters { get { return _outputRegisters; } }
-        public Master Master { get; private set; }
-        public SfcProgramm SfcProgramm { get; private set; }
+        
+        public SfcProgram SfcProgram { get; private set; }
         #endregion
         
         
         #region ==================== Constructor ====================
-        public ProgrammableLogicController(Master master)
+        public ProgrammableLogicController(SimulationPage simulationPage, SfcEntity sfcEntity)
         {
-            Master = master;
-            SfcProgrammData data = new SfcProgrammData(master.Sfc2dEditorControl.LinkSfcData());
-            SfcProgramm = new SfcProgramm(this, data);
+            _simulationPage = simulationPage;
+            SfcProgramData data = new SfcProgramData(sfcEntity);
+            SfcProgram = new SfcProgram(this, data);
         }
         #endregion
         
@@ -29,19 +34,19 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void Startup()
         {
-            _inputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationOutput);
-            _outputRegisters = new ResettingStateTable(Master.SimulationControlNode.SimulationInput);
+            _inputRegisters = new ResettingStateTable(_simulationPage.SimulationOutput);
+            _outputRegisters = new ResettingStateTable(_simulationPage.SimulationInput);
         }
         
         /// <summary>
         /// Is called every simulation step to update the PLC.
         /// We follow the IPO (EVA) pattern like real PLC.
         /// </summary>
-        public void Update()
+        public void Update(int deltaTimeMs)
         {
             ResetOutputRegisters();
             UpdateInputs();
-            UpdateProcess();
+            UpdateProcess(deltaTimeMs);
             UpdateOutputs();
         }
         
@@ -50,7 +55,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public bool IsLogicValid()
         {
-            return SfcProgramm.IsProgrammLogicValid();
+            return SfcProgram.IsProgramLogicValid();
         }
         #endregion
         
@@ -69,15 +74,15 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         private void UpdateInputs()
         {
-            _inputRegisters.AssignValuesFrom(Master.SimulationControlNode.SimulationOutput);
+            _inputRegisters.AssignValuesFrom(_simulationPage.SimulationOutput);
         }
         
         /// <summary>
         /// Updates the sfc model
         /// </summary>
-        private void UpdateProcess()
+        private void UpdateProcess(int timeMs)
         {
-            SfcProgramm.UpdateProcess();
+            SfcProgram.UpdateProcess(timeMs);
         }
         
         /// <summary>
@@ -85,7 +90,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         private void UpdateOutputs()
         {
-            Master.SimulationControlNode.SimulationInput.AssignValuesFrom(OutputRegisters);
+            _simulationPage.SimulationInput.AssignValuesFrom(OutputRegisters);
         }
         #endregion
     }

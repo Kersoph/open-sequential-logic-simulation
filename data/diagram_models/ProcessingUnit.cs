@@ -24,8 +24,8 @@ namespace Osls
         /// <summary>
         /// Is called every simulation step to update the PU.
         /// </summary>
-        void Update();
-
+        void Update(int deltaTimeMs);
+        
         /// <summary>
         /// Returns true if the simulation can be executed
         /// </summary>

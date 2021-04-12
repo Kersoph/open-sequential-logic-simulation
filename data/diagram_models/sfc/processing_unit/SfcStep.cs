@@ -31,7 +31,7 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Parses the diagram and sets up the transitions reached by this step.
         /// </summary>
-        public void Initialise(SfcProgrammData data)
+        public void Initialise(SfcProgramData data)
         {
             AssignActionsFrom(data.SfcEntity.Lookup(Id));
             _transitions = Sources.CollectTransitionSources(this, data);
@@ -41,20 +41,23 @@ namespace Osls.SfcSimulation.Engine
             }
         }
         
-        public void ExecuteActions(SfcProgramm context, ActionQualifier qualifier)
+        /// <summary>
+        /// Executes the ations with the marked qualifier in the given program context and delta time
+        /// </summary>
+        public void ExecuteActions(SfcProgram context, ActionQualifier qualifier, int deltaTimeMs)
         {
             List<AssignmentExpression> actions = _actions[qualifier];
             foreach (AssignmentExpression action in actions)
             {
                 action.Execute(context);
             }
-            UpdateStepCounter(qualifier);
+            UpdateStepCounter(qualifier, deltaTimeMs);
         }
         
         /// <summary>
-        /// Calculatest the transitions and updates the step status according to the result
+        /// Calculates the transitions and updates the step status according to the result
         /// </summary>
-        public void CalculateTransition(SfcProgramm context)
+        public void CalculateTransition(SfcProgram context)
         {
             foreach (SfcTransition transition in _transitions)
             {
@@ -110,14 +113,14 @@ namespace Osls.SfcSimulation.Engine
             }
         }
         
-        private void UpdateStepCounter(ActionQualifier qualifier)
+        private void UpdateStepCounter(ActionQualifier qualifier, int deltaTimeMs)
         {
             switch (qualifier)
             {
                 case ActionQualifier.PPlus:
                     break;
                 case ActionQualifier.N:
-                    if(StepCounter != int.MaxValue) StepCounter += (int)(1000f * Master.StepUpdateTime);
+                    if(StepCounter != int.MaxValue) StepCounter += deltaTimeMs;
                     break;
                 case ActionQualifier.PMinus:
                     StepCounter = 0;

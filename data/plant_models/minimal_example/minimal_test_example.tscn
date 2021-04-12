@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/plant_models/minimal_example/MinimalTestExample.cs" type="Script" id=1]
-
+[ext_resource path="res://data/plant_models/minimal_example/minimal_simulation_example.tscn" type="PackedScene" id=2]
 
 [node name="MinimalTestExample" type="Node"]
 script = ExtResource( 1 )
@@ -11,4 +11,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+margin_left = -32.5
+margin_top = 36.0
+margin_right = 32.5
+margin_bottom = 50.0
 text = "Test Page!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MinimalSimulationExample" parent="." instance=ExtResource( 2 )]

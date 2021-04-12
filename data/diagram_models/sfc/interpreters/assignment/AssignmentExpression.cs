@@ -9,7 +9,7 @@ namespace Osls.SfcEditor.Interpreter.Assignment
         /// <summary>
         /// Executes the assignment according to the model.
         /// </summary>
-        public abstract void Execute(SfcSimulation.Engine.SfcProgramm sfcProgramm);
+        public abstract void Execute(SfcSimulation.Engine.SfcProgram sfcProgram);
         
         /// <summary>
         /// returns true, if this or sub-expressions are valid.

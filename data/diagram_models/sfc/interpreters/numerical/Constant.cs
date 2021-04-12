@@ -19,7 +19,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// <summary>
         /// Calculates the result of this numerical expression
         /// </summary>
-        public override int Result(SfcSimulation.Engine.SfcProgramm sfcProgramm)
+        public override int Result(SfcSimulation.Engine.SfcProgram sfcProgram)
         {
             return _number;
         }

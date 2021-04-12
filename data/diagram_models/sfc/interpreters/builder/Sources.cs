@@ -12,7 +12,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Looks for all transitions connected to this step
         /// </summary>
-        public static List<SfcTransition> CollectTransitionSources(SfcStep source, SfcProgrammData data)
+        public static List<SfcTransition> CollectTransitionSources(SfcStep source, SfcProgramData data)
         {
             List<SfcTransition> alternativeBranches = CollectUpperAlternativeBranches(source, data);
             List<SfcTransition> SimultaneousMerge = CollectUpperSimultaneousMerge(source, data);
@@ -39,7 +39,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// Collects all alternative branches from this step.
         /// If it returns only one transition is not an alternative branch but a normal transition.
         /// </summary>
-        private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, SfcProgrammData data)
+        private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, SfcProgramData data)
         {
             List<SfcTransition> transitions = new List<SfcTransition>();
             List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Single, true);
@@ -59,7 +59,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// Collects all Simultaneous branches to merge from this step.
         /// null if there is none.
         /// </summary>
-        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgrammData data)
+        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgramData data)
         {
             List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Double, true);
             if (collected.Count <= 1) return null;
@@ -71,7 +71,7 @@ namespace Osls.SfcSimulation.Engine.Builder
             return new List<SfcTransition> { transition };
         }
         
-        private static PatchEntity FindSimultaneousTransition(List<int> patches, SfcProgrammData data)
+        private static PatchEntity FindSimultaneousTransition(List<int> patches, SfcProgramData data)
         {
             PatchEntity transitionPatch = null;
             foreach (int step in patches)
@@ -83,7 +83,7 @@ namespace Osls.SfcSimulation.Engine.Builder
             return transitionPatch;
         }
         
-        private static List<SfcStep> CollectConnectedSteps(List<int> patches, SfcProgrammData data)
+        private static List<SfcStep> CollectConnectedSteps(List<int> patches, SfcProgramData data)
         {
             List<SfcStep> connectedSteps = new List<SfcStep>();
             foreach (int step in patches)
@@ -110,7 +110,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Creates a new SfcTransition with the given transitionPatchId
         /// </summary>
-        private static SfcTransition CreateTransition(int transitionPatchId, SfcProgrammData data)
+        private static SfcTransition CreateTransition(int transitionPatchId, SfcProgramData data)
         {
             string transitionText = data.SfcEntity.Lookup(transitionPatchId).TransitionText;
             BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, data.StepMaster);

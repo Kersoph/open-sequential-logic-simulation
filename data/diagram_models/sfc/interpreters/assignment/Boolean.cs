@@ -21,9 +21,9 @@ namespace Osls.SfcEditor.Interpreter.Assignment
         /// <summary>
         /// Executes the assignment according to the model.
         /// </summary>
-        public override void Execute(SfcSimulation.Engine.SfcProgramm sfcProgramm)
+        public override void Execute(SfcSimulation.Engine.SfcProgram sfcProgram)
         {
-            sfcProgramm.Plc.OutputRegisters.SetValue(_target, _source.Result(sfcProgramm));
+            sfcProgram.Plc.OutputRegisters.SetValue(_target, _source.Result(sfcProgram));
         }
         
         /// <summary>

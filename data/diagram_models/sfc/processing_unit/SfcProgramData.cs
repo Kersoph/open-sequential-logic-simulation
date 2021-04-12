@@ -5,7 +5,7 @@ using Osls.SfcEditor.Interpreter;
 
 namespace Osls.SfcSimulation.Engine
 {
-    public class SfcProgrammData
+    public class SfcProgramData
     {
         #region ==================== Fields / Properties ====================
         public IReadOnlyDictionary<int, SfcStep> ControlMap { get; private set; }
@@ -20,7 +20,7 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Constructor ====================
-        public SfcProgrammData(SfcEntity sfcEntity)
+        public SfcProgramData(SfcEntity sfcEntity)
         {
             SfcEntity = sfcEntity;
             StepMaster = new StepMaster();

@@ -43,7 +43,8 @@ namespace Osls.SfcEditor
             LoadDiagram();
             LoadedSimulationNode = (SimulationPage)((PackedScene)GD.Load(opendLesson.SimulationPath)).Instance();
             GetNode("PlantViewNode/PlantViewportContainer/PlantViewport").AddChild(LoadedSimulationNode);
-            _simulationMaster = new Master(Sfc2dEditorNode.Sfc2dEditorControl, LoadedSimulationNode);
+            SfcEntity sfcEntity = Sfc2dEditorNode.Sfc2dEditorControl.LinkSfcData();
+            _simulationMaster = new Master(sfcEntity, LoadedSimulationNode);
             _plantInfoPanel = GetNode<PlantInfoPanel>("PlantInfoPanel");
             _plantInfoPanel.SetSimulationInfo(LoadedSimulationNode);
             _isExecutable = _simulationMaster.IsProgramSimulationValid();
@@ -64,7 +65,10 @@ namespace Osls.SfcEditor
             if (_isExecutable)
             {
                 _plantInfoPanel.UpdateText(true);
-                _simulationMaster.UpdateSimulation();
+                int timeMs = (int)(delta * 1000);
+                timeMs = timeMs < 1 ? 1 : (timeMs > 1000 ? 1000 : timeMs);
+                _simulationMaster.UpdateSimulation(timeMs);
+                _simulationMaster.VisualiseStatus(Sfc2dEditorNode.Sfc2dEditorControl);
             }
         }
         #endregion

@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace Osls.SfcSimulation.Engine
 {
-    public class SfcProgramm
+    public class SfcProgram
     {
         #region ==================== Fields / Properties ====================
         public ProgrammableLogicController Plc { get; private set; }
-        public SfcProgrammData Data { get; private set; }
+        public SfcProgramData Data { get; private set; }
         #endregion
         
         
         #region ==================== Constructor ====================
-        public SfcProgramm(ProgrammableLogicController plc, SfcProgrammData data)
+        public SfcProgram(ProgrammableLogicController plc, SfcProgramData data)
         {
             Plc = plc;
             Data = data;
@@ -25,14 +25,14 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Is called to calculate the next steps of the simulation.
         /// </summary>
-        public void UpdateProcess()
+        public void UpdateProcess(int deltaTimeMs)
         {
             Data.InactiveSteps.UnionWith(Data.SoonInactiveSteps);
             Data.ActiveSteps.ExceptWith(Data.SoonInactiveSteps);
             Data.SoonInactiveSteps.Clear();
             foreach (var sfcStep in Data.SoonActiveSteps)
             {
-                sfcStep.ExecuteActions(this, ActionQualifier.PPlus);
+                sfcStep.ExecuteActions(this, ActionQualifier.PPlus, deltaTimeMs);
             }
             Data.ActiveSteps.UnionWith(Data.SoonActiveSteps);
             Data.InactiveSteps.ExceptWith(Data.SoonActiveSteps);
@@ -40,7 +40,7 @@ namespace Osls.SfcSimulation.Engine
             
             foreach (var sfcStep in Data.ActiveSteps)
             {
-                sfcStep.ExecuteActions(this, ActionQualifier.N);
+                sfcStep.ExecuteActions(this, ActionQualifier.N, deltaTimeMs);
             }
             
             foreach (var sfcStep in Data.ActiveSteps)
@@ -50,7 +50,7 @@ namespace Osls.SfcSimulation.Engine
             
             foreach (var sfcStep in Data.SoonInactiveSteps)
             {
-                sfcStep.ExecuteActions(this, ActionQualifier.PMinus);
+                sfcStep.ExecuteActions(this, ActionQualifier.PMinus, deltaTimeMs);
             }
         }
         
@@ -66,7 +66,7 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Returns true if the simulation can be executed
         /// </summary>
-        public bool IsProgrammLogicValid()
+        public bool IsProgramLogicValid()
         {
             return Data.AreStepsValid();
         }
