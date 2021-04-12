@@ -47,12 +47,12 @@ namespace Osls.Plants
         /// Gets the scene page type
         /// </summary>
         public override PageCategory ScenePage { get { return PageCategory.Simulation; } }
-        #endregion;
+        #endregion
         
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Claculate sthe next simulation step.
+        /// Calculates the next simulation step.
         /// </summary>
         public void UpdateModel()
         {
@@ -73,7 +73,7 @@ namespace Osls.Plants
         protected abstract StateTable DefineOutput();
         
         /// <summary>
-        /// Claculates the next simulation step
+        /// Calculates the next simulation step
         /// </summary>
         protected abstract void CalculateNextStep();
         #endregion

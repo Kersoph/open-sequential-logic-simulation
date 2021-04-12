@@ -15,15 +15,15 @@ namespace Osls
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Initializes the whole page. Called bevore the node is added to the tree by the lesson controller.
+        /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public virtual void InitialiseWith(MainNode mainNode, LessonEntity opendLesson)
+        public virtual void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {
         }
         
         /// <summary>
         /// Requests a change of the current page to the new page.
-        /// Used to privide the possibility for the user to save or cancel the action.
+        /// Used to provide the possibility for the user to save or cancel the action.
         /// </summary>
         public virtual void OnUserRequestsChange(MainNode mainNode, PageCategory nextPage)
         {
