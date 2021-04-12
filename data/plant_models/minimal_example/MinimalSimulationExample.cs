@@ -52,7 +52,7 @@ namespace Osls.Plants.MinimalExample
         /// Calculates the next simulation step.
         /// It will read the SimulationInput values and stores in the end the new values to the SimulationOutput.
         /// </summary>
-        protected override void CalculateNextStep() { }
+        protected override void CalculateNextStep(int deltaTime) { }
         #endregion
     }
 }

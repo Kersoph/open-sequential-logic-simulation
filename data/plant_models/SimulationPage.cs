@@ -56,7 +56,7 @@ namespace Osls.Plants
         /// </summary>
         public void UpdateModel(int timeMs)
         {
-            CalculateNextStep();
+            CalculateNextStep(timeMs);
         }
         #endregion
         
@@ -75,7 +75,7 @@ namespace Osls.Plants
         /// <summary>
         /// Calculates the next simulation step
         /// </summary>
-        protected abstract void CalculateNextStep();
+        protected abstract void CalculateNextStep(int timeMs);
         #endregion
     }
 }
