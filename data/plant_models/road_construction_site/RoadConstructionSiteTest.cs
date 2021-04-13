@@ -88,105 +88,80 @@ namespace Osls.Plants.RoadConstructionSite
         {
             _testState = TestState.Done;
             List<DynamicCarReport> reports = _simulation.CollectReports();
-            
-            int hadAnAccident = 0;
-            int minimumWaitingCycles = 999999;
-            ulong totalWaitingCycles = 0;
-            int maximumWaitingCycles = 0;
-            int completedSimulations = 0;
-            
-            for (int i = 0; i < reports.Count; i++)
-            {
-                if (reports[i].HadAnAccident)
-                {
-                    hadAnAccident++;
-                }
-                else
-                {
-                    int cycles = reports[i].WaitingCycles;
-                    if(maximumWaitingCycles < cycles) maximumWaitingCycles = cycles;
-                    if (reports[i].SimulationCompleted && minimumWaitingCycles > cycles)
-                    {
-                        minimumWaitingCycles = cycles;
-                    }
-                    totalWaitingCycles = checked(totalWaitingCycles + (ulong)cycles);
-                    completedSimulations++;
-                }
-            }
-            int averageWaitingMs = (int)(totalWaitingCycles / (ulong)completedSimulations) * SimulatedCycleTime;
-            string headline = GetHeadline(hadAnAccident, averageWaitingMs);
-            string infoText = GetInfoText(averageWaitingMs, maximumWaitingCycles);
-            string quoteText = GetNewsQuote(hadAnAccident, averageWaitingMs);
-            int stars = CalculateStars(hadAnAccident, averageWaitingMs, maximumWaitingCycles);
+            ResultCollector results = new ResultCollector(reports, SimulatedCycleTime);
+            string headline = GetHeadline(results);
+            string infoText = GetInfoText(results);
+            string quoteText = GetNewsQuote(results);
+            int stars = CalculateStars(results);
             _openedLesson.SetAndSaveStars(stars);
             string starQuote = GetStarText(stars);
             GetNode<Newspaper>("Newspaper").SetTexts(headline, infoText, quoteText, starQuote);
             GetNode<Viewport>("PlantViewportContainer/PlantViewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
         }
         
-        private string GetHeadline(int hadAnAccident, int averageWaitingMs)
+        private string GetHeadline(ResultCollector results)
         {
-            if (hadAnAccident > 1)
+            if (results.HadAnAccident > 1)
             {
-                return hadAnAccident + " Deaths Due To Faulty Control";
+                return results.HadAnAccident + " Deaths Due To Faulty Control";
             }
-            if (hadAnAccident == 1)
+            if (results.HadAnAccident == 1)
             {
                 return "A Death Due To Faulty Control";
             }
-            if (averageWaitingMs > 10000)
+            if (results.AverageWaitingMs > 10000)
             {
                 return "Annoyance About Horrific Waiting Times";
             }
-            if (averageWaitingMs > 7500)
+            if (results.AverageWaitingMs > 7500)
             {
                 return "Annoyance About Long Waiting Times";
             }
-            if (averageWaitingMs > 6000)
+            if (results.AverageWaitingMs > 6000)
             {
                 return "Ongoing Discussions About Traffic Light";
             }
             return "Local Engineer Receives Award";
         }
         
-        private string GetInfoText(int averageWaitingMs, int maximumWaitingCycles)
+        private string GetInfoText(ResultCollector results)
         {
-            string averageSeconds = ((float)averageWaitingMs * 0.001f).ToString("F1");
-            string maximumSeconds = (maximumWaitingCycles * SimulatedCycleTime * 0.001).ToString("F1");
+            string averageSeconds = ((float)results.AverageWaitingMs * 0.001f).ToString("F1");
+            string maximumSeconds = (results.MaximumWaitingCycles * SimulatedCycleTime * 0.001).ToString("F1");
             return "The average waiting time is " + averageSeconds + "s.\n\n"
             + "Some had to wait up to " + maximumSeconds + "s.";
         }
         
-        private string GetNewsQuote(int hadAnAccident, int averageWaitingMs)
+        private string GetNewsQuote(ResultCollector results)
         {
-            if (hadAnAccident > 0)
+            if (results.HadAnAccident > 0)
             {
                 return "\"It should never have been put into operation.\"";
             }
-            if (averageWaitingMs > 18000)
+            if (results.AverageWaitingMs > 18000)
             {
                 return "\"It's Like One Side Is Always Red!\"";
             }
-            if (averageWaitingMs > 8500)
+            if (results.AverageWaitingMs > 8500)
             {
                 return "\"Any Snail Is Faster!\"";
             }
-            if (averageWaitingMs > 7500)
+            if (results.AverageWaitingMs > 7500)
             {
                 return "\"I Could Do It Better\"";
             }
-            if (averageWaitingMs > 6000)
+            if (results.AverageWaitingMs > 6000)
             {
                 return "\"It's Not That Bad\"";
             }
             return "\"My Most Favourite Signal Light!\"";
         }
         
-        private int CalculateStars(int hadAnAccident, float averageWaitingCycles, int maximumWaitingCycles)
+        private int CalculateStars(ResultCollector results)
         {
-            if (maximumWaitingCycles > 100000 || hadAnAccident > 0) return 0;
-            if (averageWaitingCycles > 7400) return 1;
-            if (averageWaitingCycles > 6000 || maximumWaitingCycles > 790) return 2;
+            if (results.MaximumWaitingCycles > 100000 || results.HadAnAccident > 0) return 0;
+            if (results.AverageWaitingMs > 7400) return 1;
+            if (results.AverageWaitingMs > 6000 || results.MaximumWaitingCycles > 790) return 2;
             return 3;
         }
         
