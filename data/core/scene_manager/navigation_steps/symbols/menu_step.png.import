@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/menu_step.png-834ceaddf63a352ae9f049cc92209cc7.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://data/core/scene_manager/navigation_steps/symbols/menu_step.png"
+dest_files=[ "res://.import/menu_step.png-834ceaddf63a352ae9f049cc92209cc7.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=true
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="StepMark" type="ColorRect"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.392157, 0.619608, 1, 1 )

@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://data/core/landing_page/LightButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorZoomOut.cs" type="Script" id=2]
+[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorZoomIn.cs" type="Script" id=3]
+[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorToggleSfs.cs" type="Script" id=4]
+[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorSave.cs" type="Script" id=5]
+[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorLoad.cs" type="Script" id=6]
+
+
+[node name="Sfc2dControls" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.323486
+margin_top = 0.323532
+margin_right = 0.323486
+margin_bottom = 0.323547
+
+[node name="EditorZoomOut" parent="." instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -60.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 60.0
+toggle_mode = false
+text = "-"
+script = ExtResource( 2 )
+
+[node name="EditorZoomIn" parent="." instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -120.0
+margin_top = 0.0
+margin_right = -60.0
+margin_bottom = 60.0
+toggle_mode = false
+text = "+"
+script = ExtResource( 3 )
+
+[node name="EditorToggleSfs" parent="." instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -220.0
+margin_top = 0.0
+margin_right = -120.0
+margin_bottom = 60.0
+disabled = true
+text = "SFS"
+script = ExtResource( 4 )
+
+[node name="EditorSave" parent="." instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -420.0
+margin_top = 0.0
+margin_right = -320.0
+margin_bottom = 60.0
+toggle_mode = false
+text = "Save"
+script = ExtResource( 5 )
+
+[node name="EditorLoad" parent="." instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -320.0
+margin_top = 0.0
+margin_right = -220.0
+margin_bottom = 60.0
+toggle_mode = false
+text = "Load"
+script = ExtResource( 6 )
