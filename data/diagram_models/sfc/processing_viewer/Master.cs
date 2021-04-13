@@ -13,17 +13,17 @@ namespace Osls.SfcEditor
         /// <summary>
         /// The loaded simulation scene with the controller
         /// </summary>
-        private readonly SimulationPage _simulationControlNode;
+        private readonly SimulationPage _simulationPage;
         
         private readonly ProgrammableLogicController _programmableLogicController;
         #endregion
         
         
         #region ==================== Constructor ====================
-        public Master(SfcEntity sfcEntity, SimulationPage simulationControl)
+        public Master(SfcEntity sfcEntity, SimulationPage simulationPage)
         {
-            _simulationControlNode = simulationControl;
-            _programmableLogicController = new ProgrammableLogicController(simulationControl, sfcEntity);
+            _simulationPage = simulationPage;
+            _programmableLogicController = new ProgrammableLogicController(simulationPage, sfcEntity);
             _programmableLogicController.Startup();
         }
         #endregion
@@ -36,7 +36,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void UpdateSimulation(int deltaTimeMs)
         {
-            _simulationControlNode.UpdateModel(deltaTimeMs);
+            _simulationPage.UpdateModel(deltaTimeMs);
             _programmableLogicController.Update(deltaTimeMs);
         }
         
