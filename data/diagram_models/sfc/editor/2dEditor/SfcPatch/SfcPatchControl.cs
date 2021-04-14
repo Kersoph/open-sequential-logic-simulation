@@ -30,7 +30,7 @@ namespace Osls.SfcEditor
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Contstuctor. It will add the patch to the 2d editor.
+        /// Constructor. It will add the patch to the 2d editor.
         /// </summary>
         public SfcPatchControl(PatchEntity data, Sfc2dEditorControl control)
         {

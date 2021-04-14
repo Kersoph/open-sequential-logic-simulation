@@ -29,7 +29,7 @@ namespace Osls
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Chnages the main lesson to the given lesson.
+        /// Changes the main lesson to the given lesson.
         /// </summary>
         public void ApplyNewLesson(LessonEntity lesson)
         {
@@ -38,7 +38,7 @@ namespace Osls
         
         /// <summary>
         /// Requests a change of the current page to the new page.
-        /// Used to privide the possibility for the user to save or cancel the action.
+        /// Used to provide the possibility for the user to save or cancel the action.
         /// </summary>
         public void UserRequestsChangeTo(PageCategory page)
         {
@@ -62,7 +62,6 @@ namespace Osls
         {
             if (_currentPage != null)
             {
-                _mainNode.RemoveChild(_currentPage);
                 _currentPage.QueueFree();
                 _currentPage = null;
             }

@@ -25,12 +25,11 @@ namespace Osls.SfcSimulation.Engine
             SfcEntity = sfcEntity;
             StepMaster = new StepMaster();
             StepMaster.UpdateStepNames(sfcEntity);
-            InitializeSfcSteps(pu);
         }
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// True if the step is contained in the active steps set.
         /// Used while checking the sfc transitions.
@@ -56,11 +55,8 @@ namespace Osls.SfcSimulation.Engine
             }
             return true;
         }
-        #endregion
         
-        
-        #region ==================== Helpers ====================
-        private void InitializeSfcSteps(ProgrammableLogicController pu)
+        public void InitializeSfcSteps(ProgrammableLogicController pu)
         {
             SoonActiveSteps = new HashSet<SfcStep>();
             ActiveSteps = new HashSet<SfcStep>();
