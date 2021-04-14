@@ -18,10 +18,10 @@ namespace Osls.SfcEditor.Interpreters
         /// <summary>
         /// Fills in the defined color keys of the opened simulation
         /// </summary>
-        public static void UpdateColorKeys(TextEdit textEdit, StepMaster stepMaster)
+        public static void UpdateColorKeys(TextEdit textEdit, IProcessingData data)
         {
             textEdit.ClearColors();
-            List<string> booleanKeys = PlantViewNode.LoadedSimulationNode.SimulationOutput.BooleanKeys;
+            List<string> booleanKeys = data.InputRegisters.BooleanKeys;
             foreach (string key in booleanKeys)
             {
                 textEdit.AddKeywordColor(key, BooleanInputColor);
@@ -38,7 +38,7 @@ namespace Osls.SfcEditor.Interpreters
             {
                 textEdit.AddKeywordColor(key, BooleanCommandColor);
             }
-            List<string> IntegerKeys = PlantViewNode.LoadedSimulationNode.SimulationOutput.IntegerKeys;
+            List<string> IntegerKeys = data.InputRegisters.IntegerKeys;
             foreach (string key in IntegerKeys)
             {
                 textEdit.AddKeywordColor(key, IntegerInputColor);
@@ -54,7 +54,7 @@ namespace Osls.SfcEditor.Interpreters
             // Godot forces member variable color according to member_variable_color
             // Godot also forces the "class" color and access without any known possibility to change or override them.
             textEdit.AddColorOverride("member_variable_color", IntegerInputColor);
-            foreach (string key in stepMaster.PatchNameMap.Keys)
+            foreach (string key in data.IntVariables)
             {
                 textEdit.AddKeywordColor(key, StepInputColor);
             }

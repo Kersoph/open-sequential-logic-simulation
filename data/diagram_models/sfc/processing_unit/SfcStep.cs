@@ -33,7 +33,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void Initialise(ProgrammableLogicController pu)
         {
-            AssignActionsFrom(pu.SfcProgramData.SfcEntity.Lookup(Id));
+            AssignActionsFrom(pu.SfcProgramData.SfcEntity.Lookup(Id), pu);
             _transitions = Sources.CollectTransitionSources(this, pu);
             foreach (SfcTransition transition in _transitions)
             {
@@ -98,7 +98,7 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Helpers ====================
-        private void AssignActionsFrom(PatchEntity source)
+        private void AssignActionsFrom(PatchEntity source, IProcessingData context)
         {
             _actions = new Dictionary<ActionQualifier, List<AssignmentExpression>>();
             foreach (ActionQualifier qualifier in (ActionQualifier[]) Enum.GetValues(typeof(ActionQualifier)))
@@ -108,7 +108,7 @@ namespace Osls.SfcSimulation.Engine
             
             for (int i = 0; i < source.ActionEntries.Count; i++)
             {
-                AssignmentExpression expression = ActionMaster.InterpretTransitionText(source.ActionEntries[i].Action);
+                AssignmentExpression expression = ActionMaster.InterpretTransitionText(source.ActionEntries[i].Action, context);
                 _actions[source.ActionEntries[i].Qualifier].Add(expression);
             }
         }

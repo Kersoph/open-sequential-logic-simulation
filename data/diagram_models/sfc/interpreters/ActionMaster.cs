@@ -8,7 +8,7 @@ namespace Osls.SfcEditor.Interpreters
     {
         #region ==================== Fields Properties ====================
         private static Color BooleanInputColor   = Color.Color8(0, 150, 0, 255);
-        private static Color BooleanOutputdColor = Color.Color8(50, 180, 0, 255);
+        private static Color BooleanOutputColor = Color.Color8(50, 180, 0, 255);
         private static Color IntegerInputColor   = Color.Color8(50, 50, 255, 255);
         
         private const string AssignmentSymbol = "=";
@@ -19,10 +19,10 @@ namespace Osls.SfcEditor.Interpreters
         /// <summary>
         /// Fills in the defined color keys of the opened simulation
         /// </summary>
-        public static void UpdateColorKeys(TextEdit textEdit)
+        public static void UpdateColorKeys(TextEdit textEdit, IProcessingData processingData)
         {
             textEdit.ClearColors();
-            List<string> booleanInputKeys = PlantViewNode.LoadedSimulationNode.SimulationOutput.BooleanKeys;
+            List<string> booleanInputKeys = processingData.InputRegisters.BooleanKeys;
             foreach (string key in booleanInputKeys)
             {
                 textEdit.AddKeywordColor(key, BooleanInputColor);
@@ -31,20 +31,20 @@ namespace Osls.SfcEditor.Interpreters
             {
                 textEdit.AddKeywordColor(key, BooleanInputColor);
             }
-            List<string> booleanOutputKeys = PlantViewNode.LoadedSimulationNode.SimulationInput.BooleanKeys;
+            List<string> booleanOutputKeys = processingData.OutputRegisters.BooleanKeys;
             foreach (string key in booleanOutputKeys)
             {
-                textEdit.AddKeywordColor(key, BooleanOutputdColor);
+                textEdit.AddKeywordColor(key, BooleanOutputColor);
             }
             
-            List<string> IntegerInputKeys = PlantViewNode.LoadedSimulationNode.SimulationOutput.IntegerKeys;
+            List<string> IntegerInputKeys = processingData.InputRegisters.IntegerKeys;
             foreach (string key in IntegerInputKeys)
             {
                 textEdit.AddKeywordColor(key, IntegerInputColor);
             }
             // Godot already forces integer static inputs and colors them. (They can not be deleted so far)
             textEdit.AddColorOverride("number_color", IntegerInputColor);
-            List<string> IntegerOutputKeys = PlantViewNode.LoadedSimulationNode.SimulationInput.IntegerKeys;
+            List<string> IntegerOutputKeys = processingData.OutputRegisters.IntegerKeys;
             foreach (string key in IntegerOutputKeys)
             {
                 textEdit.AddKeywordColor(key, IntegerInputColor);
@@ -54,11 +54,11 @@ namespace Osls.SfcEditor.Interpreters
         /// <summary>
         /// Converts the string to a logical model.
         /// </summary>
-        public static Assignment.AssignmentExpression InterpretTransitionText(string transition)
+        public static Assignment.AssignmentExpression InterpretTransitionText(string transition, IProcessingData processingData)
         {
             string[] words = transition.Split(" ");
             Data data = new Data(words);
-            return InterpretAssignmentExpression(data);
+            return InterpretAssignmentExpression(data, processingData);
         }
         #endregion
         
@@ -68,36 +68,36 @@ namespace Osls.SfcEditor.Interpreters
         /// Interprets the given words into a logical model.
         /// We follow a fixed y = x format according the requirements.
         /// </summary>
-        private static Assignment.AssignmentExpression InterpretAssignmentExpression(Data data)
+        private static Assignment.AssignmentExpression InterpretAssignmentExpression(Data data, IProcessingData context)
         {
             string targetWord = data.GetNext();
-            if (data.IsEndRechaed) return null;
+            if (data.IsEndReached) return null;
             string assignmentSymbol = data.GetNext();
-            if (assignmentSymbol != AssignmentSymbol || data.IsEndRechaed) return null;
+            if (assignmentSymbol != AssignmentSymbol || data.IsEndReached) return null;
             string sourceName = data.GetNext();
-            if (PlantViewNode.LoadedSimulationNode.SimulationInput.ContainsBoolean(targetWord))
+            if (context.OutputRegisters.ContainsBoolean(targetWord))
             {
-                Boolean.BooleanExpression sourceExpression = InterpretBoolean(sourceName);
-                return new Assignment.Boolean(targetWord, sourceExpression);
+                Boolean.BooleanExpression sourceExpression = InterpretBoolean(sourceName, context);
+                return new Assignment.Boolean(targetWord, sourceExpression, context);
             }
-            else if (PlantViewNode.LoadedSimulationNode.SimulationInput.ContainsInteger(targetWord))
+            else if (context.OutputRegisters.ContainsInteger(targetWord))
             {
-                Numerical.NumericalExpression sourceExpression = InterpretNumerical(sourceName);
-                return new Assignment.Numerical(targetWord, sourceExpression);
+                Numerical.NumericalExpression sourceExpression = InterpretNumerical(sourceName, context);
+                return new Assignment.Numerical(targetWord, sourceExpression, context);
             }
             return null; // not valid
         }
         
-        private static Boolean.BooleanExpression InterpretBoolean(string word)
+        private static Boolean.BooleanExpression InterpretBoolean(string word, IProcessingData context)
         {
             if (Boolean.Constant.Values.Contains(word)) return new Boolean.Constant(word);
-            return new Boolean.PlantReference(word);
+            return new Boolean.PlantReference(word, context);
         }
         
-        private static Numerical.NumericalExpression InterpretNumerical(string word)
+        private static Numerical.NumericalExpression InterpretNumerical(string word, IProcessingData context)
         {
             if (int.TryParse(word, out int number)) return new Numerical.Constant(number);
-            return new Numerical.PlantReference(word);
+            return new Numerical.PlantReference(word, context);
         }
         #endregion
         
@@ -118,7 +118,7 @@ namespace Osls.SfcEditor.Interpreters
                 Position++;
                 return word;
             }
-            public bool IsEndRechaed { get { return Position == Words.Length; } }
+            public bool IsEndReached { get { return Position == Words.Length; } }
         }
         #endregion
     }

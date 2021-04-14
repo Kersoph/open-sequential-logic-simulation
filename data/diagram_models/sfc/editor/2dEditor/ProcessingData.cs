@@ -1,5 +1,6 @@
-using Osls.SfcEditor.Interpreters;
 using System.IO;
+using System.Collections.Generic;
+using Osls.SfcEditor.Interpreters;
 
 
 namespace Osls.SfcEditor
@@ -26,6 +27,11 @@ namespace Osls.SfcEditor
         /// Step Master holding the step names and Ids
         /// </summary>
         public StepMaster StepMaster { get; private set; }
+        
+        /// <summary>
+        /// Links the integer variables
+        /// </summary>
+        public IEnumerable<string> IntVariables { get { return StepMaster.PatchStepTimeMap.Keys; } }
         #endregion
         
         

@@ -7,6 +7,7 @@ namespace Osls.SfcEditor.Interpreters.Numerical
     {
         #region ==================== Fields Properties ====================
         private readonly string _key;
+        private readonly bool _valid;
         #endregion
         
         
@@ -14,9 +15,10 @@ namespace Osls.SfcEditor.Interpreters.Numerical
         /// <summary>
         /// Holds a reference to a integer plant output
         /// </summary>
-        public PlantReference(string key)
+        public PlantReference(string key, IProcessingData data)
         {
             _key = key;
+            _valid = data.InputRegisters.ContainsInteger(_key);
         }
         
         /// <summary>
@@ -32,7 +34,7 @@ namespace Osls.SfcEditor.Interpreters.Numerical
         /// </summary>
         public override bool IsValid()
         {
-            return PlantViewNode.LoadedSimulationNode.SimulationOutput.ContainsInteger(_key);
+            return _valid;
         }
         
         public override string ToString()

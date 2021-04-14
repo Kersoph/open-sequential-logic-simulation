@@ -17,26 +17,26 @@ namespace Osls.SfcEditor
         
         
         #region ==================== Public ====================
-        public void InitializeWith(ActionEditorBox controller)
+        public void InitializeWith(ActionEditorBox controller, IProcessingData data)
         {
             _controller = controller;
             _actionDescriptionNode = GetNode<TextEdit>("ActionTextEditor");
             _actionDescriptionNode.Connect("focus_exited", this, nameof(OnTextEditorFocusExited));
             _qualifierNode = GetNode<MenuButton>("ActionQualifierSelector");
             ConfigureQualifierPopupMenu();
-            ActionMaster.UpdateColorKeys(_actionDescriptionNode);
+            ActionMaster.UpdateColorKeys(_actionDescriptionNode, data);
         }
         
         /// <summary>
         /// Called when the model has changed or is initialized.
         /// </summary>
-        public void UpdateAction(ActionEntity action)
+        public void UpdateAction(ActionEntity action, IProcessingData context)
         {
             _selectedQualifier = action.Qualifier;
             SetQualifierText((int)_selectedQualifier);
             _actionDescriptionNode.Text = action.Action;
             _isRelevant = !string.IsNullOrEmpty(_actionDescriptionNode.Text);
-            AssignmentExpression expression = ActionMaster.InterpretTransitionText(action.Action);
+            AssignmentExpression expression = ActionMaster.InterpretTransitionText(action.Action, context);
             _actionDescriptionNode.HintTooltip = expression == null ? "???" : expression.ToString();
             bool validExpression = expression != null && expression.IsValid();
             Color background = validExpression ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);

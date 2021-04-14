@@ -63,8 +63,8 @@ namespace Osls.SfcEditor
             _loadedSimulationNode = (SimulationPage)((PackedScene)GD.Load(_openedLesson.SimulationPath)).Instance();
             GetNode("PlantViewNode/PlantViewportContainer/PlantViewport").AddChild(_loadedSimulationNode);
             ProcessingData data = new ProcessingData();
-            data.InputRegisters.AssignValuesFrom(PlantViewNode.LoadedSimulationNode.SimulationOutput);
-            data.OutputRegisters.AssignValuesFrom(PlantViewNode.LoadedSimulationNode.SimulationInput);
+            data.InputRegisters.AssignValuesFrom(_loadedSimulationNode.SimulationOutput);
+            data.OutputRegisters.AssignValuesFrom(_loadedSimulationNode.SimulationInput);
             return data;
         }
         

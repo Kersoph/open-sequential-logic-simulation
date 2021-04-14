@@ -13,9 +13,8 @@ namespace Osls.SfcEditor
         /// <summary>
         /// The entity loaded by the PlantViewNode to provide access to the simulation interface.
         /// Can be null or Godot Invalid if no simulation is assigned to this lesson.
-        /// Todo: remove static
         /// </summary>
-        public static SimulationPage LoadedSimulationNode { get; private set; }
+        public SimulationPage LoadedSimulationNode { get; private set; }
         #endregion
         
         

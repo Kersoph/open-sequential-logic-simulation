@@ -16,6 +16,11 @@ namespace Tests.SfcEditor.Interpreters
         /// Holds the output registers of the processing unit
         /// </summary>
         public StateTable OutputRegisters { get; }
+        
+        /// <summary>
+        /// Links the integer variables
+        /// </summary>
+        public IEnumerable<string> IntVariables { get { return new List<string>(); } }
         #endregion
         
         

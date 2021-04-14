@@ -34,7 +34,7 @@ namespace Osls.SfcEditor
         {
             if (_textEdit != null)
             {
-                TransitionMaster.UpdateColorKeys(_textEdit, contex.Data.StepMaster);
+                TransitionMaster.UpdateColorKeys(_textEdit, contex.Data);
                 _textEdit.Text = transitionText;
                 UpdateVisualRepresentation();
                 if (!string.IsNullOrEmpty(transitionText))

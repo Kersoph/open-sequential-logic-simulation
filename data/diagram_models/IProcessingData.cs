@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+
+
 namespace Osls
 {
     public interface IProcessingData
@@ -12,6 +15,11 @@ namespace Osls
         /// Holds the output registers of the processing unit
         /// </summary>
         StateTable OutputRegisters { get; }
+        
+        /// <summary>
+        /// Links the integer variables
+        /// </summary>
+        IEnumerable<string> IntVariables { get; }
         #endregion
         
         

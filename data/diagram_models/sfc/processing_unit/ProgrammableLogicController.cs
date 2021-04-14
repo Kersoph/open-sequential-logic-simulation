@@ -1,5 +1,6 @@
 using Osls.Plants;
 using Osls.SfcEditor;
+using System.Collections.Generic;
 
 
 namespace Osls.SfcSimulation.Engine
@@ -11,8 +12,20 @@ namespace Osls.SfcSimulation.Engine
         private ResettingStateTable _outputRegisters;
         private SimulationPage _simulationPage;
         
+        /// <summary>
+        /// Links the input register of the processing unit
+        /// </summary>
         public StateTable InputRegisters { get { return _inputRegisters; } }
+        
+        /// <summary>
+        /// Links the output register of the processing unit
+        /// </summary>
         public StateTable OutputRegisters { get { return _outputRegisters; } }
+        
+        /// <summary>
+        /// Links the internal integer variables of the processing unit
+        /// </summary>
+        public IEnumerable<string> IntVariables { get { return SfcProgramData.StepMaster.PatchStepTimeMap.Keys; } }
         
         public SfcProgramData SfcProgramData { get; private set; }
         protected SfcProgram SfcProgram { get; private set; }

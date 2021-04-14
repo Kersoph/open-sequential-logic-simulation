@@ -60,7 +60,7 @@ namespace Osls.SfcEditor.Interpreters.Boolean
             // B -> b
             if (IsRepresentingBoolean(currentWord, context))
             {
-                currentExpression = InterpretBoolean(currentWord);
+                currentExpression = InterpretBoolean(currentWord, context);
                 if (data.IsEndReached) return currentExpression;
                 currentWord = data.GetNext();
             }
@@ -97,10 +97,10 @@ namespace Osls.SfcEditor.Interpreters.Boolean
             || context.InputRegisters.ContainsBoolean(word);
         }
         
-        private static BooleanExpression InterpretBoolean(string word)
+        private static BooleanExpression InterpretBoolean(string word, IProcessingData context)
         {
             if (Constant.Values.Contains(word)) return new Constant(word);
-            return new PlantReference(word);
+            return new PlantReference(word, context);
         }
         
         private static bool IsRepresentingNumerical(string word, IProcessingData context)

@@ -7,6 +7,7 @@ namespace Osls.SfcEditor.Interpreters.Boolean
     {
         #region ==================== Fields Properties ====================
         private readonly string _key;
+        private readonly bool _valid;
         #endregion
         
         
@@ -14,9 +15,10 @@ namespace Osls.SfcEditor.Interpreters.Boolean
         /// <summary>
         /// Holds a reference to a boolean plant output
         /// </summary>
-        public PlantReference(string key)
+        public PlantReference(string key, IProcessingData data)
         {
             _key = key;
+            _valid = data.InputRegisters.ContainsBoolean(_key);
         }
         
         /// <summary>
@@ -32,7 +34,7 @@ namespace Osls.SfcEditor.Interpreters.Boolean
         /// </summary>
         public override bool IsValid()
         {
-            return PlantViewNode.LoadedSimulationNode.SimulationOutput.ContainsBoolean(_key);
+            return _valid;
         }
         
         public override string ToString()

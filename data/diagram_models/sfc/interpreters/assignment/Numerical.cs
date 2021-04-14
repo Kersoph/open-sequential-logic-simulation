@@ -8,14 +8,16 @@ namespace Osls.SfcEditor.Interpreters.Assignment
         #region ==================== Fields Properties ====================
         private readonly string _target;
         private readonly Interpreters.Numerical.NumericalExpression _source;
+        private readonly bool _valid;
         #endregion
         
         
         #region ==================== Public ====================
-        public Numerical(string target, Interpreters.Numerical.NumericalExpression source)
+        public Numerical(string target, Interpreters.Numerical.NumericalExpression source, IProcessingData data)
         {
             _target = target;
             _source = source;
+            _valid = data.OutputRegisters.ContainsInteger(_target);
         }
         
         /// <summary>
@@ -31,14 +33,12 @@ namespace Osls.SfcEditor.Interpreters.Assignment
         /// </summary>
         public override bool IsValid()
         {
-            return PlantViewNode.LoadedSimulationNode.SimulationInput.ContainsInteger(_target)
-            && _source.IsValid();
+            return _valid && _source.IsValid();
         }
         
         public override string ToString()
         {
-            bool isTargetValid = PlantViewNode.LoadedSimulationNode.SimulationInput.ContainsInteger(_target);
-            string target = (isTargetValid ? _target : "?");
+            string target = (_valid ? _target : "?");
             return target + " = " + (_source.IsValid() ? _source.ToString() : "?");
         }
         #endregion

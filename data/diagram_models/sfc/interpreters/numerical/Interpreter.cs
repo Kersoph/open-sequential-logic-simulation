@@ -10,7 +10,7 @@ namespace Osls.SfcEditor.Interpreters.Numerical
         {
             if (int.TryParse(word, out int number)) return new Constant(number);
             if (context.HasIntVariable(word)) return new StepReference(word);
-            return new PlantReference(word);
+            return new PlantReference(word, context);
         }
         #endregion
     }
