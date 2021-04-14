@@ -11,7 +11,7 @@ namespace Osls.LandingPage
     public class LessonSelectionGridNode : GridContainer
     {
         #region ==================== Fields ====================
-        private const string LessonControllerScene = "res://data/core/landing_page/LessonSourceController/LessonController.tscn";
+        private const string LessonControllerScene = "res://data/core/landing_page/Lesson_Source_controller/lesson_controller.tscn";
         private LessonControllerNode[] _lessonNodes;
         #endregion
         
