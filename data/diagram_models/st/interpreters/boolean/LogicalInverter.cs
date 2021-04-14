@@ -10,7 +10,7 @@ namespace Osls.St.Boolean
     {
         #region ==================== Fields Properties ====================
         public const string NOT = "not";
-        public static HashSet<string> Values = new HashSet<string>(){ NOT };
+        public static HashSet<string> Values = new HashSet<string>(){ NOT, "Not", "NOT", "!" };
         
         private readonly BooleanExpression _target;
         #endregion

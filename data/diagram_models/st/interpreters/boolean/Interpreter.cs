@@ -2,48 +2,26 @@ namespace Osls.St.Boolean
 {
     public class Interpreter
     {
-        #region ==================== Nested ====================
-        private class Data
-        {
-            public Data(string[] words)
-            {
-                Words = words;
-                Position = 0;
-            }
-            public string[] Words { get; set; }
-            public int Position { get; set; }
-            public string GetNext()
-            {
-                string word = Words[Position];
-                Position++;
-                return word;
-            }
-            public bool IsEndReached { get { return Position == Words.Length; } }
-        }
-        #endregion
-        
-        
         #region ==================== Public Methods ====================
         /// <summary>
         /// Converts the string to a logical model.
         /// </summary>
         public static BooleanExpression AsBooleanExpression(string transition, IProcessingData context)
         {
-            string[] words = transition.Split(' ');
-            Data data = new Data(words);
+            Terminals data = new Terminals(transition);
             BooleanExpression mainExpression = InterpretBooleanExpression(data, context);
             return mainExpression;
         }
         #endregion
         
         
-        #region ==================== Private Methods ====================
+        #region ==================== Helpers ====================
         /// <summary>
         /// Interprets the given words into a logical model.
         /// As there are different possible approaches, we choose a left to right packing method to provide
         /// a readable debug string for the user.
         /// </summary>
-        private static BooleanExpression InterpretBooleanExpression(Data data, IProcessingData context)
+        internal static BooleanExpression InterpretBooleanExpression(Terminals data, IProcessingData context)
         {
             if (data.IsEndReached) return null;
             string currentWord = data.GetNext();

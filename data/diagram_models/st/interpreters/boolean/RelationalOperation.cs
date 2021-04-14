@@ -12,7 +12,10 @@ namespace Osls.St.Boolean
         #region ==================== Fields Properties ====================
         public const string GreaterThan = ">";
         public const string SmallerThan = "<";
-        public static HashSet<string> Values = new HashSet<string>() { GreaterThan, SmallerThan };
+        public const string GreaterEqual = ">=";
+        public const string SmallerEqual = "<=";
+        public const string Equal = "==";
+        public static HashSet<string> Values = new HashSet<string>() { GreaterThan, SmallerThan, GreaterEqual, SmallerEqual, Equal };
         
         private readonly string _operator;
         private readonly NumericalExpression _left;
@@ -42,6 +45,12 @@ namespace Osls.St.Boolean
                     return _left.Result(pu) > _right.Result(pu);
                 case SmallerThan:
                     return _left.Result(pu) < _right.Result(pu);
+                case GreaterEqual:
+                    return _left.Result(pu) >= _right.Result(pu);
+                case SmallerEqual:
+                    return _left.Result(pu) <= _right.Result(pu);
+                case Equal:
+                    return _left.Result(pu) == _right.Result(pu);
             }
             Godot.GD.PushError("Unknown operator " + _operator);
             return false;
