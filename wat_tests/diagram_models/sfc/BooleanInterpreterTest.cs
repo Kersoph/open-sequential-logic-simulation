@@ -1,5 +1,7 @@
 using WAT;
 using Osls.SfcEditor.Interpreters.Boolean;
+using Osls;
+using System.Collections.Generic;
 
 
 namespace Tests.SfcEditor.Interpreters
@@ -65,5 +67,21 @@ namespace Tests.SfcEditor.Interpreters
             Assert.IsEqual(expression.Result(pu), result);
         }
         
+        [Test]
+        public void BooleanIO()
+        {
+            var boolKeys = new Dictionary<string, bool>
+            {
+                { "testBool", true }
+            };
+            var inputRegisters = new StateTable(boolKeys, new Dictionary<string, int>());
+            var outputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
+            ProcessingUnitMock pu = new ProcessingUnitMock(inputRegisters, outputRegisters);
+            BooleanExpression expressionA = Interpreter.AsBooleanExpression("testBool", pu);
+            Assert.IsTrue(expressionA.IsValid());
+            Assert.IsEqual(expressionA.Result(pu), true);
+            BooleanExpression expressionB = Interpreter.AsBooleanExpression("invalidBool", pu);
+            Assert.IsTrue(expressionB == null || !expressionB.IsValid());
+        }
     }
 }

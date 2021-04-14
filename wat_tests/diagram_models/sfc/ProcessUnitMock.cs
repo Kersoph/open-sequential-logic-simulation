@@ -20,7 +20,12 @@ namespace Tests.SfcEditor.Interpreters
         /// <summary>
         /// Links the integer variables
         /// </summary>
-        public IEnumerable<string> IntVariables { get { return new List<string>(); } }
+        public IEnumerable<string> IntVariables { get { return IntLookup.Keys; } }
+        
+        /// <summary>
+        /// The mocked internal int variables
+        /// </summary>
+        public Dictionary<string, int> IntLookup { get; }
         #endregion
         
         
@@ -29,6 +34,14 @@ namespace Tests.SfcEditor.Interpreters
         {
             InputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
             OutputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
+            IntLookup = new Dictionary<string, int>();
+        }
+        
+        public ProcessingUnitMock(StateTable inputs, StateTable outputs)
+        {
+            InputRegisters = inputs;
+            OutputRegisters = outputs;
+            IntLookup = new Dictionary<string, int>();
         }
         
         /// <summary>
@@ -49,12 +62,12 @@ namespace Tests.SfcEditor.Interpreters
         /// <summary>
         /// Returns true if there is a internal variable with this key
         /// </summary>
-        public bool HasIntVariable(string key) { return false; }
+        public bool HasIntVariable(string key) { return IntLookup.ContainsKey(key); }
         
         /// <summary>
         /// Gets the value of the internal variable
         /// </summary>
-        public int LookupIntVariable(string key) { return 0; }
+        public int LookupIntVariable(string key) { return IntLookup[key]; }
         
         /// <summary>
         /// Gets the value of the internal variable
