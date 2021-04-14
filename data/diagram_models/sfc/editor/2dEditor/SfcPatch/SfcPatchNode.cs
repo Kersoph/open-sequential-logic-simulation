@@ -26,11 +26,10 @@ namespace Osls.SfcEditor
             SfcPatchControl = sfcPatchControl;
             SetCellPosition(data.X, data.Y);
             GetNode<SfcTransitionNode>("SfcTransition").Initialise();
-            UpdateNodes(data);
         }
         
         /// <summary>
-        /// Updates the noced according to the given data
+        /// Updates the patch nodes according to the given data
         /// </summary>
         public void UpdateNodes(PatchEntity data)
         {

@@ -50,6 +50,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void Startup()
         {
+            SfcProgramData.InitializeSfcSteps(this);
         }
         
         /// <summary>
@@ -77,7 +78,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public bool HasIntVariable(string key)
         {
-            return SfcProgramData.StepMaster.ContainsStep(key);
+            return SfcProgramData.StepMaster.ContainsInternalNumeric(key);
         }
         
         /// <summary>

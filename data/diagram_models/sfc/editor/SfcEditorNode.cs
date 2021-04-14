@@ -28,8 +28,8 @@ namespace Osls.SfcEditor
             GetNode<PlantInfoPanel>("PlantInfoPanel").SetSimulationInfo(PlantViewNode.LoadedSimulationNode);
             Sfc2dEditorNode = GetNode<Sfc2dEditorNode>("ViewportContainer/Viewport/Sfc2dEditor");
             ProcessingData data = new ProcessingData();
-            data.InputRegisters.AssignValuesFrom(PlantViewNode.LoadedSimulationNode.SimulationOutput);
-            data.OutputRegisters.AssignValuesFrom(PlantViewNode.LoadedSimulationNode.SimulationInput);
+            data.InputRegisters = new StateTable(PlantViewNode.LoadedSimulationNode.SimulationOutput);
+            data.OutputRegisters = new StateTable(PlantViewNode.LoadedSimulationNode.SimulationInput);
             Sfc2dEditorNode.InitializeEditor(data);
             TryLoadDiagram();
         }

@@ -28,11 +28,11 @@ namespace Osls.SfcEditor
             UpdateVisibility(entity);
             for (int i = 0; i < entity.ActionEntries.Count; i++)
             {
-                if (i >= _actionEditors.Count) AddActionEditor();
+                if (i >= _actionEditors.Count) AddActionEditor(context);
                 _actionEditors[i].UpdateAction(entity.ActionEntries[i], context);
             }
             
-            if (entity.ActionEntries.Count >= _actionEditors.Count) AddActionEditor();
+            if (entity.ActionEntries.Count >= _actionEditors.Count) AddActionEditor(context);
             _actionEditors[entity.ActionEntries.Count].ResetAction();
             
             for (int i = entity.ActionEntries.Count + 1; i < _actionEditors.Count; i++)
@@ -75,13 +75,13 @@ namespace Osls.SfcEditor
             Visible = entity.ContainsRealStep();
         }
         
-        private void AddActionEditor()
+        private void AddActionEditor(IProcessingData data)
         {
             Node node = ((PackedScene)GD.Load(_editorScenePath)).Instance();
             ActionEditor actionEditor = (ActionEditor)node;
             _actionEditors.Add(actionEditor);
             GetNode<BoxContainer>("ScrollContainer/VerticalBoxContainer").AddChild(actionEditor);
-            actionEditor.InitializeWith(this, _patchController.Master.Data);
+            actionEditor.InitializeWith(this, data);
         }
         
         private void RemoveActionEditor(ActionEditor actionEditor)

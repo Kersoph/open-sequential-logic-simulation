@@ -11,12 +11,12 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Holds the input registers of the processing unit
         /// </summary>
-        public StateTable InputRegisters { get; private set; }
+        public StateTable InputRegisters { get; set; }
         
         /// <summary>
         /// Holds the output registers of the processing unit
         /// </summary>
-        public StateTable OutputRegisters { get; private set; }
+        public StateTable OutputRegisters { get; set; }
         
         /// <summary>
         /// The sfc entity holding the diagram data
@@ -47,7 +47,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public bool HasIntVariable(string key)
         {
-            return StepMaster.ContainsStep(key);
+            return StepMaster.ContainsInternalNumeric(key);
         }
         
         /// <summary>
@@ -71,7 +71,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void LoadData(string filepath)
         {
-            using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
+            using (FileStream stream = File.Open(filepath, FileMode.OpenOrCreate))
             {
                 using (BinaryReader reader = new BinaryReader(stream))
                 {
@@ -85,7 +85,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void SaveData(string filepath)
         {
-            using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
+            using (FileStream stream = File.Open(filepath, FileMode.OpenOrCreate))
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
