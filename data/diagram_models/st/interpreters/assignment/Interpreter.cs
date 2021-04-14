@@ -31,9 +31,11 @@ namespace Osls.St.Assignment
         /// </summary>
         private static AssignmentExpression InterpretAssignmentExpression(Terminals data, IProcessingData context)
         {
-            string targetWord = data.GetNext();
+            string targetWord = data.Current;
+            data.MoveNext();
             if (data.IsEndReached) return null;
-            string assignmentSymbol = data.GetNext();
+            string assignmentSymbol = data.Current;
+            data.MoveNext();
             if (!AssignmentSymbol.Contains(assignmentSymbol) || data.IsEndReached) return null;
             if (context.OutputRegisters.ContainsBoolean(targetWord))
             {
@@ -42,7 +44,7 @@ namespace Osls.St.Assignment
             }
             else if (context.OutputRegisters.ContainsInteger(targetWord))
             {
-                string numerical = data.GetNext();
+                string numerical = data.Current;
                 NumericalExpression sourceExpression = St.Numerical.Interpreter.AsNumericalExpression(numerical, context);
                 return new Numerical(targetWord, sourceExpression, context);
             }

@@ -24,47 +24,48 @@ namespace Osls.St.Boolean
         internal static BooleanExpression InterpretBooleanExpression(Terminals data, IProcessingData context)
         {
             if (data.IsEndReached) return null;
-            string currentWord = data.GetNext();
-            
             BooleanExpression currentExpression = null;
             // B -> I B
-            if (LogicalInverter.Values.Contains(currentWord))
+            if (LogicalInverter.Values.Contains(data.Current))
             {
+                data.MoveNext();
                 BooleanExpression nextExpression = InterpretBooleanExpression(data, context);
                 currentExpression = new LogicalInverter(nextExpression);
                 if (data.IsEndReached) return currentExpression;
-                currentWord = data.GetNext();
             }
             // B -> b
-            if (IsRepresentingBoolean(currentWord, context))
+            if (IsRepresentingBoolean(data.Current, context))
             {
-                currentExpression = InterpretBoolean(currentWord, context);
+                currentExpression = InterpretBoolean(data.Current, context);
+                data.MoveNext();
                 if (data.IsEndReached) return currentExpression;
-                currentWord = data.GetNext();
             }
             // B -> N V N
-            else if (IsRepresentingNumerical(currentWord, context))
+            else if (IsRepresentingNumerical(data.Current, context))
             {
                 // N -> n
-                Numerical.NumericalExpression leftNumber = Numerical.Interpreter.AsNumericalExpression(currentWord, context);
+                Numerical.NumericalExpression leftNumber = Numerical.Interpreter.AsNumericalExpression(data.Current, context);
+                data.MoveNext();
                 if (data.IsEndReached) return null;
-                string relation = data.GetNext();
                 // V -> v
+                string relation = data.Current;
                 if (!RelationalOperation.Values.Contains(relation)) return null;
+                data.MoveNext();
                 if (data.IsEndReached) return null;
-                currentWord = data.GetNext();
                 // N -> n
-                if (!IsRepresentingNumerical(currentWord, context)) return null;
-                Numerical.NumericalExpression rightNumber = Numerical.Interpreter.AsNumericalExpression(currentWord, context);
+                if (!IsRepresentingNumerical(data.Current, context)) return null;
+                Numerical.NumericalExpression rightNumber = Numerical.Interpreter.AsNumericalExpression(data.Current, context);
                 currentExpression = new RelationalOperation(relation, leftNumber, rightNumber);
+                data.MoveNext();
                 if (data.IsEndReached) return currentExpression;
-                currentWord = data.GetNext();
             }
             // B -> B E B
-            if (LogicalCombination.Values.Contains(currentWord))
+            if (LogicalCombination.Values.Contains(data.Current))
             {
+                string combination = data.Current;
+                data.MoveNext();
                 BooleanExpression nextExpression = InterpretBooleanExpression(data, context);
-                return new LogicalCombination(currentWord, currentExpression, nextExpression);
+                return new LogicalCombination(combination, currentExpression, nextExpression);
             }
             return currentExpression; // Partial failure
         }

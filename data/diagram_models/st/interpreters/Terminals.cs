@@ -14,6 +14,11 @@ namespace Osls.St
         public int Position { get; private set; }
         
         /// <summary>
+        /// Gets the current element
+        /// </summary>
+        public string Current { get { return Words[Position]; } }
+        
+        /// <summary>
         /// True if the end of the word chain is reached
         /// </summary>
         public bool IsEndReached { get { return Position >= Words.Length; } }
@@ -36,11 +41,12 @@ namespace Osls.St
         
         
         #region ==================== Public Methods ====================
-        public string GetNext()
+        /// <summary>
+        /// Advances the position to the next element.
+        /// </summary>
+        public void MoveNext()
         {
-            string word = Words[Position];
             Position++;
-            return word;
         }
         #endregion
     }
