@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Numerical
+namespace Osls.St.Numerical
 {
     /// <summary>
     /// Base class for all numerical expressions

@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Boolean
 {
     public class Interpreter
     {

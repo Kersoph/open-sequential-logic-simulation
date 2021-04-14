@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Assignment
+namespace Osls.St.Assignment
 {
     /// <summary>
     /// Base class for all assignment expressions

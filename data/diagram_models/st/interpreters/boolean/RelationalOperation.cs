@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Osls.SfcEditor.Interpreters.Numerical;
+using Osls.St.Numerical;
 
 
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Boolean
 {
     /// <summary>
     /// Preforms an relational operation on the given data

@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Assignment
+namespace Osls.St.Assignment
 {
     /// <summary>
     /// Represents an boolean assignment
@@ -7,13 +7,13 @@ namespace Osls.SfcEditor.Interpreters.Assignment
     {
         #region ==================== Fields Properties ====================
         private readonly string _target;
-        private readonly Interpreters.Boolean.BooleanExpression _source;
+        private readonly St.Boolean.BooleanExpression _source;
         private readonly bool _valid;
         #endregion
         
         
         #region ==================== Public ====================
-        public Boolean(string target, Interpreters.Boolean.BooleanExpression source, IProcessingData data)
+        public Boolean(string target, St.Boolean.BooleanExpression source, IProcessingData data)
         {
             _target = target;
             _source = source;

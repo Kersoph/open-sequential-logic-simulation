@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Osls.SfcEditor.Interpreters.Boolean;
+using Osls.St.Boolean;
 
 
 namespace Osls.SfcSimulation.Engine
@@ -19,7 +19,7 @@ namespace Osls.SfcSimulation.Engine
         public List<SfcStep> DependingSteps { get; set; }
         
         /// <summary>
-        /// The condition to fire the chnage.
+        /// The condition to fire the change.
         /// </summary>
         public BooleanExpression Transition { get; private set; }
         

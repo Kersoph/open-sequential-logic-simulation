@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Boolean
 {
     /// <summary>
     /// Used to link boolean outputs of the plant to the transition

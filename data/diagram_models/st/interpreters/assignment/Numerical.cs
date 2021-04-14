@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Assignment
+namespace Osls.St.Assignment
 {
     /// <summary>
     /// Represents an numerical assignment
@@ -7,13 +7,13 @@ namespace Osls.SfcEditor.Interpreters.Assignment
     {
         #region ==================== Fields Properties ====================
         private readonly string _target;
-        private readonly Interpreters.Numerical.NumericalExpression _source;
+        private readonly St.Numerical.NumericalExpression _source;
         private readonly bool _valid;
         #endregion
         
         
         #region ==================== Public ====================
-        public Numerical(string target, Interpreters.Numerical.NumericalExpression source, IProcessingData data)
+        public Numerical(string target, St.Numerical.NumericalExpression source, IProcessingData data)
         {
             _target = target;
             _source = source;

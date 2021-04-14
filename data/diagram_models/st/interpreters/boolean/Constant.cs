@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Boolean
 {
     /// <summary>
     /// Represents an boolean constant

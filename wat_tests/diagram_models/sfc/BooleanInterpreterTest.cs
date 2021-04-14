@@ -1,5 +1,5 @@
 using WAT;
-using Osls.SfcEditor.Interpreters.Boolean;
+using Osls.St.Boolean;
 using Osls;
 using System.Collections.Generic;
 

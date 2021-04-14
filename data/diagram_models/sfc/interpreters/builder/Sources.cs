@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Osls.SfcEditor;
 using Osls.SfcEditor.Interpreters;
-using Osls.SfcEditor.Interpreters.Boolean;
+using Osls.St.Boolean;
 
 
 namespace Osls.SfcSimulation.Engine.Builder

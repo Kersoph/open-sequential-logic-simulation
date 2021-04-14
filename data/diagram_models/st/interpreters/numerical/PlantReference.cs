@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Numerical
+namespace Osls.St.Numerical
 {
     /// <summary>
     /// Used to link integer outputs of the plant to the transition
