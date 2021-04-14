@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace Osls.SfcEditor.Interpreter
+
+namespace Osls.SfcEditor.Interpreters
 {
     public class StepMaster
     {
@@ -56,9 +57,9 @@ namespace Osls.SfcEditor.Interpreter
         }
         
         /// <summary>
-        /// Returns true if a STEP.T exists.
+        /// Returns true if a intern variable/entity exists with the given name. For example STEP.T in SFC.
         /// </summary>
-        public bool ContainsStepTime(string name)
+        public bool ContainsInternalNumeric(string name)
         {
             return PatchStepTimeMap.ContainsKey(name);
         }

@@ -1,7 +1,8 @@
 using Godot;
 using System.Collections.Generic;
 
-namespace Osls.SfcEditor.Interpreter
+
+namespace Osls.SfcEditor.Interpreters
 {
     public static class ActionMaster
     {

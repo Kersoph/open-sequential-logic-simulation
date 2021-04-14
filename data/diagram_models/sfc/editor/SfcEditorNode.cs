@@ -7,7 +7,7 @@ namespace Osls.SfcEditor
     public class SfcEditorNode : ModelEditor
     {
         #region ==================== Fields / Properties ====================
-        private LessonEntity _opendLesson;
+        private LessonEntity _openedLesson;
         
         public MainNode MainNode { get; private set; }
         public PlantViewNode PlantViewNode { get; private set; }
@@ -17,17 +17,20 @@ namespace Osls.SfcEditor
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Initializes the whole page. Called bevore the node is added to the tree by the lesson controller.
+        /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, LessonEntity opendLesson)
+        public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {
             MainNode = mainNode;
-            _opendLesson = opendLesson;
+            _openedLesson = openedLesson;
             PlantViewNode = GetNode<PlantViewNode>("PlantViewNode");
-            PlantViewNode.UpdateLessonEntity(opendLesson);
+            PlantViewNode.UpdateLessonEntity(openedLesson);
             GetNode<PlantInfoPanel>("PlantInfoPanel").SetSimulationInfo(PlantViewNode.LoadedSimulationNode);
             Sfc2dEditorNode = GetNode<Sfc2dEditorNode>("ViewportContainer/Viewport/Sfc2dEditor");
-            Sfc2dEditorNode.InitializeEditor();
+            ProcessingData data = new ProcessingData();
+            data.InputRegisters.AssignValuesFrom(PlantViewNode.LoadedSimulationNode.SimulationOutput);
+            data.OutputRegisters.AssignValuesFrom(PlantViewNode.LoadedSimulationNode.SimulationInput);
+            Sfc2dEditorNode.InitializeEditor(data);
             TryLoadDiagram();
         }
         
@@ -36,7 +39,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void SaveDiagram()
         {
-            string filepath = _opendLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = _openedLesson.FolderPath + "/User/Diagram.sfc";
             Sfc2dEditorNode.SaveDiagram(filepath);
         }
         
@@ -45,7 +48,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void TryLoadDiagram()
         {
-            string filepath = _opendLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = _openedLesson.FolderPath + "/User/Diagram.sfc";
             Sfc2dEditorNode.TryLoadDiagram(filepath);
         }
         #endregion

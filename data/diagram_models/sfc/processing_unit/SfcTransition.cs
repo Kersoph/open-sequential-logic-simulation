@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Osls.SfcEditor.Interpreter.Boolean;
+using Osls.SfcEditor.Interpreters.Boolean;
 
 
 namespace Osls.SfcSimulation.Engine
@@ -53,7 +53,7 @@ namespace Osls.SfcSimulation.Engine
             {
                 if (!program.Data.IsStepActive(step)) return false;
             }
-            return Transition.Result(program);
+            return Transition.Result(program.Plc);
         }
         
         /// <summary>

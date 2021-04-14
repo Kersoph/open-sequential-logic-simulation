@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Assignment
+namespace Osls.SfcEditor.Interpreters.Assignment
 {
     /// <summary>
     /// Base class for all assignment expressions
@@ -9,7 +9,7 @@ namespace Osls.SfcEditor.Interpreter.Assignment
         /// <summary>
         /// Executes the assignment according to the model.
         /// </summary>
-        public abstract void Execute(SfcSimulation.Engine.SfcProgram sfcProgram);
+        public abstract void Execute(IProcessingUnit pu);
         
         /// <summary>
         /// returns true, if this or sub-expressions are valid.

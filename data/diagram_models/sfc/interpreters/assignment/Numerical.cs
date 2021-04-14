@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Assignment
+namespace Osls.SfcEditor.Interpreters.Assignment
 {
     /// <summary>
     /// Represents an numerical assignment
@@ -7,12 +7,12 @@ namespace Osls.SfcEditor.Interpreter.Assignment
     {
         #region ==================== Fields Properties ====================
         private readonly string _target;
-        private readonly Interpreter.Numerical.NumericalExpression _source;
+        private readonly Interpreters.Numerical.NumericalExpression _source;
         #endregion
         
         
         #region ==================== Public ====================
-        public Numerical(string target, Interpreter.Numerical.NumericalExpression source)
+        public Numerical(string target, Interpreters.Numerical.NumericalExpression source)
         {
             _target = target;
             _source = source;
@@ -21,9 +21,9 @@ namespace Osls.SfcEditor.Interpreter.Assignment
         /// <summary>
         /// Executes the assignment according to the model.
         /// </summary>
-        public override void Execute(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override void Execute(IProcessingUnit pu)
         {
-            sfcProgram.Plc.OutputRegisters.SetValue(_target, _source.Result(sfcProgram));
+            pu.OutputRegisters.SetValue(_target, _source.Result(pu));
         }
         
         /// <summary>

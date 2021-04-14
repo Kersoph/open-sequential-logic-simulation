@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace Osls.SfcEditor.Interpreter.Boolean
+
+namespace Osls.SfcEditor.Interpreters.Boolean
 {
     /// <summary>
     /// Represents an boolean constant
@@ -28,7 +29,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override bool Result(IProcessingUnit pu)
         {
             return _value;
         }

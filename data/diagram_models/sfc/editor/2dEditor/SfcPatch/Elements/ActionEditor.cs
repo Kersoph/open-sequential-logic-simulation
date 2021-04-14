@@ -1,6 +1,6 @@
 using Godot;
-using Osls.SfcEditor.Interpreter;
-using Osls.SfcEditor.Interpreter.Assignment;
+using Osls.SfcEditor.Interpreters;
+using Osls.SfcEditor.Interpreters.Assignment;
 
 
 namespace Osls.SfcEditor

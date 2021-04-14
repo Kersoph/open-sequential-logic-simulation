@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Osls.SfcEditor;
-using Osls.SfcEditor.Interpreter;
-using Osls.SfcEditor.Interpreter.Assignment;
+using Osls.SfcEditor.Interpreters;
+using Osls.SfcEditor.Interpreters.Assignment;
 using Osls.SfcSimulation.Engine.Builder;
 
 
@@ -31,13 +31,13 @@ namespace Osls.SfcSimulation.Engine
         /// <summary>
         /// Parses the diagram and sets up the transitions reached by this step.
         /// </summary>
-        public void Initialise(SfcProgramData data)
+        public void Initialise(ProgrammableLogicController pu)
         {
-            AssignActionsFrom(data.SfcEntity.Lookup(Id));
-            _transitions = Sources.CollectTransitionSources(this, data);
+            AssignActionsFrom(pu.SfcProgramData.SfcEntity.Lookup(Id));
+            _transitions = Sources.CollectTransitionSources(this, pu);
             foreach (SfcTransition transition in _transitions)
             {
-                Destinations.AssignTransitionDestinations(transition, data);
+                Destinations.AssignTransitionDestinations(transition, pu.SfcProgramData);
             }
         }
         
@@ -49,7 +49,7 @@ namespace Osls.SfcSimulation.Engine
             List<AssignmentExpression> actions = _actions[qualifier];
             foreach (AssignmentExpression action in actions)
             {
-                action.Execute(context);
+                action.Execute(context.Plc);
             }
             UpdateStepCounter(qualifier, deltaTimeMs);
         }

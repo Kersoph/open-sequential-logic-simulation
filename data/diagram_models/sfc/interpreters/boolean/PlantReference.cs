@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Boolean
+namespace Osls.SfcEditor.Interpreters.Boolean
 {
     /// <summary>
     /// Used to link boolean outputs of the plant to the transition
@@ -22,9 +22,9 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override bool Result(IProcessingUnit pu)
         {
-            return sfcProgram.Plc.InputRegisters.PollBoolean(_key);
+            return pu.InputRegisters.PollBoolean(_key);
         }
         
         /// <summary>

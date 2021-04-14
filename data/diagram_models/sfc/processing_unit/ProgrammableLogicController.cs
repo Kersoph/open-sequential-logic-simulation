@@ -14,7 +14,8 @@ namespace Osls.SfcSimulation.Engine
         public StateTable InputRegisters { get { return _inputRegisters; } }
         public StateTable OutputRegisters { get { return _outputRegisters; } }
         
-        public SfcProgram SfcProgram { get; private set; }
+        public SfcProgramData SfcProgramData { get; private set; }
+        protected SfcProgram SfcProgram { get; private set; }
         #endregion
         
         
@@ -22,8 +23,10 @@ namespace Osls.SfcSimulation.Engine
         public ProgrammableLogicController(SimulationPage simulationPage, SfcEntity sfcEntity)
         {
             _simulationPage = simulationPage;
-            SfcProgramData data = new SfcProgramData(sfcEntity);
-            SfcProgram = new SfcProgram(this, data);
+            _inputRegisters = new ResettingStateTable(_simulationPage.SimulationOutput);
+            _outputRegisters = new ResettingStateTable(_simulationPage.SimulationInput);
+            SfcProgramData = new SfcProgramData(sfcEntity, this);
+            SfcProgram = new SfcProgram(this, SfcProgramData);
         }
         #endregion
         
@@ -34,8 +37,6 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void Startup()
         {
-            _inputRegisters = new ResettingStateTable(_simulationPage.SimulationOutput);
-            _outputRegisters = new ResettingStateTable(_simulationPage.SimulationInput);
         }
         
         /// <summary>
@@ -56,6 +57,30 @@ namespace Osls.SfcSimulation.Engine
         public bool IsLogicValid()
         {
             return SfcProgram.IsProgramLogicValid();
+        }
+        
+        /// <summary>
+        /// Returns true if there is a internal variable with this key
+        /// </summary>
+        public bool HasIntVariable(string key)
+        {
+            return SfcProgramData.StepMaster.ContainsStep(key);
+        }
+        
+        /// <summary>
+        /// Gets the value of the internal variable
+        /// </summary>
+        public int LookupIntVariable(string key)
+        {
+            return SfcProgramData.GetStepFromMapKey(SfcProgramData.StepMaster.GetStepTimeKey(key)).StepCounter;
+        }
+        
+        /// <summary>
+        /// Gets the value of the internal variable
+        /// </summary>
+        public bool LookupBoolVariable(string key)
+        {
+            throw new System.NotImplementedException();
         }
         #endregion
         

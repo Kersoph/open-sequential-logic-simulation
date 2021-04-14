@@ -1,6 +1,6 @@
 namespace Osls
 {
-    public interface IProcessingUnit
+    public interface IProcessingData
     {
         #region ==================== Fields Properties ====================
         /// <summary>
@@ -17,19 +17,19 @@ namespace Osls
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Called to initialize the PU
+        /// Returns true if there is a internal variable with this key
         /// </summary>
-        void Startup();
+        bool HasIntVariable(string key);
         
         /// <summary>
-        /// Is called every simulation step to update the PU.
+        /// Gets the value of the internal variable
         /// </summary>
-        void Update(int deltaTimeMs);
+        int LookupIntVariable(string key);
         
         /// <summary>
-        /// Returns true if the simulation can be executed
+        /// Gets the value of the internal variable
         /// </summary>
-        bool IsLogicValid();
+        bool LookupBoolVariable(string key);
         #endregion
     }
 }

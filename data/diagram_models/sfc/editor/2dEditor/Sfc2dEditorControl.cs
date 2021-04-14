@@ -1,8 +1,6 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
-using Osls.SfcEditor.Interpreter;
-using System.IO;
 
 
 namespace Osls.SfcEditor
@@ -13,19 +11,25 @@ namespace Osls.SfcEditor
     public class Sfc2dEditorControl
     {
         #region ==================== Fields Properties ====================
-        public ReferenceRect ReferenceRect { get; private set; }
-        protected SfcEntity Data { get; private set; }
-        public StepMaster StepMaster { get; private set; }
         private readonly Dictionary<int, SfcPatchControl> _controlMap = new Dictionary<int, SfcPatchControl>();
+        
+        /// <summary>
+        /// Reference patch to hold the nodes
+        /// </summary>
+        public ReferenceRect ReferenceRect { get; private set; }
+        
+        /// <summary>
+        /// Holds the processing data
+        /// </summary>
+        public ProcessingData Data { get; private set; }
         #endregion
         
         
         #region ==================== Public ====================
-        public Sfc2dEditorControl(ReferenceRect referenceRect)
+        public Sfc2dEditorControl(ReferenceRect referenceRect, ProcessingData data)
         {
             ReferenceRect = referenceRect;
-            Data = new SfcEntity();
-            StepMaster = new StepMaster();
+            Data = data;
         }
         
         /// <summary>
@@ -38,14 +42,6 @@ namespace Osls.SfcEditor
             {
                 patchControl.UpdatePatchNodes();
             }
-        }
-        
-        /// <summary>
-        /// Clones the control map into a new dictionary.
-        /// </summary>
-        public SfcEntity LinkSfcData()
-        {
-            return Data; // todo: Read from file?
         }
         
         /// <summary>
@@ -68,17 +64,11 @@ namespace Osls.SfcEditor
                 {
                     SfcStepType = StepType.StartingStep
                 };
-                Data.AddPatch(entity);
+                Data.SfcEntity.AddPatch(entity);
             }
             else
             {
-                using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
-                {
-                    using (BinaryReader reader = new BinaryReader(stream))
-                    {
-                        Data.ReadFrom(reader);
-                    }
-                }
+                Data.LoadData(filepath);
             }
             InitialiseFromData();
         }
@@ -88,13 +78,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void SaveDiagram(string filepath)
         {
-            using (FileStream stream = System.IO.File.Open(filepath, FileMode.OpenOrCreate))
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    Data.WriteTo(writer);
-                }
-            }
+            Data.SaveData(filepath);
         }
         #endregion
         
@@ -110,7 +94,7 @@ namespace Osls.SfcEditor
                 patch.RemovePatch();
             }
             _controlMap.Clear();
-            IReadOnlyCollection<PatchEntity> patches = Data.Patches;
+            IReadOnlyCollection<PatchEntity> patches = Data.SfcEntity.Patches;
             foreach (PatchEntity entity in patches)
             {
                 SfcPatchControl control = new SfcPatchControl(entity, this);
@@ -125,7 +109,7 @@ namespace Osls.SfcEditor
         private void UpdateLogicalModel()
         {
             // We want a copy because we will add empty forward patches to the dict
-            PatchEntity[] patches = Data.Patches.ToArray();
+            PatchEntity[] patches = Data.SfcEntity.Patches.ToArray();
             foreach (PatchEntity patch in patches)
             {
                 if (patch.ContainsRelevantData())
@@ -133,7 +117,7 @@ namespace Osls.SfcEditor
                     EnsureNeighbours(patch);
                 }
             }
-            StepMaster.UpdateStepNames(Data);
+            Data.StepMaster.UpdateStepNames(Data.SfcEntity);
         }
         
         /// <summary>
@@ -152,11 +136,11 @@ namespace Osls.SfcEditor
         /// </summary>
         private void EnsurePatchAt(int x, int y)
         {
-            PatchEntity patch = Data.Lookup(x, y);
+            PatchEntity patch = Data.SfcEntity.Lookup(x, y);
             if (patch == null)
             {
-                Data.CreatePatchAt((short)x, (short)y);
-                patch = Data.Lookup(x, y);
+                Data.SfcEntity.CreatePatchAt((short)x, (short)y);
+                patch = Data.SfcEntity.Lookup(x, y);
                 SfcPatchControl control = new SfcPatchControl(patch, this);
                 _controlMap.Add(patch.Key, control);
             }

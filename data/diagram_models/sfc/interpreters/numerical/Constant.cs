@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Numerical
+namespace Osls.SfcEditor.Interpreters.Numerical
 {
     /// <summary>
     /// Represents an constant integer
@@ -19,7 +19,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// <summary>
         /// Calculates the result of this numerical expression
         /// </summary>
-        public override int Result(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override int Result(IProcessingUnit pu)
         {
             return _number;
         }

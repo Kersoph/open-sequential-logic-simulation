@@ -23,10 +23,10 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Creates a controller and initializes the patch fields.
         /// </summary>
-        public void InitializeEditor()
+        public void InitializeEditor(ProcessingData data)
         {
             _renderViewportReferenceRect = GetNode<ReferenceRect>("RenderViewportReferenceRect");
-            Sfc2dEditorControl = new Sfc2dEditorControl(_renderViewportReferenceRect);
+            Sfc2dEditorControl = new Sfc2dEditorControl(_renderViewportReferenceRect, data);
         }
         
         public override void _Process(float delta)

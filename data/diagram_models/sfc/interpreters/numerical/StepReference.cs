@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Numerical
+namespace Osls.SfcEditor.Interpreters.Numerical
 {
     /// <summary>
     /// Used to link integer outputs of the step to the transition
@@ -22,9 +22,9 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override int Result(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override int Result(IProcessingUnit pu)
         {
-            return sfcProgram.Data.GetStepFromMapKey(sfcProgram.Data.StepMaster.GetStepTimeKey(_key)).StepCounter;
+            return pu.LookupIntVariable(_key);
         }
         
         /// <summary>

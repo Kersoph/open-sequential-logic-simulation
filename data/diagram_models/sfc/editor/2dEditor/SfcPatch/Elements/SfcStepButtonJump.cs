@@ -18,7 +18,7 @@ namespace Osls.SfcEditor
         {
             TextEdit node = GetNode<TextEdit>("StepNameEditor");
             node.Text = text;
-            bool validReference = context.StepMaster.ContainsStep(text);
+            bool validReference = context.Data.StepMaster.ContainsStep(text);
             Color background = validReference ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);
             node.AddColorOverride("background_color", background);
         }
