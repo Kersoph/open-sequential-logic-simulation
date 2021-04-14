@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Osls.SfcEditor;
-using Osls.SfcEditor.Interpreter;
-using Osls.SfcEditor.Interpreter.Boolean;
+using Osls.SfcEditor.Interpreters;
+using Osls.SfcEditor.Interpreters.Boolean;
 
 
 namespace Osls.SfcSimulation.Engine.Builder
@@ -12,10 +12,10 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Looks for all transitions connected to this step
         /// </summary>
-        public static List<SfcTransition> CollectTransitionSources(SfcStep source, SfcProgramData data)
+        public static List<SfcTransition> CollectTransitionSources(SfcStep source, ProgrammableLogicController pu)
         {
-            List<SfcTransition> alternativeBranches = CollectUpperAlternativeBranches(source, data);
-            List<SfcTransition> SimultaneousMerge = CollectUpperSimultaneousMerge(source, data);
+            List<SfcTransition> alternativeBranches = CollectUpperAlternativeBranches(source, pu);
+            List<SfcTransition> SimultaneousMerge = CollectUpperSimultaneousMerge(source, pu);
             if (alternativeBranches.Count > 1)
             {
                 return alternativeBranches;
@@ -39,15 +39,15 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// Collects all alternative branches from this step.
         /// If it returns only one transition is not an alternative branch but a normal transition.
         /// </summary>
-        private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, SfcProgramData data)
+        private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, ProgrammableLogicController pu)
         {
             List<SfcTransition> transitions = new List<SfcTransition>();
-            List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Single, true);
+            List<int> collected = Collector.CollectHorizontal(source.Id, pu.SfcProgramData, BranchType.Single, true);
             foreach (int step in collected)
             {
-                if (data.SfcEntity.Lookup(step).ContainsTransition())
+                if (pu.SfcProgramData.SfcEntity.Lookup(step).ContainsTransition())
                 {
-                    SfcTransition transition = CreateTransition(step, data);
+                    SfcTransition transition = CreateTransition(step, pu);
                     transition.DependingSteps.Add(source);
                     transitions.Add(transition);
                 }
@@ -59,14 +59,14 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// Collects all Simultaneous branches to merge from this step.
         /// null if there is none.
         /// </summary>
-        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, SfcProgramData data)
+        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, ProgrammableLogicController pu)
         {
-            List<int> collected = Collector.CollectHorizontal(source.Id, data, BranchType.Double, true);
+            List<int> collected = Collector.CollectHorizontal(source.Id, pu.SfcProgramData, BranchType.Double, true);
             if (collected.Count <= 1) return null;
-            PatchEntity transitionPatch = FindSimultaneousTransition(collected, data);
-            List<SfcStep> connectedSteps = CollectConnectedSteps(collected, data);
+            PatchEntity transitionPatch = FindSimultaneousTransition(collected, pu.SfcProgramData);
+            List<SfcStep> connectedSteps = CollectConnectedSteps(collected, pu.SfcProgramData);
             if (!IsMinimalId(connectedSteps, source.Id)) return new List<SfcTransition> { };
-            SfcTransition transition = CreateTransition(transitionPatch.Key, data);
+            SfcTransition transition = CreateTransition(transitionPatch.Key, pu);
             transition.DependingSteps = connectedSteps;
             return new List<SfcTransition> { transition };
         }
@@ -110,10 +110,10 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// <summary>
         /// Creates a new SfcTransition with the given transitionPatchId
         /// </summary>
-        private static SfcTransition CreateTransition(int transitionPatchId, SfcProgramData data)
+        private static SfcTransition CreateTransition(int transitionPatchId, ProgrammableLogicController pu)
         {
-            string transitionText = data.SfcEntity.Lookup(transitionPatchId).TransitionText;
-            BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, data.StepMaster);
+            string transitionText = pu.SfcProgramData.SfcEntity.Lookup(transitionPatchId).TransitionText;
+            BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, pu);
             SfcTransition transition = new SfcTransition(expression, transitionPatchId);
             return transition;
         }

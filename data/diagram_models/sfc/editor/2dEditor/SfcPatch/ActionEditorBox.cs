@@ -23,13 +23,13 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called when the model has changed or is initialized.
         /// </summary>
-        public void UpdateActions(PatchEntity entity)
+        public void UpdateActions(PatchEntity entity, IProcessingData context)
         {
             UpdateVisibility(entity);
             for (int i = 0; i < entity.ActionEntries.Count; i++)
             {
                 if (i >= _actionEditors.Count) AddActionEditor();
-                _actionEditors[i].UpdateAction(entity.ActionEntries[i]);
+                _actionEditors[i].UpdateAction(entity.ActionEntries[i], context);
             }
             
             if (entity.ActionEntries.Count >= _actionEditors.Count) AddActionEditor();
@@ -81,7 +81,7 @@ namespace Osls.SfcEditor
             ActionEditor actionEditor = (ActionEditor)node;
             _actionEditors.Add(actionEditor);
             GetNode<BoxContainer>("ScrollContainer/VerticalBoxContainer").AddChild(actionEditor);
-            actionEditor.InitializeWith(this);
+            actionEditor.InitializeWith(this, _patchController.Master.Data);
         }
         
         private void RemoveActionEditor(ActionEditor actionEditor)

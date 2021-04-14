@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Assignment
+namespace Osls.SfcEditor.Interpreters.Assignment
 {
     /// <summary>
     /// Represents an numerical assignment
@@ -7,23 +7,25 @@ namespace Osls.SfcEditor.Interpreter.Assignment
     {
         #region ==================== Fields Properties ====================
         private readonly string _target;
-        private readonly Interpreter.Numerical.NumericalExpression _source;
+        private readonly Interpreters.Numerical.NumericalExpression _source;
+        private readonly bool _valid;
         #endregion
         
         
         #region ==================== Public ====================
-        public Numerical(string target, Interpreter.Numerical.NumericalExpression source)
+        public Numerical(string target, Interpreters.Numerical.NumericalExpression source, IProcessingData data)
         {
             _target = target;
             _source = source;
+            _valid = data.OutputRegisters.ContainsInteger(_target);
         }
         
         /// <summary>
         /// Executes the assignment according to the model.
         /// </summary>
-        public override void Execute(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override void Execute(IProcessingUnit pu)
         {
-            sfcProgram.Plc.OutputRegisters.SetValue(_target, _source.Result(sfcProgram));
+            pu.OutputRegisters.SetValue(_target, _source.Result(pu));
         }
         
         /// <summary>
@@ -31,14 +33,12 @@ namespace Osls.SfcEditor.Interpreter.Assignment
         /// </summary>
         public override bool IsValid()
         {
-            return PlantViewNode.LoadedSimulationNode.SimulationInput.ContainsInteger(_target)
-            && _source.IsValid();
+            return _valid && _source.IsValid();
         }
         
         public override string ToString()
         {
-            bool isTargetValid = PlantViewNode.LoadedSimulationNode.SimulationInput.ContainsInteger(_target);
-            string target = (isTargetValid ? _target : "?");
+            string target = (_valid ? _target : "?");
             return target + " = " + (_source.IsValid() ? _source.ToString() : "?");
         }
         #endregion

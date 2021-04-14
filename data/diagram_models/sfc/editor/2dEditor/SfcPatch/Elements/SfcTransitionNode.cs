@@ -1,6 +1,6 @@
 using Godot;
-using Osls.SfcEditor.Interpreter;
-using Osls.SfcEditor.Interpreter.Boolean;
+using Osls.SfcEditor.Interpreters;
+using Osls.SfcEditor.Interpreters.Boolean;
 
 
 namespace Osls.SfcEditor
@@ -34,12 +34,12 @@ namespace Osls.SfcEditor
         {
             if (_textEdit != null)
             {
-                TransitionMaster.UpdateColorKeys(_textEdit, contex.StepMaster);
+                TransitionMaster.UpdateColorKeys(_textEdit, contex.Data);
                 _textEdit.Text = transitionText;
                 UpdateVisualRepresentation();
                 if (!string.IsNullOrEmpty(transitionText))
                 {
-                    BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, contex.StepMaster);
+                    BooleanExpression expression = TransitionMaster.InterpretTransitionText(transitionText, contex.Data);
                     _textEdit.HintTooltip = expression == null ? "???" : expression.ToString();
                     bool validExpression = expression != null && expression.IsValid();
                     Color background = validExpression ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);

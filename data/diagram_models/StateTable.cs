@@ -32,7 +32,7 @@ namespace Osls
         }
         
         /// <summary>
-        /// Initialises a resettig state table from the booleans and integers of the given one
+        /// Initialises a state table from the booleans and integers of the given one
         /// </summary>
         public StateTable(StateTable other)
         {

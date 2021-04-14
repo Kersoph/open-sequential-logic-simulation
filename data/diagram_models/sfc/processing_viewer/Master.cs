@@ -45,11 +45,11 @@ namespace Osls.SfcEditor
         /// </summary>
         public void VisualiseStatus(Sfc2dEditorControl sfc2dEditorControl)
         {
-            foreach (var SfcStep in _programmableLogicController.SfcProgram.Data.ActiveSteps)
+            foreach (var SfcStep in _programmableLogicController.SfcProgramData.ActiveSteps)
             {
                 sfc2dEditorControl.MarkStep(SfcStep.Id, true);
             }
-            foreach (var SfcStep in _programmableLogicController.SfcProgram.Data.InactiveSteps)
+            foreach (var SfcStep in _programmableLogicController.SfcProgramData.InactiveSteps)
             {
                 sfc2dEditorControl.MarkStep(SfcStep.Id, false);
             }

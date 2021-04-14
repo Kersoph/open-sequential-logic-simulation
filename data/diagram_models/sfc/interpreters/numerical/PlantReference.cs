@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Numerical
+namespace Osls.SfcEditor.Interpreters.Numerical
 {
     /// <summary>
     /// Used to link integer outputs of the plant to the transition
@@ -7,6 +7,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
     {
         #region ==================== Fields Properties ====================
         private readonly string _key;
+        private readonly bool _valid;
         #endregion
         
         
@@ -14,17 +15,18 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// <summary>
         /// Holds a reference to a integer plant output
         /// </summary>
-        public PlantReference(string key)
+        public PlantReference(string key, IProcessingData data)
         {
             _key = key;
+            _valid = data.InputRegisters.ContainsInteger(_key);
         }
         
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override int Result(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override int Result(IProcessingUnit pu)
         {
-            return sfcProgram.Plc.InputRegisters.PollInteger(_key);
+            return pu.InputRegisters.PollInteger(_key);
         }
         
         /// <summary>
@@ -32,7 +34,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// </summary>
         public override bool IsValid()
         {
-            return PlantViewNode.LoadedSimulationNode.SimulationOutput.ContainsInteger(_key);
+            return _valid;
         }
         
         public override string ToString()

@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Numerical
+namespace Osls.SfcEditor.Interpreters.Numerical
 {
     /// <summary>
     /// Base class for all numerical expressions
@@ -10,7 +10,7 @@ namespace Osls.SfcEditor.Interpreter.Numerical
         /// <summary>
         /// Calculates the result of this numerical expression
         /// </summary>
-        public abstract int Result(SfcSimulation.Engine.SfcProgram sfcProgram);
+        public abstract int Result(IProcessingUnit pu);
         
         /// <summary>
         /// returns true, if this or sub-expressions are valid.

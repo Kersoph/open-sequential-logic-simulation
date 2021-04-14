@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 
-namespace Osls.SfcEditor.Interpreter.Boolean
+
+namespace Osls.SfcEditor.Interpreters.Boolean
 {
     /// <summary>
-    /// Inverts the resulat of an boolean expression
+    /// Inverts the result of an boolean expression
     /// </summary>
     public class LogicalInverter : BooleanExpression
     {
@@ -27,9 +28,9 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override bool Result(IProcessingUnit pu)
         {
-            return !_target.Result(sfcProgram);
+            return !_target.Result(pu);
         }
         
         /// <summary>

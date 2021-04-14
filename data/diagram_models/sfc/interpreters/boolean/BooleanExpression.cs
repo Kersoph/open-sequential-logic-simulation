@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreter.Boolean
+namespace Osls.SfcEditor.Interpreters.Boolean
 {
     /// <summary>
     /// Base class for all boolean expressions
@@ -9,7 +9,7 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public abstract bool Result(SfcSimulation.Engine.SfcProgram sfcProgram);
+        public abstract bool Result(IProcessingUnit pu);
         
         /// <summary>
         /// returns true, if this or sub-expressions are valid.

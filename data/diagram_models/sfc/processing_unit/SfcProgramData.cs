@@ -1,6 +1,6 @@
 using Osls.SfcEditor;
 using System.Collections.Generic;
-using Osls.SfcEditor.Interpreter;
+using Osls.SfcEditor.Interpreters;
 
 
 namespace Osls.SfcSimulation.Engine
@@ -20,12 +20,12 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Constructor ====================
-        public SfcProgramData(SfcEntity sfcEntity)
+        public SfcProgramData(SfcEntity sfcEntity, ProgrammableLogicController pu)
         {
             SfcEntity = sfcEntity;
             StepMaster = new StepMaster();
             StepMaster.UpdateStepNames(sfcEntity);
-            InitializeSfcSteps();
+            InitializeSfcSteps(pu);
         }
         #endregion
         
@@ -60,7 +60,7 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Helpers ====================
-        private void InitializeSfcSteps()
+        private void InitializeSfcSteps(ProgrammableLogicController pu)
         {
             SoonActiveSteps = new HashSet<SfcStep>();
             ActiveSteps = new HashSet<SfcStep>();
@@ -85,7 +85,7 @@ namespace Osls.SfcSimulation.Engine
             
             foreach (var step in InactiveSteps)
             {
-                step.Initialise(this);
+                step.Initialise(pu);
             }
         }
         #endregion

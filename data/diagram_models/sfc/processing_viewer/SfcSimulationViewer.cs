@@ -32,8 +32,9 @@ namespace Osls.SfcEditor
         public override void InitialiseWith(MainNode _mainNode, LessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
-            InitialiseDiagram();
-            InitialiseSimulation();
+            ProcessingData data = InitialisePlant();
+            InitialiseDiagram(data);
+            InitialiseSimulation(data);
             _plantInfoPanel = GetNode<PlantInfoPanel>("PlantInfoPanel");
             _plantInfoPanel.SetSimulationInfo(_loadedSimulationNode);
             if (!_isExecutable) GetNode<Label>("Sfc2dViewer/ErrorLabel").Visible = true;
@@ -55,12 +56,25 @@ namespace Osls.SfcEditor
         
         #region ==================== Helpers ====================
         /// <summary>
+        /// Loads the plant node and links the I/O Table
+        /// </summary>
+        private ProcessingData InitialisePlant()
+        {
+            _loadedSimulationNode = (SimulationPage)((PackedScene)GD.Load(_openedLesson.SimulationPath)).Instance();
+            GetNode("PlantViewNode/PlantViewportContainer/PlantViewport").AddChild(_loadedSimulationNode);
+            ProcessingData data = new ProcessingData();
+            data.InputRegisters.AssignValuesFrom(_loadedSimulationNode.SimulationOutput);
+            data.OutputRegisters.AssignValuesFrom(_loadedSimulationNode.SimulationInput);
+            return data;
+        }
+        
+        /// <summary>
         /// Loads the file and builds the SFC diagram
         /// </summary>
-        private void InitialiseDiagram()
+        private void InitialiseDiagram(ProcessingData data)
         {
             _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("Sfc2dViewer/Sfc2dEditor");
-            _sfc2dEditorNode.InitializeEditor();
+            _sfc2dEditorNode.InitializeEditor(data);
             string filepath = _openedLesson.FolderPath + "/User/Diagram.sfc";
             _sfc2dEditorNode.TryLoadDiagram(filepath);
         }
@@ -68,12 +82,9 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Loads the simulation node and creates a simulation master
         /// </summary>
-        private void InitialiseSimulation()
+        private void InitialiseSimulation(ProcessingData data)
         {
-            _loadedSimulationNode = (SimulationPage)((PackedScene)GD.Load(_openedLesson.SimulationPath)).Instance();
-            GetNode("PlantViewNode/PlantViewportContainer/PlantViewport").AddChild(_loadedSimulationNode);
-            SfcEntity sfcEntity = _sfc2dEditorNode.Sfc2dEditorControl.LinkSfcData();
-            _simulationMaster = new Master(sfcEntity, _loadedSimulationNode);
+            _simulationMaster = new Master(data.SfcEntity, _loadedSimulationNode);
             _isExecutable = _simulationMaster.IsProgramSimulationValid();
         }
         #endregion

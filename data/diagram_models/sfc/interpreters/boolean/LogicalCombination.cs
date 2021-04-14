@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace Osls.SfcEditor.Interpreter.Boolean
+
+namespace Osls.SfcEditor.Interpreters.Boolean
 {
     /// <summary>
     /// Preforms an logical operation on the left and right expression
@@ -32,14 +33,14 @@ namespace Osls.SfcEditor.Interpreter.Boolean
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(SfcSimulation.Engine.SfcProgram sfcProgram)
+        public override bool Result(IProcessingUnit pu)
         {
             switch (_operator)
             {
                 case AND:
-                    return _left.Result(sfcProgram) && _right.Result(sfcProgram);
+                    return _left.Result(pu) && _right.Result(pu);
                 case OR:
-                    return _left.Result(sfcProgram) || _right.Result(sfcProgram);
+                    return _left.Result(pu) || _right.Result(pu);
             }
             Godot.GD.PushError("Unknown operator " + _operator);
             return false;
