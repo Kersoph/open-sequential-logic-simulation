@@ -102,5 +102,35 @@ namespace Tests.SfcEditor.Interpreters
             BooleanExpression expressionB = Interpreter.AsBooleanExpression("invalidBool", pu);
             Assert.IsTrue(expressionB == null || !expressionB.IsValid());
         }
+        
+        [Test]
+        [RunWith("(true)", true)]
+        [RunWith("not (false or true)", false)]
+        [RunWith("(not false) or true", true)]
+        [RunWith("true or (false and false)", true)]
+        [RunWith("(true or false) and false", false)]
+        [RunWith("((true or false) and (false)) or ((false))", false)]
+        [RunWith("((1 > 0))", true)]
+        [RunWith("((1 > 0) and (1 > 0))", true)]
+        public void LogicalGrouping(string transition, bool result)
+        {
+            ProcessingUnitMock pu = new ProcessingUnitMock();
+            BooleanExpression expression = Interpreter.AsBooleanExpression(transition, pu);
+            Assert.IsTrue(expression.IsValid());
+            Assert.IsEqual(expression.Result(pu), result);
+        }
+        
+        [Test]
+        [RunWith("(true")]
+        [RunWith("((true and false)")]
+        [RunWith("true) false")]
+        [RunWith("true) (false)")]
+        [RunWith(")")]
+        public void InvalidLogicalGrouping(string transition)
+        {
+            ProcessingUnitMock pu = new ProcessingUnitMock();
+            BooleanExpression expression = Interpreter.AsBooleanExpression(transition, pu);
+            Assert.IsFalse(expression.IsValid());
+        }
     }
 }

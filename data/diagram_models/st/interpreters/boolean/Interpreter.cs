@@ -10,6 +10,7 @@ namespace Osls.St.Boolean
         {
             Terminals data = new Terminals(transition);
             BooleanExpression mainExpression = InterpretBooleanExpression(data, context);
+            if (!data.IsEndReached) mainExpression = AppendFailureInfo(data, mainExpression);
             return mainExpression;
         }
         #endregion
@@ -25,6 +26,17 @@ namespace Osls.St.Boolean
         {
             if (data.IsEndReached) return null;
             BooleanExpression currentExpression = null;
+            // B -> ( B )
+            if (data.Current == "(")
+            {
+                data.MoveNext();
+                BooleanExpression subExpression = InterpretBooleanExpression(data, context);
+                if (data.IsEndReached || data.Current != ")") return new Grouping(currentExpression, false);
+                data.MoveNext();
+                currentExpression = new Grouping(subExpression, true);
+                if (data.IsEndReached) return currentExpression;
+            }
+            
             // B -> I B
             if (LogicalInverter.Values.Contains(data.Current))
             {
@@ -67,6 +79,10 @@ namespace Osls.St.Boolean
                 BooleanExpression nextExpression = InterpretBooleanExpression(data, context);
                 return new LogicalCombination(combination, currentExpression, nextExpression);
             }
+            if (data.Current == ")")
+            {
+                return currentExpression;
+            }
             return currentExpression; // Partial failure
         }
         
@@ -87,6 +103,18 @@ namespace Osls.St.Boolean
             return int.TryParse(word, out _)
             || context.InputRegisters.ContainsInteger(word)
             || context.HasIntVariable(word);
+        }
+        
+        private static BooleanExpression AppendFailureInfo(Terminals data, BooleanExpression mainExpression)
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder();
+            while (!data.IsEndReached)
+            {
+                builder.Append(data.Current);
+                builder.Append(" ");
+                data.MoveNext();
+            }
+            return new FailureHelper(mainExpression, builder.ToString());
         }
         #endregion
     }
