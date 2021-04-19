@@ -25,10 +25,10 @@ namespace Osls.St
         #endregion
         
         
-        #region ==================== Public Methods ====================
+        #region ==================== Constructor ====================
         public Terminals(string text)
         {
-            Words = text.Split(' ');
+            Words = Lexer.Tokenise(text);
             Position = 0;
         }
         
