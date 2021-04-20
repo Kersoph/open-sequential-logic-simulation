@@ -8,7 +8,7 @@ namespace Osls.St.Assignment
     public class Interpreter
     {
         #region ==================== Fields Properties ====================
-        private static HashSet<string> AssignmentSymbol = new HashSet<string>() { "=", ":=" };
+        private static readonly HashSet<string> AssignmentSymbol = new HashSet<string>() { "=", ":=" };
         #endregion
         
         
