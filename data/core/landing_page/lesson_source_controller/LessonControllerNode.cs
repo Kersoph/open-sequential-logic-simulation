@@ -13,7 +13,7 @@ namespace Osls.LandingPage
         private LessonSelectionGridNode _gridController;
         
         /// <summary>
-        /// Gets the lesson information savend in the lesson folder.
+        /// Gets the lesson information saved in the lesson folder.
         /// </summary>
         public LessonEntity LessonEntity { get; private set; }
         #endregion
@@ -22,6 +22,7 @@ namespace Osls.LandingPage
         #region ==================== Public Methods ====================
         public override void _Ready()
         {
+            GetNode<Button>("LessonButton").Connect("mouse_entered", this, nameof(LessonMouseEntered));
             GetNode<Button>("LessonButton").Connect("toggled", this, nameof(LessonButtonToggled));
         }
         
@@ -34,15 +35,6 @@ namespace Osls.LandingPage
             _gridController = gridController;
             SetTitle(info.Title);
             SetStars(info.Stars);
-        }
-        
-        /// <summary>
-        /// Resets the button to not pressed.
-        /// </summary>
-        public void ResetButtonStatus()
-        {
-            Button lessonButton = GetNode<Button>("LessonButton");
-            lessonButton.Pressed = false;
         }
         #endregion
         
@@ -58,13 +50,21 @@ namespace Osls.LandingPage
         }
         
         /// <summary>
-        /// Event receiver of the LessonButton when the button is toggeled.
+        /// Event receiver of the LessonButton when the mouse entered the button.
+        /// </summary>
+        private void LessonMouseEntered()
+        {
+            _gridController.SelectionChangedTo(this);
+        }
+        
+        /// <summary>
+        /// Event receiver of the LessonButton when the button is toggled.
         /// </summary>
         private void LessonButtonToggled(bool buttonPressed)
         {
             if (buttonPressed)
             {
-                _gridController.SelectionChangedTo(this);
+                _gridController.StartSelectedLesson(this);
             }
         }
         
