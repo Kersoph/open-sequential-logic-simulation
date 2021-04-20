@@ -9,6 +9,7 @@
 
 [node name="SfcEditorNode" type="Node"]
 script = ExtResource( 1 )
+Sfc2dEditorPath = NodePath("Sfc2dBackground/Sfc2dEditor")
 
 [node name="PlantViewNode" type="ColorRect" parent="."]
 anchor_left = 1.0
@@ -40,8 +41,12 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -512.0
-margin_bottom = -514.0
+margin_top = 1.0
+margin_bottom = -513.0
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlantInfoText" parent="PlantInfoPanel" instance=ExtResource( 4 )]
 bbcode_text = "[b][u]Plant Inputs[/u][/b]
@@ -63,18 +68,15 @@ B_Bot   bool"
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
-margin_right = -514.0
+margin_top = 1.0
+margin_right = -513.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sfc2dEditor" parent="." instance=ExtResource( 5 )]
-margin_left = 80.0
-margin_right = -514.0
+[node name="Sfc2dEditor" parent="Sfc2dBackground" instance=ExtResource( 5 )]
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
-[node name="Sfc2dControls" parent="." instance=ExtResource( 6 )]
-margin_left = 80.0
-margin_right = -514.0
+[node name="Sfc2dControls" parent="Sfc2dBackground" instance=ExtResource( 6 )]
 mouse_filter = 2

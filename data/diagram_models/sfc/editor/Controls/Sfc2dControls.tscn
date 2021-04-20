@@ -7,37 +7,51 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorLoad.cs" type="Script" id=6]
 
 [node name="Sfc2dControls" type="Control"]
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = -236.0
+margin_bottom = 39.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="EditorZoomOut" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -40.0
-margin_right = 0.0
+margin_left = -39.0
+margin_top = -1.0
+margin_right = 1.0
+margin_bottom = 39.0
 text = "-"
 script = ExtResource( 2 )
 
 [node name="EditorZoomIn" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -79.0
-margin_right = -39.0
+margin_left = -78.0
+margin_top = -1.0
+margin_right = -38.0
+margin_bottom = 39.0
 text = "+"
 script = ExtResource( 3 )
 
 [node name="EditorSave" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -237.0
-margin_right = -157.0
+margin_left = -236.0
+margin_top = -1.0
+margin_right = -156.0
+margin_bottom = 39.0
 text = "Save"
 script = ExtResource( 5 )
 
 [node name="EditorLoad" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -158.0
-margin_right = -78.0
+margin_left = -157.0
+margin_top = -1.0
+margin_right = -77.0
+margin_bottom = 39.0
 text = "Load"
 script = ExtResource( 6 )
