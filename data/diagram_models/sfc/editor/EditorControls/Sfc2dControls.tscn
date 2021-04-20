@@ -13,6 +13,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -40.0
 margin_right = 0.0
+toggle_mode = false
 text = "-"
 script = ExtResource( 2 )
 
@@ -21,5 +22,6 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -79.0
 margin_right = -39.0
+toggle_mode = false
 text = "+"
 script = ExtResource( 3 )
