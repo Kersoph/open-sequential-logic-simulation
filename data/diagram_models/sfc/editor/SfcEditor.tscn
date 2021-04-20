@@ -17,8 +17,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -512.0
 margin_top = -512.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlantViewportContainer" type="ViewportContainer" parent="PlantViewNode"]
 anchor_right = 1.0
@@ -39,7 +41,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -512.0
 margin_bottom = -514.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
 script = ExtResource( 3 )
 
 [node name="PlantInfoText" parent="PlantInfoPanel" instance=ExtResource( 4 )]
@@ -63,33 +64,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
 margin_right = -514.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 100.0
-margin_top = 80.0
-margin_right = -534.0
-stretch = true
-
-[node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1286, 937 )
-transparent_bg = true
-handle_input_locally = false
-hdr = false
-disable_3d = true
-usage = 0
-render_target_update_mode = 3
-
-[node name="Sfc2dEditor" parent="ViewportContainer/Viewport" instance=ExtResource( 5 )]
+[node name="Sfc2dEditor" parent="." instance=ExtResource( 5 )]
+margin_left = 80.0
+margin_right = -514.0
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
 [node name="Sfc2dControls" parent="." instance=ExtResource( 6 )]
 margin_left = 80.0
-margin_top = 0.0
 margin_right = -514.0
-margin_bottom = 0.0
 mouse_filter = 2
