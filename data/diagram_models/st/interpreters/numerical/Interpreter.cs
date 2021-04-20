@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor.Interpreters.Numerical
+namespace Osls.St.Numerical
 {
     public class Interpreter
     {

@@ -1,16 +1,15 @@
-namespace Osls.SfcEditor.Interpreters.Numerical
+namespace Osls.St.Assignment
 {
     /// <summary>
-    /// Base class for all numerical expressions
-    /// May convert it to an interface
+    /// Base class for all assignment expressions
     /// </summary>
-    public abstract class NumericalExpression
+    public abstract class AssignmentExpression
     {
         #region ==================== Public ====================
         /// <summary>
-        /// Calculates the result of this numerical expression
+        /// Executes the assignment according to the model.
         /// </summary>
-        public abstract int Result(IProcessingUnit pu);
+        public abstract void Execute(IProcessingUnit pu);
         
         /// <summary>
         /// returns true, if this or sub-expressions are valid.

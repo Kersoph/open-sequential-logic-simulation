@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Osls.SfcEditor;
 using Osls.SfcEditor.Interpreters;
-using Osls.SfcEditor.Interpreters.Assignment;
+using Osls.St.Assignment;
 using Osls.SfcSimulation.Engine.Builder;
 
 

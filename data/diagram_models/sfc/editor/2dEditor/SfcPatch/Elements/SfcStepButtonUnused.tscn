@@ -4,8 +4,6 @@
 [ext_resource path="res://data/core/theme/font/roboto_regular_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonUnused.cs" type="Script" id=3]
 
-
-
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 32, 32 )
@@ -28,8 +26,8 @@ margin_bottom = 5.0
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="SfcStepButtonUnused" type="Button"]
-margin_right = 200.0
-margin_bottom = 100.0
+margin_right = 150.0
+margin_bottom = 70.0
 mouse_default_cursor_shape = 2
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
@@ -39,3 +37,6 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 clip_text = true
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

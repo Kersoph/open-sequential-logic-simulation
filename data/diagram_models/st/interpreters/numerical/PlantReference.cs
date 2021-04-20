@@ -1,22 +1,24 @@
-namespace Osls.SfcEditor.Interpreters.Numerical
+namespace Osls.St.Numerical
 {
     /// <summary>
-    /// Used to link integer outputs of the step to the transition
+    /// Used to link integer outputs of the plant to the transition
     /// </summary>
-    public class StepReference : NumericalExpression
+    public class PlantReference : NumericalExpression
     {
         #region ==================== Fields Properties ====================
         private readonly string _key;
+        private readonly bool _valid;
         #endregion
         
         
         #region ==================== Public ====================
         /// <summary>
-        /// Holds a reference to a step integer output
+        /// Holds a reference to a integer plant output
         /// </summary>
-        public StepReference(string key)
+        public PlantReference(string key, IProcessingData data)
         {
             _key = key;
+            _valid = data.InputRegisters.ContainsInteger(_key);
         }
         
         /// <summary>
@@ -24,7 +26,7 @@ namespace Osls.SfcEditor.Interpreters.Numerical
         /// </summary>
         public override int Result(IProcessingUnit pu)
         {
-            return pu.LookupIntVariable(_key);
+            return pu.InputRegisters.PollInteger(_key);
         }
         
         /// <summary>
@@ -32,7 +34,7 @@ namespace Osls.SfcEditor.Interpreters.Numerical
         /// </summary>
         public override bool IsValid()
         {
-            return true;
+            return _valid;
         }
         
         public override string ToString()

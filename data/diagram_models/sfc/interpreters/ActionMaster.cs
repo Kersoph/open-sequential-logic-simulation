@@ -1,5 +1,8 @@
 using Godot;
 using System.Collections.Generic;
+using Osls.St.Assignment;
+using Osls.St.Boolean;
+using Osls.St.Numerical;
 
 
 namespace Osls.SfcEditor.Interpreters
@@ -27,7 +30,7 @@ namespace Osls.SfcEditor.Interpreters
             {
                 textEdit.AddKeywordColor(key, BooleanInputColor);
             }
-            foreach (string key in Boolean.Constant.Values)
+            foreach (string key in St.Boolean.Constant.Values)
             {
                 textEdit.AddKeywordColor(key, BooleanInputColor);
             }
@@ -54,7 +57,7 @@ namespace Osls.SfcEditor.Interpreters
         /// <summary>
         /// Converts the string to a logical model.
         /// </summary>
-        public static Assignment.AssignmentExpression InterpretTransitionText(string transition, IProcessingData processingData)
+        public static AssignmentExpression InterpretTransitionText(string transition, IProcessingData processingData)
         {
             string[] words = transition.Split(" ");
             Data data = new Data(words);
@@ -68,7 +71,7 @@ namespace Osls.SfcEditor.Interpreters
         /// Interprets the given words into a logical model.
         /// We follow a fixed y = x format according the requirements.
         /// </summary>
-        private static Assignment.AssignmentExpression InterpretAssignmentExpression(Data data, IProcessingData context)
+        private static St.Assignment.AssignmentExpression InterpretAssignmentExpression(Data data, IProcessingData context)
         {
             string targetWord = data.GetNext();
             if (data.IsEndReached) return null;
@@ -77,27 +80,27 @@ namespace Osls.SfcEditor.Interpreters
             string sourceName = data.GetNext();
             if (context.OutputRegisters.ContainsBoolean(targetWord))
             {
-                Boolean.BooleanExpression sourceExpression = InterpretBoolean(sourceName, context);
-                return new Assignment.Boolean(targetWord, sourceExpression, context);
+                BooleanExpression sourceExpression = InterpretBoolean(sourceName, context);
+                return new Boolean(targetWord, sourceExpression, context);
             }
             else if (context.OutputRegisters.ContainsInteger(targetWord))
             {
-                Numerical.NumericalExpression sourceExpression = InterpretNumerical(sourceName, context);
-                return new Assignment.Numerical(targetWord, sourceExpression, context);
+                NumericalExpression sourceExpression = InterpretNumerical(sourceName, context);
+                return new Numerical(targetWord, sourceExpression, context);
             }
             return null; // not valid
         }
         
-        private static Boolean.BooleanExpression InterpretBoolean(string word, IProcessingData context)
+        private static BooleanExpression InterpretBoolean(string word, IProcessingData context)
         {
-            if (Boolean.Constant.Values.Contains(word)) return new Boolean.Constant(word);
-            return new Boolean.PlantReference(word, context);
+            if (St.Boolean.Constant.Values.Contains(word)) return new St.Boolean.Constant(word);
+            return new St.Boolean.PlantReference(word, context);
         }
         
-        private static Numerical.NumericalExpression InterpretNumerical(string word, IProcessingData context)
+        private static NumericalExpression InterpretNumerical(string word, IProcessingData context)
         {
-            if (int.TryParse(word, out int number)) return new Numerical.Constant(number);
-            return new Numerical.PlantReference(word, context);
+            if (int.TryParse(word, out int number)) return new St.Numerical.Constant(number);
+            return new St.Numerical.PlantReference(word, context);
         }
         #endregion
         

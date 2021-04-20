@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://data/core/landing_page/LandingPageNode.cs" type="Script" id=1]
 [ext_resource path="res://data/core/landing_page/LessonsNode.cs" type="Script" id=2]
 [ext_resource path="res://data/core/landing_page/LessonSelectionGridNode.cs" type="Script" id=3]
-[ext_resource path="res://data/core/landing_page/LessonStartController.cs" type="Script" id=4]
-[ext_resource path="res://data/core/landing_page/LightButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/core/landing_page/LessonPreview.cs" type="Script" id=6]
 [ext_resource path="res://data/core/landing_page/LessonInfo.cs" type="Script" id=7]
 [ext_resource path="res://data/core/landing_page/RichTextLabel.tscn" type="PackedScene" id=8]
@@ -19,56 +17,30 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
-margin_right = -514.0
-margin_bottom = -302.0
+margin_top = 1.0
+margin_right = -513.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="ColorRect" parent="LessonsNode/LessonSelectorContainer"]
-margin_right = 1326.0
-margin_bottom = 715.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
+margin_right = 1327.0
+margin_bottom = 1016.0
 
 [node name="LessonCenterContainer" type="CenterContainer" parent="LessonsNode/LessonSelectorContainer"]
-margin_right = 1326.0
-margin_bottom = 715.0
+margin_right = 1327.0
+margin_bottom = 1016.0
+rect_clip_content = true
 
 [node name="LessonSelectionGridNode" type="GridContainer" parent="LessonsNode/LessonSelectorContainer/LessonCenterContainer"]
 margin_left = 663.0
-margin_top = 357.0
+margin_top = 508.0
 margin_right = 663.0
-margin_bottom = 357.0
-custom_constants/vseparation = 100
-custom_constants/hseparation = 100
+margin_bottom = 508.0
+custom_constants/vseparation = 50
+custom_constants/hseparation = 50
 columns = 4
 script = ExtResource( 3 )
-
-[node name="LessonStartContainer" type="MarginContainer" parent="LessonsNode"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 80.0
-margin_top = -300.0
-margin_right = -514.0
-
-[node name="Background" type="ColorRect" parent="LessonsNode/LessonStartContainer"]
-margin_right = 1326.0
-margin_bottom = 300.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
-
-[node name="LessonStartController" type="CenterContainer" parent="LessonsNode/LessonStartContainer"]
-margin_right = 1326.0
-margin_bottom = 300.0
-script = ExtResource( 4 )
-
-[node name="LessonStartButton" parent="LessonsNode/LessonStartContainer/LessonStartController" instance=ExtResource( 5 )]
-anchor_top = 0.0
-anchor_bottom = 0.0
-margin_left = 463.0
-margin_top = 100.0
-margin_right = 863.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 400, 100 )
-disabled = true
-text = "Start"
 
 [node name="LessonPreviewBackground" type="ColorRect" parent="LessonsNode"]
 anchor_left = 1.0
@@ -77,7 +49,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -512.0
 margin_top = -512.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LessonPreview" type="ViewportContainer" parent="LessonsNode"]
 anchor_left = 1.0
@@ -92,6 +66,9 @@ rect_min_size = Vector2( 512, 512 )
 mouse_default_cursor_shape = 8
 stretch = true
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LessonPreviewViewport" type="Viewport" parent="LessonsNode/LessonPreview"]
 size = Vector2( 512, 512 )
@@ -108,12 +85,33 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -512.0
-margin_bottom = -514.0
+margin_top = 1.0
+margin_bottom = -513.0
 grow_horizontal = 0
 grow_vertical = 0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LessonInfoLabel" parent="LessonsNode/LessonInfo" instance=ExtResource( 8 )]
 margin_top = 8.052
 margin_bottom = -11.948
+
+[node name="ColorRect" type="ColorRect" parent="LessonsNode/LessonInfo"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="LessonsNode"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -513.0
+margin_right = -512.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

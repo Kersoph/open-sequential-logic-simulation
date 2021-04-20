@@ -2,8 +2,10 @@
 
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNode.cs" type="Script" id=1]
 
-
-[node name="SfcStepNode" type="Control"]
-margin_right = 200.0
-margin_bottom = 100.0
+[node name="SfcStepNode" type="ReferenceRect"]
+margin_right = 150.0
+margin_bottom = 70.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

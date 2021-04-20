@@ -11,17 +11,12 @@ namespace Osls.LandingPage
     {
         #region ==================== Fields / Properties ====================
         [Export] private NodePath _landingPagePath = "..";
-        [Export] private NodePath _lessonSelectionGridPath = "LessonSelectorContainer/LessonCenterContainer/LessonSelectionGridNode";
-        [Export] private NodePath _lessonStartControllerPath = "LessonStartContainer/LessonStartController";
         [Export] private NodePath _lessonInfoPath = "LessonInfo";
         [Export] private NodePath _lessonPreviewPath = "LessonPreview";
         
         private LandingPageNode _landingPageNode;
-        private LessonSelectionGridNode _lessonSelectionGrid;
-        private LessonStartController _lessonStartController;
         private LessonInfo _lessonInfo;
         private LessonPreview _lessonPreview;
-        private LessonEntity _selectedLesson;
         #endregion
         
         
@@ -29,8 +24,6 @@ namespace Osls.LandingPage
         public override void _Ready()
         {
             _landingPageNode = GetNode<LandingPageNode>(_landingPagePath);
-            _lessonSelectionGrid = GetNode<LessonSelectionGridNode>(_lessonSelectionGridPath);
-            _lessonStartController = GetNode<LessonStartController>(_lessonStartControllerPath);
             _lessonInfo = GetNode<LessonInfo>(_lessonInfoPath);
             _lessonPreview = GetNode<LessonPreview>(_lessonPreviewPath);
         }
@@ -41,21 +34,19 @@ namespace Osls.LandingPage
         /// <summary>
         /// Informs the grid, that the selection has changed to this button and the UI needs to be updated.
         /// </summary>
-        public void SelectionChangedTo(LessonControllerNode node)
+        public void SelectionChangedTo(LessonEntity selectedLesson)
         {
-            _selectedLesson = node.LessonEntity;
-            _lessonStartController.ActivateStartButton();
-            _lessonInfo.UpdateLessonEntity(_selectedLesson);
-            _lessonPreview.UpdateLessonEntity(_selectedLesson);
+            _lessonInfo.UpdateLessonEntity(selectedLesson);
+            _lessonPreview.UpdateLessonEntity(selectedLesson);
         }
-
+        
         /// <summary>
-        /// The currently selected lesson will be told tho the main view to
-        /// switch from the landing page to the SFC editor.
+        /// The given lesson will be forwarded to the main view to
+        /// switch from the landing page to the editor.
         /// </summary>
-        public void StartSelectedLesson()
+        public void StartSelectedLesson(LessonEntity selectedLesson)
         {
-            _landingPageNode.StartLesson(_selectedLesson);
+            _landingPageNode.StartLesson(selectedLesson);
         }
         #endregion
     }

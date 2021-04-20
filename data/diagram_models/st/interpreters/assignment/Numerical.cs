@@ -1,23 +1,23 @@
-namespace Osls.SfcEditor.Interpreters.Assignment
+namespace Osls.St.Assignment
 {
     /// <summary>
-    /// Represents an boolean assignment
+    /// Represents an numerical assignment
     /// </summary>
-    public class Boolean : AssignmentExpression
+    public class Numerical : AssignmentExpression
     {
         #region ==================== Fields Properties ====================
         private readonly string _target;
-        private readonly Interpreters.Boolean.BooleanExpression _source;
+        private readonly St.Numerical.NumericalExpression _source;
         private readonly bool _valid;
         #endregion
         
         
         #region ==================== Public ====================
-        public Boolean(string target, Interpreters.Boolean.BooleanExpression source, IProcessingData data)
+        public Numerical(string target, St.Numerical.NumericalExpression source, IProcessingData data)
         {
             _target = target;
             _source = source;
-            _valid = data.OutputRegisters.ContainsBoolean(_target);
+            _valid = data.OutputRegisters.ContainsInteger(_target);
         }
         
         /// <summary>

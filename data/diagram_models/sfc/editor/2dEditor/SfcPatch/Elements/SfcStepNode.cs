@@ -6,7 +6,7 @@ namespace Osls.SfcEditor
     /// Topmost node for the SfcStepNode.tscn
     /// Controls the visual appearance of the SFC Step
     /// </summary>
-    public class SfcStepNode : Control
+    public class SfcStepNode : ReferenceRect
     {
         #region ==================== Fields Properties ====================
         private const string UnusedStepButton = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonUnused.tscn";

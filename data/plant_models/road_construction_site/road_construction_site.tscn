@@ -232,8 +232,9 @@ script = ExtResource( 12 )
 
 [node name="LambdaOption" type="HSlider" parent="UI"]
 margin_left = 2.0
-margin_top = 30.0
+margin_top = 17.0
 margin_right = 130.0
+margin_bottom = 33.0
 hint_tooltip = "The scale of the waiting time
 for incoming cars. Higher values
 means less cars on the street."
@@ -246,11 +247,11 @@ ticks_on_borders = true
 [node name="LambdsText" type="Label" parent="UI"]
 margin_left = 2.0
 margin_right = 179.0
-margin_bottom = 38.0
+margin_bottom = 24.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Spawn delay"
+text = "Car Arrival Delay"
 __meta__ = {
 "_edit_use_anchors_": false
 }

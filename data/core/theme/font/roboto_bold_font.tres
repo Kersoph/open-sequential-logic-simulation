@@ -2,8 +2,7 @@
 
 [ext_resource path="res://data/core/theme/font/roboto_bold_data.tres" type="DynamicFontData" id=1]
 
-
 [resource]
-size = 32
+size = 20
 use_filter = true
 font_data = ExtResource( 1 )

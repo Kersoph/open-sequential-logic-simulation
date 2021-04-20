@@ -11,7 +11,7 @@ namespace Osls.LandingPage
     public class LessonSelectionGridNode : GridContainer
     {
         #region ==================== Fields ====================
-        private const string LessonControllerScene = "res://data/core/landing_page/LessonSourceController/LessonController.tscn";
+        private const string LessonControllerScene = "res://data/core/landing_page/Lesson_Source_controller/lesson_controller.tscn";
         private LessonControllerNode[] _lessonNodes;
         #endregion
         
@@ -28,7 +28,7 @@ namespace Osls.LandingPage
             {
                 // After around 48 loads the Godot JSON parser can fail
                 // Its not clear atm why, but generally a user needs 2-3 loads so it is
-                // regarded as OK for the Protorype.
+                // regarded as OK for the Prototype.
                 GD.PrintErr(e);
                 GD.PushError(e.Message);
             }
@@ -42,15 +42,17 @@ namespace Osls.LandingPage
         /// </summary>
         public void SelectionChangedTo(LessonControllerNode node)
         {
-            for (int i = 0; i < _lessonNodes.Length; i++)
-            {
-                if (_lessonNodes[i] != node)
-                {
-                    _lessonNodes[i].ResetButtonStatus();
-                }
-            }
             LessonsNode lessonsNode = GetNode<LessonsNode>("../../..");
-            lessonsNode.SelectionChangedTo(node);
+            lessonsNode.SelectionChangedTo(node.LessonEntity);
+        }
+        
+        /// <summary>
+        /// Informs the grid, that the selection has changed to this button and the UI needs to be updated.
+        /// </summary>
+        public void StartSelectedLesson(LessonControllerNode node)
+        {
+            LessonsNode lessonsNode = GetNode<LessonsNode>("../../..");
+            lessonsNode.StartSelectedLesson(node.LessonEntity);
         }
         #endregion
         
@@ -77,7 +79,7 @@ namespace Osls.LandingPage
             {
                 LessonControllerNode controllerNode = (LessonControllerNode)packedControllerNode.Instance();
                 controllerNode.SetLessonInfo(lessons[i], this);
-                this.AddChild(controllerNode);
+                AddChild(controllerNode);
                 _lessonNodes[i] = controllerNode;
             }
         }

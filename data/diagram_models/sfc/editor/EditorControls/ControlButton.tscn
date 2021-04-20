@@ -7,10 +7,8 @@ content_margin_left = 8.0
 content_margin_right = 8.0
 content_margin_top = 8.0
 content_margin_bottom = 8.0
-bg_color = Color( 1, 1, 0.705882, 1 )
+bg_color = Color( 0.627451, 0.627451, 0.627451, 1 )
 border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
-shadow_size = 2
-shadow_offset = Vector2( 2, 2 )
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=2]
@@ -18,10 +16,8 @@ content_margin_left = 8.0
 content_margin_right = 8.0
 content_margin_top = 8.0
 content_margin_bottom = 8.0
-bg_color = Color( 1, 1, 0.705882, 1 )
+bg_color = Color( 0.705882, 0.705882, 0.705882, 1 )
 border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
-shadow_size = 4
-shadow_offset = Vector2( 2, 2 )
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -37,11 +33,7 @@ content_margin_left = 8.0
 content_margin_right = 8.0
 content_margin_top = 8.0
 content_margin_bottom = 8.0
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+bg_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
 anti_aliasing = false
 
@@ -56,19 +48,13 @@ anti_aliasing = false
 
 [node name="NavigationButton" type="Button"]
 margin_right = 80.0
-margin_bottom = 80.0
-focus_mode = 0
-mouse_default_cursor_shape = 2
+margin_bottom = 40.0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = ExtResource( 6 )
-custom_colors/font_color_disabled = Color( 0.352941, 0.352941, 0.352941, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 toggle_mode = true
 shortcut_in_tooltip = false
 __meta__ = {

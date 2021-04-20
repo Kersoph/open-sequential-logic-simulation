@@ -1,32 +1,30 @@
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Numerical
 {
     /// <summary>
-    /// Used to link boolean outputs of the plant to the transition
+    /// Used to link integer outputs of the step to the transition
     /// </summary>
-    public class PlantReference : BooleanExpression
+    public class StepReference : NumericalExpression
     {
         #region ==================== Fields Properties ====================
         private readonly string _key;
-        private readonly bool _valid;
         #endregion
         
         
         #region ==================== Public ====================
         /// <summary>
-        /// Holds a reference to a boolean plant output
+        /// Holds a reference to a step integer output
         /// </summary>
-        public PlantReference(string key, IProcessingData data)
+        public StepReference(string key)
         {
             _key = key;
-            _valid = data.InputRegisters.ContainsBoolean(_key);
         }
         
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override bool Result(IProcessingUnit pu)
+        public override int Result(IProcessingUnit pu)
         {
-            return pu.InputRegisters.PollBoolean(_key);
+            return pu.LookupIntVariable(_key);
         }
         
         /// <summary>
@@ -34,7 +32,7 @@ namespace Osls.SfcEditor.Interpreters.Boolean
         /// </summary>
         public override bool IsValid()
         {
-            return _valid;
+            return true;
         }
         
         public override string ToString()

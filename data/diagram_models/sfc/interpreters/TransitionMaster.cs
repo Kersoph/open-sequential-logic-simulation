@@ -26,15 +26,15 @@ namespace Osls.SfcEditor.Interpreters
             {
                 textEdit.AddKeywordColor(key, BooleanInputColor);
             }
-            foreach (string key in Boolean.Constant.Values)
+            foreach (string key in St.Boolean.Constant.Values)
             {
                 textEdit.AddKeywordColor(key, BooleanInputColor);
             }
-            foreach (string key in Boolean.LogicalCombination.Values)
+            foreach (string key in St.Boolean.LogicalCombination.Values)
             {
                 textEdit.AddKeywordColor(key, BooleanCommandColor);
             }
-            foreach (string key in Boolean.LogicalInverter.Values)
+            foreach (string key in St.Boolean.LogicalInverter.Values)
             {
                 textEdit.AddKeywordColor(key, BooleanCommandColor);
             }
@@ -46,7 +46,7 @@ namespace Osls.SfcEditor.Interpreters
             // Godot already forces integer static inputs and colors them. (They can not be deleted so far)
             textEdit.AddColorOverride("symbol_color", IntegerCommandColor);
             textEdit.AddColorOverride("number_color", IntegerInputColor);
-            foreach (string key in Boolean.RelationalOperation.Values)
+            foreach (string key in St.Boolean.RelationalOperation.Values)
             {
                 textEdit.AddKeywordColor(key, IntegerCommandColor);
             }
@@ -63,9 +63,9 @@ namespace Osls.SfcEditor.Interpreters
         /// <summary>
         /// Converts the string to a logical model.
         /// </summary>
-        public static Boolean.BooleanExpression InterpretTransitionText(string transition, IProcessingData context)
+        public static St.Boolean.BooleanExpression InterpretTransitionText(string transition, IProcessingData context)
         {
-            return Boolean.Interpreter.AsBooleanExpression(transition, context);
+            return St.Boolean.Interpreter.AsBooleanExpression(transition, context);
         }
         #endregion
     }

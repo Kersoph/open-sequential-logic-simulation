@@ -1,9 +1,9 @@
-namespace Osls.SfcEditor.Interpreters.Numerical
+namespace Osls.St.Boolean
 {
     /// <summary>
-    /// Used to link integer outputs of the plant to the transition
+    /// Used to link boolean outputs of the plant to the transition
     /// </summary>
-    public class PlantReference : NumericalExpression
+    public class PlantReference : BooleanExpression
     {
         #region ==================== Fields Properties ====================
         private readonly string _key;
@@ -13,20 +13,20 @@ namespace Osls.SfcEditor.Interpreters.Numerical
         
         #region ==================== Public ====================
         /// <summary>
-        /// Holds a reference to a integer plant output
+        /// Holds a reference to a boolean plant output
         /// </summary>
         public PlantReference(string key, IProcessingData data)
         {
             _key = key;
-            _valid = data.InputRegisters.ContainsInteger(_key);
+            _valid = data.InputRegisters.ContainsBoolean(_key);
         }
         
         /// <summary>
         /// Calculates the result of this boolean expression
         /// </summary>
-        public override int Result(IProcessingUnit pu)
+        public override bool Result(IProcessingUnit pu)
         {
-            return pu.InputRegisters.PollInteger(_key);
+            return pu.InputRegisters.PollBoolean(_key);
         }
         
         /// <summary>

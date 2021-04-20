@@ -1,5 +1,5 @@
 using WAT;
-using Osls.SfcEditor.Interpreters.Boolean;
+using Osls.St.Boolean;
 using Osls;
 using System.Collections.Generic;
 
@@ -16,6 +16,10 @@ namespace Tests.SfcEditor.Interpreters
         [Test]
         [RunWith("true", true)]
         [RunWith("false", false)]
+        [RunWith("True", true)]
+        [RunWith("False", false)]
+        [RunWith("TRUE", true)]
+        [RunWith("FALSE", false)]
         public void BooleanConstant(string transition, bool result)
         {
             ProcessingUnitMock pu = new ProcessingUnitMock();
@@ -33,6 +37,12 @@ namespace Tests.SfcEditor.Interpreters
         [RunWith("true or false", true)]
         [RunWith("false or false", false)]
         [RunWith("false or true", true)]
+        [RunWith("False OR true", true)]
+        [RunWith("FALSE And TRUE", false)]
+        [RunWith("true and True And TRUE AND true", true)]
+        [RunWith("true and True And TRUE AND false", false)]
+        [RunWith("false or False Or FALSE OR false", false)]
+        [RunWith("false or False Or TRUE OR false", true)]
         public void LogicalCombination(string transition, bool result)
         {
             ProcessingUnitMock pu = new ProcessingUnitMock();
@@ -59,6 +69,15 @@ namespace Tests.SfcEditor.Interpreters
         [RunWith("1 < 2", true)]
         [RunWith("1 > 1", false)]
         [RunWith("1 < 1", false)]
+        [RunWith("1 >= 1", true)]
+        [RunWith("1 <= 1", true)]
+        [RunWith("1 == 1", true)]
+        [RunWith("1 >= 2", false)]
+        [RunWith("2 <= 1", false)]
+        [RunWith("2 == 1", false)]
+        [RunWith("1 < 1 or 1 > 1", false)]
+        [RunWith("2 < 1 or 2 > 1", true)]
+        [RunWith("1 < 2 and 1 == 1 and true and not 1 == 2", true)]
         public void RelationalOperation(string transition, bool result)
         {
             ProcessingUnitMock pu = new ProcessingUnitMock();
@@ -82,6 +101,36 @@ namespace Tests.SfcEditor.Interpreters
             Assert.IsEqual(expressionA.Result(pu), true);
             BooleanExpression expressionB = Interpreter.AsBooleanExpression("invalidBool", pu);
             Assert.IsTrue(expressionB == null || !expressionB.IsValid());
+        }
+        
+        [Test]
+        [RunWith("(true)", true)]
+        [RunWith("not (false or true)", false)]
+        [RunWith("(not false) or true", true)]
+        [RunWith("true or (false and false)", true)]
+        [RunWith("(true or false) and false", false)]
+        [RunWith("((true or false) and (false)) or ((false))", false)]
+        [RunWith("((1 > 0))", true)]
+        [RunWith("((1 > 0) and (1 > 0))", true)]
+        public void LogicalGrouping(string transition, bool result)
+        {
+            ProcessingUnitMock pu = new ProcessingUnitMock();
+            BooleanExpression expression = Interpreter.AsBooleanExpression(transition, pu);
+            Assert.IsTrue(expression.IsValid());
+            Assert.IsEqual(expression.Result(pu), result);
+        }
+        
+        [Test]
+        [RunWith("(true")]
+        [RunWith("((true and false)")]
+        [RunWith("true) false")]
+        [RunWith("true) (false)")]
+        [RunWith(")")]
+        public void InvalidLogicalGrouping(string transition)
+        {
+            ProcessingUnitMock pu = new ProcessingUnitMock();
+            BooleanExpression expression = Interpreter.AsBooleanExpression(transition, pu);
+            Assert.IsFalse(expression.IsValid());
         }
     }
 }

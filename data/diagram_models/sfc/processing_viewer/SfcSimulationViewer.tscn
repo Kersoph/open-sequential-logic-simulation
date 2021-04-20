@@ -16,7 +16,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -512.0
 margin_top = -512.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlantViewportContainer" type="ViewportContainer" parent="PlantViewNode"]
 anchor_right = 1.0
@@ -36,8 +38,8 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -512.0
-margin_bottom = -514.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
+margin_top = 1.0
+margin_bottom = -513.0
 script = ExtResource( 4 )
 
 [node name="PlantInfoText" parent="PlantInfoPanel" instance=ExtResource( 2 )]
@@ -52,8 +54,9 @@ Plant Outputs"
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
-margin_right = -514.0
-color = Color( 0.784314, 0.784314, 0.784314, 1 )
+margin_top = 1.0
+margin_right = -513.0
+rect_clip_content = true
 
 [node name="Sfc2dEditor" parent="Sfc2dViewer" instance=ExtResource( 3 )]
 scroll_horizontal_enabled = false
@@ -64,12 +67,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_default_cursor_shape = 8
 color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Sfc2dControls" parent="Sfc2dViewer" instance=ExtResource( 1 )]
 anchor_left = 1.0
 anchor_bottom = 0.0
-margin_top = 0.0
-margin_right = 0.0
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 1.0
+margin_bottom = -1.0
 mouse_default_cursor_shape = 8
 
 [node name="ErrorLabel" type="Label" parent="Sfc2dViewer"]

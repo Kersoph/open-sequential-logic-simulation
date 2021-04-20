@@ -1,28 +1,24 @@
-using System.Collections.Generic;
-
-
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Boolean
 {
     /// <summary>
-    /// Inverts the result of an boolean expression
+    /// Groups the result of an boolean expression
     /// </summary>
-    public class LogicalInverter : BooleanExpression
+    public class FailureHelper : BooleanExpression
     {
         #region ==================== Fields Properties ====================
-        public const string NOT = "not";
-        public static HashSet<string> Values = new HashSet<string>(){ NOT };
-        
         private readonly BooleanExpression _target;
+        private string _trail;
         #endregion
         
         
         #region ==================== Public ====================
         /// <summary>
-        /// Holds a true or false constant
+        /// Accepts the part that could be interpreted and shows the trail as an error
         /// </summary>
-        public LogicalInverter(BooleanExpression target)
+        public FailureHelper(BooleanExpression target, string trail)
         {
             _target = target;
+            _trail = trail;
         }
         
         /// <summary>
@@ -30,21 +26,21 @@ namespace Osls.SfcEditor.Interpreters.Boolean
         /// </summary>
         public override bool Result(IProcessingUnit pu)
         {
-            return !_target.Result(pu);
+            return _target.Result(pu);
         }
         
         /// <summary>
-        /// returns true, if this or sub-expressions are valid.
+        /// Returns false
         /// </summary>
         public override bool IsValid()
         {
-            return _target != null && _target.IsValid();
+            return false;
         }
         
         public override string ToString()
         {
             string targetString = _target != null ? _target.ToString() : "???";
-            return NOT + " " + targetString;
+            return targetString + "_?" + _trail;
         }
         #endregion
     }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Boolean
 {
     /// <summary>
     /// Represents an boolean constant
@@ -9,9 +9,11 @@ namespace Osls.SfcEditor.Interpreters.Boolean
     public class Constant : BooleanExpression
     {
         #region ==================== Fields Properties ====================
-        public const string TRUE = "true";
-        public const string FALSE = "false";
-        public static HashSet<string> Values = new HashSet<string>(){ TRUE, FALSE };
+        public static string TRUE = "true";
+        public static string FALSE = "false";
+        public static HashSet<string> TrueSet = new HashSet<string>(){ "true", "True", "TRUE" };
+        public static HashSet<string> FalseSet = new HashSet<string>(){ "false", "False", "FALSE" };
+        public static HashSet<string> Values = Union(TrueSet, FalseSet);
         
         private readonly bool _value;
         #endregion
@@ -49,15 +51,16 @@ namespace Osls.SfcEditor.Interpreters.Boolean
         #endregion
         
         
-        #region ==================== Private ====================
+        #region ==================== Helpers ====================
         private static bool ConvertValue(string value)
         {
-            switch (value)
+            if (TrueSet.Contains(value))
             {
-                case TRUE:
-                    return true;
-                case FALSE:
-                    return false;
+                return true;
+            }
+            if (FalseSet.Contains(value))
+            {
+                return false;
             }
             Godot.GD.Print("Unknown value " + value);
             return false;

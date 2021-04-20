@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 
-namespace Osls.SfcEditor.Interpreters.Boolean
+namespace Osls.St.Boolean
 {
     /// <summary>
     /// Preforms an logical operation on the left and right expression
@@ -11,8 +11,10 @@ namespace Osls.SfcEditor.Interpreters.Boolean
         #region ==================== Fields Properties ====================
         public const string AND = "and";
         public const string OR = "or";
-        public static HashSet<string> Values = new HashSet<string>() { AND, OR };
-
+        public static HashSet<string> AndSet = new HashSet<string>(){ AND, "And", "AND", "&&", "&" };
+        public static HashSet<string> OrSet = new HashSet<string>(){ OR, "Or", "OR", "||", "|" };
+        public static HashSet<string> Values = Union(AndSet, OrSet);
+        
         private readonly string _operator;
         private readonly BooleanExpression _left;
         private readonly BooleanExpression _right;
@@ -35,12 +37,13 @@ namespace Osls.SfcEditor.Interpreters.Boolean
         /// </summary>
         public override bool Result(IProcessingUnit pu)
         {
-            switch (_operator)
+            if (AndSet.Contains(_operator))
             {
-                case AND:
-                    return _left.Result(pu) && _right.Result(pu);
-                case OR:
-                    return _left.Result(pu) || _right.Result(pu);
+                return _left.Result(pu) && _right.Result(pu);
+            }
+            if (OrSet.Contains(_operator))
+            {
+                return _left.Result(pu) || _right.Result(pu);
             }
             Godot.GD.PushError("Unknown operator " + _operator);
             return false;

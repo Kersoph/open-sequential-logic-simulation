@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/plant_models/minimal_example/MinimalSimulationExample.cs" type="Script" id=1]
-[ext_resource path="res://data/core/theme/font/roboto_bold_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://data/core/theme/font/roboto_t0_font.tres" type="DynamicFont" id=2]
 
 [node name="MinimalSimulationExample" type="Node"]
 script = ExtResource( 1 )
@@ -16,6 +16,7 @@ margin_top = -19.0
 margin_right = 41.5
 margin_bottom = 19.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 0, 1 )
 text = "Hello!"
 __meta__ = {
 "_edit_use_anchors_": false

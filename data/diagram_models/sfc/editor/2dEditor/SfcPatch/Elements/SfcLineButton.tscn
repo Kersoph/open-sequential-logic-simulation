@@ -20,8 +20,8 @@ _doubleLineTexture = ExtResource( 3 )
 [node name="SfcLineTexture" type="TextureRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
-margin_right = 500.0
-margin_bottom = 32.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true

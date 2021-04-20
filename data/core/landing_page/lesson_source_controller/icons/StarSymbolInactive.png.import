@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/StarSymbolActive.png-aba79848ac29a26dd336691e0825ed7c.stex"
+path="res://.import/StarSymbolInactive.png-b1f43d57563577b5ff58eef1ebfa14bc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/core/landing_page/LessonSourceController/icons/StarSymbolActive.png"
-dest_files=[ "res://.import/StarSymbolActive.png-aba79848ac29a26dd336691e0825ed7c.stex" ]
+source_file="res://data/core/landing_page/lesson_source_controller/icons/StarSymbolInactive.png"
+dest_files=[ "res://.import/StarSymbolInactive.png-b1f43d57563577b5ff58eef1ebfa14bc.stex" ]
 
 [params]
 

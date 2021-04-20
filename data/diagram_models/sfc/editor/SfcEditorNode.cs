@@ -1,3 +1,6 @@
+using Godot;
+
+
 namespace Osls.SfcEditor
 {
     /// <summary>
@@ -7,6 +10,9 @@ namespace Osls.SfcEditor
     public class SfcEditorNode : ModelEditor
     {
         #region ==================== Fields / Properties ====================
+        [Export] private NodePath PlantViewNodePath = "PlantViewNode";
+        [Export] private NodePath Sfc2dEditorPath = "Sfc2dEditor";
+        
         private LessonEntity _openedLesson;
         
         public MainNode MainNode { get; private set; }
@@ -23,10 +29,10 @@ namespace Osls.SfcEditor
         {
             MainNode = mainNode;
             _openedLesson = openedLesson;
-            PlantViewNode = GetNode<PlantViewNode>("PlantViewNode");
+            PlantViewNode = GetNode<PlantViewNode>(PlantViewNodePath);
             PlantViewNode.UpdateLessonEntity(openedLesson);
             GetNode<PlantInfoPanel>("PlantInfoPanel").SetSimulationInfo(PlantViewNode.LoadedSimulationNode);
-            Sfc2dEditorNode = GetNode<Sfc2dEditorNode>("ViewportContainer/Viewport/Sfc2dEditor");
+            Sfc2dEditorNode = GetNode<Sfc2dEditorNode>(Sfc2dEditorPath);
             ProcessingData data = new ProcessingData();
             data.InputRegisters = new StateTable(PlantViewNode.LoadedSimulationNode.SimulationOutput);
             data.OutputRegisters = new StateTable(PlantViewNode.LoadedSimulationNode.SimulationInput);
