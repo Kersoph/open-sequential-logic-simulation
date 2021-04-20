@@ -35,6 +35,11 @@ namespace Osls
         int LookupIntVariable(string key);
         
         /// <summary>
+        /// Returns true if there is a internal variable with this key
+        /// </summary>
+        bool HasBoolVariable(string key);
+        
+        /// <summary>
         /// Gets the value of the internal variable
         /// </summary>
         bool LookupBoolVariable(string key);

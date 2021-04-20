@@ -8,15 +8,20 @@ namespace Osls.SfcEditor.Interpreters
         #region ==================== Fields Properties ====================
         private readonly Dictionary<string, int> _patchNameMap = new Dictionary<string, int>();
         private readonly Dictionary<string, int> _patchStepTimeMap = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> _patchStepStateMap = new Dictionary<string, int>();
         
         /// <summary>
         /// Contains the Step to patch id dictionary
         /// </summary>
         public IReadOnlyDictionary<string, int> PatchNameMap { get { return _patchNameMap; } }
         /// <summary>
-        /// Contains the Step Time to patch id dictionary
+        /// Contains the key to the Step Time
         /// </summary>
         public IReadOnlyDictionary<string, int> PatchStepTimeMap { get { return _patchStepTimeMap; } }
+        /// <summary>
+        /// Contains the key to the Step State
+        /// </summary>
+        public IReadOnlyDictionary<string, int> PatchStepStateMap { get { return _patchStepStateMap; } }
         #endregion
         
         
@@ -28,6 +33,7 @@ namespace Osls.SfcEditor.Interpreters
         {
             _patchNameMap.Clear();
             _patchStepTimeMap.Clear();
+            _patchStepStateMap.Clear();
             foreach (PatchEntity entity in sfcEntity.Patches)
             {
                 if (entity.ContainsRealStep())
@@ -36,6 +42,7 @@ namespace Osls.SfcEditor.Interpreters
                     int mapKey = entity.Key;
                     _patchNameMap.Add(entity.StepName, mapKey);
                     _patchStepTimeMap.Add(entity.StepName + ".T", mapKey);
+                    _patchStepStateMap.Add(entity.StepName + ".Q", mapKey);
                 }
             }
         }
@@ -70,6 +77,22 @@ namespace Osls.SfcEditor.Interpreters
         public int GetStepTimeKey(string name)
         {
             return PatchStepTimeMap[name];
+        }
+        
+        /// <summary>
+        /// Returns true if a intern variable/entity exists with the given name. For example STEP.Q in SFC.
+        /// </summary>
+        public bool ContainsInternalBoolean(string name)
+        {
+            return PatchStepStateMap.ContainsKey(name);
+        }
+        
+        /// <summary>
+        /// Returns numeric key of the STEP.Q.
+        /// </summary>
+        public int GetStepStateKey(string name)
+        {
+            return PatchStepStateMap[name];
         }
         #endregion
         

@@ -70,6 +70,11 @@ namespace Tests.SfcEditor.Interpreters
         public int LookupIntVariable(string key) { return IntLookup[key]; }
         
         /// <summary>
+        /// Returns true if there is a internal variable with this key
+        /// </summary>
+        public bool HasBoolVariable(string key) { return false; }
+        
+        /// <summary>
         /// Gets the value of the internal variable
         /// </summary>
         public bool LookupBoolVariable(string key) { return false; }
