@@ -1,11 +1,8 @@
-Main Fields
-040 040 040 255	Normal
+Main Fields Dark
+040 040 040 255	Normal, Disabled
 080 080 080 255	Hover
-120 120 120 255 Active
-160 160 160 255 Background
-200 200 200 255 Clear
+120 120 120 255 Active, Background
 
-253 231 014 255 FHNW
-
-255 255 255 255 Background and Text
-disabled: Filter through "Normal" color
+Main Fields Light
+255 255 255 255 Normal
+255 255 180 255 Active

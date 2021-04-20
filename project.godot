@@ -67,4 +67,5 @@ ui_translate={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.470588, 0.470588, 0.470588, 1 )
 environment/default_environment="res://data/core/environment/default.tres"
