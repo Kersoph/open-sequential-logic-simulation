@@ -43,7 +43,14 @@ namespace Osls.LandingPage
         /// </summary>
         public void StartSelectedLesson(LessonEntity selectedLesson)
         {
-            _landingPageNode.StartLesson(selectedLesson);
+            if (_lessonView.PlantView.LoadedSimulationNode != null)
+            {
+                _landingPageNode.StartLesson(selectedLesson);
+            }
+            else
+            {
+                GD.PushWarning("could not load " + selectedLesson.Title);
+            }
         }
         #endregion
     }

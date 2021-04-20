@@ -60,7 +60,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 1.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="IoInfo" type="ColorRect" parent="."]
 anchor_top = 0.5
@@ -84,4 +84,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 1.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SideLine" type="ColorRect" parent="."]
+anchor_bottom = 1.0
+margin_left = -1.0
+color = Color( 0.470588, 0.470588, 0.470588, 1 )

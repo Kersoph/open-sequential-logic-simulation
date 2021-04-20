@@ -59,6 +59,14 @@ namespace Osls.SfcEditor
         }
         
         /// <summary>
+        /// Returns true if there is a internal variable with this key
+        /// </summary>
+        public bool HasBoolVariable(string key)
+        {
+            return StepMaster.ContainsInternalBoolean(key);
+        }
+        
+        /// <summary>
         /// Gets the value of the internal variable
         /// </summary>
         public bool LookupBoolVariable(string key)

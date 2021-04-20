@@ -13,6 +13,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -80.0
 margin_right = 80.0
+focus_mode = 0
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 6 )
@@ -21,4 +22,8 @@ custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 shortcut_in_tooltip = false
+enabled_focus_mode = 0
 icon = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

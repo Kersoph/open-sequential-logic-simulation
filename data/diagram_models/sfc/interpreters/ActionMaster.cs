@@ -1,8 +1,6 @@
 using Godot;
 using System.Collections.Generic;
 using Osls.St.Assignment;
-using Osls.St.Boolean;
-using Osls.St.Numerical;
 
 
 namespace Osls.SfcEditor.Interpreters
@@ -13,8 +11,6 @@ namespace Osls.SfcEditor.Interpreters
         private static Color BooleanInputColor   = Color.Color8(0, 150, 0, 255);
         private static Color BooleanOutputColor = Color.Color8(50, 180, 0, 255);
         private static Color IntegerInputColor   = Color.Color8(50, 50, 255, 255);
-        
-        private const string AssignmentSymbol = "=";
         #endregion
         
         
@@ -59,69 +55,7 @@ namespace Osls.SfcEditor.Interpreters
         /// </summary>
         public static AssignmentExpression InterpretTransitionText(string transition, IProcessingData processingData)
         {
-            string[] words = transition.Split(" ");
-            Data data = new Data(words);
-            return InterpretAssignmentExpression(data, processingData);
-        }
-        #endregion
-        
-        
-        #region ==================== Private Methods ====================
-        /// <summary>
-        /// Interprets the given words into a logical model.
-        /// We follow a fixed y = x format according the requirements.
-        /// </summary>
-        private static St.Assignment.AssignmentExpression InterpretAssignmentExpression(Data data, IProcessingData context)
-        {
-            string targetWord = data.GetNext();
-            if (data.IsEndReached) return null;
-            string assignmentSymbol = data.GetNext();
-            if (assignmentSymbol != AssignmentSymbol || data.IsEndReached) return null;
-            string sourceName = data.GetNext();
-            if (context.OutputRegisters.ContainsBoolean(targetWord))
-            {
-                BooleanExpression sourceExpression = InterpretBoolean(sourceName, context);
-                return new Boolean(targetWord, sourceExpression, context);
-            }
-            else if (context.OutputRegisters.ContainsInteger(targetWord))
-            {
-                NumericalExpression sourceExpression = InterpretNumerical(sourceName, context);
-                return new Numerical(targetWord, sourceExpression, context);
-            }
-            return null; // not valid
-        }
-        
-        private static BooleanExpression InterpretBoolean(string word, IProcessingData context)
-        {
-            if (St.Boolean.Constant.Values.Contains(word)) return new St.Boolean.Constant(word);
-            return new St.Boolean.PlantReference(word, context);
-        }
-        
-        private static NumericalExpression InterpretNumerical(string word, IProcessingData context)
-        {
-            if (int.TryParse(word, out int number)) return new St.Numerical.Constant(number);
-            return new St.Numerical.PlantReference(word, context);
-        }
-        #endregion
-        
-        
-        #region ==================== Nested Class ====================
-        private class Data
-        {
-            public Data(string[] words)
-            {
-                Words = words;
-                Position = 0;
-            }
-            public string[] Words { get; set; }
-            public int Position { get; set; }
-            public string GetNext()
-            {
-                string word = Words[Position];
-                Position++;
-                return word;
-            }
-            public bool IsEndReached { get { return Position == Words.Length; } }
+            return St.Assignment.Interpreter.AsAssignmentExpression(transition, processingData);
         }
         #endregion
     }

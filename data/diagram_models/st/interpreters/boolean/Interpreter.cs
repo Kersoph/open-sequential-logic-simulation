@@ -89,12 +89,14 @@ namespace Osls.St.Boolean
         private static bool IsRepresentingBoolean(string word, IProcessingData context)
         {
             return Constant.Values.Contains(word)
-            || context.InputRegisters.ContainsBoolean(word);
+            || context.InputRegisters.ContainsBoolean(word)
+            || context.HasBoolVariable(word);
         }
         
         private static BooleanExpression InterpretBoolean(string word, IProcessingData context)
         {
             if (Constant.Values.Contains(word)) return new Constant(word);
+            if (context.HasBoolVariable(word)) return new StepReference(word);
             return new PlantReference(word, context);
         }
         

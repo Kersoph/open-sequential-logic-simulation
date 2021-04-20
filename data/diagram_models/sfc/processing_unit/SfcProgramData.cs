@@ -39,6 +39,18 @@ namespace Osls.SfcSimulation.Engine
             return ActiveSteps.Contains(step);
         }
         
+        /// <summary>
+        /// True if the step is contained in the active steps set.
+        /// Used while checking the sfc transitions.
+        /// </summary>
+        public bool IsStepActive(int key)
+        {
+            return ActiveSteps.Contains(GetStepFromMapKey(key));
+        }
+        
+        /// <summary>
+        /// Gets the logical step from the given key
+        /// </summary>
         public SfcStep GetStepFromMapKey(int key)
         {
             return ControlMap[key];

@@ -90,11 +90,19 @@ namespace Osls.SfcSimulation.Engine
         }
         
         /// <summary>
+        /// Returns true if there is a internal variable with this key
+        /// </summary>
+        public bool HasBoolVariable(string key)
+        {
+            return SfcProgramData.StepMaster.ContainsInternalBoolean(key);
+        }
+        
+        /// <summary>
         /// Gets the value of the internal variable
         /// </summary>
         public bool LookupBoolVariable(string key)
         {
-            throw new System.NotImplementedException();
+            return SfcProgramData.IsStepActive(SfcProgramData.StepMaster.GetStepStateKey(key));
         }
         #endregion
         
