@@ -11,15 +11,6 @@ namespace Osls.Core
     {
         #region ==================== Fields ====================
         private const string LessonInfoLabelPath = "LessonInfoLabel";
-        private RichTextLabel _richTextLabel;
-        #endregion
-        
-        
-        #region ==================== Updates ====================
-        public override void _Ready()
-        {
-            _richTextLabel = GetNode<RichTextLabel>(LessonInfoLabelPath);
-        }
         #endregion
         
         
@@ -34,7 +25,7 @@ namespace Osls.Core
             builder.AppendLine(lessonEntity.Description);
             builder.AppendLine("[center][b][u]Goal[/u][/b][/center]");
             builder.AppendLine(lessonEntity.Goal);
-            _richTextLabel.BbcodeText = builder.ToString();
+            GetNode<RichTextLabel>(LessonInfoLabelPath).BbcodeText = builder.ToString();
         }
         #endregion
     }

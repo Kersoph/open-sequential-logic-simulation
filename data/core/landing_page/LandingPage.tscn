@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/core/landing_page/LandingPageNode.cs" type="Script" id=1]
 [ext_resource path="res://data/core/landing_page/LessonsNode.cs" type="Script" id=2]
 [ext_resource path="res://data/core/landing_page/LessonSelectionGridNode.cs" type="Script" id=3]
 [ext_resource path="res://data/core/lesson/viewer/lesson_view.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/core/landing_page/LessonPreview.cs" type="Script" id=6]
 
 [node name="LandingPage" type="Node"]
 script = ExtResource( 1 )
@@ -51,34 +50,6 @@ margin_top = -512.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="LessonPreview" type="ViewportContainer" parent="LessonsNode"]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = -512.0
-grow_horizontal = 0
-grow_vertical = 0
-rect_min_size = Vector2( 512, 512 )
-mouse_default_cursor_shape = 8
-stretch = true
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LessonPreviewViewport" type="Viewport" parent="LessonsNode/LessonPreview"]
-size = Vector2( 512, 512 )
-transparent_bg = true
-handle_input_locally = false
-msaa = 1
-hdr = false
-render_target_update_mode = 0
-gui_disable_input = true
-shadow_atlas_size = 1024
 
 [node name="ColorRect" type="ColorRect" parent="LessonsNode"]
 anchor_left = 1.0

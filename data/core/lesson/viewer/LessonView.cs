@@ -31,7 +31,7 @@ namespace Osls.Core
         /// <summary>
         /// Informs the grid, that the selection has changed to this button and the UI needs to be updated.
         /// </summary>
-        public void ShowInfo(LessonEntity selectedLesson)
+        public void LoadAndShowInfo(LessonEntity selectedLesson)
         {
             PlantView.UpdateLessonEntity(selectedLesson);
             LessonInfo.UpdateLessonEntity(selectedLesson);

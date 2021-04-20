@@ -34,7 +34,7 @@ namespace Osls.LandingPage
         /// </summary>
         public void SelectionChangedTo(LessonEntity selectedLesson)
         {
-            _lessonView.ShowInfo(selectedLesson);
+            _lessonView.LoadAndShowInfo(selectedLesson);
         }
         
         /// <summary>

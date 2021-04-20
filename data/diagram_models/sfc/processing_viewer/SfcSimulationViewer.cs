@@ -1,5 +1,6 @@
 using Godot;
 using Osls.Plants;
+using Osls.Core;
 
 
 namespace Osls.SfcEditor
@@ -11,7 +12,7 @@ namespace Osls.SfcEditor
     public class SfcSimulationViewer : PageModule
     {
         #region ==================== Fields / Properties ====================
-        private PlantInfoPanel _plantInfoPanel;
+        private LessonView _lessonView;
         private LessonEntity _openedLesson;
         private Master _simulationMaster;
         private bool _isExecutable;
@@ -35,8 +36,6 @@ namespace Osls.SfcEditor
             ProcessingData data = InitialisePlant();
             InitialiseDiagram(data);
             InitialiseSimulation(data);
-            _plantInfoPanel = GetNode<PlantInfoPanel>("PlantInfoPanel");
-            _plantInfoPanel.SetSimulationInfo(_loadedSimulationNode);
             if (!_isExecutable) GetNode<Label>("Sfc2dViewer/ErrorLabel").Visible = true;
         }
         
@@ -44,7 +43,7 @@ namespace Osls.SfcEditor
         {
             if (_isExecutable)
             {
-                _plantInfoPanel.UpdateText(true);
+                _lessonView.IoInfo.UpdateText(true);
                 int timeMs = (int)(delta * 1000);
                 timeMs = timeMs < 1 ? 1 : (timeMs > 1000 ? 1000 : timeMs);
                 _simulationMaster.UpdateSimulation(timeMs);
@@ -60,8 +59,9 @@ namespace Osls.SfcEditor
         /// </summary>
         private ProcessingData InitialisePlant()
         {
-            _loadedSimulationNode = (SimulationPage)((PackedScene)GD.Load(_openedLesson.SimulationPath)).Instance();
-            GetNode("PlantViewNode/PlantViewportContainer/PlantViewport").AddChild(_loadedSimulationNode);
+            _lessonView = GetNode<LessonView>("LessonView");
+            _lessonView.LoadAndShowInfo(_openedLesson);
+            _loadedSimulationNode = _lessonView.PlantView.LoadedSimulationNode;
             ProcessingData data = new ProcessingData();
             data.InputRegisters = new StateTable(_loadedSimulationNode.SimulationOutput);
             data.OutputRegisters = new StateTable(_loadedSimulationNode.SimulationInput);

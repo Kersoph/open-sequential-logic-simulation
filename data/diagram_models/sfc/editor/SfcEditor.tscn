@@ -1,68 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/SfcEditorNode.cs" type="Script" id=1]
-[ext_resource path="res://data/diagram_models/sfc/editor/PlantViewNode.cs" type="Script" id=2]
-[ext_resource path="res://data/diagram_models/sfc/editor/PlantInfoPanel.cs" type="Script" id=3]
-[ext_resource path="res://data/core/landing_page/RichTextLabel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/Sfc2dEditor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/Controls/Sfc2dControls.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/core/lesson/viewer/lesson_view.tscn" type="PackedScene" id=7]
 
 [node name="SfcEditorNode" type="Node"]
 script = ExtResource( 1 )
-Sfc2dEditorPath = NodePath("Sfc2dBackground/Sfc2dEditor")
 
-[node name="PlantViewNode" type="ColorRect" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = -512.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlantViewportContainer" type="ViewportContainer" parent="PlantViewNode"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch = true
-
-[node name="PlantViewport" type="Viewport" parent="PlantViewNode/PlantViewportContainer"]
-size = Vector2( 512, 512 )
-transparent_bg = true
-handle_input_locally = false
-msaa = 1
-render_target_update_mode = 3
-shadow_atlas_size = 1024
-
-[node name="PlantInfoPanel" type="ColorRect" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = 1.0
-margin_bottom = -513.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlantInfoText" parent="PlantInfoPanel" instance=ExtResource( 4 )]
-bbcode_text = "[b][u]Plant Inputs[/u][/b]
-H_Top   [i]int[/i]
-H_Bot   [i]int[/i]
-
-[b][u]Plant Outputs[/u][/b]
-B_Top   [i]bool[/i]
-B_Bot   [i]bool[/i]"
-text = "Plant Inputs
-H_Top   int
-H_Bot   int
-
-Plant Outputs
-B_Top   bool
-B_Bot   bool"
+[node name="LessonView" parent="." instance=ExtResource( 7 )]
 
 [node name="Sfc2dBackground" type="ColorRect" parent="."]
 anchor_right = 1.0
