@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/core/landing_page/LandingPageNode.cs" type="Script" id=1]
 [ext_resource path="res://data/core/landing_page/LessonsNode.cs" type="Script" id=2]
 [ext_resource path="res://data/core/landing_page/LessonSelectionGridNode.cs" type="Script" id=3]
-[ext_resource path="res://data/core/landing_page/LessonPreview.cs" type="Script" id=6]
-[ext_resource path="res://data/core/landing_page/LessonInfo.cs" type="Script" id=7]
-[ext_resource path="res://data/core/landing_page/RichTextLabel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://data/core/lesson/viewer/lesson_view.tscn" type="PackedScene" id=4]
 
 [node name="LandingPage" type="Node"]
 script = ExtResource( 1 )
@@ -53,58 +51,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LessonPreview" type="ViewportContainer" parent="LessonsNode"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = -512.0
-grow_horizontal = 0
-grow_vertical = 0
-rect_min_size = Vector2( 512, 512 )
-mouse_default_cursor_shape = 8
-stretch = true
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LessonPreviewViewport" type="Viewport" parent="LessonsNode/LessonPreview"]
-size = Vector2( 512, 512 )
-transparent_bg = true
-handle_input_locally = false
-msaa = 1
-hdr = false
-render_target_update_mode = 3
-gui_disable_input = true
-shadow_atlas_size = 1024
-
-[node name="LessonInfo" type="ColorRect" parent="LessonsNode"]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = 1.0
-margin_bottom = -513.0
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LessonInfoLabel" parent="LessonsNode/LessonInfo" instance=ExtResource( 8 )]
-margin_top = 8.052
-margin_bottom = -11.948
-
-[node name="ColorRect" type="ColorRect" parent="LessonsNode/LessonInfo"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 1.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-
 [node name="ColorRect" type="ColorRect" parent="LessonsNode"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -115,3 +61,5 @@ color = Color( 0.156863, 0.156863, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LessonView" parent="LessonsNode" instance=ExtResource( 4 )]

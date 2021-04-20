@@ -10,8 +10,8 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields Properties ====================
         private ReferenceRect _renderViewportReferenceRect;
-        private int _zoomLevel = 3;
-        private static readonly float[] zoomLevels = new float[] { 0.34f, 0.5f, 0.7f, 1f, 1.5f, 2f, 3f };
+        private int _zoomLevel = 2;
+        private static readonly float[] zoomLevels = new float[] { 0.5f, 0.7f, 1f, 1.5f, 2f, 3f };
         private bool _isDragging;
         private Vector2 _lastDragPosition;
         

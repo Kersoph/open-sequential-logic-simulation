@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using Osls.Plants;
 
 
-namespace Osls.SfcEditor
+namespace Osls.Core
 {
     /// <summary>
     /// Provides an info panel with the inputs and outputs of the simulated plant.
     /// </summary>
-    public class PlantInfoPanel : ColorRect
+    public class IoInfo : ColorRect
     {
         #region ==================== Fields Properties ====================
+        private const string IoTablePath = "IoTable";
         private SimulationPage _simulationControlNode;
         #endregion
         
@@ -33,7 +34,7 @@ namespace Osls.SfcEditor
         {
             if (_simulationControlNode == null)
             {
-                GetNode<RichTextLabel>("PlantInfoText").BbcodeText = string.Empty;
+                GetNode<RichTextLabel>(IoTablePath).BbcodeText = string.Empty;
             }
             else
             {
@@ -75,7 +76,7 @@ namespace Osls.SfcEditor
                     builder.Append("\n");
                 }
                 
-                GetNode<RichTextLabel>("PlantInfoText").BbcodeText = builder.ToString();
+                GetNode<RichTextLabel>(IoTablePath).BbcodeText = builder.ToString();
             }
         }
         #endregion

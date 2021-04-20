@@ -1,4 +1,5 @@
 using Godot;
+using Osls.Core;
 
 
 namespace Osls.LandingPage
@@ -11,12 +12,10 @@ namespace Osls.LandingPage
     {
         #region ==================== Fields / Properties ====================
         [Export] private NodePath _landingPagePath = "..";
-        [Export] private NodePath _lessonInfoPath = "LessonInfo";
-        [Export] private NodePath _lessonPreviewPath = "LessonPreview";
+        [Export] private NodePath _lessonViewPath = "LessonView";
         
         private LandingPageNode _landingPageNode;
-        private LessonInfo _lessonInfo;
-        private LessonPreview _lessonPreview;
+        private LessonView _lessonView;
         #endregion
         
         
@@ -24,8 +23,7 @@ namespace Osls.LandingPage
         public override void _Ready()
         {
             _landingPageNode = GetNode<LandingPageNode>(_landingPagePath);
-            _lessonInfo = GetNode<LessonInfo>(_lessonInfoPath);
-            _lessonPreview = GetNode<LessonPreview>(_lessonPreviewPath);
+            _lessonView = GetNode<LessonView>(_lessonViewPath);
         }
         #endregion
         
@@ -36,8 +34,7 @@ namespace Osls.LandingPage
         /// </summary>
         public void SelectionChangedTo(LessonEntity selectedLesson)
         {
-            _lessonInfo.UpdateLessonEntity(selectedLesson);
-            _lessonPreview.UpdateLessonEntity(selectedLesson);
+            _lessonView.LoadAndShowInfo(selectedLesson);
         }
         
         /// <summary>

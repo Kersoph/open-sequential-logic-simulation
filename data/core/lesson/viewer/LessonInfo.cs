@@ -1,7 +1,8 @@
 using Godot;
+using System.Text;
 
 
-namespace Osls.LandingPage
+namespace Osls.Core
 {
     /// <summary>
     /// Controls the LessonInfoLabel to show the desired text.
@@ -9,16 +10,7 @@ namespace Osls.LandingPage
     public class LessonInfo : ColorRect
     {
         #region ==================== Fields ====================
-        [Export] private NodePath _lessonInfoLabelPath = "LessonInfoLabel";
-        private RichTextLabel _richTextLabel;
-        #endregion
-        
-        
-        #region ==================== Updates ====================
-        public override void _Ready()
-        {
-            _richTextLabel = GetNode<RichTextLabel>(_lessonInfoLabelPath);
-        }
+        private const string LessonInfoLabelPath = "LessonInfoLabel";
         #endregion
         
         
@@ -28,7 +20,12 @@ namespace Osls.LandingPage
         /// </summary>
         public void UpdateLessonEntity(LessonEntity lessonEntity)
         {
-            _richTextLabel.BbcodeText = lessonEntity.Description;
+            StringBuilder builder = new StringBuilder(100);
+            builder.AppendLine("[center][b][u]Lesson Description[/u][/b][/center]");
+            builder.AppendLine(lessonEntity.Description);
+            builder.AppendLine("[center][b][u]Goal[/u][/b][/center]");
+            builder.AppendLine(lessonEntity.Goal);
+            GetNode<RichTextLabel>(LessonInfoLabelPath).BbcodeText = builder.ToString();
         }
         #endregion
     }
