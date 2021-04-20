@@ -23,6 +23,7 @@ margin_left = -39.0
 margin_top = -1.0
 margin_right = 1.0
 margin_bottom = 39.0
+toggle_mode = false
 text = "-"
 script = ExtResource( 2 )
 
@@ -33,6 +34,7 @@ margin_left = -78.0
 margin_top = -1.0
 margin_right = -38.0
 margin_bottom = 39.0
+toggle_mode = false
 text = "+"
 script = ExtResource( 3 )
 
@@ -43,6 +45,7 @@ margin_left = -236.0
 margin_top = -1.0
 margin_right = -156.0
 margin_bottom = 39.0
+toggle_mode = false
 text = "Save"
 script = ExtResource( 5 )
 
@@ -53,5 +56,6 @@ margin_left = -157.0
 margin_top = -1.0
 margin_right = -77.0
 margin_bottom = 39.0
+toggle_mode = false
 text = "Load"
 script = ExtResource( 6 )

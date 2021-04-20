@@ -7,12 +7,12 @@ namespace Osls.SfcEditor.Controls
     {
         public override void _Ready()
         {
-            Connect("button_up", this, nameof(ButtonUpEvent));
+            Connect("pressed", this, nameof(OnButtonPressed));
         }
         
-        public void ButtonUpEvent()
+        public void OnButtonPressed()
         {
-            GetNode<SfcEditorNode>("../..").Sfc2dEditorNode.ZoomOut();
+            GetNode<SfcEditorNode>("../../..").Sfc2dEditorNode.ZoomOut();
         }
     }
 }
