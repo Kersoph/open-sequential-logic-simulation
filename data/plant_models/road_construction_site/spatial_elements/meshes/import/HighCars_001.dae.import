@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Road_001.dae-1cbfff3e6a42e8866f4632845be54aa2.scn"
+path="res://.import/HighCars_001.dae-006c0b316dc9ee0dafce9aeb359ad87a.scn"
 
 [deps]
 
-source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/Road_001.dae"
-dest_files=[ "res://.import/Road_001.dae-1cbfff3e6a42e8866f4632845be54aa2.scn" ]
+source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/HighCars_001.dae"
+dest_files=[ "res://.import/HighCars_001.dae-006c0b316dc9ee0dafce9aeb359ad87a.scn" ]
 
 [params]
 
@@ -29,8 +29,8 @@ external_files/store_in_subdir=false
 animation/import=false
 animation/fps=15
 animation/filter_script=""
-animation/storage=true
-animation/keep_custom_tracks=true
+animation/storage=false
+animation/keep_custom_tracks=false
 animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01
