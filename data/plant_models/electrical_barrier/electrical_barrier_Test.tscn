@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/plant_models/electrical_barrier/ElectricalBarrierTest.cs" type="Script" id=1]
+[ext_resource path="res://data/plant_models/electrical_barrier/electrical_barrier.tscn" type="PackedScene" id=2]
+
+[node name="ElectricalBarrierTest" type="Node"]
+script = ExtResource( 1 )
+
+[node name="ElectricalBarrier" parent="." instance=ExtResource( 2 )]
