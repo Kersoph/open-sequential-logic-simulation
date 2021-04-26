@@ -17,11 +17,10 @@ namespace Osls.Plants.ElectricalBarrier
             return new StateTable(
                 new Dictionary<string, bool>()
                 {
-                    {"B_Opened", false},
-                    {"B_Closed", false}
                 },
                 new Dictionary<string, int>()
                 {
+                    { ElectricalBarrierNode.MotorKey, 0 },
                 }
             );
         }
@@ -35,10 +34,12 @@ namespace Osls.Plants.ElectricalBarrier
             return new StateTable(
                 new Dictionary<string, bool>()
                 {
+                    { ElectricalBarrierNode.SensorOpenedKey, false },
+                    { ElectricalBarrierNode.SensorClosedKey, false },
+                    { GuardAgent.OpenGateSwitchKey, false },
                 },
                 new Dictionary<string, int>()
                 {
-                    {"M_Gate", 0},
                 }
             );
         }
@@ -47,7 +48,12 @@ namespace Osls.Plants.ElectricalBarrier
         /// Calculates the next simulation step.
         /// It will read the SimulationInput values and stores in the end the new values to the SimulationOutput.
         /// </summary>
-        protected override void CalculateNextStep(int deltaTime) { }
+        protected override void CalculateNextStep(int deltaTime)
+        {
+            GetNode<ElectricalBarrierNode>("ElectricalBarrierNode").Update(this, deltaTime);
+            GetNode<VehicleAgentController>("VehicleAgents").Update(this, deltaTime);
+            GetNode<GuardAgent>("GuardAgent").Update(this, deltaTime);
+        }
         #endregion
     }
 }

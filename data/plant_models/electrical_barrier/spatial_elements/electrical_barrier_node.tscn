@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_electrical_pole.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_electrical_base.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/ElectricalBarrierNode.cs" type="Script" id=3]
 
-[node name="ElectricalBarrier" type="Spatial"]
+[node name="ElectricalBarrierNode" type="Spatial"]
+script = ExtResource( 3 )
 
 [node name="BarrierElectricalBase" parent="." instance=ExtResource( 2 )]
 

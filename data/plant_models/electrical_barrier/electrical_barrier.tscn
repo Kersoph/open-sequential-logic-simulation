@@ -1,17 +1,19 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://data/plant_models/electrical_barrier/ElectricalBarrier.cs" type="Script" id=1]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_material.material" type="Material" id=2]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Ground.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/highcar_black.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/lamp.tscn" type="PackedScene" id=5]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/electrical_barrier.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/electrical_barrier_node.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_cone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_pole.tscn" type="PackedScene" id=8]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_fence.tscn" type="PackedScene" id=9]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_wall.tscn" type="PackedScene" id=10]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/highcar_blue.tscn" type="PackedScene" id=11]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/highcar_green.tscn" type="PackedScene" id=12]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/vehicle_agents.tscn" type="PackedScene" id=13]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/guard_agent.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_horizon_color = Color( 0.976471, 0.815686, 0.505882, 1 )
@@ -166,8 +168,12 @@ fov = 60.0
 near = 1.0
 far = 60.0
 
-[node name="ElectricalBarrier" parent="." instance=ExtResource( 6 )]
+[node name="ElectricalBarrierNode" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.14634, 2.38419e-07, -1.05815 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
+
+[node name="VehicleAgents" parent="." instance=ExtResource( 13 )]
+
+[node name="GuardAgent" parent="." instance=ExtResource( 14 )]
