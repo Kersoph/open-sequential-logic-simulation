@@ -52,6 +52,8 @@ namespace Osls.Plants.ElectricalBarrier
         private void BreakDown()
         {
             _isBroken = true;
+            GetNode<Particles>("BreakdownSmoke").Visible = true;
+            GetNode<Flash>("Flash").FlashNextFrame();
         }
         #endregion
     }
