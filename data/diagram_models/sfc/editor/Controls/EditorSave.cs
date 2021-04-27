@@ -5,6 +5,7 @@ namespace Osls.SfcEditor.Controls
 {
     public class EditorSave : Button
     {
+        #region ==================== Public Methods ====================
         public override void _Ready()
         {
             Connect("pressed", this, nameof(OnButtonPressed));
@@ -14,5 +15,14 @@ namespace Osls.SfcEditor.Controls
         {
             GetNode<SfcEditorNode>("../../..").SaveDiagram();
         }
+        
+        public override void _UnhandledKeyInput(InputEventKey @event)
+        {
+            if (@event.IsActionPressed("main_save"))
+            {
+                GetNode<SfcEditorNode>("../../..").SaveDiagram();
+            }
+        }
+        #endregion
     }
 }
