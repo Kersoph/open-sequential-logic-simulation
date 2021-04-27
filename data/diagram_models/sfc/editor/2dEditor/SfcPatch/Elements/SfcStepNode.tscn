@@ -1,11 +1,61 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNode.cs" type="Script" id=1]
+[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNormal.png" type="Texture" id=2]
+[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepStart.png" type="Texture" id=3]
+[ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=4]
+[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepPass.png" type="Texture" id=5]
+[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepJump.png" type="Texture" id=6]
+[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepEmpty.png" type="Texture" id=7]
+[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/StepSelection.cs" type="Script" id=8]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_left = 6.0
+margin_right = 6.0
+margin_top = 6.0
+margin_bottom = 6.0
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_left = 6.0
+margin_right = 6.0
+margin_top = 6.0
+margin_bottom = 6.0
+draw_center = false
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
 
 [node name="SfcStepNode" type="ReferenceRect"]
 margin_right = 150.0
 margin_bottom = 70.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StepSelection" type="MenuButton" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 4 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_constants/hseparation = 36
+shortcut_in_tooltip = false
+flat = false
+items = [ "Empty", ExtResource( 7 ), 0, false, false, 0, 0, null, "", false, "Starting Step", ExtResource( 3 ), 0, false, false, 1, 0, null, "", false, "Step", ExtResource( 2 ), 0, false, false, 2, 0, null, "", false, "Jump", ExtResource( 6 ), 0, false, false, 3, 0, null, "", false, "Pass", ExtResource( 5 ), 0, false, false, 4, 0, null, "", false ]
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

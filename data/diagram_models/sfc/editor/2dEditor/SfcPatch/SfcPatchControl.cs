@@ -115,7 +115,7 @@ namespace Osls.SfcEditor
         /// Called if the user changed the step.
         /// This will update the model.
         /// </summary>
-        public void UpdateSfcSetpTo(StepType sfcStepType)
+        public void UpdateSfcStepTo(StepType sfcStepType)
         {
             Data.SfcStepType = sfcStepType;
             Master.UpdateGrid();

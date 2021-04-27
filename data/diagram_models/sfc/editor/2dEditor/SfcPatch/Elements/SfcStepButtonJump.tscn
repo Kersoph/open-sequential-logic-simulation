@@ -1,41 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNormal.png" type="Texture" id=1]
-[ext_resource path="res://data/core/theme/font/roboto_regular_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonJump.cs" type="Script" id=3]
 [ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNameEditor.tscn" type="PackedScene" id=4]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 5.0
-margin_right = 5.0
-margin_top = 5.0
-margin_bottom = 5.0
-modulate_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 5.0
-margin_right = 5.0
-margin_top = 5.0
-margin_bottom = 5.0
-
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=4]
-
-[node name="SfcStepButtonJump" type="Button"]
+[node name="SfcStepButtonJump" type="NinePatchRect"]
 margin_right = 150.0
 margin_bottom = 70.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-clip_text = true
 script = ExtResource( 3 )
 
 [node name="ColorLineDown" type="ColorRect" parent="."]

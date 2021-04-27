@@ -21,7 +21,7 @@ namespace Osls.SfcEditor
         
         #region ==================== Public ====================
         /// <summary>
-        /// Updates the visivle nodes according to the given step type.
+        /// Updates the visible nodes according to the given step type.
         /// </summary>
         public void UpdateStep(PatchEntity data, Sfc2dEditorControl context)
         {
@@ -34,30 +34,12 @@ namespace Osls.SfcEditor
         }
         
         /// <summary>
-        /// Called by sub nodes: The current button was pressed.
+        /// Called by sub nodes when the step selection was updated
         /// </summary>
-        public void NotifyButtonPressed()
+        public void NotifyStepSelected(StepType selectedType)
         {
-            // Todo: Later we will provide direct options with a gui
             SfcPatchControl controller = GetNode<SfcPatchNode>("..").SfcPatchControl;
-            switch (_currentStepType)
-            {
-                case StepType.Unused:
-                    controller.UpdateSfcSetpTo(StepType.Step);
-                    break;
-                case StepType.Step:
-                    controller.UpdateSfcSetpTo(StepType.StartingStep);
-                    break;
-                case StepType.StartingStep:
-                    controller.UpdateSfcSetpTo(StepType.Pass);
-                    break;
-                case StepType.Pass:
-                    controller.UpdateSfcSetpTo(StepType.Jump);
-                    break;
-                case StepType.Jump:
-                    controller.UpdateSfcSetpTo(StepType.Unused);
-                    break;
-            }
+            controller.UpdateSfcStepTo(selectedType);
         }
         
         /// <summary>
