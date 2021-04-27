@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2021-04-21T10:06:55</created>
-    <modified>2021-04-21T10:06:55</modified>
+    <created>2021-04-27T14:05:58</created>
+    <modified>2021-04-27T14:05:58</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -16,7 +16,7 @@
     </image>
   </library_images>
   <library_effects>
-    <effect id="Material-effect">
+    <effect id="lookup_material-effect">
       <profile_COMMON>
         <technique sid="common">
           <phong>
@@ -44,8 +44,8 @@
     </effect>
   </library_effects>
   <library_materials>
-    <material id="Material-material" name="Material">
-      <instance_effect url="#Material-effect"/>
+    <material id="lookup_material-material" name="lookup_material">
+      <instance_effect url="#lookup_material-effect"/>
     </material>
   </library_materials>
   <library_geometries>
@@ -83,7 +83,7 @@
         <vertices id="Tree_001-mesh-vertices">
           <input semantic="POSITION" source="#Tree_001-mesh-positions"/>
         </vertices>
-        <triangles material="Material-material" count="104">
+        <triangles material="lookup_material-material" count="104">
           <input semantic="VERTEX" source="#Tree_001-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Tree_001-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Tree_001-mesh-map-0" offset="2" set="0"/>
@@ -125,7 +125,7 @@
         <vertices id="Tree_002-mesh-vertices">
           <input semantic="POSITION" source="#Tree_002-mesh-positions"/>
         </vertices>
-        <triangles material="Material-material" count="136">
+        <triangles material="lookup_material-material" count="136">
           <input semantic="VERTEX" source="#Tree_002-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Tree_002-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Tree_002-mesh-map-0" offset="2" set="0"/>
@@ -141,9 +141,7 @@
         <instance_geometry url="#Tree_001-mesh" name="Tree_001">
           <bind_material>
             <technique_common>
-              <instance_material symbol="Material-material" target="#Material-material">
-                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-              </instance_material>
+              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -153,9 +151,7 @@
         <instance_geometry url="#Tree_002-mesh" name="Tree_002">
           <bind_material>
             <technique_common>
-              <instance_material symbol="Material-material" target="#Material-material">
-                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-              </instance_material>
+              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>

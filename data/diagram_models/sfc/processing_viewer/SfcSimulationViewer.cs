@@ -50,6 +50,14 @@ namespace Osls.SfcEditor
                 _simulationMaster.VisualiseStatus(_sfc2dEditorNode.Sfc2dEditorControl);
             }
         }
+        
+        /// <summary>
+        /// Resets the controller like there was a blackout
+        /// </summary>
+        public void ResetController()
+        {
+            _simulationMaster.Reset();
+        }
         #endregion
         
         

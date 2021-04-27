@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2021-04-21T10:31:41</created>
-    <modified>2021-04-21T10:31:41</modified>
+    <created>2021-04-27T14:07:15</created>
+    <modified>2021-04-27T14:07:15</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -16,7 +16,7 @@
     </image>
   </library_images>
   <library_effects>
-    <effect id="Material-effect">
+    <effect id="lookup_material-effect">
       <profile_COMMON>
         <technique sid="common">
           <phong>
@@ -44,8 +44,8 @@
     </effect>
   </library_effects>
   <library_materials>
-    <material id="Material-material" name="Material">
-      <instance_effect url="#Material-effect"/>
+    <material id="lookup_material-material" name="lookup_material">
+      <instance_effect url="#lookup_material-effect"/>
     </material>
   </library_materials>
   <library_geometries>
@@ -83,7 +83,7 @@
         <vertices id="Signaling-mesh-vertices">
           <input semantic="POSITION" source="#Signaling-mesh-positions"/>
         </vertices>
-        <triangles material="Material-material" count="196">
+        <triangles material="lookup_material-material" count="196">
           <input semantic="VERTEX" source="#Signaling-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Signaling-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Signaling-mesh-map-0" offset="2" set="0"/>
@@ -99,7 +99,7 @@
         <instance_geometry url="#Signaling-mesh" name="Signaling">
           <bind_material>
             <technique_common>
-              <instance_material symbol="Material-material" target="#Material-material"/>
+              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
