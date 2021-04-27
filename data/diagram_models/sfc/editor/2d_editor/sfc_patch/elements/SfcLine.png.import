@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SfcStepPass.png-bc3c62185eac665a126aacf5fae2763e.stex"
+path="res://.import/SfcLine.png-ccd74f97a3b62e7d50cf6ac297899655.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepPass.png"
-dest_files=[ "res://.import/SfcStepPass.png-bc3c62185eac665a126aacf5fae2763e.stex" ]
+source_file="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcLine.png"
+dest_files=[ "res://.import/SfcLine.png-ccd74f97a3b62e7d50cf6ac297899655.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

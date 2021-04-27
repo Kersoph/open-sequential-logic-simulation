@@ -9,11 +9,11 @@ namespace Osls.SfcEditor
     public class SfcStepNode : ReferenceRect
     {
         #region ==================== Fields Properties ====================
-        private const string UnusedStepButton = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonUnused.tscn";
-        private const string PassStepButton = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonPass.tscn";
-        private const string StepButton = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButton.tscn";
-        private const string StartStepButton = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonStart.tscn";
-        private const string StepJump = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonJump.tscn";
+        private const string UnusedStepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonUnused.tscn";
+        private const string PassStepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonPass.tscn";
+        private const string StepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButton.tscn";
+        private const string StartStepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonStart.tscn";
+        private const string StepJump = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonJump.tscn";
         private StepType _currentStepType;
         private SfcStepButtonBasic _stepNode;
         #endregion

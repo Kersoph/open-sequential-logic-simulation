@@ -7,7 +7,7 @@ namespace Osls.SfcEditor
     public class ActionEditorBox : Control
     {
         #region ==================== Fields / Properties ====================
-        private const string _editorScenePath = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/ActionEditor.tscn";
+        private const string _editorScenePath = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/ActionEditor.tscn";
         
         private SfcPatchControl _patchController;
         private readonly List<ActionEditor> _actionEditors = new List<ActionEditor>();

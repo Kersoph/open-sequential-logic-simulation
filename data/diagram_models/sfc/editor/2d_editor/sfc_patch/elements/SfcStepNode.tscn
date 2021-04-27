@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNode.cs" type="Script" id=1]
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNormal.png" type="Texture" id=2]
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepStart.png" type="Texture" id=3]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepNode.cs" type="Script" id=1]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepNormal.png" type="Texture" id=2]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepStart.png" type="Texture" id=3]
 [ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=4]
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepPass.png" type="Texture" id=5]
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepJump.png" type="Texture" id=6]
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepEmpty.png" type="Texture" id=7]
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/StepSelection.cs" type="Script" id=8]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepPass.png" type="Texture" id=5]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepJump.png" type="Texture" id=6]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepEmpty.png" type="Texture" id=7]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/StepSelection.cs" type="Script" id=8]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 3 )

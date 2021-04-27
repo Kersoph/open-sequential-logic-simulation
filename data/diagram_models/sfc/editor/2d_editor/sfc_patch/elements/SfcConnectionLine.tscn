@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcConnectionLine.cs" type="Script" id=1]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcConnectionLine.cs" type="Script" id=1]
 
 [node name="SfcConnectionLine" type="Control"]
 mouse_filter = 2

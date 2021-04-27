@@ -9,7 +9,7 @@ namespace Osls.SfcEditor
     public class SfcPatchControl
     {
         #region ==================== Fields / Properties ====================
-        private const string _patchReferencePath = "res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/SfcPatch.tscn";
+        private const string _patchReferencePath = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/SfcPatch.tscn";
         
         /// <summary>
         /// The editor master holding all patch controls

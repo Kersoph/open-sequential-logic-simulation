@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SfcStepNormal.png-9790ffc45f857f636f503df6f5bf164f.stex"
+path="res://.import/SfcStepNormal.png-0bfe8e46dc5eae311eb7c6d0581e2f04.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNormal.png"
-dest_files=[ "res://.import/SfcStepNormal.png-9790ffc45f857f636f503df6f5bf164f.stex" ]
+source_file="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepNormal.png"
+dest_files=[ "res://.import/SfcStepNormal.png-0bfe8e46dc5eae311eb7c6d0581e2f04.stex" ]
 
 [params]
 

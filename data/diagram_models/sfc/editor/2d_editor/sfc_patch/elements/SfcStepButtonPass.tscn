@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonUnused.cs" type="Script" id=3]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonUnused.cs" type="Script" id=3]
 
 [node name="SfcStepButtonPass" type="Control"]
 margin_right = 150.0

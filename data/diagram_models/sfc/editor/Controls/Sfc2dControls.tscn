@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorZoomOut.cs" type="Script" id=2]
-[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorZoomIn.cs" type="Script" id=3]
-[ext_resource path="res://data/diagram_models/sfc/editor/EditorControls/ControlButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorSave.cs" type="Script" id=5]
-[ext_resource path="res://data/diagram_models/sfc/editor/Controls/EditorLoad.cs" type="Script" id=6]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomIn.cs" type="Script" id=3]
+[ext_resource path="res://data/diagram_models/sfc/editor/editor_controls/ControlButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorSave.cs" type="Script" id=5]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorLoad.cs" type="Script" id=6]
 
 [node name="Sfc2dControls" type="Control"]
 anchor_left = 1.0

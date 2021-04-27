@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepButtonJump.cs" type="Script" id=3]
-[ext_resource path="res://data/diagram_models/sfc/editor/2dEditor/SfcPatch/Elements/SfcStepNameEditor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonJump.cs" type="Script" id=3]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepNameEditor.tscn" type="PackedScene" id=4]
 
 [node name="SfcStepButtonJump" type="NinePatchRect"]
 margin_right = 150.0
