@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonUnused.cs" type="Script" id=3]
+[ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisualUnused.cs" type="Script" id=1]
 
 [node name="SfcStepButtonUnused" type="Control"]
 margin_right = 150.0
 margin_bottom = 70.0
 mouse_filter = 2
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

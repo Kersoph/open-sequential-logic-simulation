@@ -1,9 +1,11 @@
 using Godot;
 
-
 namespace Osls.SfcEditor
 {
-    public class SfcStepButtonJump : SfcStepButtonBasic
+    /// <summary>
+    /// Topmost node for the SfcStepButton.tscn
+    /// </summary>
+    public class SfcStepVisual : SfcStepVisualBasic
     {
         #region ==================== Public Methods ====================
         public override void _Ready()
@@ -16,11 +18,15 @@ namespace Osls.SfcEditor
         /// </summary>
         public override void SetEditorText(string text, Sfc2dEditorControl context)
         {
-            TextEdit node = GetNode<TextEdit>("StepNameEditor");
-            node.Text = text;
-            bool validReference = context.Data.StepMaster.ContainsStep(text);
-            Color background = validReference ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);
-            node.AddColorOverride("background_color", background);
+            GetNode<TextEdit>("StepNameEditor").Text = text;
+        }
+        
+        /// <summary>
+        /// Marks or unmarks the step if possible
+        /// </summary>
+        public override void MarkStep(bool setMark)
+        {
+            GetNode<Control>("StepMark").Visible = setMark;
         }
         #endregion
         

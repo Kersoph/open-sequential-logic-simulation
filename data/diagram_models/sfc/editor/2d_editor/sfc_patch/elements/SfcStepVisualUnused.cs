@@ -1,6 +1,6 @@
 namespace Osls.SfcEditor
 {
-    public class SfcStepButtonUnused : SfcStepButtonBasic
+    public class SfcStepVisualUnused : SfcStepVisualBasic
     {
         #region ==================== Public Methods ====================
         #endregion

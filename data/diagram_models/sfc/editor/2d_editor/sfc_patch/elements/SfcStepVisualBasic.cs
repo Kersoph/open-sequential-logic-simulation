@@ -6,7 +6,7 @@ namespace Osls.SfcEditor
     /// Abstract class for sfc step buttons as we can not use an interface
     /// because we need to inherit godots button to instantiate this type of buttons.
     /// </summary>
-    public abstract class SfcStepButtonBasic : Control
+    public abstract class SfcStepVisualBasic : Control
     {
         /// <summary>
         /// Displays the text as a multi line string in the editor if possible.

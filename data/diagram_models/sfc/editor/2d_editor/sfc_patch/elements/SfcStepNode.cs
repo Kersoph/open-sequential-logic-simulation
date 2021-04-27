@@ -9,13 +9,13 @@ namespace Osls.SfcEditor
     public class SfcStepNode : ReferenceRect
     {
         #region ==================== Fields Properties ====================
-        private const string UnusedStepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonUnused.tscn";
-        private const string PassStepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonPass.tscn";
-        private const string StepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButton.tscn";
-        private const string StartStepButton = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonStart.tscn";
-        private const string StepJump = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepButtonJump.tscn";
+        private const string UnusedStep = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisualUnused.tscn";
+        private const string PassStep = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisualPass.tscn";
+        private const string Step = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisual.tscn";
+        private const string StartStep = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisualStart.tscn";
+        private const string StepJump = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisualJump.tscn";
         private StepType _currentStepType;
-        private SfcStepButtonBasic _stepNode;
+        private SfcStepVisualBasic _stepNode;
         #endregion
         
         
@@ -68,26 +68,26 @@ namespace Osls.SfcEditor
                 _stepNode.QueueFree();
                 _stepNode = null;
             }
-            string reference = StepButton;
+            string reference = Step;
             switch (type)
             {
                 case StepType.Unused:
-                    reference = UnusedStepButton;
+                    reference = UnusedStep;
                     break;
                 case StepType.Pass:
-                    reference = PassStepButton;
+                    reference = PassStep;
                     break;
                 case StepType.Step:
-                    reference = StepButton;
+                    reference = Step;
                     break;
                 case StepType.StartingStep:
-                    reference = StartStepButton;
+                    reference = StartStep;
                     break;
                 case StepType.Jump:
                     reference = StepJump;
                     break;
             }
-            _stepNode = (SfcStepButtonBasic)((PackedScene)GD.Load(reference)).Instance();
+            _stepNode = (SfcStepVisualBasic)((PackedScene)GD.Load(reference)).Instance();
             AddChild(_stepNode);
         }
         #endregion
