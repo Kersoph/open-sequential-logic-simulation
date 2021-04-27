@@ -9,7 +9,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public class Master
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// The loaded simulation scene with the controller
         /// </summary>
@@ -61,6 +61,14 @@ namespace Osls.SfcEditor
         public bool IsProgramSimulationValid()
         {
             return _programmableLogicController.IsLogicValid();
+        }
+        
+        /// <summary>
+        /// Resets the controller like there was a blackout
+        /// </summary>
+        public void Reset()
+        {
+            _programmableLogicController.Startup();
         }
         #endregion
     }

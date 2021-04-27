@@ -2,7 +2,7 @@
 
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomIn.cs" type="Script" id=3]
-[ext_resource path="res://data/diagram_models/sfc/editor/editor_controls/ControlButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/ControlButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorSave.cs" type="Script" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorLoad.cs" type="Script" id=6]
 

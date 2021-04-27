@@ -1,11 +1,11 @@
 using Godot;
-using Osls.SfcEditor;
 
 
 namespace Osls.SfcSimulation.EditorControls
 {
-    public class EditorZoomOut : Button
+    public class EditorZoomIn : Button
     {
+        #region ==================== Fields / Properties ====================
         public override void _Ready()
         {
             Connect("button_up", this, nameof(ButtonUpEvent));
@@ -13,7 +13,8 @@ namespace Osls.SfcSimulation.EditorControls
         
         public void ButtonUpEvent()
         {
-            GetNode<Sfc2dEditorNode>("../../Sfc2dEditor").ZoomOut();
+            GetNode<Sfc2dControls>("..").Sfc2dEditorNode.ZoomIn();
         }
+        #endregion
     }
 }
