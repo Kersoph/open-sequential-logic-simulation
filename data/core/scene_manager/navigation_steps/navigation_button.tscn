@@ -22,7 +22,6 @@ custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 shortcut_in_tooltip = false
-enabled_focus_mode = 0
 icon = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false

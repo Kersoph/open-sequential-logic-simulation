@@ -2,7 +2,7 @@
 
 [ext_resource path="res://data/plant_models/road_construction_site/RoadConstructionSite.cs" type="Script" id=1]
 [ext_resource path="res://data/core/environment/default.tres" type="Environment" id=2]
-[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/Street.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/Road.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/barrier_fence.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/barrier_pole.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/barrier_cone.tscn" type="PackedScene" id=6]
@@ -76,7 +76,6 @@ transform = Transform( 0.906727, 0, 0.421718, 0, 1, 0, -0.421718, 0, 0.906727, -
 
 [node name="Barrier_Fence8" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.685597, 0, 0.727982, 0, 1, 0, -0.727982, 0, 0.685597, -15.6, 4.76837e-07, 2.75547 )
-material/0 = null
 
 [node name="Barrier_Pole" parent="StaticStreet/Barriers" instance=ExtResource( 5 )]
 transform = Transform( -0.0175398, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175398, -10.272, 7.15256e-07, 0.303242 )
@@ -135,11 +134,9 @@ transform = Transform( 0.205029, 0, 0.978755, 0, 1, 0, -0.978755, 0, 0.205029, 2
 
 [node name="Barrier_Cone2" parent="Signalisation/TrafficControlSystemTop" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0306997, 0, -0.995209 )
-material/0 = null
 
 [node name="Barrier_Cone3" parent="Signalisation/TrafficControlSystemTop" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.627586, 0, 1.05184 )
-material/0 = null
 
 [node name="DynamicCars" type="Node" parent="."]
 

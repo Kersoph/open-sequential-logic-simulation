@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_material.material" type="Material" id=1]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Tree_001.mesh" type="ArrayMesh" id=2]
 
 [node name="Tree_Cone1" type="MeshInstance"]
 mesh = ExtResource( 2 )
 skeleton = NodePath("")
-material/0 = null
+material/0 = ExtResource( 1 )
