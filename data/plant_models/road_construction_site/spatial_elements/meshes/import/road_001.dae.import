@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/road_001.dae-bc9b8beb071514544cd6d251a2273904.scn"
+path="res://.import/Road_001.dae-1cbfff3e6a42e8866f4632845be54aa2.scn"
 
 [deps]
 
-source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/road_001.dae"
-dest_files=[ "res://.import/road_001.dae-bc9b8beb071514544cd6d251a2273904.scn" ]
+source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/Road_001.dae"
+dest_files=[ "res://.import/Road_001.dae-1cbfff3e6a42e8866f4632845be54aa2.scn" ]
 
 [params]
 

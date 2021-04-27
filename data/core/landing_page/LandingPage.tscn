@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/core/landing_page/LandingPageNode.cs" type="Script" id=1]
 [ext_resource path="res://data/core/landing_page/LessonsNode.cs" type="Script" id=2]
 [ext_resource path="res://data/core/landing_page/LessonSelectionGridNode.cs" type="Script" id=3]
 [ext_resource path="res://data/core/lesson/viewer/lesson_view.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/core/landing_page/lesson_source_controller/images/diagram_shreenshot.png" type="Texture" id=5]
 
 [node name="LandingPage" type="Node"]
 script = ExtResource( 1 )
@@ -11,24 +12,37 @@ script = ExtResource( 1 )
 [node name="LessonsNode" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="LessonSelectorContainer" type="MarginContainer" parent="LessonsNode"]
+[node name="LessonSelectorContainer" type="Control" parent="LessonsNode"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
 margin_top = 1.0
 margin_right = -513.0
+rect_clip_content = true
+
+[node name="Background" type="TextureRect" parent="LessonsNode/LessonSelectorContainer"]
+modulate = Color( 0.956863, 0.94902, 0.917647, 1 )
+anchor_left = -2.0
+anchor_right = 6.0
+anchor_bottom = 12.0
+rect_rotation = -45.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="LessonsNode/LessonSelectorContainer"]
-margin_right = 1327.0
-margin_bottom = 1016.0
-
 [node name="LessonCenterContainer" type="CenterContainer" parent="LessonsNode/LessonSelectorContainer"]
-margin_right = 1327.0
-margin_bottom = 1016.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LessonSelectionGridNode" type="GridContainer" parent="LessonsNode/LessonSelectorContainer/LessonCenterContainer"]
 margin_left = 663.0

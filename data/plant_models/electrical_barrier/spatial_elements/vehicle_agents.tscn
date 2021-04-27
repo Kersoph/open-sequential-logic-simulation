@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/highcaractive_black.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/VehicleAgentController.cs" type="Script" id=3]
+
+[sub_resource type="Curve3D" id=1]
+bake_interval = 0.5
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.775094, 0, 19.0006, 0, 0, 0, 0, 0, 0, 0.478698, 0, 1.31215, 0, 0, 0, 0, 0, 0, 0.245165, 0, -8.39761, 0, 0, 0, 0, 0, 0, 0.0357454, 0, -20.0395, 0, 0, 0, 0, 0, 0, 0.0339946, 0, -22.5765, 0, 0, 0, 0, 0, 0, 0.175382, 0, -24.9762, 0, 0, 0, 0, 0, 0, 0.492406, 0, -27.0787, 0, 0, 0, 0, 0, 0, 0.981766, 0, -28.8989, 0, 0, 0, 0, 0, 0, 2.41796, 0, -32.3585, 0, 0, 0, 0, 0, 0, 3.99329, 0, -36.1533, 0, 0, 0, 0, 0, 0, 9.10491, 0, -43.0436, 0, 0, 0, 0, 0, 0, 13.9274, 0, -47.2747 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="VehicleAgents" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="VehiclePath" type="Path" parent="."]
+curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PathFollow" type="PathFollow" parent="VehiclePath"]
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.775094, 0, 19.0006 )
+rotation_mode = 1
+loop = false
+
+[node name="HighCar_Black" parent="VehiclePath/PathFollow" instance=ExtResource( 1 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )

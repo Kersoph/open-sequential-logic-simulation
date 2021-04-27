@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/GuardAgent.cs" type="Script" id=1]
+
+[node name="GuardAgent" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3785, 1.47117, 0.519559 )
+script = ExtResource( 1 )

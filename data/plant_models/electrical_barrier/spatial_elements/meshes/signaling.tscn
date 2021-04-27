@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Signaling.mesh" type="ArrayMesh" id=2]
+
+[node name="Signaling" type="MeshInstance"]
+mesh = ExtResource( 2 )
+skeleton = NodePath("")
+material/0 = null

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/color_table.png-3545fc51c62b24678b07c552eac2cd29.stex"
+path="res://.import/lookup_table.png-50e218ec0e6a98257642d196305dbff9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/color_table.png"
-dest_files=[ "res://.import/color_table.png-3545fc51c62b24678b07c552eac2cd29.stex" ]
+source_file="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_table.png"
+dest_files=[ "res://.import/lookup_table.png-50e218ec0e6a98257642d196305dbff9.stex" ]
 
 [params]
 
@@ -18,13 +18,13 @@ compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=0
-flags/repeat=0
+compress/normal_map=2
+flags/repeat=true
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=1
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

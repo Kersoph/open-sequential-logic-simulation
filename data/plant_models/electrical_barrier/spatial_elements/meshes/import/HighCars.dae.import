@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/high_cars_001.dae-6f3fffd9ffb70a9db1b633302c244487.scn"
+path="res://.import/HighCars.dae-88ab4a043c34298b960fe9b51801e59f.scn"
 
 [deps]
 
-source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/high_cars_001.dae"
-dest_files=[ "res://.import/high_cars_001.dae-6f3fffd9ffb70a9db1b633302c244487.scn" ]
+source_file="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/HighCars.dae"
+dest_files=[ "res://.import/HighCars.dae-88ab4a043c34298b960fe9b51801e59f.scn" ]
 
 [params]
 
@@ -29,8 +29,8 @@ external_files/store_in_subdir=false
 animation/import=false
 animation/fps=15
 animation/filter_script=""
-animation/storage=true
-animation/keep_custom_tracks=true
+animation/storage=false
+animation/keep_custom_tracks=false
 animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01
