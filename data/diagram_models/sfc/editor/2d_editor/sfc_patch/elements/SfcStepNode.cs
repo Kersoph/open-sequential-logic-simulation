@@ -57,10 +57,25 @@ namespace Osls.SfcEditor
         {
             _stepNode.MarkStep(setMark);
         }
+        
+        /// <summary>
+        /// Shows or hides the content hint for the user
+        /// </summary>
+        public void HintContent(bool active)
+        {
+            if (_currentStepType == StepType.Unused)
+            {
+                GetNode<Control>("HintPatch").Visible = active;
+            }
+            else
+            {
+                GetNode<Control>("HintPatch").Visible = false;
+            }
+        }
         #endregion
         
         
-        #region ==================== Private ====================
+        #region ==================== Helpers ====================
         private void ShowStepAs(StepType type)
         {
             if (_stepNode != null)

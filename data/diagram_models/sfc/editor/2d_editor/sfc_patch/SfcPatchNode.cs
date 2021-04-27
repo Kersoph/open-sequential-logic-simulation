@@ -26,6 +26,8 @@ namespace Osls.SfcEditor
             SfcPatchControl = sfcPatchControl;
             SetCellPosition(data.X, data.Y);
             GetNode<SfcTransitionNode>("SfcTransition").Initialise();
+            Connect("mouse_entered", this, nameof(OnMouseEntered));
+            Connect("mouse_exited", this, nameof(OnMouseExited));
         }
         
         /// <summary>
@@ -58,6 +60,20 @@ namespace Osls.SfcEditor
             float xOffset = sizeOffset.x * x;
             float yOffset = sizeOffset.y * y;
             SetPosition(new Vector2(xOffset, yOffset));
+        }
+        
+        private void OnMouseEntered()
+        {
+            GetNode<SfcStepNode>("SfcStepNode").HintContent(true);
+            GetNode<SfcLineButton>("SfcLineButtonTop").HintContent(true);
+            GetNode<SfcLineButton>("SfcLineButtonBot").HintContent(true);
+        }
+        
+        private void OnMouseExited()
+        {
+            GetNode<SfcStepNode>("SfcStepNode").HintContent(false);
+            GetNode<SfcLineButton>("SfcLineButtonTop").HintContent(false);
+            GetNode<SfcLineButton>("SfcLineButtonBot").HintContent(false);
         }
         #endregion
     }

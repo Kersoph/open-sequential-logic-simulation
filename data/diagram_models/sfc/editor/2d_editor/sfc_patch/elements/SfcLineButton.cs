@@ -4,7 +4,7 @@ namespace Osls.SfcEditor
 {
     /// <summary>
     /// Topmost node for the SFC line.
-    /// Controls the visual apperance of the line.
+    /// Controls the visual appearance of the line.
     /// </summary>
     public class SfcLineButton : TextureButton
     {
@@ -36,17 +36,14 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Updates ====================
+        #region ==================== Public Methods ====================
         public override void _Ready()
         {
             Connect("mouse_entered", this, nameof(OnMouseEntered));
             Connect("mouse_exited", this, nameof(OnMouseExited));
             
         }
-        #endregion
         
-        
-        #region ==================== Public Methods ====================
         /// <summary>
         /// Called when the button is pressed.
         /// </summary>
@@ -75,6 +72,21 @@ namespace Osls.SfcEditor
                 }
                 _sfcLineType = type;
                 UpdateLineVisibility();
+            }
+        }
+        
+        /// <summary>
+        /// Shows or hides the content hint for the user
+        /// </summary>
+        public void HintContent(bool active)
+        {
+            if (_sfcLineType == BranchType.Unused)
+            {
+                GetNode<Control>("HintPatch").Visible = active;
+            }
+            else
+            {
+                GetNode<Control>("HintPatch").Visible = false;
             }
         }
         #endregion

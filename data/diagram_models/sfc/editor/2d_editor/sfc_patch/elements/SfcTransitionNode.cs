@@ -78,7 +78,7 @@ namespace Osls.SfcEditor
             GetNode<Control>("TransitionTextureHint").Visible = false;
             UpdateVisualRepresentation();
         }
-
+        
         private void UpdateVisualRepresentation()
         {
             if (string.IsNullOrEmpty(_textEdit.Text))
