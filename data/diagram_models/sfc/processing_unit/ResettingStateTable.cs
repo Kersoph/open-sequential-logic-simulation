@@ -6,13 +6,13 @@ namespace Osls.SfcSimulation.Engine
     public class ResettingStateTable : StateTable
     {
         #region ==================== Constructor ====================
-        public ResettingStateTable(Dictionary<string, bool> booleans, Dictionary<string, int> integers)
+        public ResettingStateTable(List<StateEntry<bool>> booleans, List<StateEntry<int>> integers)
         : base(booleans, integers)
         {
         }
         
         /// <summary>
-        /// Initialises a resettig state table from the booleans and integers of the given one
+        /// Initialises a resetting state table from the booleans and integers of the given one
         /// </summary>
         public ResettingStateTable(StateTable other)
         : base(other)
@@ -29,11 +29,11 @@ namespace Osls.SfcSimulation.Engine
         {
             foreach (string entry in BooleanKeys)
             {
-                Booleans[entry] = false;
+                Booleans[entry].Value = Booleans[entry].DefaultValue;
             }
             foreach (string entry in IntegerKeys)
             {
-                Integers[entry] = 0;
+                Integers[entry].Value = Integers[entry].DefaultValue;
             }
         }
         #endregion

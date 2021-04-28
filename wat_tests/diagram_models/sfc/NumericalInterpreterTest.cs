@@ -29,12 +29,12 @@ namespace Tests.SfcEditor.Interpreters
         [Test]
         public void NumericalIO()
         {
-            var intKeys = new Dictionary<string, int>
+            var intKeys = new List<StateEntry<int>>
             {
-                { "testInt", 1 }
+                { new StateEntry<int>("testInt", 1, "", "") }
             };
-            var inputRegisters = new StateTable(new Dictionary<string, bool>(), intKeys);
-            var outputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
+            var inputRegisters = new StateTable(new List<StateEntry<bool>>(), intKeys);
+            var outputRegisters = new StateTable(new List<StateEntry<bool>>(), new List<StateEntry<int>>());
             ProcessingUnitMock pu = new ProcessingUnitMock(inputRegisters, outputRegisters);
             NumericalExpression expressionA = Interpreter.AsNumericalExpression("testInt", pu);
             Assert.IsTrue(expressionA.IsValid());

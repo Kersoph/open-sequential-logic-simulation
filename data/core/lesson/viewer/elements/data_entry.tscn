@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/core/lesson/viewer/elements/DataEntry.cs" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="DataEntry" type="MarginContainer"]
+margin_right = 508.0
+margin_bottom = 24.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 508.0
+margin_bottom = 24.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Data" type="HBoxContainer" parent="."]
+margin_right = 508.0
+margin_bottom = 24.0
+custom_constants/separation = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="Data"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 100, 0 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "B_100"
+
+[node name="Value" type="Label" parent="Data"]
+margin_left = 106.0
+margin_top = 5.0
+margin_right = 166.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 60, 0 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "True"
+
+[node name="Description" type="Label" parent="Data"]
+margin_left = 172.0
+margin_top = 5.0
+margin_right = 508.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -6
+text = "Up position reached"
+autowrap = true

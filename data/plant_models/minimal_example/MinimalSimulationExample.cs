@@ -15,15 +15,13 @@ namespace Osls.Plants.MinimalExample
         protected override StateTable DefineInputs()
         {
             return new StateTable(
-                new Dictionary<string, bool>()
+                new List<StateEntry<bool>>()
                 {
-                    {"Foo", true},
-                    {"Bar", false}
+                    { new StateEntry<bool>("Foo", true, "Foo description", "Foo hint") },
                 },
-                new Dictionary<string, int>()
+                new List<StateEntry<int>>()
                 {
-                    {"Teki", 0},
-                    {"Tori", 0}
+                    { new StateEntry<int>("Bar", 0, "Bar description", "Bar hint") },
                 }
             );
         }
@@ -31,19 +29,16 @@ namespace Osls.Plants.MinimalExample
         /// <summary>
         /// Returns the output definition for the simulation
         /// </summary>
-        /// <returns></returns>
         protected override StateTable DefineOutput()
         {
             return new StateTable(
-                new Dictionary<string, bool>()
+                new List<StateEntry<bool>>()
                 {
-                    {"Zumsl", false},
-                    {"Surzul", false}
+                    { new StateEntry<bool>("Zumsl", false, "Zumsl description", "Zumsl hint") },
                 },
-                new Dictionary<string, int>()
+                new List<StateEntry<int>>()
                 {
-                    {"O1.12", 1},
-                    {"O1.13", 2}
+                    { new StateEntry<int>("M15.2", 1, "M15.2 description", "M15.2 hint") }
                 }
             );
         }

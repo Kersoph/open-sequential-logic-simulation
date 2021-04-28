@@ -1,5 +1,4 @@
 using Godot;
-using System.Text;
 using System.Collections.Generic;
 
 
@@ -8,10 +7,12 @@ namespace Osls.Core
     /// <summary>
     /// Provides an info panel with the inputs and outputs of the simulated plant.
     /// </summary>
-    public class IoInfo : ColorRect
+    public class IoInfo : Control
     {
         #region ==================== Fields / Properties ====================
-        private const string IoTablePath = "IoTable";
+        [Export] private PackedScene _dataEntryScene;
+        private readonly List<DataEntry> _aviableInputs = new List<DataEntry>();
+        private readonly List<DataEntry> _aviableOutputs = new List<DataEntry>();
         #endregion
         
         
@@ -19,53 +20,60 @@ namespace Osls.Core
         /// <summary>
         /// Creates the text for the plant info panel according to the given inputs and outputs
         /// </summary>
-        public void UpdateText(StateTable inputs, StateTable outputs, bool withStates)
+        public void UpdateText(StateTable inputs, StateTable outputs)
         {
             if (inputs == null || outputs == null)
             {
-                GetNode<RichTextLabel>(IoTablePath).BbcodeText = string.Empty;
+                foreach (var entry in _aviableInputs)
+                {
+                    entry.QueueFree();
+                }
+                _aviableInputs.Clear();
+                foreach (var entry in _aviableOutputs)
+                {
+                    entry.QueueFree();
+                }
+                _aviableOutputs.Clear();
             }
             else
             {
-                StringBuilder builder = new StringBuilder(100);
-                
-                builder.Append("[b][u]Inputs[/u][/b]\n");
-                List<string> booleanInputKeys = inputs.BooleanKeys;
-                foreach (string key in booleanInputKeys)
-                {
-                    builder.Append(key);
-                    builder.Append("    [i]bool[/i]   ");
-                    if (withStates) builder.Append(inputs.PollBoolean(key));
-                    builder.Append("\n");
-                }
-                List<string> integerInputKeys = inputs.IntegerKeys;
-                foreach (string key in integerInputKeys)
-                {
-                    builder.Append(key);
-                    builder.Append("    [i]int[/i]    ");
-                    if (withStates) builder.Append(inputs.PollInteger(key));
-                    builder.Append("\n");
-                }
-                
-                builder.Append("\n[b][u]Outputs[/u][/b]\n");
-                List<string> booleanOutputKeys = outputs.BooleanKeys;
-                foreach (string key in booleanOutputKeys)
-                {
-                    builder.Append(key);
-                    builder.Append("    [i]bool[/i]   ");
-                    if (withStates) builder.Append(outputs.PollBoolean(key));
-                    builder.Append("\n");
-                }
-                List<string> integerOutputKeys = outputs.IntegerKeys;
-                foreach (string key in integerOutputKeys)
-                {
-                    builder.Append(key);
-                    builder.Append("    [i]int[/i]    ");
-                    if (withStates) builder.Append(outputs.PollInteger(key));
-                    builder.Append("\n");
-                }
-                
-                GetNode<RichTextLabel>(IoTablePath).BbcodeText = builder.ToString();
+                Node inputNode = GetNode<VBoxContainer>("ScrollContainer/VBox/Inputs");
+                Node outputNode = GetNode<VBoxContainer>("ScrollContainer/VBox/Outputs");
+                UpdateList(inputNode, inputs, _aviableInputs);
+                UpdateList(outputNode, outputs, _aviableOutputs);
+            }
+        }
+        #endregion
+        
+        
+        #region ==================== Helpers ====================
+        private void UpdateList(Node root, StateTable inputs, List<DataEntry> aviable)
+        {
+            var booleans = inputs.BooleanEntries;
+            var integers = inputs.IntegerEntries;
+            
+            int neededCount = booleans.Count + integers.Count;
+            for (int i = aviable.Count; i < neededCount; i++)
+            {
+                var entry = _dataEntryScene.Instance<DataEntry>();
+                root.AddChild(entry);
+                aviable.Add(entry);
+            }
+            for (int i = aviable.Count; i > neededCount; i--)
+            {
+                aviable[i - 1].QueueFree();
+                aviable.RemoveAt(i - 1);
+            }
+            int state = 0;
+            foreach (var entry in booleans)
+            {
+                aviable[state].UpdateText(entry);
+                state++;
+            }
+            foreach (var entry in integers)
+            {
+                aviable[state].UpdateText(entry);
+                state++;
             }
         }
         #endregion

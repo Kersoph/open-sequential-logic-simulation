@@ -44,7 +44,7 @@ namespace Osls.SfcEditor
         {
             if (_isExecutable)
             {
-                _lessonView.IoInfo.UpdateText(_processingData.InputRegisters, _processingData.OutputRegisters, true);
+                _lessonView.IoInfo.UpdateText(_processingData.InputRegisters, _processingData.OutputRegisters);
                 int timeMs = (int)(delta * 1000);
                 timeMs = timeMs < 1 ? 1 : (timeMs > 1000 ? 1000 : timeMs);
                 _simulationMaster.UpdateSimulation(timeMs);

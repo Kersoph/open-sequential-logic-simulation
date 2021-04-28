@@ -93,12 +93,12 @@ namespace Tests.SfcEditor.Interpreters
         [Test]
         public void BooleanIO()
         {
-            var boolKeys = new Dictionary<string, bool>
+            var boolKeys = new List<StateEntry<bool>>()
             {
-                { "testBool", true }
+                { new StateEntry<bool>("testBool", true, "", "") }
             };
-            var inputRegisters = new StateTable(boolKeys, new Dictionary<string, int>());
-            var outputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
+            var inputRegisters = new StateTable(boolKeys, new List<StateEntry<int>>());
+            var outputRegisters = new StateTable(new List<StateEntry<bool>>(), new List<StateEntry<int>>());
             ProcessingUnitMock pu = new ProcessingUnitMock(inputRegisters, outputRegisters);
             BooleanExpression expressionA = Interpreter.AsBooleanExpression("testBool", pu);
             Assert.IsTrue(expressionA.IsValid());
