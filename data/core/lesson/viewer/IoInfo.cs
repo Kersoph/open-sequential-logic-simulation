@@ -1,7 +1,6 @@
 using Godot;
 using System.Text;
 using System.Collections.Generic;
-using Osls.Plants;
 
 
 namespace Osls.Core
@@ -11,28 +10,18 @@ namespace Osls.Core
     /// </summary>
     public class IoInfo : ColorRect
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private const string IoTablePath = "IoTable";
-        private SimulationPage _simulationControlNode;
         #endregion
         
         
-        #region ==================== Constructor ====================
+        #region ==================== Public Methods ====================
         /// <summary>
-        /// Creates the text for the plant info panel according to the simulation interface
+        /// Creates the text for the plant info panel according to the given inputs and outputs
         /// </summary>
-        public void SetSimulationInfo(SimulationPage simulationControlNode)
+        public void UpdateText(StateTable inputs, StateTable outputs, bool withStates)
         {
-            _simulationControlNode = simulationControlNode;
-            UpdateText(false);
-        }
-        #endregion
-        
-        
-        #region ==================== Public ====================
-        public void UpdateText(bool withStates)
-        {
-            if (_simulationControlNode == null)
+            if (inputs == null || outputs == null)
             {
                 GetNode<RichTextLabel>(IoTablePath).BbcodeText = string.Empty;
             }
@@ -40,39 +29,39 @@ namespace Osls.Core
             {
                 StringBuilder builder = new StringBuilder(100);
                 
-                builder.Append("[b][u]Plant Inputs[/u][/b]\n");
-                List<string> booleanInputKeys = _simulationControlNode.SimulationInput.BooleanKeys;
+                builder.Append("[b][u]Inputs[/u][/b]\n");
+                List<string> booleanInputKeys = inputs.BooleanKeys;
                 foreach (string key in booleanInputKeys)
                 {
                     builder.Append(key);
                     builder.Append("    [i]bool[/i]   ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationInput.PollBoolean(key));
+                    if (withStates) builder.Append(inputs.PollBoolean(key));
                     builder.Append("\n");
                 }
-                List<string> integerInputKeys = _simulationControlNode.SimulationInput.IntegerKeys;
+                List<string> integerInputKeys = inputs.IntegerKeys;
                 foreach (string key in integerInputKeys)
                 {
                     builder.Append(key);
                     builder.Append("    [i]int[/i]    ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationInput.PollInteger(key));
+                    if (withStates) builder.Append(inputs.PollInteger(key));
                     builder.Append("\n");
                 }
                 
-                builder.Append("\n[b][u]Plant Outputs[/u][/b]\n");
-                List<string> booleanOutputKeys = _simulationControlNode.SimulationOutput.BooleanKeys;
+                builder.Append("\n[b][u]Outputs[/u][/b]\n");
+                List<string> booleanOutputKeys = outputs.BooleanKeys;
                 foreach (string key in booleanOutputKeys)
                 {
                     builder.Append(key);
                     builder.Append("    [i]bool[/i]   ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationOutput.PollBoolean(key));
+                    if (withStates) builder.Append(outputs.PollBoolean(key));
                     builder.Append("\n");
                 }
-                List<string> integerOutputKeys = _simulationControlNode.SimulationOutput.IntegerKeys;
+                List<string> integerOutputKeys = outputs.IntegerKeys;
                 foreach (string key in integerOutputKeys)
                 {
                     builder.Append(key);
                     builder.Append("    [i]int[/i]    ");
-                    if (withStates) builder.Append(_simulationControlNode.SimulationOutput.PollInteger(key));
+                    if (withStates) builder.Append(outputs.PollInteger(key));
                     builder.Append("\n");
                 }
                 
