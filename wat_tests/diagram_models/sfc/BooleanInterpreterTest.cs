@@ -56,6 +56,8 @@ namespace Tests.SfcEditor.Interpreters
         [RunWith("not false", true)]
         [RunWith("not not false", false)]
         [RunWith("not not not true", false)]
+        [RunWith("NOT true", false)]
+        [RunWith("!false", true)]
         public void LogicalInverter(string transition, bool result)
         {
             ProcessingUnitMock pu = new ProcessingUnitMock();
