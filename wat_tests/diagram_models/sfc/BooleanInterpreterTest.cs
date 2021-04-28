@@ -80,6 +80,8 @@ namespace Tests.SfcEditor.Interpreters
         [RunWith("1 < 1 or 1 > 1", false)]
         [RunWith("2 < 1 or 2 > 1", true)]
         [RunWith("1 < 2 and 1 == 1 and true and not 1 == 2", true)]
+        [RunWith("2 = 2", true)]
+        [RunWith("2 = 1", false)]
         public void RelationalOperation(string transition, bool result)
         {
             ProcessingUnitMock pu = new ProcessingUnitMock();
