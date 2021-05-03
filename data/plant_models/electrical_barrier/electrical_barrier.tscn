@@ -1,17 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://data/plant_models/electrical_barrier/ElectricalBarrier.cs" type="Script" id=1]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_material.material" type="Material" id=2]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Ground.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/highcar_black.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/lamp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/barrier_parked_cars.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/barrier_lights.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/electrical_barrier_node.tscn" type="PackedScene" id=6]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_cone.tscn" type="PackedScene" id=7]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_pole.tscn" type="PackedScene" id=8]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_fence.tscn" type="PackedScene" id=9]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_wall.tscn" type="PackedScene" id=10]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/highcar_blue.tscn" type="PackedScene" id=11]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/highcar_green.tscn" type="PackedScene" id=12]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/props.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/vehicle_agents.tscn" type="PackedScene" id=13]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/guard_agent.tscn" type="PackedScene" id=14]
 [ext_resource path="res://data/plant_models/electrical_barrier/environment.tres" type="Environment" id=15]
@@ -31,120 +26,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Lights" type="Spatial" parent="Map"]
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Lights" parent="Map" instance=ExtResource( 5 )]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="Map/Lights"]
-transform = Transform( 0.639643, 0.416946, -0.645766, 0.0447843, 0.818464, 0.57281, 0.767367, -0.395314, 0.504852, 0, 18.7292, 0 )
-light_color = Color( 1, 0.94902, 0.85098, 1 )
-light_energy = 0.4
-shadow_enabled = true
-shadow_reverse_cull_face = true
-directional_shadow_mode = 0
-directional_shadow_normal_bias = 0.3
-directional_shadow_depth_range = 1
-directional_shadow_max_distance = 50.0
+[node name="ParkedCars" parent="Map" instance=ExtResource( 4 )]
 
-[node name="OmniLight" type="OmniLight" parent="Map/Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73004, 2.32033, -10.481 )
-light_color = Color( 1, 0.870588, 0.721569, 1 )
-light_indirect_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.3
-omni_range = 20.0
-
-[node name="Lamp" parent="Map/Lights" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1.8 )
-
-[node name="Lamp2" parent="Map/Lights" instance=ExtResource( 5 )]
-transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 2.5, 0, 3 )
-
-[node name="ParkedCars" type="Spatial" parent="Map"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="HighCar_Black" parent="Map/ParkedCars" instance=ExtResource( 4 )]
-transform = Transform( -0.72812, 0, 0.68545, 0, 1, 0, -0.68545, 0, -0.72812, 14.72, 0, -4.599 )
-
-[node name="HighCar_Blue" parent="Map/ParkedCars" instance=ExtResource( 11 )]
-transform = Transform( -0.704585, 0, 0.70962, 0, 1, 0, -0.70962, 0, -0.704585, 18.8647, 0, -4.42701 )
-
-[node name="HighCar_Green" parent="Map/ParkedCars" instance=ExtResource( 12 )]
-transform = Transform( -0.761482, 0, 0.648186, 0, 1, 0, -0.648186, 0, -0.761482, 22.6903, 4.76837e-07, -4.38435 )
-
-[node name="Props" type="Spatial" parent="Map"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Barrier_Cone" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54773, -4.76837e-07, 0.421923 )
-
-[node name="Barrier_Cone2" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51795, -4.76837e-07, 2.05423 )
-
-[node name="Barrier_Cone3" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4467, 4.76837e-07, 3.46541 )
-
-[node name="Barrier_Cone4" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57643, 4.76837e-07, -0.658865 )
-
-[node name="Barrier_Cone5" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22748, 7.15256e-07, -10.2973 )
-
-[node name="Barrier_Cone6" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64998, 0.909535, -13.6912 )
-
-[node name="Barrier_Cone7" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67229, 7.15256e-07, -5.52938 )
-
-[node name="Barrier_Cone8" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74354, 2.38419e-07, -5.74312 )
-
-[node name="Barrier_Cone9" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62526, 2.38419e-07, -8.59703 )
-
-[node name="Barrier_Cone10" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58332, 2.38419e-07, -12.3826 )
-
-[node name="Barrier_Cone11" parent="Map/Props" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0063, 2.38419e-07, -14.4936 )
-
-[node name="Barrier_Fence" parent="Map/Props" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.88554, 0, -14.0543 )
-
-[node name="Barrier_Fence2" parent="Map/Props" instance=ExtResource( 9 )]
-transform = Transform( 0.999428, 0, -0.033818, 0, 1, 0, 0.033818, 0, 0.999428, 8.69818, 0.0140178, -14.0934 )
-
-[node name="Barrier_Pole" parent="Map/Props" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57291, 0, 3.6068 )
-
-[node name="BarrierWall" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.05396, 0, 0.9505 )
-
-[node name="BarrierWall2" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 0.999028, 0, -0.0440902, 0, 1, 0, 0.0440902, 0, 0.999028, 9.08797, 0, 1.05183 )
-
-[node name="BarrierWall3" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 0.125645, 0, -0.992075, 0, 1, 0, 0.992075, 0, 0.125645, 2.9184, 0, -3.69522 )
-
-[node name="BarrierWall4" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 0.0401318, 0, 0.999194, 0, 1, 0, -0.999194, 0, 0.0401318, -4.08439, 0, 0.198108 )
-
-[node name="BarrierWall5" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 0.991367, 0, 0.131114, 0, 1, 0, -0.131114, 0, 0.991367, -5.66657, 0, -5.94324 )
-
-[node name="BarrierWall6" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 0.999028, 0, -0.0440902, 0, 1, 0, 0.0440902, 0, 0.999028, 12.528, 0, 1.13923 )
-
-[node name="BarrierWall7" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 0.999028, 0, -0.0440902, 0, 1, 0, 0.0440902, 0, 0.999028, 15.7215, 0, 1.22302 )
-
-[node name="BarrierWall8" parent="Map/Props" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.14031, 4.76837e-07, 0.983891 )
+[node name="Props" parent="Map" instance=ExtResource( 7 )]
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.984808, 0.0868241, -0.150384, 0, 0.866025, 0.5, 0.173648, -0.492404, 0.852868, -1, 6, 7 )

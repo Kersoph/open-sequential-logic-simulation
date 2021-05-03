@@ -1,0 +1,139 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_material.material" type="Material" id=1]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_cone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_pole.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_wall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/barrier_fence.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Barrier_Cone.mesh" type="ArrayMesh" id=6]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Barrier_Wall.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Barrier_Pole.mesh" type="ArrayMesh" id=8]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Barrier_Fence.mesh" type="ArrayMesh" id=9]
+
+[node name="Props" type="Spatial"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Barrier_Cone" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54773, -4.76837e-07, 0.421923 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone2" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51795, -4.76837e-07, 2.05423 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone3" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4467, 4.76837e-07, 3.46541 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone4" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57643, 4.76837e-07, -0.658865 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone5" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22748, 7.15256e-07, -10.2973 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone6" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64998, 0.909535, -13.6912 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone7" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67229, 7.15256e-07, -5.52938 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone8" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74354, 2.38419e-07, -5.74312 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone9" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62526, 2.38419e-07, -8.59703 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone10" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58332, 2.38419e-07, -12.3826 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Cone11" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0063, 2.38419e-07, -14.4936 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Fence" type="MeshInstance" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.88554, 0, -14.0543 )
+mesh = ExtResource( 9 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Fence2" type="MeshInstance" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.999428, 0, -0.033818, 0, 1, 0, 0.033818, 0, 0.999428, 8.69818, 0.0140178, -14.0934 )
+mesh = ExtResource( 9 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="Barrier_Pole" type="MeshInstance" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57291, 0, 3.6068 )
+mesh = ExtResource( 8 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.05396, 0, 0.9505 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall2" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.999028, 0, -0.0440902, 0, 1, 0, 0.0440902, 0, 0.999028, 9.08797, 0, 1.05183 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall3" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.125645, 0, -0.992075, 0, 1, 0, 0.992075, 0, 0.125645, 2.9184, 0, -3.69522 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall4" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.0401318, 0, 0.999194, 0, 1, 0, -0.999194, 0, 0.0401318, -4.08439, 0, 0.198108 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall5" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.991367, 0, 0.131114, 0, 1, 0, -0.131114, 0, 0.991367, -5.66657, 0, -5.94324 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall6" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.999028, 0, -0.0440902, 0, 1, 0, 0.0440902, 0, 0.999028, 12.528, 0, 1.13923 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall7" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.999028, 0, -0.0440902, 0, 1, 0, 0.0440902, 0, 0.999028, 15.7215, 0, 1.22302 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="BarrierWall8" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.14031, 4.76837e-07, 0.983891 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
