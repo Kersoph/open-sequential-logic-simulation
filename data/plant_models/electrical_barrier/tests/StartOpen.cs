@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Osls.Plants.ElectricalBarrier
 {
-    public class RegularOperation : ViewportContainer
+    public class StartOpen : ViewportContainer
     {
         #region ==================== Fields / Properties ====================
         private bool _isExecutable;
@@ -31,6 +31,9 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
+                _simulation.Guard.AllowVehiclePass = false;
+                _simulation.Barrier.SetAsOpened();
+                _simulation.Vehicle.CarSpeed = 0;
             }
             else
             {
@@ -47,12 +50,9 @@ namespace Osls.Plants.ElectricalBarrier
         {
             if (_isExecutable && Result == -1)
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    _simulationMaster.UpdateSimulation(16);
-                    if (_simulation.Vehicle.TimesPassedTrack == 5) _simulation.Guard.AllowVehiclePass = false;
-                }
+                _simulationMaster.UpdateSimulation(16);
                 _simulatedSteps++;
+                if (_simulatedSteps == 300) _simulation.Vehicle.CarSpeed = VehicleAgentController.RegularCarSpeed;
                 if (_simulatedSteps >= 600)
                 {
                     CollectResults();
@@ -74,15 +74,7 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 builder.AppendLine("The car got scratched");
             }
-            if (_simulation.Vehicle.TimesPassedTrack == 0)
-            {
-                builder.AppendLine("No car could pass");
-            }
-            else if (_simulation.Vehicle.TimesPassedTrack < 5)
-            {
-                builder.AppendLine("Not enough cars could pass");
-            }
-            if (_simulation.Vehicle.TimesPassedTrack > 5)
+            if (_simulation.Vehicle.TimesPassedTrack > 0)
             {
                 builder.AppendLine("At least one invalid car could pass");
             }
@@ -90,7 +82,7 @@ namespace Osls.Plants.ElectricalBarrier
             if (builder.Length == 0)
             {
                 Result = 1;
-                GetNode<Label>("Label").Text = "Passed!";
+                GetNode<Label>("Label").Text = "Ok!";
             }
             else
             {

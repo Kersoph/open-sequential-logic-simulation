@@ -14,6 +14,9 @@ namespace Osls.Plants.ElectricalBarrier
         private LessonEntity _openedLesson;
         
         private RegularOperation _regularOperation;
+        private StartOpen _startOpen;
+        private StartPassing _startPassing;
+        private NoiseAndBlackout _noiseAndBlackout;
         #endregion
         
         
@@ -29,6 +32,12 @@ namespace Osls.Plants.ElectricalBarrier
             
             _regularOperation = GetNode<RegularOperation>("Tests/RegularOperation");
             _regularOperation.InitialiseWith(sfcEntity);
+            _startOpen = GetNode<StartOpen>("Tests/StartOpen");
+            _startOpen.InitialiseWith(sfcEntity);
+            _startPassing = GetNode<StartPassing>("Tests/StartPassing");
+            _startPassing.InitialiseWith(sfcEntity);
+            _noiseAndBlackout = GetNode<NoiseAndBlackout>("Tests/NoiseAndBlackout");
+            _noiseAndBlackout.InitialiseWith(sfcEntity);
         }
         
         public override void _Process(float delta)
@@ -54,11 +63,17 @@ namespace Osls.Plants.ElectricalBarrier
         private void UpdateTests()
         {
             if (_regularOperation.Result == -1) _regularOperation.UpdateStep();
+            if (_startOpen.Result == -1) _startOpen.UpdateStep();
+            if (_startPassing.Result == -1) _startPassing.UpdateStep();
+            if (_noiseAndBlackout.Result == -1) _noiseAndBlackout.UpdateStep();
         }
         
         private bool AreTestsDone()
         {
-            return _regularOperation.Result != -1;
+            return _regularOperation.Result != -1
+                && _startOpen.Result != -1
+                && _startPassing.Result != -1
+                && _noiseAndBlackout.Result != -1;
         }
         
         private void CreateResult()

@@ -51,6 +51,14 @@ namespace Osls.Plants.ElectricalBarrier
                 BreakDown();
             }
         }
+        
+        /// <summary>
+        /// Immediately sets the barrier to be opened
+        /// </summary>
+        public void SetAsOpened()
+        {
+            GetNode<MeshInstance>("BarrierElectricalPole").RotationDegrees = new Vector3(0, 0, 55);
+        }
         #endregion
         
         

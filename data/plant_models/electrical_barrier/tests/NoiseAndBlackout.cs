@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Osls.Plants.ElectricalBarrier
 {
-    public class RegularOperation : ViewportContainer
+    public class NoiseAndBlackout : ViewportContainer
     {
         #region ==================== Fields / Properties ====================
         private bool _isExecutable;
@@ -47,15 +47,9 @@ namespace Osls.Plants.ElectricalBarrier
         {
             if (_isExecutable && Result == -1)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    _simulationMaster.UpdateSimulation(16);
-                    if (_simulation.Vehicle.TimesPassedTrack == 5) _simulation.Guard.AllowVehiclePass = false;
-                }
-                _simulatedSteps++;
-                if (_simulatedSteps >= 600)
-                {
-                    CollectResults();
+                    SimulateStep();
                 }
             }
         }
@@ -63,6 +57,26 @@ namespace Osls.Plants.ElectricalBarrier
         
         
         #region ==================== Helpers ====================
+        private void SimulateStep()
+        {
+            _simulationMaster.SimulationPage.UpdateModel(50);
+            if ((_simulatedSteps % 70) == 0)
+            {
+                _simulationMaster.SimulationPage.SimulationOutput.SetValue(GuardAgent.OpenGateSwitchKey, false);
+            }
+            if ((_simulatedSteps % 99) == 0)
+            {
+                _simulationMaster.Reset();
+            }
+            _simulationMaster.Plc.Update(50);
+            if (_simulation.Vehicle.TimesPassedTrack == 1) _simulation.Guard.AllowVehiclePass = false;
+            _simulatedSteps++;
+            if (_simulatedSteps >= 600 * 5)
+            {
+                CollectResults();
+            }
+        }
+        
         public void CollectResults()
         {
             StringBuilder builder = new StringBuilder();
@@ -78,11 +92,11 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 builder.AppendLine("No car could pass");
             }
-            else if (_simulation.Vehicle.TimesPassedTrack < 5)
+            else if (_simulation.Vehicle.TimesPassedTrack < 1)
             {
                 builder.AppendLine("Not enough cars could pass");
             }
-            if (_simulation.Vehicle.TimesPassedTrack > 5)
+            if (_simulation.Vehicle.TimesPassedTrack > 1)
             {
                 builder.AppendLine("At least one invalid car could pass");
             }

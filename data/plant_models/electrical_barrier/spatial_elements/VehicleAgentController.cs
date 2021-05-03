@@ -10,6 +10,7 @@ namespace Osls.Plants.ElectricalBarrier
         public const float PathCheckpointCollisionStart = 0.26f;
         public const float PathCheckpointCollisionEnd = 0.30f;
         public const float PathCheckpointPassed = 0.32f;
+        public const float RegularCarSpeed = 0.0001f;
         
         [Export] private NodePath _barrierPath = "../ElectricalBarrierNode";
         
@@ -17,7 +18,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// How fast the car can drive in
         /// UnitOffset [0..1] per ms
         /// </summary>
-        public float CarSpeed { get; set; } = 0.0001f;
+        public float CarSpeed { get; set; } = RegularCarSpeed;
         
         /// <summary>
         /// True if a car is visibly on the place before the barrier

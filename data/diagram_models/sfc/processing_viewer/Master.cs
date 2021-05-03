@@ -13,18 +13,21 @@ namespace Osls.SfcEditor
         /// <summary>
         /// The loaded simulation scene with the controller
         /// </summary>
-        private readonly SimulationPage _simulationPage;
+        public SimulationPage SimulationPage { get; }
         
-        private readonly ProgrammableLogicController _programmableLogicController;
+        /// <summary>
+        /// The loaded Programmable Logic Controller
+        /// </summary>
+        public ProgrammableLogicController Plc { get; }
         #endregion
         
         
         #region ==================== Constructor ====================
         public Master(SfcEntity sfcEntity, SimulationPage simulationPage)
         {
-            _simulationPage = simulationPage;
-            _programmableLogicController = new ProgrammableLogicController(simulationPage, sfcEntity);
-            _programmableLogicController.Startup();
+            SimulationPage = simulationPage;
+            Plc = new ProgrammableLogicController(simulationPage, sfcEntity);
+            Plc.Startup();
         }
         #endregion
         
@@ -36,8 +39,8 @@ namespace Osls.SfcEditor
         /// </summary>
         public void UpdateSimulation(int deltaTimeMs)
         {
-            _simulationPage.UpdateModel(deltaTimeMs);
-            _programmableLogicController.Update(deltaTimeMs);
+            SimulationPage.UpdateModel(deltaTimeMs);
+            Plc.Update(deltaTimeMs);
         }
         
         /// <summary>
@@ -45,11 +48,11 @@ namespace Osls.SfcEditor
         /// </summary>
         public void VisualiseStatus(Sfc2dEditorControl sfc2dEditorControl)
         {
-            foreach (var SfcStep in _programmableLogicController.SfcProgramData.ActiveSteps)
+            foreach (var SfcStep in Plc.SfcProgramData.ActiveSteps)
             {
                 sfc2dEditorControl.MarkStep(SfcStep.Id, true);
             }
-            foreach (var SfcStep in _programmableLogicController.SfcProgramData.InactiveSteps)
+            foreach (var SfcStep in Plc.SfcProgramData.InactiveSteps)
             {
                 sfc2dEditorControl.MarkStep(SfcStep.Id, false);
             }
@@ -60,7 +63,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public bool IsProgramSimulationValid()
         {
-            return _programmableLogicController.IsLogicValid();
+            return Plc.IsLogicValid();
         }
         
         /// <summary>
@@ -68,7 +71,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void Reset()
         {
-            _programmableLogicController.Startup();
+            Plc.Startup();
         }
         #endregion
     }
