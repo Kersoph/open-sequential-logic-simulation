@@ -18,6 +18,7 @@ namespace Osls.SfcEditor
         private bool _isExecutable;
         private Sfc2dEditorNode _sfc2dEditorNode;
         private SimulationPage _loadedSimulationNode;
+        private ProcessingData _processingData;
         
         /// <summary>
         /// Gets the scene page type
@@ -33,9 +34,9 @@ namespace Osls.SfcEditor
         public override void InitialiseWith(MainNode _mainNode, LessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
-            ProcessingData data = InitialisePlant();
-            InitialiseDiagram(data);
-            InitialiseSimulation(data);
+            _processingData = InitialisePlant();
+            InitialiseDiagram();
+            InitialiseSimulation();
             if (!_isExecutable) GetNode<Label>("Sfc2dViewer/ErrorLabel").Visible = true;
         }
         
@@ -43,7 +44,7 @@ namespace Osls.SfcEditor
         {
             if (_isExecutable)
             {
-                _lessonView.IoInfo.UpdateText(true);
+                _lessonView.IoInfo.UpdateText(_processingData.InputRegisters, _processingData.OutputRegisters);
                 int timeMs = (int)(delta * 1000);
                 timeMs = timeMs < 1 ? 1 : (timeMs > 1000 ? 1000 : timeMs);
                 _simulationMaster.UpdateSimulation(timeMs);
@@ -79,10 +80,10 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Loads the file and builds the SFC diagram
         /// </summary>
-        private void InitialiseDiagram(ProcessingData data)
+        private void InitialiseDiagram()
         {
             _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("Sfc2dViewer/Sfc2dEditor");
-            _sfc2dEditorNode.InitializeEditor(data);
+            _sfc2dEditorNode.InitializeEditor(_processingData);
             string filepath = _openedLesson.FolderPath + "/User/Diagram.sfc";
             _sfc2dEditorNode.TryLoadDiagram(filepath);
         }
@@ -90,9 +91,9 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Loads the simulation node and creates a simulation master
         /// </summary>
-        private void InitialiseSimulation(ProcessingData data)
+        private void InitialiseSimulation()
         {
-            _simulationMaster = new Master(data.SfcEntity, _loadedSimulationNode);
+            _simulationMaster = new Master(_processingData.SfcEntity, _loadedSimulationNode);
             _isExecutable = _simulationMaster.IsProgramSimulationValid();
         }
         #endregion

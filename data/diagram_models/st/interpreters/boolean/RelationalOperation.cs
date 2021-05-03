@@ -15,7 +15,8 @@ namespace Osls.St.Boolean
         public const string GreaterEqual = ">=";
         public const string SmallerEqual = "<=";
         public const string Equal = "==";
-        public static HashSet<string> Values = new HashSet<string>() { GreaterThan, SmallerThan, GreaterEqual, SmallerEqual, Equal };
+        public const string EqualSingle = "=";
+        public static HashSet<string> Values = new HashSet<string>() { GreaterThan, SmallerThan, GreaterEqual, SmallerEqual, Equal, EqualSingle };
         
         private readonly string _operator;
         private readonly NumericalExpression _left;
@@ -50,6 +51,7 @@ namespace Osls.St.Boolean
                 case SmallerEqual:
                     return _left.Result(pu) <= _right.Result(pu);
                 case Equal:
+                case EqualSingle:
                     return _left.Result(pu) == _right.Result(pu);
             }
             Godot.GD.PushError("Unknown operator " + _operator);

@@ -51,12 +51,12 @@ namespace Osls.Plants.RoadConstructionSite
         protected override StateTable DefineInputs()
         {
             return new StateTable(
-                new Dictionary<string, bool>()
+                new List<StateEntry<bool>>()
                 {
-                    { _topTrafficLightKey, false },
-                    { _botTrafficLightKey, false }
+                    { new StateEntry<bool>(_topTrafficLightKey, false, "Switches the upper traffic light", "Turns the upper lane light to green if the value is set to true. Otherwise it will be red.") },
+                    { new StateEntry<bool>(_botTrafficLightKey, false, "Switches the lower traffic light", "Turns the lower lane light to green if the value is set to true. Otherwise it will be red.") }
                 },
-                new Dictionary<string, int>()
+                new List<StateEntry<int>>()
             );
         }
         
@@ -66,12 +66,12 @@ namespace Osls.Plants.RoadConstructionSite
         protected override StateTable DefineOutput()
         {
             return new StateTable(
-                new Dictionary<string, bool>()
+                new List<StateEntry<bool>>()
                 {
-                    { _topTrafficSensorKey, false },
-                    { _botTrafficSensorKey, false }
+                    { new StateEntry<bool>(_topTrafficSensorKey, false, "Upper lane proximity sensor", "True if a car is close to the sensor") },
+                    { new StateEntry<bool>(_botTrafficSensorKey, false, "Lower lane proximity sensor", "True if a car is close to the sensor") }
                 },
-                new Dictionary<string, int>()
+                new List<StateEntry<int>>()
             );
         }
         

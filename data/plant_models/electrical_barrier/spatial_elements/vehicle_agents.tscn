@@ -20,7 +20,7 @@ __meta__ = {
 }
 
 [node name="PathFollow" type="PathFollow" parent="VehiclePath"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.775094, 0, 19.0006 )
+transform = Transform( 0.999972, 0, 0.00740829, 0, 1, 0, -0.00740829, 0, 0.999972, 0.775094, 0, 19.0006 )
 rotation_mode = 1
 loop = false
 

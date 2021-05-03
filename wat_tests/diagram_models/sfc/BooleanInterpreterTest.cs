@@ -56,6 +56,8 @@ namespace Tests.SfcEditor.Interpreters
         [RunWith("not false", true)]
         [RunWith("not not false", false)]
         [RunWith("not not not true", false)]
+        [RunWith("NOT true", false)]
+        [RunWith("!false", true)]
         public void LogicalInverter(string transition, bool result)
         {
             ProcessingUnitMock pu = new ProcessingUnitMock();
@@ -78,6 +80,8 @@ namespace Tests.SfcEditor.Interpreters
         [RunWith("1 < 1 or 1 > 1", false)]
         [RunWith("2 < 1 or 2 > 1", true)]
         [RunWith("1 < 2 and 1 == 1 and true and not 1 == 2", true)]
+        [RunWith("2 = 2", true)]
+        [RunWith("2 = 1", false)]
         public void RelationalOperation(string transition, bool result)
         {
             ProcessingUnitMock pu = new ProcessingUnitMock();
@@ -89,12 +93,12 @@ namespace Tests.SfcEditor.Interpreters
         [Test]
         public void BooleanIO()
         {
-            var boolKeys = new Dictionary<string, bool>
+            var boolKeys = new List<StateEntry<bool>>()
             {
-                { "testBool", true }
+                { new StateEntry<bool>("testBool", true, "", "") }
             };
-            var inputRegisters = new StateTable(boolKeys, new Dictionary<string, int>());
-            var outputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
+            var inputRegisters = new StateTable(boolKeys, new List<StateEntry<int>>());
+            var outputRegisters = new StateTable(new List<StateEntry<bool>>(), new List<StateEntry<int>>());
             ProcessingUnitMock pu = new ProcessingUnitMock(inputRegisters, outputRegisters);
             BooleanExpression expressionA = Interpreter.AsBooleanExpression("testBool", pu);
             Assert.IsTrue(expressionA.IsValid());

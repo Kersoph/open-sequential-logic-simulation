@@ -35,7 +35,7 @@ namespace Osls.Core
         {
             PlantView.UpdateLessonEntity(selectedLesson);
             LessonInfo.UpdateLessonEntity(selectedLesson);
-            IoInfo.SetSimulationInfo(PlantView.LoadedSimulationNode);
+            IoInfo.UpdateText(PlantView.LoadedSimulationNode?.SimulationOutput, PlantView.LoadedSimulationNode?.SimulationInput);
         }
         #endregion
     }

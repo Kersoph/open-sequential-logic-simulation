@@ -32,8 +32,8 @@ namespace Tests.SfcEditor.Interpreters
         #region ==================== Public Methods ====================
         public ProcessingUnitMock()
         {
-            InputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
-            OutputRegisters = new StateTable(new Dictionary<string, bool>(), new Dictionary<string, int>());
+            InputRegisters = new StateTable(new List<StateEntry<bool>>(), new List<StateEntry<int>>());
+            OutputRegisters = new StateTable(new List<StateEntry<bool>>(), new List<StateEntry<int>>());
             IntLookup = new Dictionary<string, int>();
         }
         

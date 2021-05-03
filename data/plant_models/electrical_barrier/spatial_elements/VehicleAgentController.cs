@@ -10,9 +10,15 @@ namespace Osls.Plants.ElectricalBarrier
         public const float PathCheckpointCollisionStart = 0.26f;
         public const float PathCheckpointCollisionEnd = 0.30f;
         public const float PathCheckpointPassed = 0.32f;
-        private const float CarSpeed = 0.0001f;
+        public const float RegularCarSpeed = 0.0001f;
         
         [Export] private NodePath _barrierPath = "../ElectricalBarrierNode";
+        
+        /// <summary>
+        /// How fast the car can drive in
+        /// UnitOffset [0..1] per ms
+        /// </summary>
+        public float CarSpeed { get; set; } = RegularCarSpeed;
         
         /// <summary>
         /// True if a car is visibly on the place before the barrier
@@ -23,6 +29,16 @@ namespace Osls.Plants.ElectricalBarrier
         /// True if a car is visibly under the barrier
         /// </summary>
         public bool IsCarUnderBarrier { get; private set; }
+        
+        /// <summary>
+        /// The number of times the car could pass the whole track
+        /// </summary>
+        public int TimesPassedTrack { get; private set; }
+        
+        /// <summary>
+        /// True if the car was damaged by the barrier
+        /// </summary>
+        public bool Damaged { get; private set; }
         #endregion
         
         
@@ -30,7 +46,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Calculates the next simulation step.
         /// </summary>
-        public void Update(SimulationPage master, int deltaTime)
+        public void Update(ElectricalBarrier master, int deltaTime)
         {
             PathFollow car = GetNode<PathFollow>("VehiclePath/PathFollow");
             if (IsCarDriving(car))
@@ -43,8 +59,19 @@ namespace Osls.Plants.ElectricalBarrier
                 else
                 {
                     ResetAgent(car);
+                    TimesPassedTrack++;
                 }
             }
+            CheckCollision(master);
+        }
+        
+        /// <summary>
+        /// Places the car at the position from the given path unit offset [0..1]
+        /// </summary>
+        public void PlaceCarAt(float unitOffset)
+        {
+            PathFollow car = GetNode<PathFollow>("VehiclePath/PathFollow");
+            car.UnitOffset = unitOffset;
         }
         #endregion
         
@@ -83,6 +110,25 @@ namespace Osls.Plants.ElectricalBarrier
         {
             car.UnitOffset = 0;
             car.Rotation = new Vector3();
+        }
+        
+        private void CheckCollision(ElectricalBarrier master)
+        {
+            PathFollow car = GetNode<PathFollow>("VehiclePath/PathFollow");
+            float unitOffset = car.UnitOffset;
+            if (unitOffset > PathCheckpointCollisionStart && unitOffset < PathCheckpointCollisionEnd)
+            {
+                if (master.Barrier.BarrierRotation < 10)
+                {
+                    BreakDown();
+                }
+            }
+        }
+        
+        private void BreakDown()
+        {
+            Damaged = true;
+            CarSpeed = 0;
         }
         #endregion
     }

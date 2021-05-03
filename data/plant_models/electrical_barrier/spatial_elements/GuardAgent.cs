@@ -8,6 +8,11 @@ namespace Osls.Plants.ElectricalBarrier
         #region ==================== Fields / Properties ====================
         public const string OpenGateSwitchKey = "S_OpenGate";
         private NodePath VehicleAgentPath = "../VehicleAgents";
+        
+        /// <summary>
+        /// Set to false to prevent the gate being opened
+        /// </summary>
+        public bool AllowVehiclePass { get; set; } = true;
         #endregion
         
         
@@ -15,10 +20,10 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Calculates the next simulation step.
         /// </summary>
-        public void Update(SimulationPage master, int deltaTime)
+        public void Update(SimulationPage master)
         {
             VehicleAgentController vehicles = GetNode<VehicleAgentController>(VehicleAgentPath);
-            if (vehicles.IsCarAtCheckpoint || vehicles.IsCarUnderBarrier)
+            if (AllowVehiclePass && (vehicles.IsCarAtCheckpoint || vehicles.IsCarUnderBarrier))
             {
                 master.SimulationOutput.SetValue(OpenGateSwitchKey, true);
             }
