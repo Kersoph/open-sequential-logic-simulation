@@ -82,9 +82,17 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 _openedLesson.SetAndSaveStars(0);
             }
-            else
+            else if (_startOpen.Result == 0 || _startPassing.Result == 0)
             {
                 _openedLesson.SetAndSaveStars(1);
+            }
+            else if (_noiseAndBlackout.Result == 0)
+            {
+                _openedLesson.SetAndSaveStars(2);
+            }
+            else
+            {
+                _openedLesson.SetAndSaveStars(3);
             }
         }
         #endregion

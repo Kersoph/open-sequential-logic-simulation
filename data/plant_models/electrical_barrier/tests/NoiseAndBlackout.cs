@@ -69,7 +69,7 @@ namespace Osls.Plants.ElectricalBarrier
                 _simulationMaster.Reset();
             }
             _simulationMaster.Plc.Update(50);
-            if (_simulation.Vehicle.TimesPassedTrack == 1) _simulation.Guard.AllowVehiclePass = false;
+            if (_simulation.Vehicle.TimesPassedTrack == 5) _simulation.Guard.AllowVehiclePass = false;
             _simulatedSteps++;
             if (_simulatedSteps >= 600 * 5)
             {
@@ -92,11 +92,11 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 builder.AppendLine("No car could pass");
             }
-            else if (_simulation.Vehicle.TimesPassedTrack < 1)
+            else if (_simulation.Vehicle.TimesPassedTrack < 5)
             {
                 builder.AppendLine("Not enough cars could pass");
             }
-            if (_simulation.Vehicle.TimesPassedTrack > 1)
+            if (_simulation.Vehicle.TimesPassedTrack > 5)
             {
                 builder.AppendLine("At least one invalid car could pass");
             }
