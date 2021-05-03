@@ -1,13 +1,13 @@
 
-name: "  Run Tests on Godot 3.2.3  "
+name: "  Run Tests on Godot 3.3  "
 
 on: [push, pull_request]
 
 jobs:
   Tests:
-    name: Run All Tests on 3.2.3
+    name: Run All Tests on 3.3
     runs-on:  ubuntu-latest
-    container: barichello/godot-ci:mono-3.2.3
+    container: barichello/godot-ci:mono-3.3
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
