@@ -8,6 +8,24 @@ namespace Osls.Plants.ElectricalBarrier
     /// </summary>
     public class ElectricalBarrier : SimulationPage
     {
+        #region ==================== Fields / Properties ====================
+        /// <summary>
+        /// Links the simulated barrier node
+        /// </summary>
+        public ElectricalBarrierNode Barrier { get { return GetNode<ElectricalBarrierNode>("ElectricalBarrierNode"); } }
+        
+        /// <summary>
+        /// Links the simulated vehicle controller
+        /// </summary>
+        public VehicleAgentController Vehicle { get { return GetNode<VehicleAgentController>("VehicleAgents"); } }
+        
+        /// <summary>
+        /// links the simulated guard controller
+        /// </summary>
+        public GuardAgent Guard { get { return GetNode<GuardAgent>("GuardAgent"); } }
+        #endregion
+        
+        
         #region ==================== Helpers ====================
         /// <summary>
         /// Returns the input definition for the simulation
@@ -49,9 +67,9 @@ namespace Osls.Plants.ElectricalBarrier
         /// </summary>
         protected override void CalculateNextStep(int deltaTime)
         {
-            GetNode<ElectricalBarrierNode>("ElectricalBarrierNode").Update(this, deltaTime);
-            GetNode<VehicleAgentController>("VehicleAgents").Update(this, deltaTime);
-            GetNode<GuardAgent>("GuardAgent").Update(this, deltaTime);
+            Barrier.Update(this, deltaTime);
+            Vehicle.Update(this, deltaTime);
+            Guard.Update(this);
         }
         #endregion
     }

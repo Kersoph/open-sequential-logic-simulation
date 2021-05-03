@@ -5,22 +5,22 @@
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/ElectricalBarrierNode.cs" type="Script" id=3]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/Flash.cs" type="Script" id=4]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.1, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.785156, 0.785156, 0.785156, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 width = 256
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
+[sub_resource type="CurveTexture" id=4]
 width = 256
-curve = SubResource( 6 )
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
 emission_sphere_radius = 0.5
 gravity = Vector3( 0, 0.2, 0 )
@@ -28,10 +28,10 @@ angular_velocity = 20.0
 angular_velocity_random = 0.5
 tangential_accel = 0.1
 scale_random = 0.5
-scale_curve = SubResource( 7 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=6]
 flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_blend_mode = 3
@@ -40,8 +40,8 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id=3]
-material = SubResource( 2 )
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
 
 [node name="ElectricalBarrierNode" type="Spatial"]
 script = ExtResource( 3 )
@@ -57,8 +57,8 @@ visible = false
 amount = 100
 lifetime = 4.0
 visibility_aabb = AABB( -4, -1, -4, 8, 8, 8 )
-process_material = SubResource( 1 )
-draw_pass_1 = SubResource( 3 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
 
 [node name="Flash" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.4 )

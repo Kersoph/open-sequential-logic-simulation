@@ -1,9 +1,115 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/plant_models/electrical_barrier/ElectricalBarrierTest.cs" type="Script" id=1]
 [ext_resource path="res://data/plant_models/electrical_barrier/electrical_barrier.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/plant_models/electrical_barrier/tests/RegularOperation.cs" type="Script" id=3]
+[ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=4]
 
 [node name="ElectricalBarrierTest" type="Node"]
 script = ExtResource( 1 )
 
-[node name="ElectricalBarrier" parent="." instance=ExtResource( 2 )]
+[node name="Tests" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 80.0
+theme = ExtResource( 4 )
+custom_constants/vseparation = 1
+custom_constants/hseparation = 1
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RegularOperation" type="ViewportContainer" parent="Tests"]
+margin_right = 919.0
+margin_bottom = 508.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Tests/RegularOperation"]
+size = Vector2( 919, 508 )
+own_world = true
+handle_input_locally = false
+msaa = 1
+render_target_update_mode = 3
+shadow_atlas_size = 1024
+shadow_atlas_quad_0 = 1
+
+[node name="ElectricalBarrier" parent="Tests/RegularOperation/Viewport" instance=ExtResource( 2 )]
+
+[node name="Label" type="Label" parent="Tests/RegularOperation"]
+margin_right = 40.0
+margin_bottom = 24.0
+text = "Testing..."
+
+[node name="StartOpen" type="ViewportContainer" parent="Tests"]
+margin_left = 920.0
+margin_right = 1839.0
+margin_bottom = 508.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Tests/StartOpen"]
+size = Vector2( 919, 508 )
+own_world = true
+handle_input_locally = false
+msaa = 1
+render_target_update_mode = 3
+shadow_atlas_size = 1024
+shadow_atlas_quad_0 = 1
+
+[node name="ElectricalBarrier" parent="Tests/StartOpen/Viewport" instance=ExtResource( 2 )]
+
+[node name="StartClosed" type="ViewportContainer" parent="Tests"]
+margin_top = 509.0
+margin_right = 919.0
+margin_bottom = 1017.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Tests/StartClosed"]
+size = Vector2( 919, 508 )
+own_world = true
+handle_input_locally = false
+msaa = 1
+render_target_update_mode = 3
+shadow_atlas_size = 1024
+shadow_atlas_quad_0 = 1
+
+[node name="ElectricalBarrier" parent="Tests/StartClosed/Viewport" instance=ExtResource( 2 )]
+
+[node name="OperationMistakes" type="ViewportContainer" parent="Tests"]
+margin_left = 920.0
+margin_top = 509.0
+margin_right = 1839.0
+margin_bottom = 1017.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Tests/OperationMistakes"]
+size = Vector2( 919, 508 )
+own_world = true
+handle_input_locally = false
+msaa = 1
+render_target_update_mode = 3
+shadow_atlas_size = 1024
+shadow_atlas_quad_0 = 1
+
+[node name="ElectricalBarrier" parent="Tests/OperationMistakes/Viewport" instance=ExtResource( 2 )]
