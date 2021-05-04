@@ -39,6 +39,11 @@ namespace Osls.Plants.ElectricalBarrier
         /// True if the car was damaged by the barrier
         /// </summary>
         public bool Damaged { get; private set; }
+        
+        /// <summary>
+        /// Range from the path at the starting position (0) to the end position (1)
+        /// </summary>
+        public float CarUnitOffset { get { return GetNode<PathFollow>("VehiclePath/PathFollow").UnitOffset; } }
         #endregion
         
         

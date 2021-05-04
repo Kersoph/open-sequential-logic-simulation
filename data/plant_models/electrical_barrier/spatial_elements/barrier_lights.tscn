@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_material_emissive.material" type="Material" id=1]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_material.material" type="Material" id=2]
 [ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/lamp.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Lamp.mesh" type="ArrayMesh" id=4]
 
 [node name="Lights" type="Spatial"]
 __meta__ = {
@@ -29,18 +26,8 @@ shadow_enabled = true
 shadow_bias = 0.3
 omni_range = 20.0
 
-[node name="Lamp" type="MeshInstance" parent="." instance=ExtResource( 3 )]
+[node name="Lamp" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1.8 )
-use_in_baked_light = true
-mesh = ExtResource( 4 )
-skeleton = NodePath("")
-material/0 = ExtResource( 2 )
-material/1 = ExtResource( 1 )
 
-[node name="Lamp2" type="MeshInstance" parent="." instance=ExtResource( 3 )]
+[node name="Lamp2" parent="." instance=ExtResource( 3 )]
 transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 2.5, 0, 3 )
-use_in_baked_light = true
-mesh = ExtResource( 4 )
-skeleton = NodePath("")
-material/0 = ExtResource( 2 )
-material/1 = ExtResource( 1 )

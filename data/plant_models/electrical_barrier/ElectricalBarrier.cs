@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Osls.Plants.ElectricalBarrier
 {
     /// <summary>
-    /// Minimal example class for a simulation controller
+    /// Boundary class between the simulation and the SFC Controllers
     /// </summary>
     public class ElectricalBarrier : SimulationPage
     {
@@ -23,6 +23,11 @@ namespace Osls.Plants.ElectricalBarrier
         /// links the simulated guard controller
         /// </summary>
         public GuardAgent Guard { get { return GetNode<GuardAgent>("GuardAgent"); } }
+        
+        /// <summary>
+        /// links the tunnel light controller
+        /// </summary>
+        public TunnelLights TunnelLights { get { return GetNode<TunnelLights>("Map/TunnelLights"); } }
         #endregion
         
         
