@@ -9,10 +9,10 @@ namespace Osls.Plants.ElectricalBarrier
     public class Lights : SimulationPage
     {
         #region ==================== Fields / Properties ====================
+        public const string ButtonKey = "S101";
+        public const string LightsKey = "H102";
         private const int PressDuration = 300;
         private const int ReleaseDuration = 1700;
-        private const string ButtonKey = "S101";
-        private const string LightsKey = "H102";
         private enum State { Idle, Pressing, Releasing }
         private State _state;
         private int _pressTime;
@@ -26,6 +26,11 @@ namespace Osls.Plants.ElectricalBarrier
         /// Links the simulated barrier node
         /// </summary>
         public ElectricalBarrierController Subcontroller { get { return GetNode<ElectricalBarrierController>("ElectricalBarrierController"); } }
+        
+        /// <summary>
+        /// Set to true if the guard should not push the button to turn the lights off
+        /// </summary>
+        public bool ForgetsToTurnLightsOff { get; set; }
         #endregion
         
         
@@ -112,7 +117,7 @@ namespace Osls.Plants.ElectricalBarrier
             float carUnitOffset = Subscene.Vehicle.CarUnitOffset;
             if (lightSignalOn)
             {
-                if (carUnitOffset > 0.9)
+                if (carUnitOffset > VehicleAgentController.ExitsTunnel && !ForgetsToTurnLightsOff)
                 {
                     return true;
                 }
@@ -123,7 +128,7 @@ namespace Osls.Plants.ElectricalBarrier
             }
             else
             {
-                if (carUnitOffset > VehicleAgentController.PathCheckpointPassed && carUnitOffset < 0.8)
+                if (carUnitOffset > VehicleAgentController.EntersTunnelSoon && carUnitOffset < VehicleAgentController.ExitsTunnel)
                 {
                     return true;
                 }

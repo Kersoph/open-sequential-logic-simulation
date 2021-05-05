@@ -10,6 +10,8 @@ namespace Osls.Plants.ElectricalBarrier
         public const float PathCheckpointCollisionStart = 0.26f;
         public const float PathCheckpointCollisionEnd = 0.30f;
         public const float PathCheckpointPassed = 0.32f;
+        public const float EntersTunnelSoon = 0.34f;
+        public const float ExitsTunnel = 0.9f;
         public const float RegularCarSpeed = 0.0001f;
         
         [Export] private NodePath _barrierPath = "../ElectricalBarrierNode";
