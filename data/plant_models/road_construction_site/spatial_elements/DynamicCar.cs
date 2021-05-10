@@ -11,12 +11,12 @@ namespace Osls.Plants.RoadConstructionSite
         private const float DriveSpeed = 10f;
         private const float AccidentResetTime = 40f;
         private static readonly string[] CarModels = new string[] {
-            "res://data/plant_models/road_construction_site/spatial_elements/meshes/highcar_black.tscn",
-            "res://data/plant_models/road_construction_site/spatial_elements/meshes/highcar_blue.tscn",
-            "res://data/plant_models/road_construction_site/spatial_elements/meshes/highcar_green.tscn",
-            "res://data/plant_models/road_construction_site/spatial_elements/meshes/highcar_orange.tscn",
-            "res://data/plant_models/road_construction_site/spatial_elements/meshes/highcar_red.tscn",
-            "res://data/plant_models/road_construction_site/spatial_elements/meshes/highcar_yellow.tscn",
+            "res://data/plant_models/road_construction_site/spatial_elements/meshes/HighCarBlack.tscn",
+            "res://data/plant_models/road_construction_site/spatial_elements/meshes/HighCarBlue.tscn",
+            "res://data/plant_models/road_construction_site/spatial_elements/meshes/HighCarGreen.tscn",
+            "res://data/plant_models/road_construction_site/spatial_elements/meshes/HighCarOrange.tscn",
+            "res://data/plant_models/road_construction_site/spatial_elements/meshes/HighCarRed.tscn",
+            "res://data/plant_models/road_construction_site/spatial_elements/meshes/HighCarYellow.tscn",
         };
         private static int LastCarModel;
         

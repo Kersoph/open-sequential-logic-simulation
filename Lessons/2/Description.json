@@ -2,6 +2,6 @@
     "Title": "[center]Simple\nTraffic\nSignal[/center]",
     "Description": "The client wants to add the possibility for the checkpoint to turn on and off additional lights in the tunnel to save energy. After a fixed amount of time, the lights should turn off automatically.",
     "Goal": "Turn the light on or off when the guard pushes the button. The light turns off automatically after 30'000 ms.",
-	"Simulation": "res://data/plant_models/electrical_barrier/lights/lights.tscn",
-	"Test": "res://data/plant_models/electrical_barrier/lights/lights_test.tscn"
+	"Simulation": "res://data/plant_models/electrical_barrier/lights/Lights.tscn",
+	"Test": "res://data/plant_models/electrical_barrier/lights/LightsTest.tscn"
 }

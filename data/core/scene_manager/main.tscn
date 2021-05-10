@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/core/scene_manager/MainNode.cs" type="Script" id=1]
-[ext_resource path="res://data/core/scene_manager/navigation_steps/navigation_steps.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/core/scene_manager/navigation_steps/NavigationSteps.tscn" type="PackedScene" id=2]
 
 [node name="MainNode" type="ReferenceRect"]
 anchor_right = 1.0

@@ -3,7 +3,7 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/SfcEditorNode.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/Sfc2dEditor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/Sfc2dControls.tscn" type="PackedScene" id=6]
-[ext_resource path="res://data/core/lesson/viewer/lesson_view.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/core/lesson/viewer/LessonView.tscn" type="PackedScene" id=7]
 
 [node name="SfcEditorNode" type="Node"]
 script = ExtResource( 1 )

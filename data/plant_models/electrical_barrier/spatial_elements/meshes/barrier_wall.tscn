@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/Barrier_Wall.mesh" type="ArrayMesh" id=1]
-[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_material.material" type="Material" id=2]
-
-[node name="BarrierWall" type="MeshInstance"]
-mesh = ExtResource( 1 )
-material/0 = ExtResource( 2 )

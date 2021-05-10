@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://data/plant_models/electrical_barrier/electrical_barrier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/plant_models/electrical_barrier/ElectricalBarrier.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/plant_models/electrical_barrier/lights/Lights.cs" type="Script" id=2]
 [ext_resource path="res://data/plant_models/electrical_barrier/lights/ElectricalBarrierController.cs" type="Script" id=3]
 

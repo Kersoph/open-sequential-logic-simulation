@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://data/core/theme/font/roboto_regular_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 8.0

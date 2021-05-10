@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=1]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/HighCarGreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/HighCarBlue.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/HighCarBlack.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/HighCar_Green.mesh" type="ArrayMesh" id=5]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/HighCar_Blue.mesh" type="ArrayMesh" id=6]
+[ext_resource path="res://data/plant_models/electrical_barrier/spatial_elements/meshes/import/HighCar_Black.mesh" type="ArrayMesh" id=7]
+
+[node name="ParkedCars" type="Spatial"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HighCar_Black" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( -0.72812, 0, 0.68545, 0, 1, 0, -0.68545, 0, -0.72812, 14.72, 0, -4.599 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="HighCar_Blue" type="MeshInstance" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.704585, 0, 0.70962, 0, 1, 0, -0.70962, 0, -0.704585, 18.8647, 0, -4.42701 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+
+[node name="HighCar_Green" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.761482, 0, 0.648186, 0, 1, 0, -0.648186, 0, -0.761482, 22.6903, 4.76837e-07, -4.38435 )
+mesh = ExtResource( 5 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
