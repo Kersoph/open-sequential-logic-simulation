@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorReload.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorWrite.cs" type="Script" id=7]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/FileDialog.cs" type="Script" id=8]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorControls.cs" type="Script" id=9]
+[ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=10]
 
 [node name="EditorControls" type="Control"]
 anchor_right = 1.0
@@ -105,13 +106,20 @@ text = "Reload"
 script = ExtResource( 1 )
 
 [node name="FileDialog" type="FileDialog" parent="."]
+visible = true
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -394.0
+margin_left = -603.0
 margin_top = 60.0
-margin_bottom = 360.0
-rect_min_size = Vector2( 394, 300 )
+margin_right = -3.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 600, 400 )
+theme = ExtResource( 10 )
+access = 2
 filters = PoolStringArray( "*.sfc ; SFC" )
+show_hidden_files = true
+current_dir = "/Projects/P9_MT/open-sequential-logic-sandbox"
+current_path = "/Projects/P9_MT/open-sequential-logic-sandbox/"
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
