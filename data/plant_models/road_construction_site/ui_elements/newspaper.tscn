@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://data/plant_models/road_construction_site/ui_elements/Source/news.png" type="Texture" id=1]
+[ext_resource path="res://data/plant_models/road_construction_site/ui_elements/source/News.png" type="Texture" id=1]
 [ext_resource path="res://data/plant_models/road_construction_site/Newspaper.cs" type="Script" id=2]
 [ext_resource path="res://data/core/theme/font/RobotoT0Font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://data/core/theme/font/RobotoT1Font.tres" type="DynamicFont" id=4]

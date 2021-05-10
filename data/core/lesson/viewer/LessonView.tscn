@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/core/lesson/viewer/LessonInfo.cs" type="Script" id=1]
-[ext_resource path="res://data/core/lesson/Viewer/PlantView.cs" type="Script" id=2]
+[ext_resource path="res://data/core/lesson/viewer/PlantView.cs" type="Script" id=2]
 [ext_resource path="res://data/core/lesson/viewer/LessonView.cs" type="Script" id=3]
 [ext_resource path="res://data/core/lesson/viewer/IoInfo.cs" type="Script" id=4]
 [ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=5]
