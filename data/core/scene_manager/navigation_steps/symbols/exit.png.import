@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/exit.png-3acbeff693cf06dfae14329ad8c9ac1d.stex"
+path="res://.import/Exit.png-46f3d1f2ed6eb38a16556d37f638e0b8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/core/scene_manager/navigation_steps/symbols/exit.png"
-dest_files=[ "res://.import/exit.png-3acbeff693cf06dfae14329ad8c9ac1d.stex" ]
+source_file="res://data/core/scene_manager/navigation_steps/symbols/Exit.png"
+dest_files=[ "res://.import/Exit.png-46f3d1f2ed6eb38a16556d37f638e0b8.stex" ]
 
 [params]
 

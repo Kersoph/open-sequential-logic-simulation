@@ -50,9 +50,9 @@ namespace Osls.Plants.ElectricalBarrier
         {
             if (_isExecutable && Result == -1)
             {
-                _simulationMaster.UpdateSimulation(16);
+                _simulationMaster.UpdateSimulation(45);
                 _simulatedSteps++;
-                if (_simulatedSteps == 300) _simulation.Vehicle.CarSpeed = VehicleAgentController.RegularCarSpeed;
+                if (_simulatedSteps == 150) _simulation.Vehicle.CarSpeed = VehicleAgentController.RegularCarSpeed;
                 if (_simulatedSteps >= 600)
                 {
                     CollectResults();

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/news.png-7bec0ffc5ba4cdb13496f328ac94babf.s3tc.stex"
-path.etc2="res://.import/news.png-7bec0ffc5ba4cdb13496f328ac94babf.etc2.stex"
+path.s3tc="res://.import/News.png-c786414c3099449b44a05d992428f45c.s3tc.stex"
+path.etc2="res://.import/News.png-c786414c3099449b44a05d992428f45c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://data/plant_models/road_construction_site/ui_elements/source/news.png"
-dest_files=[ "res://.import/news.png-7bec0ffc5ba4cdb13496f328ac94babf.s3tc.stex", "res://.import/news.png-7bec0ffc5ba4cdb13496f328ac94babf.etc2.stex" ]
+source_file="res://data/plant_models/road_construction_site/ui_elements/source/News.png"
+dest_files=[ "res://.import/News.png-c786414c3099449b44a05d992428f45c.s3tc.stex", "res://.import/News.png-c786414c3099449b44a05d992428f45c.etc2.stex" ]
 
 [params]
 

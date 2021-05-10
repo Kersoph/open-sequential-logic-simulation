@@ -42,7 +42,7 @@ Auto_Refresh_Tests=false
 [application]
 
 config/name="open_sequential_logic_sandbox"
-run/main_scene="res://data/core/scene_manager/main.tscn"
+run/main_scene="res://data/core/scene_manager/Main.tscn"
 
 [display]
 
@@ -1132,7 +1132,11 @@ main_load={
  ]
 }
 
+[logging]
+
+file_logging/enable_file_logging=true
+
 [rendering]
 
 environment/default_clear_color=Color( 0.470588, 0.470588, 0.470588, 1 )
-environment/default_environment="res://data/core/environment/default.tres"
+environment/default_environment="res://data/core/environment/Default.tres"

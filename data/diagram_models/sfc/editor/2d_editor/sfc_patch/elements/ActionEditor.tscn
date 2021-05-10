@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/ActionEditor.cs" type="Script" id=1]
-[ext_resource path="res://data/core/theme/font/roboto_regular_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false

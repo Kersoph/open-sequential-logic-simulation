@@ -10,7 +10,7 @@ namespace Osls.Plants.RoadConstructionSite
     public class TrafficController
     {
         #region ==================== Fields / Properties ====================
-        private const string CarReference = "res://data/plant_models/road_construction_site/spatial_elements/dynamic_car.tscn";
+        private const string CarReference = "res://data/plant_models/road_construction_site/spatial_elements/DynamicCar.tscn";
 
         private readonly PathController _topPath;
         private readonly PathController _botPath;
