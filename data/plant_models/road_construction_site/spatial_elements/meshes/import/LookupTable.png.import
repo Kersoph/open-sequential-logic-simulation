@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lookup_table.png-c817de8d64b6793270ba781b14728d5f.stex"
+path="res://.import/LookupTable.png-c5f97ee475c06c5396dacf644d55003f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/lookup_table.png"
-dest_files=[ "res://.import/lookup_table.png-c817de8d64b6793270ba781b14728d5f.stex" ]
+source_file="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/LookupTable.png"
+dest_files=[ "res://.import/LookupTable.png-c5f97ee475c06c5396dacf644d55003f.stex" ]
 
 [params]
 

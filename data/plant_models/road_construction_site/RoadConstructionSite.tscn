@@ -13,7 +13,7 @@
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/TreeCone_4.tscn" type="PackedScene" id=11]
 [ext_resource path="res://data/plant_models/road_construction_site/UI.cs" type="Script" id=12]
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=13]
-[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/lookup_material.material" type="Material" id=14]
+[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=14]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
