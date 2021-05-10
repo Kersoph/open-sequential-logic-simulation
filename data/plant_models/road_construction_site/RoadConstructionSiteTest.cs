@@ -31,7 +31,7 @@ namespace Osls.Plants.RoadConstructionSite
         {
             _openedLesson = openedLesson;
             _simulation = GetNode<RoadConstructionSite>("PlantViewportContainer/PlantViewport/RoadConstructionSite");
-            string filepath = openedLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = _openedLesson.TemporaryDiagramFilePath;
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             if (sfcEntity != null)
             {

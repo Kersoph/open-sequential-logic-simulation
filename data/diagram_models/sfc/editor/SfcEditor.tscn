@@ -25,4 +25,3 @@ scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
 [node name="Sfc2dControls" parent="Sfc2dBackground" instance=ExtResource( 6 )]
-mouse_filter = 2

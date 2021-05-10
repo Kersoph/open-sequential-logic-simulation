@@ -1,17 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorReload.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomIn.cs" type="Script" id=3]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/ControlButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorSave.cs" type="Script" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorLoad.cs" type="Script" id=6]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorWrite.cs" type="Script" id=7]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/FileDialog.cs" type="Script" id=8]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorControls.cs" type="Script" id=9]
 
-[node name="Sfc2dControls" type="Control"]
-anchor_left = 1.0
+[node name="EditorControls" type="Control"]
 anchor_right = 1.0
-margin_left = -236.0
-margin_bottom = 39.0
+anchor_bottom = 1.0
 rect_clip_content = true
+mouse_filter = 2
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -20,9 +24,11 @@ __meta__ = {
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -39.0
-margin_top = -1.0
+margin_top = -1.47192
 margin_right = 1.0
-margin_bottom = 39.0
+margin_bottom = 38.5281
+focus_mode = 0
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "-"
 script = ExtResource( 2 )
@@ -30,32 +36,77 @@ script = ExtResource( 2 )
 [node name="EditorZoomIn" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -78.0
+margin_left = -78.1323
 margin_top = -1.0
-margin_right = -38.0
+margin_right = -38.1323
 margin_bottom = 39.0
+focus_mode = 0
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "+"
 script = ExtResource( 3 )
 
-[node name="EditorSave" parent="." instance=ExtResource( 4 )]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -236.0
-margin_top = -1.0
-margin_right = -156.0
-margin_bottom = 39.0
-toggle_mode = false
-text = "Save"
-script = ExtResource( 5 )
-
-[node name="EditorLoad" parent="." instance=ExtResource( 4 )]
+[node name="EditorWrite" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -157.0
 margin_top = -1.0
 margin_right = -77.0
 margin_bottom = 39.0
+focus_mode = 0
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
-text = "Load"
+text = "Write..."
+script = ExtResource( 7 )
+
+[node name="EditorLoad" parent="." instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -236.0
+margin_top = -1.0
+margin_right = -156.0
+margin_bottom = 39.0
+focus_mode = 0
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+toggle_mode = false
+text = "Load..."
 script = ExtResource( 6 )
+
+[node name="EditorSave" parent="." instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -315.0
+margin_top = -1.0
+margin_right = -235.0
+margin_bottom = 39.0
+focus_mode = 0
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+toggle_mode = false
+text = "Save"
+script = ExtResource( 5 )
+
+[node name="EditorReload" parent="." instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -394.0
+margin_top = -1.0
+margin_right = -314.0
+margin_bottom = 39.0
+focus_mode = 0
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+toggle_mode = false
+text = "Reload"
+script = ExtResource( 1 )
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -394.0
+margin_top = 60.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 394, 300 )
+filters = PoolStringArray( "*.sfc ; SFC" )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

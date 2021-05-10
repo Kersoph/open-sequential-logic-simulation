@@ -84,7 +84,7 @@ namespace Osls.SfcEditor
         {
             _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("Sfc2dViewer/Sfc2dEditor");
             _sfc2dEditorNode.InitializeEditor(_processingData);
-            string filepath = _openedLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = _openedLesson.TemporaryDiagramFilePath;
             _sfc2dEditorNode.TryLoadDiagram(filepath);
         }
         

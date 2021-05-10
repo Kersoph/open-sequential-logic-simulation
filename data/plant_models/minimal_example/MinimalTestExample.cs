@@ -22,7 +22,7 @@ namespace Osls.Plants.MinimalExample
         public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {
             _simulation = GetNode<MinimalSimulationExample>("MinimalSimulationExample");
-            string filepath = openedLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = openedLesson.TemporaryDiagramFilePath;
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             if (sfcEntity != null)
             {
