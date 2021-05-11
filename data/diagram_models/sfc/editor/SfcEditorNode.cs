@@ -45,10 +45,6 @@ namespace Osls.SfcEditor
         public void SaveDiagram()
         {
             string filepath = OpenedLesson.CustomDiagramFilePath;
-            if (string.IsNullOrEmpty(filepath))
-            {
-                filepath = OpenedLesson.FolderPath + LessonEntity.UserResultDirectory + "/Diagram.sfc";
-            }
             Sfc2dEditorNode.SaveDiagram(filepath);
         }
         
@@ -61,6 +57,7 @@ namespace Osls.SfcEditor
             if (string.IsNullOrEmpty(filepath))
             {
                 filepath = OpenedLesson.FolderPath + LessonEntity.UserResultDirectory + "/Diagram.sfc";
+                OpenedLesson.CustomDiagramFilePath = filepath;
             }
             Sfc2dEditorNode.TryLoadDiagram(filepath);
         }

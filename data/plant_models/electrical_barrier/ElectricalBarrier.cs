@@ -74,7 +74,7 @@ namespace Osls.Plants.ElectricalBarrier
         {
             Barrier.Update(this, deltaTime);
             Vehicle.Update(this, deltaTime);
-            Guard.Update(this);
+            Guard.Update(this, deltaTime);
         }
         #endregion
     }

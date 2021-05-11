@@ -38,7 +38,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Calculates the next simulation step.
         /// </summary>
-        public void Update(SimulationPage master, int deltaTime)
+        public void Update(ElectricalBarrier master, int deltaTime)
         {
             if (IsBroken) return;
             int motor = master.SimulationInput.PollInteger(MotorKey);
@@ -46,7 +46,7 @@ namespace Osls.Plants.ElectricalBarrier
             float rotation = GetNode<MeshInstance>("BarrierElectricalPole").RotationDegrees.z;
             master.SimulationOutput.SetValue(SensorOpenedKey, rotation > 60);
             master.SimulationOutput.SetValue(SensorClosedKey, rotation < 2);
-            if (rotation < -10 || rotation > 133)
+            if (rotation < -10 || rotation > 133 || master.Vehicle.Damaged)
             {
                 BreakDown();
             }

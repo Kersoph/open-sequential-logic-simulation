@@ -11,19 +11,28 @@ namespace Osls.Bubbles
         
         private const int LineOffset = 2;
         private float _remainingTime;
+        private bool _importantDisplay;
+        
+        /// <summary>
+        /// Cumulated time in s from the last activation
+        /// </summary>
+        public float TimeSinceLastActivation { get; private set; }
         #endregion
         
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Shows the 3dSprite with the bubble type and expression for the given time [ms] and then hides again.
+        /// Shows the 3dSprite with the bubble type and expression for the given time [s] and then hides again.
         /// </summary>
-        public void Show(Bubble bubble, Expression expression, float time)
+        public void ShowAs(Bubble bubble, Expression expression, float time, bool important = false)
         {
+            if (_importantDisplay && ! important) return;
+            _importantDisplay = important;
             int y = (int)bubble * LineOffset + (int)expression / Hframes;
             int x = (int)expression % Hframes;
             FrameCoords = new Vector2(x, y);
             _remainingTime = time;
+            TimeSinceLastActivation = 0;
             Visible = true;
         }
         
@@ -35,8 +44,10 @@ namespace Osls.Bubbles
                 if (_remainingTime < 0)
                 {
                     Visible = false;
+                    _importantDisplay = false;
                 }
             }
+            TimeSinceLastActivation += delta;
         }
         #endregion
     }

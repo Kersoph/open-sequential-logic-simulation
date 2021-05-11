@@ -1,4 +1,5 @@
 using Godot;
+using Osls.Bubbles;
 
 
 namespace Osls.Plants.ElectricalBarrier
@@ -15,6 +16,9 @@ namespace Osls.Plants.ElectricalBarrier
         public const float RegularCarSpeed = 0.0001f;
         
         [Export] private NodePath _barrierPath = "../ElectricalBarrierNode";
+        [Export] private NodePath _BubbleSpritePath = "VehiclePath/PathFollow/HighCar_Black/BubbleSprite";
+        
+        protected BubbleSprite Bubble { get { return GetNode<BubbleSprite>(_BubbleSpritePath); } }
         
         /// <summary>
         /// How fast the car can drive in
@@ -43,6 +47,11 @@ namespace Osls.Plants.ElectricalBarrier
         public bool Damaged { get; private set; }
         
         /// <summary>
+        /// The cumulated time per car the driver had to wait despite being allowed to access the area
+        /// </summary>
+        public int WaitingTime { get; private set; }
+        
+        /// <summary>
         /// Range from the path at the starting position (0) to the end position (1)
         /// </summary>
         public float CarUnitOffset { get { return GetNode<PathFollow>("VehiclePath/PathFollow").UnitOffset; } }
@@ -68,6 +77,10 @@ namespace Osls.Plants.ElectricalBarrier
                     ResetAgent(car);
                     TimesPassedTrack++;
                 }
+            }
+            else
+            {
+                OnWait(master, deltaTime);
             }
             CheckCollision(master);
         }
@@ -117,6 +130,7 @@ namespace Osls.Plants.ElectricalBarrier
         {
             car.UnitOffset = 0;
             car.Rotation = new Vector3();
+            WaitingTime = 0;
         }
         
         private void CheckCollision(ElectricalBarrier master)
@@ -136,6 +150,40 @@ namespace Osls.Plants.ElectricalBarrier
         {
             Damaged = true;
             CarSpeed = 0;
+            Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 3, true);
+        }
+        
+        private void OnWait(ElectricalBarrier master, int deltaTime)
+        {
+            WaitingTime += deltaTime;
+            if (WaitingTime > 3000 && WaitingTime < 3500 && master.Guard.AllowVehiclePass)
+            {
+                Bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Confused, 1);
+            }
+            else if (WaitingTime > 6000 && WaitingTime < 6800 && master.Guard.AllowVehiclePass)
+            {
+                Bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Annoyed, 0.5f);
+            }
+            else if (WaitingTime > 6800 && WaitingTime < 7500 && master.Guard.AllowVehiclePass)
+            {
+                Bubble.ShowAs(BubbleSprite.Bubble.Say, BubbleSprite.Expression.Confused, 1);
+            }
+            else if (WaitingTime > 15000 && WaitingTime < 15500 && master.Guard.AllowVehiclePass)
+            {
+                Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Surprised, 1);
+            }
+            else if (WaitingTime > 25000 && WaitingTime < 26000 && master.Guard.AllowVehiclePass)
+            {
+                Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Surprised, 1);
+            }
+            else if (WaitingTime > 26000 && WaitingTime < 26500 && master.Guard.AllowVehiclePass)
+            {
+                Bubble.ShowAs(BubbleSprite.Bubble.Say, BubbleSprite.Expression.Frustrated, 1);
+            }
+            else if (WaitingTime > 26500 && WaitingTime < 27000 && master.Guard.AllowVehiclePass)
+            {
+                Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 3);
+            }
         }
         #endregion
     }

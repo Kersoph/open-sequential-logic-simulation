@@ -4,6 +4,7 @@
 [ext_resource path="res://data/core/bubbles/BubbleSprite.cs" type="Script" id=2]
 
 [node name="BubbleSprite" type="Sprite3D"]
+modulate = Color( 0.862745, 0.862745, 0.862745, 1 )
 pixel_size = 0.04
 billboard = 2
 double_sided = false
