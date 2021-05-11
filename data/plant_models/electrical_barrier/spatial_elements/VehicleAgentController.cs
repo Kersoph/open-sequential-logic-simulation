@@ -12,6 +12,7 @@ namespace Osls.Plants.ElectricalBarrier
         public const float PathCheckpointCollisionEnd = 0.30f;
         public const float PathCheckpointPassed = 0.32f;
         public const float EntersTunnelSoon = 0.34f;
+        public const float EntersTunnel = 0.45f;
         public const float ExitsTunnel = 0.9f;
         public const float RegularCarSpeed = 0.0001f;
         
@@ -67,16 +68,7 @@ namespace Osls.Plants.ElectricalBarrier
             PathFollow car = GetNode<PathFollow>("VehiclePath/PathFollow");
             if (IsCarDriving(car))
             {
-                float newOffset = car.UnitOffset + (CarSpeed * deltaTime);
-                if (newOffset < 1)
-                {
-                    car.UnitOffset = newOffset;
-                }
-                else
-                {
-                    ResetAgent(car);
-                    TimesPassedTrack++;
-                }
+                OnDriving(car, master, deltaTime);
             }
             else
             {
@@ -151,6 +143,27 @@ namespace Osls.Plants.ElectricalBarrier
             Damaged = true;
             CarSpeed = 0;
             Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 3, true);
+        }
+        
+        private void OnDriving(PathFollow car, ElectricalBarrier master, int deltaTime)
+        {
+            float newOffset = car.UnitOffset + (CarSpeed * deltaTime);
+            if (newOffset < 1)
+            {
+                car.UnitOffset = newOffset;
+            }
+            else
+            {
+                ResetAgent(car);
+                TimesPassedTrack++;
+            }
+            if (car.UnitOffset > EntersTunnel && car.UnitOffset < ExitsTunnel)
+            {
+                if (!master.TunnelLights.AreLightsOn)
+                {
+                    Bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Confused, 0.5f);
+                }
+            }
         }
         
         private void OnWait(ElectricalBarrier master, int deltaTime)
