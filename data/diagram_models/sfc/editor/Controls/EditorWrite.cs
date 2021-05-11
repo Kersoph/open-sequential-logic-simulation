@@ -1,9 +1,9 @@
 using Godot;
 
 
-namespace Osls.SfcEditor
+namespace Osls.SfcEditor.Controls
 {
-    public class EditorLoad : Button
+    public class EditorWrite : Button
     {
         #region ==================== Public Methods ====================
         public override void _Ready()
@@ -13,7 +13,7 @@ namespace Osls.SfcEditor
         
         public void OnButtonPressed()
         {
-            GetNode<FileDialog>("../FileDialog").LoadFile();
+            GetNode<FileDialog>("../FileDialog").SaveFile();
         }
         #endregion
     }

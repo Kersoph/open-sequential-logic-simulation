@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/Tree_002.mesh" type="ArrayMesh" id=1]
-[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/lookup_material.material" type="Material" id=2]
+[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=2]
 
 [node name="Tree_Cone4" type="MeshInstance"]
 mesh = ExtResource( 1 )

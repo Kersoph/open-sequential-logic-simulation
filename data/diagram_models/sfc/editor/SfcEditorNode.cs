@@ -14,8 +14,7 @@ namespace Osls.SfcEditor
         [Export] private NodePath LessonViewPath = "LessonView";
         [Export] private NodePath Sfc2dEditorPath = "Sfc2dBackground/Sfc2dEditor";
         
-        private LessonEntity _openedLesson;
-        
+        public LessonEntity OpenedLesson { get; private set; }
         public MainNode MainNode { get; private set; }
         public LessonView LessonView { get; private set; }
         public Sfc2dEditorNode Sfc2dEditorNode { get; private set; }
@@ -29,7 +28,7 @@ namespace Osls.SfcEditor
         public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {
             MainNode = mainNode;
-            _openedLesson = openedLesson;
+            OpenedLesson = openedLesson;
             LessonView = GetNode<LessonView>(LessonViewPath);
             LessonView.LoadAndShowInfo(openedLesson);
             Sfc2dEditorNode = GetNode<Sfc2dEditorNode>(Sfc2dEditorPath);
@@ -45,7 +44,11 @@ namespace Osls.SfcEditor
         /// </summary>
         public void SaveDiagram()
         {
-            string filepath = _openedLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = OpenedLesson.CustomDiagramFilePath;
+            if (string.IsNullOrEmpty(filepath))
+            {
+                filepath = OpenedLesson.FolderPath + LessonEntity.UserResultDirectory + "/Diagram.sfc";
+            }
             Sfc2dEditorNode.SaveDiagram(filepath);
         }
         
@@ -54,8 +57,30 @@ namespace Osls.SfcEditor
         /// </summary>
         public void TryLoadDiagram()
         {
-            string filepath = _openedLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = OpenedLesson.CustomDiagramFilePath;
+            if (string.IsNullOrEmpty(filepath))
+            {
+                filepath = OpenedLesson.FolderPath + LessonEntity.UserResultDirectory + "/Diagram.sfc";
+            }
             Sfc2dEditorNode.TryLoadDiagram(filepath);
+        }
+        
+        /// <summary>
+        /// Saves the data to a temporary file which is always written when the scene changes
+        /// </summary>
+        public void SerialiseToTemp()
+        {
+            Sfc2dEditorNode.SaveDiagram(OpenedLesson.TemporaryDiagramFilePath);
+        }
+        
+        /// <summary>
+        /// Requests a change of the current page to the new page.
+        /// Used to provide the possibility for the user to save or cancel the action.
+        /// </summary>
+        public override void OnUserRequestsChange(MainNode mainNode, PageCategory nextPage)
+        {
+            SerialiseToTemp();
+            mainNode.ChangePageTo(nextPage);
         }
         #endregion
     }

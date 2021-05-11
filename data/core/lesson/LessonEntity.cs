@@ -14,7 +14,7 @@ namespace Osls
         public const string DescriptionFilePath = "/Description.json";
         public const string UserResultDirectory = "/User";
         public const string UserResultFilePath = UserResultDirectory + "/Results.json";
-        public const string UserDiagramDirectory = UserResultDirectory + "/Diagram.sfc";
+        public const string TemporaryDiagram = UserResultDirectory + "/Temp.sfc";
         
         /// <summary>
         /// The lesson title as a BBCode.
@@ -37,9 +37,15 @@ namespace Osls
         public string FolderPath { get; private set; }
         
         /// <summary>
-        /// The complete path where the sfc file is stored for this lesson.
+        /// The complete path where the temporary sfc file is stored for this lesson.
+        /// Used for test / scene communication and immediate saves.
         /// </summary>
-        public string DiagramFilePath { get { return FolderPath + UserDiagramDirectory; } }
+        public string TemporaryDiagramFilePath { get { return FolderPath + TemporaryDiagram; } }
+        
+        /// <summary>
+        /// The complete path where the custom sfc file is stored for this lesson.
+        /// </summary>
+        public string CustomDiagramFilePath { get; set; }
         
         /// <summary>
         /// The data path of the simulation.

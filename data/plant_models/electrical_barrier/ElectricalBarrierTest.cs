@@ -27,7 +27,7 @@ namespace Osls.Plants.ElectricalBarrier
         public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
-            string filepath = openedLesson.FolderPath + "/User/Diagram.sfc";
+            string filepath = _openedLesson.TemporaryDiagramFilePath;
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             
             _regularOperation = GetNode<RegularOperation>("Tests/RegularOperation");

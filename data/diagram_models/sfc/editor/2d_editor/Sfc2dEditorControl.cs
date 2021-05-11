@@ -60,11 +60,14 @@ namespace Osls.SfcEditor
         {
             if (!System.IO.File.Exists(filepath))
             {
-                PatchEntity entity = new PatchEntity(1, 0)
+                if (Data.SfcEntity.Lookup(1, 0) == null)
                 {
-                    SfcStepType = StepType.StartingStep
-                };
-                Data.SfcEntity.AddPatch(entity);
+                    PatchEntity entity = new PatchEntity(1, 0)
+                    {
+                        SfcStepType = StepType.StartingStep
+                    };
+                    Data.SfcEntity.AddPatch(entity);
+                }
             }
             else
             {
