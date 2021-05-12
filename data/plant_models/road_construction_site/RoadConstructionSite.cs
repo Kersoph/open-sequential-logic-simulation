@@ -10,12 +10,12 @@ namespace Osls.Plants.RoadConstructionSite
     {
         #region ==================== Fields / Properties ====================
         private TrafficControlSystem _topTrafficLight;
-        private const string _topTrafficLightKey = "H_Top";
+        private const string _topTrafficLightKey = "H100";
         private TrafficControlSystem _botTrafficLight;
-        private const string _botTrafficLightKey = "H_Bot";
+        private const string _botTrafficLightKey = "H101";
         private TrafficController _trafficController;
-        private const string _topTrafficSensorKey = "B_Top";
-        private const string _botTrafficSensorKey = "B_Bot";
+        private const string _topTrafficSensorKey = "B100";
+        private const string _botTrafficSensorKey = "B101";
         #endregion
         
         
