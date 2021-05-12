@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorReload.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
@@ -9,7 +9,10 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorWrite.cs" type="Script" id=7]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/FileDialog.cs" type="Script" id=8]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorControls.cs" type="Script" id=9]
-[ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=10]
+[ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=10]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 10 )
 
 [node name="EditorControls" type="Control"]
 anchor_right = 1.0
@@ -114,7 +117,7 @@ margin_top = 60.0
 margin_right = -3.0
 margin_bottom = 460.0
 rect_min_size = Vector2( 600, 400 )
-theme = ExtResource( 10 )
+theme = SubResource( 1 )
 access = 2
 filters = PoolStringArray( "*.sfc ; SFC" )
 show_hidden_files = true

@@ -6,9 +6,9 @@ namespace Osls.Plants.ElectricalBarrier
     public class ElectricalBarrierNode : Spatial
     {
         #region ==================== Fields / Properties ====================
-        public const string MotorKey = "M_Gate";
-        public const string SensorOpenedKey = "B_Opened";
-        public const string SensorClosedKey = "B_Closed";
+        public const string MotorKey = "M100";
+        public const string SensorOpenedKey = "B100";
+        public const string SensorClosedKey = "B101";
         
         /// <summary>
         /// True if agents perceive the barrier as opened

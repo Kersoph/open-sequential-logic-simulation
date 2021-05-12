@@ -7,7 +7,7 @@ namespace Osls.Plants.ElectricalBarrier
     public class GuardAgent : Spatial
     {
         #region ==================== Fields / Properties ====================
-        public const string OpenGateSwitchKey = "S_OpenGate";
+        public const string OpenGateSwitchKey = "S116";
         private int _lastCarNumber = -1;
         private int _reactionTimer;
         private bool _witnessedBreakdown;
