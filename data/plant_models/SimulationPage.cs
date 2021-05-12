@@ -51,6 +51,12 @@ namespace Osls.Plants
         
         #region ==================== Public Methods ====================
         /// <summary>
+        /// Called when the user can have options to influence the simulation
+        /// Normally called by the by the simulation UI
+        /// </summary>
+        public abstract void SetupUi();
+        
+        /// <summary>
         /// Calculates the next simulation step.
         /// </summary>
         public void UpdateModel(int timeMs)

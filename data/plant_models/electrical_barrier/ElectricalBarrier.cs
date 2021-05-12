@@ -31,6 +31,18 @@ namespace Osls.Plants.ElectricalBarrier
         #endregion
         
         
+        #region ==================== Public Methods ====================
+        /// <summary>
+        /// Called when the user can have options to influence the simulation.
+        /// Normally called by the by the simulation UI
+        /// </summary>
+        public override void SetupUi()
+        {
+            GetNode<ElectricalBarrierUi>("ElectricalBarrierUi").SetupUi(this);
+        }
+        #endregion
+        
+        
         #region ==================== Helpers ====================
         /// <summary>
         /// Returns the input definition for the simulation

@@ -41,6 +41,14 @@ namespace Osls.Plants.RoadConstructionSite
         {
             return _trafficController.CollectReports();
         }
+        
+        /// <summary>
+        /// Called when the user can have options to influence the simulation.
+        /// Normally called by the by the simulation UI
+        /// </summary>
+        public override void SetupUi()
+        {
+        }
         #endregion
         
         
