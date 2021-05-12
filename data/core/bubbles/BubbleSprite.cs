@@ -6,10 +6,10 @@ namespace Osls.Bubbles
     public class BubbleSprite : Sprite3D
     {
         #region ==================== Fields / Properties ====================
-        public enum Bubble { Say, Think, Shout}
-        public enum Expression { Attention, Exclamation, Confused, Surprised, Ok, Nok, Sleeping, Annoyed, Frustrated, Angry, Loving, Happy }
+        public enum Bubble { Say, Think, Shout, None }
+        public enum Expression { Attention, Exclamation, Confused, Surprised, Ok, Nok, Sleeping, Annoyed, Angry, Frustrated, Loving, Happy, Sad, Laughing, Busy, Depressed, Dizzy, Home, Idea, Money, Music, Waiting }
         
-        private const int LineOffset = 2;
+        private const int LineOffset = 4;
         private float _remainingTime;
         private bool _importantDisplay;
         
