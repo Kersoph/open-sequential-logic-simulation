@@ -151,7 +151,6 @@ margin_bottom = 40.0
 hint_tooltip = "Tells the guart to not let anyone in."
 focus_mode = 0
 toggle_mode = true
-pressed = true
 text = "Block Entry"
 __meta__ = {
 "_edit_use_anchors_": false
