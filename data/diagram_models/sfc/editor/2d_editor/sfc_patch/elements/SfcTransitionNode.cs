@@ -25,6 +25,7 @@ namespace Osls.SfcEditor
             _textEdit.Connect("focus_exited", this, nameof(OnTextEditorFocusExited));
             _textEdit.Connect("mouse_entered", this, nameof(OnMouseEntered));
             _textEdit.Connect("mouse_exited", this, nameof(OnMouseExited));
+            _textEdit.Connect("text_changed", this, nameof(OnTextChanged));
         }
         
         /// <summary>
@@ -79,6 +80,22 @@ namespace Osls.SfcEditor
             UpdateVisualRepresentation();
         }
         
+        /// <summary>
+        /// Confirmes the text when a new line is added (the user pressed enter)
+        /// By removing the char and lose the focus.
+        /// </summary>
+        private void OnTextChanged()
+        {
+            string currentText = _textEdit.Text;
+            int escapePosition = currentText.IndexOf('\n');
+            if (escapePosition >= 0)
+            {
+                string subtext = currentText.Remove(escapePosition, 1);
+                _textEdit.Text = subtext;
+                _textEdit.ReleaseFocus();
+            }
+        }
+
         private void UpdateVisualRepresentation()
         {
             if (string.IsNullOrEmpty(_textEdit.Text))
