@@ -24,16 +24,13 @@ namespace Osls.SfcSimulation.Engine
         #region ==================== Public Methods ====================
         /// <summary>
         /// Resets the registers to the default value
+        /// Only booleans reset automatically according to tests with the laboratory PLC
         /// </summary>
         public void ResetRegisters()
         {
             foreach (string entry in BooleanKeys)
             {
                 Booleans[entry].Value = Booleans[entry].DefaultValue;
-            }
-            foreach (string entry in IntegerKeys)
-            {
-                Integers[entry].Value = Integers[entry].DefaultValue;
             }
         }
         #endregion
