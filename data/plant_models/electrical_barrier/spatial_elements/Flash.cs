@@ -6,17 +6,17 @@ namespace Osls.Plants.ElectricalBarrier
     public class Flash : OmniLight
     {
         #region ==================== Fields / Properties ====================
-        private bool _flashNextFrame;
+        private int _flashFrames;
         #endregion
         
         
         #region ==================== Public Methods ====================
         public override void _Process(float delta)
         {
-            if (_flashNextFrame)
+            if (_flashFrames > 0)
             {
                 Visible = true;
-                _flashNextFrame = false;
+                _flashFrames--;
             }
             else if (Visible)
             {
@@ -29,7 +29,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// </summary>
         public void FlashNextFrame()
         {
-            _flashNextFrame = true;
+            _flashFrames = 3;
         }
         #endregion
     }
