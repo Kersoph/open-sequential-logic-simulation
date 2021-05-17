@@ -11,6 +11,7 @@
 margin_right = 400.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 400, 220 )
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true,
@@ -44,6 +45,7 @@ margin_bottom = 170.0
 margin_left = 160.0
 margin_right = 380.0
 margin_bottom = 95.0
+mouse_filter = 2
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true,
@@ -54,6 +56,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0
+mouse_filter = 2
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false

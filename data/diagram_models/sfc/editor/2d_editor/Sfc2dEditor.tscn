@@ -12,3 +12,4 @@ __meta__ = {
 
 [node name="RenderViewportReferenceRect" type="ReferenceRect" parent="."]
 show_behind_parent = true
+mouse_filter = 2

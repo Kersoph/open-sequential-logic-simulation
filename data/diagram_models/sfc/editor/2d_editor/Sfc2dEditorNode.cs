@@ -6,7 +6,7 @@ namespace Osls.SfcEditor
     /// <summary>
     /// Topmost node for the Sfc2dEditorNode.tscn
     /// </summary>
-    public class Sfc2dEditorNode : Node
+    public class Sfc2dEditorNode : Control
     {
         #region ==================== Fields Properties ====================
         private ReferenceRect _renderViewportReferenceRect;
@@ -77,16 +77,9 @@ namespace Osls.SfcEditor
             }
         }
         
-        public void ApplyDiagramScale(Vector2 scale)
-        {
-            _renderViewportReferenceRect.RectScale = scale;
-        }
-        
-        public void ApplyDiagramOffset(Vector2 position)
-        {
-            _renderViewportReferenceRect.SetPosition(position);
-        }
-        
+        /// <summary>
+        /// Moving with the middle mouse button always works.
+        /// </summary>
         public override void _Input(InputEvent @event)
         {
             if (@event.IsActionPressed("ui_translate"))
@@ -98,6 +91,35 @@ namespace Osls.SfcEditor
             {
                 _isDragging = false;
             }
+        }
+        
+        /// <summary>
+        /// Using secondary move buttons only when they are not used for another control
+        /// </summary>
+        public override void _GuiInput(InputEvent @event)
+        {
+            if (@event.IsActionPressed("ui_translate_idle"))
+            {
+                _lastDragPosition = GetViewport().GetMousePosition();
+                _isDragging = true;
+            }
+            else if (@event.IsActionReleased("ui_translate_idle"))
+            {
+                _isDragging = false;
+            }
+        }
+        #endregion
+        
+        
+        #region ==================== Helpers ====================
+        private void ApplyDiagramScale(Vector2 scale)
+        {
+            _renderViewportReferenceRect.RectScale = scale;
+        }
+        
+        private void ApplyDiagramOffset(Vector2 position)
+        {
+            _renderViewportReferenceRect.SetPosition(position);
         }
         #endregion
     }
