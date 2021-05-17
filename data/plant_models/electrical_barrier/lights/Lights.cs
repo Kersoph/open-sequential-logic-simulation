@@ -54,7 +54,7 @@ namespace Osls.Plants.ElectricalBarrier
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(LightsKey, false, "Tunnel lights", "A true signal of will turn on the lights in the tunnel.") },
+                    { new StateEntry<bool>(LightsKey, false, "Tunnel lights", "A true signal of will turn on the lights\nin the tunnel. False keeps them off.") },
                 },
                 new List<StateEntry<int>>()
                 {
@@ -70,7 +70,7 @@ namespace Osls.Plants.ElectricalBarrier
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(ButtonKey, false, "Lights ON/OFF", "True if the guard pushed the button") },
+                    { new StateEntry<bool>(ButtonKey, false, "Lights ON/OFF", "True if the guard pushes the button.") },
                 },
                 new List<StateEntry<int>>()
                 {
