@@ -6,9 +6,27 @@ namespace Osls.Plants.ElectricalBarrier
     public class TunnelLights : Spatial
     {
         #region ==================== Fields / Properties ====================
-        private bool[] _signalHistory = new bool[6];
+        private bool[] _signalHistory = new bool[] { true, true, true, true, true, true };
         private int _flickerCount;
         
+        /// <summary>
+        /// True if all lights are on
+        /// </summary>
+        public bool AreLightsOn
+        {
+            get
+            {
+                for (int i = 0; i < _signalHistory.Length; i++)
+                {
+                    if (!_signalHistory[i]) return false;
+                }
+                return true;
+            }
+        }
+        
+        /// <summary>
+        /// True if the flicker amount was so high that they broke down.
+        /// </summary>
         public bool Broken { get; private set; }
         #endregion
         

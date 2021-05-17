@@ -61,6 +61,7 @@ namespace Osls.LandingPage
         private LessonEntity[] LoadLessons()
         {
             string[] LessonPaths = System.IO.Directory.GetDirectories(EnvironmentPaths.LessonsFolderPath);
+            System.Array.Sort<string>(LessonPaths);
             LessonEntity[] lessonEntities = new LessonEntity[LessonPaths.Length];
             for (int i = 0; i < LessonPaths.Length; i++)
             {

@@ -94,6 +94,7 @@ namespace Osls.SfcEditor
         private void InitialiseSimulation()
         {
             _simulationMaster = new Master(_processingData.SfcEntity, _loadedSimulationNode);
+            _loadedSimulationNode.SetupUi();
             _isExecutable = _simulationMaster.IsProgramSimulationValid();
         }
         #endregion

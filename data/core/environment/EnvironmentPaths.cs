@@ -9,7 +9,7 @@ namespace Osls.Environment
         {
             get
             {
-                return Godot.ProjectSettings.GlobalizePath("res://Lessons/");
+                return Godot.ProjectSettings.GlobalizePath("res://lessons/");
             }
         }
     }

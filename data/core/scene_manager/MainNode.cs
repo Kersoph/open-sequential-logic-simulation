@@ -6,7 +6,7 @@ namespace Osls
 {
     /// <summary>
     /// Top node connected to the main tree. It will be rendered to the main window.
-    /// Handels the visibility and layers of the modules.
+    /// Handles the visibility and layers of the modules.
     /// </summary>
     public class MainNode : Node
     {

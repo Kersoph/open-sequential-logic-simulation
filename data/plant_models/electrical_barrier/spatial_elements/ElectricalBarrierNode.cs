@@ -6,9 +6,9 @@ namespace Osls.Plants.ElectricalBarrier
     public class ElectricalBarrierNode : Spatial
     {
         #region ==================== Fields / Properties ====================
-        public const string MotorKey = "M_Gate";
-        public const string SensorOpenedKey = "B_Opened";
-        public const string SensorClosedKey = "B_Closed";
+        public const string MotorKey = "M100";
+        public const string SensorOpenedKey = "B100";
+        public const string SensorClosedKey = "B101";
         
         /// <summary>
         /// True if agents perceive the barrier as opened
@@ -38,7 +38,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Calculates the next simulation step.
         /// </summary>
-        public void Update(SimulationPage master, int deltaTime)
+        public void Update(ElectricalBarrier master, int deltaTime)
         {
             if (IsBroken) return;
             int motor = master.SimulationInput.PollInteger(MotorKey);
@@ -46,7 +46,7 @@ namespace Osls.Plants.ElectricalBarrier
             float rotation = GetNode<MeshInstance>("BarrierElectricalPole").RotationDegrees.z;
             master.SimulationOutput.SetValue(SensorOpenedKey, rotation > 60);
             master.SimulationOutput.SetValue(SensorClosedKey, rotation < 2);
-            if (rotation < -10 || rotation > 133)
+            if (rotation < -10 || rotation > 133 || master.Vehicle.Damaged)
             {
                 BreakDown();
             }
