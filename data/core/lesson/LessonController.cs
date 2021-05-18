@@ -13,7 +13,7 @@ namespace Osls
         private const string EditorPath = "res://data/diagram_models/sfc/editor/SfcEditor.tscn";
         private const string SimulationPath = "res://data/diagram_models/sfc/processing_viewer/SfcSimulationViewer.tscn";
         private readonly MainNode _mainNode;
-        private LessonEntity _opendLesson;
+        private LessonEntity _openedLesson;
         
         private PageModule _currentPage;
         #endregion
@@ -33,7 +33,7 @@ namespace Osls
         /// </summary>
         public void ApplyNewLesson(LessonEntity lesson)
         {
-            _opendLesson = lesson;
+            _openedLesson = lesson;
         }
         
         /// <summary>
@@ -79,22 +79,22 @@ namespace Osls
                     scene = ((PackedScene)GD.Load(EditorPath)).Instance() as PageModule;
                     break;
                 case PageCategory.Simulation:
-                    if (!string.IsNullOrEmpty(_opendLesson.SimulationPath))
+                    if (!string.IsNullOrEmpty(_openedLesson.SimulationPath))
                     {
                         scene = ((PackedScene)GD.Load(SimulationPath)).Instance() as PageModule;
                     }
                     break;
                 case PageCategory.Examination:
-                    if (!string.IsNullOrEmpty(_opendLesson.TestPath))
+                    if (!string.IsNullOrEmpty(_openedLesson.TestPath))
                     {
-                        scene = ((PackedScene)GD.Load(_opendLesson.TestPath)).Instance() as PageModule;
+                        scene = ((PackedScene)GD.Load(_openedLesson.TestPath)).Instance() as PageModule;
                     }
                     break;
             }
             _currentPage = scene;
             if (_currentPage != null)
             {
-                _currentPage.InitialiseWith(_mainNode, _opendLesson);
+                _currentPage.InitialiseWith(_mainNode, _openedLesson);
                 _mainNode.AddChild(_currentPage);
                 _mainNode.MoveChild(_currentPage, 0);
             }
