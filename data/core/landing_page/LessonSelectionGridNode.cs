@@ -1,5 +1,4 @@
 using Godot;
-using Osls.Environment;
 
 
 namespace Osls.LandingPage
@@ -11,7 +10,7 @@ namespace Osls.LandingPage
     public class LessonSelectionGridNode : GridContainer
     {
         #region ==================== Fields ====================
-        private const string LessonControllerScene = "res://data/core/landing_page/lesson_source_controller/LessonController.tscn";
+        [Export] private PackedScene _lessonControllerScene;
         private LessonControllerNode[] _lessonNodes;
         #endregion
         
@@ -21,7 +20,7 @@ namespace Osls.LandingPage
         {
             try
             {
-                LessonEntity[] lessons = LoadLessons();
+                LessonEntity[] lessons = LessonCollector.LoadLessons();
                 CreateButtons(lessons);
             }
             catch (System.Exception e)
@@ -57,28 +56,13 @@ namespace Osls.LandingPage
         #endregion
         
         
-        #region ==================== Private Methods ====================
-        private LessonEntity[] LoadLessons()
-        {
-            string[] LessonPaths = System.IO.Directory.GetDirectories(EnvironmentPaths.LessonsFolderPath);
-            System.Array.Sort<string>(LessonPaths);
-            LessonEntity[] lessonEntities = new LessonEntity[LessonPaths.Length];
-            for (int i = 0; i < LessonPaths.Length; i++)
-            {
-                LessonEntity lessonData = new LessonEntity(LessonPaths[i]);
-                lessonData.LoadFolderContent();
-                lessonEntities[i] = lessonData;
-            }
-            return lessonEntities;
-        }
-        
+        #region ==================== Helpers ====================
         private void CreateButtons(LessonEntity[] lessons)
         {
-            PackedScene packedControllerNode = (PackedScene)GD.Load(LessonControllerScene);
             _lessonNodes = new LessonControllerNode[lessons.Length];
             for (int i = 0; i < lessons.Length; i++)
             {
-                LessonControllerNode controllerNode = (LessonControllerNode)packedControllerNode.Instance();
+                LessonControllerNode controllerNode = (LessonControllerNode)_lessonControllerScene.Instance();
                 controllerNode.SetLessonInfo(lessons[i], this);
                 AddChild(controllerNode);
                 _lessonNodes[i] = controllerNode;

@@ -61,8 +61,8 @@ namespace Osls.Plants.RoadConstructionSite
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(_topTrafficLightKey, false, "Switches the upper traffic light", "Turns the upper lane light to green if the value is set to true. Otherwise it will be red.") },
-                    { new StateEntry<bool>(_botTrafficLightKey, false, "Switches the lower traffic light", "Turns the lower lane light to green if the value is set to true. Otherwise it will be red.") }
+                    { new StateEntry<bool>(_topTrafficLightKey, false, "Switches the upper traffic light", "Turns the upper lane light to green\nif the value is set to true.\nOtherwise it will be red.") },
+                    { new StateEntry<bool>(_botTrafficLightKey, false, "Switches the lower traffic light", "Turns the lower lane light to green\nif the value is set to true.\nOtherwise it will be red.") }
                 },
                 new List<StateEntry<int>>()
             );

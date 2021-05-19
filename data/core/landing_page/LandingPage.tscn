@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://data/core/landing_page/LandingPageNode.cs" type="Script" id=1]
 [ext_resource path="res://data/core/landing_page/LessonsNode.cs" type="Script" id=2]
 [ext_resource path="res://data/core/landing_page/LessonSelectionGridNode.cs" type="Script" id=3]
 [ext_resource path="res://data/core/lesson/viewer/LessonView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/core/landing_page/lesson_source_controller/images/DiagramScreenshot.png" type="Texture" id=5]
+[ext_resource path="res://data/core/landing_page/lesson_source_controller/LessonController.tscn" type="PackedScene" id=6]
 
 [node name="LandingPage" type="Node"]
 script = ExtResource( 1 )
@@ -19,6 +20,9 @@ margin_left = 80.0
 margin_top = 1.0
 margin_right = -513.0
 rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="TextureRect" parent="LessonsNode/LessonSelectorContainer"]
 modulate = Color( 0.956863, 0.94902, 0.917647, 1 )
@@ -53,6 +57,7 @@ custom_constants/vseparation = 50
 custom_constants/hseparation = 50
 columns = 4
 script = ExtResource( 3 )
+_lessonControllerScene = ExtResource( 6 )
 
 [node name="LessonPreviewBackground" type="ColorRect" parent="LessonsNode"]
 anchor_left = 1.0

@@ -19,6 +19,7 @@ namespace Osls
         #region ==================== Public Methods ====================
         public override void _Ready()
         {
+            HandleWindow();
             _lessonController = new LessonController(this);
             _navigationSteps = GetNode<NavigationSteps>("NavigationSteps");
             ChangePageTo(PageCategory.LandingPage);
@@ -43,7 +44,7 @@ namespace Osls
         
         /// <summary>
         /// Requests a change of the current page to the new page.
-        /// Used to privide the possibility for the user to save or cancel the action.
+        /// Used to provide the possibility for the user to save or cancel the action.
         /// </summary>
         public void UserRequestsChangeTo(PageCategory page)
         {
@@ -63,6 +64,11 @@ namespace Osls
         
         
         #region ==================== Helpers ====================
+        private void HandleWindow()
+        {
+            OS.WindowMaximized = true;
+        }
+        
         private void QuitSfcSandbox()
         {
             GetTree().Quit();

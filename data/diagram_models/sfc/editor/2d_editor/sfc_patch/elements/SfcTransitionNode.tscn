@@ -8,6 +8,7 @@
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 30.0
 
 [node name="SfcTransitionNode" type="ReferenceRect"]
 margin_right = 318.0
@@ -18,7 +19,7 @@ script = ExtResource( 1 )
 [node name="TransitionTextEditor" type="TextEdit" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 18.0
+margin_left = -12.0
 custom_styles/read_only = SubResource( 1 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
