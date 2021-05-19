@@ -118,7 +118,7 @@ namespace Osls
         #region ==================== Helpers ====================
         /// <summary>
         /// Loads the description json as a godot dictionary.
-        /// It is different than the System.Runtime.Serialization json attribute deserilisation.
+        /// It is different than the System.Runtime.Serialization json attribute deserialization.
         /// But it is sufficient for our needs.
         /// </summary>
         private void LoadDescriptionDictionary()
