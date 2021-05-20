@@ -90,12 +90,12 @@ namespace Osls.Plants.ElectricalBarrier
             if (builder.Length == 0)
             {
                 Result = 1;
-                GetNode<Label>("Label").Text = "Passed!";
+                GetNode<Label>("Label").Text += "\nPassed!";
             }
             else
             {
                 Result = 0;
-                GetNode<Label>("Label").Text = builder.ToString();
+                GetNode<Label>("Label").Text += "\n" + builder.ToString();
             }
         }
         #endregion
