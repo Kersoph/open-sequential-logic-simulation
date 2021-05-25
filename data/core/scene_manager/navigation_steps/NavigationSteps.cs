@@ -16,6 +16,7 @@ namespace Osls.Navigation
         private Button _simulationStepButton;
         private Button _examinationStepButton;
         private Button _exitButton;
+        private PageCategory _currentPage;
         #endregion
         
         
@@ -40,6 +41,7 @@ namespace Osls.Navigation
         /// </summary>
         public void VisibleViewIs(PageCategory view)
         {
+            _currentPage = view;
             _landingPageButton.Pressed = view == PageCategory.LandingPage;
             _sfcStepButton.Pressed = view == PageCategory.LogicEditor;
             _sfcStepButton.Disabled = view == PageCategory.LandingPage;
@@ -83,11 +85,13 @@ namespace Osls.Navigation
             if (pressed)
             {
                 _mainNode.UserRequestsChangeTo(pages);
-                button.MouseFilter = Control.MouseFilterEnum.Ignore;
             }
             else
             {
-                button.MouseFilter = Control.MouseFilterEnum.Stop;
+                if (_currentPage == pages)
+                {
+                    _mainNode.UserRequestsChangeTo(pages);
+                }
             }
         }
         #endregion
