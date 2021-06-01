@@ -22,6 +22,15 @@ namespace Osls.SfcEditor
             Color background = validReference ? new Color(1, 0, 0, 0f) : new Color(1, 0, 0, 0.2f);
             node.AddColorOverride("background_color", background);
         }
+        
+        /// <summary>
+        /// Applies all user edits to the data model.
+        /// </summary>
+        public override void ApplyEdits()
+        {
+            string stepName = GetNode<TextEdit>("StepNameEditor").Text;
+            GetNode<SfcStepNode>("..").NotifyUserUpdatedName(stepName);
+        }
         #endregion
         
         
@@ -32,8 +41,7 @@ namespace Osls.SfcEditor
         /// </summary>
         private void OnTextEditorFocusExited()
         {
-            string stepName = GetNode<TextEdit>("StepNameEditor").Text;
-            GetNode<SfcStepNode>("..").NotifyUserUpdatedName(stepName);
+            ApplyEdits();
         }
         #endregion
     }

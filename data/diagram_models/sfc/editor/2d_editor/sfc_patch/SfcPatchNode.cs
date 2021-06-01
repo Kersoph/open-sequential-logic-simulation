@@ -44,6 +44,17 @@ namespace Osls.SfcEditor
         }
         
         /// <summary>
+        /// Applies all user edits to the data model.
+        /// Called when the editor is closed.
+        /// </summary>
+        public void ApplyAllEdits()
+        {
+            GetNode<SfcStepNode>("SfcStepNode").ApplyAllEdits();
+            GetNode<SfcTransitionNode>("SfcTransition").ApplyEdits();
+            GetNode<ActionEditorBox>("ActionEditorBox").ApplyAllEdits();
+        }
+        
+        /// <summary>
         /// Marks or unmarks the step if possible
         /// </summary>
         public void MarkStep(bool setMark)

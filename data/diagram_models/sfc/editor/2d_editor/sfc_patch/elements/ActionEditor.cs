@@ -51,6 +51,16 @@ namespace Osls.SfcEditor
             _actionDescriptionNode.Text = string.Empty;
             _isRelevant = false;
         }
+        
+        /// <summary>
+        /// Applies the edits to address immediate data.
+        /// Used when the scene changes or is saved.
+        /// </summary>
+        public void ApplyAllEdits()
+        {
+            CheckRelevancy();
+            if (_isRelevant) _controller.UserChangedData(this, _selectedQualifier, _actionDescriptionNode.Text);
+        }
         #endregion
         
         
@@ -79,11 +89,11 @@ namespace Osls.SfcEditor
         
         private void ConfigureQualifierPopupMenu()
         {
-            PopupMenu menue = _qualifierNode.GetPopup();
-            menue.AddItem("N");
-            menue.AddItem("P+");
-            menue.AddItem("P-");
-            menue.Connect("id_pressed", this, nameof(OnPopupElementSelected));
+            PopupMenu menu = _qualifierNode.GetPopup();
+            menu.AddItem("N");
+            menu.AddItem("P+");
+            menu.AddItem("P-");
+            menu.Connect("id_pressed", this, nameof(OnPopupElementSelected));
         }
         
         private void CheckRelevancy()

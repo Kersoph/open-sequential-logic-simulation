@@ -57,6 +57,9 @@ namespace Osls.SfcEditor
             Sfc2dEditorControl.LoadDiagramOrDefault(filepath);
         }
         
+        /// <summary>
+        /// Uses the next higher zoom level
+        /// </summary>
         public void ZoomIn()
         {
             if (_zoomLevel + 1 < zoomLevels.Length)
@@ -67,6 +70,9 @@ namespace Osls.SfcEditor
             }
         }
         
+        /// <summary>
+        /// Uses the next lower zoom level
+        /// </summary>
         public void ZoomOut()
         {
             if (_zoomLevel > 0)

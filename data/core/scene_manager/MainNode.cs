@@ -39,7 +39,7 @@ namespace Osls
         public void OpenNewLesson(LessonEntity lessonData)
         {
             _lessonController.ApplyNewLesson(lessonData);
-            ChangePageTo(PageCategory.LogicEditor);
+            _navigationSteps.VisibleViewIs(PageCategory.LogicEditor);
         }
         
         /// <summary>

@@ -66,6 +66,17 @@ namespace Osls.SfcEditor
             int index = _actionEditors.IndexOf(editor);
             _patchController.RemoveActionAt(index);
         }
+        
+        /// <summary>
+        /// Applies all user edits to the data model.
+        /// </summary>
+        public void ApplyAllEdits()
+        {
+            for (int i = 0; i < _actionEditors.Count; i++)
+            {
+                _actionEditors[i].ApplyAllEdits();
+            }
+        }
         #endregion
         
         

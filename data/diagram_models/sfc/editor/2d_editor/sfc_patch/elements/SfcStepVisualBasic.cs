@@ -21,5 +21,12 @@ namespace Osls.SfcEditor
         public virtual void MarkStep(bool setMark)
         {
         }
+        
+        /// <summary>
+        /// Applies all user edits to the data model.
+        /// </summary>
+        public virtual void ApplyEdits()
+        {
+        }
     }
 }
