@@ -55,8 +55,11 @@ namespace Osls.SfcEditor
         /// </summary>
         public void UpdateNameTo(string name)
         {
-            Data.StepName = name;
-            Master.UpdateGrid();
+            if (Data.StepName != name)
+            {
+                Data.StepName = name;
+                Master.UpdateGrid();
+            }
         }
         
         /// <summary>
@@ -127,9 +130,12 @@ namespace Osls.SfcEditor
         /// </summary>
         public void UpdateActionTo(int index, ActionQualifier qualifier, string action)
         {
-            Data.ActionEntries[index].Qualifier = qualifier;
-            Data.ActionEntries[index].Action = action;
-            UpdatePatchNodes();
+            if (Data.ActionEntries[index].Qualifier != qualifier || Data.ActionEntries[index].Action != action)
+            {
+                Data.ActionEntries[index].Qualifier = qualifier;
+                Data.ActionEntries[index].Action = action;
+                UpdatePatchNodes();
+            }
         }
         
         /// <summary>

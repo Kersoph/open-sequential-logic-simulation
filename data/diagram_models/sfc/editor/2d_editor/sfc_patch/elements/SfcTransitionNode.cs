@@ -48,6 +48,17 @@ namespace Osls.SfcEditor
                 }
             }
         }
+        
+        /// <summary>
+        /// Applies all user edits to the data model.
+        /// </summary>
+        public void ApplyEdits()
+        {
+            if (_patchController.Data.TransitionText != _textEdit.Text)
+            {
+                _patchController.UpdateTransitionTo(_textEdit.Text);
+            }
+        }
         #endregion
         
         
@@ -57,7 +68,7 @@ namespace Osls.SfcEditor
         /// </summary>
         private void OnTextEditorFocusExited()
         {
-            _patchController.UpdateTransitionTo(_textEdit.Text);
+            ApplyEdits();
         }
         
         /// <summary>

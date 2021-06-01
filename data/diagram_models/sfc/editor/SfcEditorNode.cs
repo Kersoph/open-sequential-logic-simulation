@@ -76,6 +76,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public override void OnUserRequestsChange(MainNode mainNode, PageCategory nextPage)
         {
+            Sfc2dEditorNode.Sfc2dEditorControl.ApplyAllEdits();
             SaveDiagram();
             SerialiseToTemp();
             mainNode.ChangePageTo(nextPage);

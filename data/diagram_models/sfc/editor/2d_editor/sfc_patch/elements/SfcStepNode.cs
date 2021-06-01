@@ -72,6 +72,15 @@ namespace Osls.SfcEditor
                 GetNode<Control>("HintPatch").Visible = false;
             }
         }
+        
+        /// <summary>
+        /// Applies all user edits to the data model.
+        /// Called when the editor is closed or the data saved.
+        /// </summary>
+        public void ApplyAllEdits()
+        {
+            _stepNode.ApplyEdits();
+        }
         #endregion
         
         

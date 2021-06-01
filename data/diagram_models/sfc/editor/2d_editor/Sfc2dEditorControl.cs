@@ -83,6 +83,17 @@ namespace Osls.SfcEditor
         {
             Data.SaveData(filepath);
         }
+        
+        /// <summary>
+        /// Forcefully applies all user edits to the data model.
+        /// </summary>
+        public void ApplyAllEdits()
+        {
+            foreach (SfcPatchControl patchControl in _controlMap.Values)
+            {
+                patchControl.SfcPatchNode.ApplyAllEdits();
+            }
+        }
         #endregion
         
         
