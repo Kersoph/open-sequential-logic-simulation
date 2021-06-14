@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://data/plant_models/road_construction_site/RoadConstructionSite.cs" type="Script" id=1]
 [ext_resource path="res://data/core/environment/Default.tres" type="Environment" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://data/plant_models/road_construction_site/UI.cs" type="Script" id=12]
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=13]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=14]
+[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/WoodenFence.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -41,6 +42,8 @@ far = 80.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Enviroment"]
 transform = Transform( 0.642788, -0.586824, 0.492404, 0, 0.642788, 0.766044, -0.766044, -0.492404, 0.413176, 0, 10, 0 )
+light_color = Color( 1, 0.94902, 0.827451, 1 )
+light_energy = 1.5
 shadow_enabled = true
 shadow_bias = 0.2
 directional_shadow_mode = 0
@@ -50,74 +53,99 @@ directional_shadow_max_distance = 80.0
 mesh = ExtResource( 3 )
 skeleton = NodePath("")
 material/0 = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Barriers" type="Spatial" parent="StaticStreet"]
 
 [node name="Barrier_Fence" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.849447, 0, -0.527674, 0, 1, 0, 0.527674, 0, 0.849447, 15.8634, 4.76837e-07, 2.62818 )
+material/0 = null
 
 [node name="Barrier_Fence2" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.989905, 0, -0.141734, 0, 1, 0, 0.141734, 0, 0.989905, 12.3058, 4.76837e-07, 1.23178 )
+material/0 = null
 
 [node name="Barrier_Fence3" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.99576, 0, 0.0919871, 0, 1, 0, -0.0919871, 0, 0.99576, 5.85154, 4.76837e-07, 1.01334 )
+material/0 = null
 
 [node name="Barrier_Fence4" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.997117, 0, 0.075879, 0, 1, 0, -0.075879, 0, 0.997117, 0.847846, 4.76837e-07, 1.19512 )
+material/0 = null
 
 [node name="Barrier_Fence5" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.998709, 0, -0.0508009, 0, 1, 0, 0.0508009, 0, 0.998709, -3.48794, 4.76837e-07, 0.73095 )
+material/0 = null
 
 [node name="Barrier_Fence6" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.881779, -0.443595, 0.160279, -0.0585627, -0.440156, -0.89601, 0.468013, 0.780696, -0.414098, -7.30186, 0.244275, 1.13651 )
+material/0 = null
 
 [node name="Barrier_Fence7" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.906727, 0, 0.421718, 0, 1, 0, -0.421718, 0, 0.906727, -12.6401, 4.76837e-07, 1.11398 )
+material/0 = null
 
 [node name="Barrier_Fence8" parent="StaticStreet/Barriers" instance=ExtResource( 4 )]
 transform = Transform( 0.685597, 0, 0.727982, 0, 1, 0, -0.727982, 0, 0.685597, -15.6, 4.76837e-07, 2.75547 )
+material/0 = null
 
 [node name="Barrier_Pole" parent="StaticStreet/Barriers" instance=ExtResource( 5 )]
 transform = Transform( -0.0175398, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175398, -10.272, 7.15256e-07, 0.303242 )
+material/0 = null
 
 [node name="Barrier_Pole2" parent="StaticStreet/Barriers" instance=ExtResource( 5 )]
 transform = Transform( -0.0175398, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175398, -5.40685, 4.76837e-07, 0.310906 )
+material/0 = null
 
 [node name="Barrier_Pole3" parent="StaticStreet/Barriers" instance=ExtResource( 5 )]
 transform = Transform( -0.0175398, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175398, -1.29891, 4.76837e-07, 0.405615 )
+material/0 = null
 
 [node name="Barrier_Pole4" parent="StaticStreet/Barriers" instance=ExtResource( 5 )]
 transform = Transform( -0.0175398, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175398, 3.29559, 4.76837e-07, 0.338944 )
+material/0 = null
 
 [node name="Barrier_Pole5" parent="StaticStreet/Barriers" instance=ExtResource( 5 )]
 transform = Transform( -0.0175398, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175398, 8.93578, 4.76837e-07, 0.32518 )
+material/0 = null
 
 [node name="Barrier_Pole6" parent="StaticStreet/Barriers" instance=ExtResource( 5 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, 14.3428, 4.76837e-07, 0.673589 )
+material/0 = null
 
 [node name="Barrier_Cone" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, -20.3228, 2.38419e-07, 3.62541 )
+material/0 = null
 
 [node name="Barrier_Cone2" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, -18.0803, 2.38419e-07, 2.81972 )
+material/0 = null
 
 [node name="Barrier_Cone3" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, -17.1267, -2.38419e-07, 2.15677 )
+material/0 = null
 
 [node name="Barrier_Cone4" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, -15.7656, -2.38419e-07, 1.50301 )
+material/0 = null
 
 [node name="Barrier_Cone5" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, 16.3643, 7.15256e-07, 1.41173 )
+material/0 = null
 
 [node name="Barrier_Cone6" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, 17.6452, 7.15256e-07, 2.32825 )
+material/0 = null
 
 [node name="Barrier_Cone7" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, 19.1568, 7.15256e-07, 3.13109 )
+material/0 = null
 
 [node name="Barrier_Cone8" parent="StaticStreet/Barriers" instance=ExtResource( 6 )]
 transform = Transform( 0.310847, 0, 0.95046, 0, 1, 0, -0.95046, 0, 0.310847, 20.5747, 7.15256e-07, 3.78051 )
+material/0 = null
 
 [node name="HighCar_Black" parent="StaticStreet" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0477, -0.1, 16.1287 )
@@ -134,9 +162,11 @@ transform = Transform( 0.205029, 0, 0.978755, 0, 1, 0, -0.978755, 0, 0.205029, 2
 
 [node name="Barrier_Cone2" parent="Signalisation/TrafficControlSystemTop" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0306997, 0, -0.995209 )
+material/0 = null
 
 [node name="Barrier_Cone3" parent="Signalisation/TrafficControlSystemTop" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.627586, 0, 1.05184 )
+material/0 = null
 
 [node name="DynamicCars" type="Node" parent="."]
 
@@ -224,6 +254,56 @@ transform = Transform( -1.61194, 0, -1.77811, 0, 2.4, 0, 1.77811, 0, -1.61194, -
 
 [node name="Tree_Cone7" parent="Fillers/Cones/ConePatch3" instance=ExtResource( 11 )]
 transform = Transform( -1.0295, 0, 1.71468, 0, 2.4, 0, -1.71468, 0, -1.0295, -5.24931, -0.2, 2.70158 )
+
+[node name="Fence" type="Spatial" parent="Fillers"]
+
+[node name="Barrier_Fence" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.0869, 3.39389, -16.4366 )
+
+[node name="Barrier_Fence7" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.00443307, 0, 0.99999, 0, 1, 0, -0.99999, 0, -0.00443307, -18.0794, 3.39389, -18.5566 )
+
+[node name="Barrier_Fence8" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.0282705, 0, 0.9996, 0, 1, 0, -0.9996, 0, -0.0282705, -18.1576, 3.39389, -22.6666 )
+
+[node name="Barrier_Fence9" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.0282705, 0, 0.9996, 0, 1, 0, -0.9996, 0, -0.0282705, -18.2706, 3.39389, -26.7943 )
+
+[node name="Barrier_Fence10" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.177016, 0, 0.984208, 0, 1, 0, -0.984208, 0, -0.177016, -18.7004, 3.39389, -30.8685 )
+
+[node name="Barrier_Fence11" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.177016, 0, 0.984208, 0, 1, 0, -0.984208, 0, -0.177016, -19.4688, 3.39389, -34.9472 )
+
+[node name="Barrier_Fence12" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -20.3993, 3.01858, -38.9601 )
+
+[node name="Barrier_Fence13" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -21.5203, 2.82043, -42.9227 )
+
+[node name="Barrier_Fence14" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -22.6152, 2.59796, -46.8853 )
+
+[node name="Barrier_Fence15" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -23.7519, 2.46063, -50.8838 )
+
+[node name="Barrier_Fence16" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -24.8726, 2.59661, -54.8521 )
+
+[node name="Barrier_Fence2" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999757, 0, 0.0220417, 0, 1, 0, -0.0220417, 0, 0.999757, -24.1336, 3.39389, -16.3904 )
+
+[node name="Barrier_Fence3" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999757, 0, 0.0220417, 0, 1, 0, -0.0220417, 0, 0.999757, -28.2351, 3.39389, -16.2778 )
+
+[node name="Barrier_Fence4" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984, -32.3367, 3.39389, -16.2135 )
+
+[node name="Barrier_Fence5" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984, -36.4382, 3.39389, -16.2296 )
+
+[node name="Barrier_Fence6" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984, -40.5656, 3.39389, -16.2484 )
 
 [node name="UI" type="Control" parent="."]
 margin_right = 40.0
