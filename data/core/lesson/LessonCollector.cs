@@ -9,9 +9,9 @@ namespace Osls
         #region ==================== Public Methods ====================
         /// <summary>
         /// Loads all aviable lessons at the locations:
-        /// res://lessons/ and as an alternative user://lesons
+        /// res://lessons/ and as an alternative user://lessons
         /// If it does not exist we try to create a default directory at
-        /// res://lessons/ and as an alternative user://lesons
+        /// res://lessons/ and as an alternative user://lessons
         /// </summary>
         public static LessonEntity[] LoadLessons()
         {
