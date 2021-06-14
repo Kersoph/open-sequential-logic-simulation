@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://data/plant_models/road_construction_site/RoadConstructionSite.cs" type="Script" id=1]
 [ext_resource path="res://data/core/environment/Default.tres" type="Environment" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://data/plant_models/road_construction_site/UI.cs" type="Script" id=12]
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=13]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=14]
+[ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/WoodenFence.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -40,7 +41,9 @@ fov = 80.0
 far = 80.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Enviroment"]
-transform = Transform( 0.642788, -0.586824, 0.492404, 0, 0.642788, 0.766044, -0.766044, -0.492404, 0.413176, 0, 10, 0 )
+transform = Transform( -0.707107, -0.353553, 0.612372, 0, 0.866026, 0.5, -0.707107, 0.353553, -0.612372, 0, 10, 0 )
+light_color = Color( 1, 0.929412, 0.811765, 1 )
+light_energy = 2.0
 shadow_enabled = true
 shadow_bias = 0.2
 directional_shadow_mode = 0
@@ -50,6 +53,9 @@ directional_shadow_max_distance = 80.0
 mesh = ExtResource( 3 )
 skeleton = NodePath("")
 material/0 = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Barriers" type="Spatial" parent="StaticStreet"]
 
@@ -133,7 +139,7 @@ transform = Transform( 0.968705, 0, 0.248217, 0, 1, 0, -0.248217, 0, 0.968705, 1
 transform = Transform( 0.205029, 0, 0.978755, 0, 1, 0, -0.978755, 0, 0.205029, 22.8346, 1.90735e-06, -3.29109 )
 
 [node name="Barrier_Cone2" parent="Signalisation/TrafficControlSystemTop" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0306997, 0, -0.995209 )
+transform = Transform( 1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0.0306997, 0, -0.995209 )
 
 [node name="Barrier_Cone3" parent="Signalisation/TrafficControlSystemTop" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.627586, 0, 1.05184 )
@@ -224,6 +230,56 @@ transform = Transform( -1.61194, 0, -1.77811, 0, 2.4, 0, 1.77811, 0, -1.61194, -
 
 [node name="Tree_Cone7" parent="Fillers/Cones/ConePatch3" instance=ExtResource( 11 )]
 transform = Transform( -1.0295, 0, 1.71468, 0, 2.4, 0, -1.71468, 0, -1.0295, -5.24931, -0.2, 2.70158 )
+
+[node name="Fence" type="Spatial" parent="Fillers"]
+
+[node name="Barrier_Fence" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.0869, 3.39389, -16.4366 )
+
+[node name="Barrier_Fence7" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.00443307, 0, 0.99999, 0, 1, 0, -0.99999, 0, -0.00443307, -18.0794, 3.39389, -18.5566 )
+
+[node name="Barrier_Fence8" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.0282705, 0, 0.9996, 0, 1, 0, -0.9996, 0, -0.0282705, -18.1576, 3.39389, -22.6666 )
+
+[node name="Barrier_Fence9" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.0282705, 0, 0.9996, 0, 1, 0, -0.9996, 0, -0.0282705, -18.2706, 3.39389, -26.7943 )
+
+[node name="Barrier_Fence10" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.177016, 0, 0.984208, 0, 1, 0, -0.984208, 0, -0.177016, -18.7004, 3.39389, -30.8685 )
+
+[node name="Barrier_Fence11" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.177016, 0, 0.984208, 0, 1, 0, -0.984208, 0, -0.177016, -19.4688, 3.39389, -34.9472 )
+
+[node name="Barrier_Fence12" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -20.3993, 3.01858, -38.9601 )
+
+[node name="Barrier_Fence13" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -21.5203, 2.82043, -42.9227 )
+
+[node name="Barrier_Fence14" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -22.6152, 2.59796, -46.8853 )
+
+[node name="Barrier_Fence15" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -23.7519, 2.46063, -50.8838 )
+
+[node name="Barrier_Fence16" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( -0.268953, 0, 0.963153, 0, 1, 0, -0.963153, 0, -0.268953, -24.8726, 2.59661, -54.8521 )
+
+[node name="Barrier_Fence2" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999757, 0, 0.0220417, 0, 1, 0, -0.0220417, 0, 0.999757, -24.1336, 3.39389, -16.3904 )
+
+[node name="Barrier_Fence3" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999757, 0, 0.0220417, 0, 1, 0, -0.0220417, 0, 0.999757, -28.2351, 3.39389, -16.2778 )
+
+[node name="Barrier_Fence4" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984, -32.3367, 3.39389, -16.2135 )
+
+[node name="Barrier_Fence5" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984, -36.4382, 3.39389, -16.2296 )
+
+[node name="Barrier_Fence6" parent="Fillers/Fence" instance=ExtResource( 15 )]
+transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984, -40.5656, 3.39389, -16.2484 )
 
 [node name="UI" type="Control" parent="."]
 margin_right = 40.0
