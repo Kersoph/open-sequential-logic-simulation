@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2021-06-14T15:06:07</created>
-    <modified>2021-06-14T15:06:07</modified>
+    <created>2021-06-14T15:53:25</created>
+    <modified>2021-06-14T15:53:25</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -16,7 +16,7 @@
     </image>
   </library_images>
   <library_effects>
-    <effect id="lookup_material-effect">
+    <effect id="LookupMaterial-effect">
       <profile_COMMON>
         <technique sid="common">
           <phong>
@@ -44,8 +44,8 @@
     </effect>
   </library_effects>
   <library_materials>
-    <material id="lookup_material-material" name="lookup_material">
-      <instance_effect url="#lookup_material-effect"/>
+    <material id="LookupMaterial-material" name="LookupMaterial">
+      <instance_effect url="#LookupMaterial-effect"/>
     </material>
   </library_materials>
   <library_geometries>
@@ -83,7 +83,7 @@
         <vertices id="Barrier_Fence-mesh-vertices">
           <input semantic="POSITION" source="#Barrier_Fence-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="520">
+        <triangles material="LookupMaterial-material" count="520">
           <input semantic="VERTEX" source="#Barrier_Fence-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Barrier_Fence-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Barrier_Fence-mesh-map-0" offset="2" set="0"/>
@@ -125,7 +125,7 @@
         <vertices id="Barrier_Pole-mesh-vertices">
           <input semantic="POSITION" source="#Barrier_Pole-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="208">
+        <triangles material="LookupMaterial-material" count="208">
           <input semantic="VERTEX" source="#Barrier_Pole-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Barrier_Pole-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Barrier_Pole-mesh-map-0" offset="2" set="0"/>
@@ -167,7 +167,7 @@
         <vertices id="Barrier_Cone-mesh-vertices">
           <input semantic="POSITION" source="#Barrier_Cone-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="160">
+        <triangles material="LookupMaterial-material" count="160">
           <input semantic="VERTEX" source="#Barrier_Cone-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Barrier_Cone-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Barrier_Cone-mesh-map-0" offset="2" set="0"/>
@@ -209,7 +209,7 @@
         <vertices id="Wooden_Fence-mesh-vertices">
           <input semantic="POSITION" source="#Wooden_Fence-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="144">
+        <triangles material="LookupMaterial-material" count="144">
           <input semantic="VERTEX" source="#Wooden_Fence-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Wooden_Fence-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Wooden_Fence-mesh-map-0" offset="2" set="0"/>
@@ -225,9 +225,7 @@
         <instance_geometry url="#Barrier_Fence-mesh" name="Barrier_Fence">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material">
-                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-              </instance_material>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -237,9 +235,7 @@
         <instance_geometry url="#Barrier_Pole-mesh" name="Barrier_Pole">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material">
-                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-              </instance_material>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -249,9 +245,7 @@
         <instance_geometry url="#Barrier_Cone-mesh" name="Barrier_Cone">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material">
-                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-              </instance_material>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -261,7 +255,7 @@
         <instance_geometry url="#Wooden_Fence-mesh" name="Wooden_Fence">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
