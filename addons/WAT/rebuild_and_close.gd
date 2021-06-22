@@ -3,6 +3,9 @@ extends Label
 
 var a = 0.0
 
+func _ready() -> void:
+	print("Starting reimport process...")
+
 func _process(delta):
 	a = a + delta
 	text = String(a)
