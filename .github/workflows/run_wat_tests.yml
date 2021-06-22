@@ -18,7 +18,7 @@ jobs:
       - name: Compile
         run: msbuild
       - name: Reimport Assets
-        run: godot --editor --build-solutions --quit
+        run: godot --editor addons/WAT/rebuild_and_close.tscn
       - name: Run
         run: godot addons/WAT/cli.tscn -run_all
       - name: Upload Test Results
