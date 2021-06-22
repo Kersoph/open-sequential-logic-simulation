@@ -17,7 +17,7 @@ namespace Osls
         /// <summary>
         /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public virtual void InitialiseWith(MainNode mainNode, ILessonEntity openedLesson)
+        public virtual void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
         }
         
@@ -25,7 +25,7 @@ namespace Osls
         /// Requests a change of the current page to the new page.
         /// Used to provide the possibility for the user to save or cancel the action.
         /// </summary>
-        public virtual void OnUserRequestsChange(MainNode mainNode, PageCategory nextPage)
+        public virtual void OnUserRequestsChange(IMainNode mainNode, PageCategory nextPage)
         {
             mainNode.ChangePageTo(nextPage);
         }

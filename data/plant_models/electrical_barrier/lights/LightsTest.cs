@@ -30,7 +30,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Initializes the whole test viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, ILessonEntity openedLesson)
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
             string filepath = _openedLesson.TemporaryDiagramFilePath;

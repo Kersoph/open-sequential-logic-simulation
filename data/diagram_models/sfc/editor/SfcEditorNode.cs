@@ -15,7 +15,7 @@ namespace Osls.SfcEditor
         [Export] private NodePath Sfc2dEditorPath = "Sfc2dBackground/Sfc2dEditor";
         
         public ILessonEntity OpenedLesson { get; private set; }
-        public MainNode MainNode { get; private set; }
+        public IMainNode MainNode { get; private set; }
         public LessonView LessonView { get; private set; }
         public Sfc2dEditorNode Sfc2dEditorNode { get; private set; }
         #endregion
@@ -25,7 +25,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, ILessonEntity openedLesson)
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             MainNode = mainNode;
             OpenedLesson = openedLesson;
@@ -74,7 +74,7 @@ namespace Osls.SfcEditor
         /// Requests a change of the current page to the new page.
         /// Used to provide the possibility for the user to save or cancel the action.
         /// </summary>
-        public override void OnUserRequestsChange(MainNode mainNode, PageCategory nextPage)
+        public override void OnUserRequestsChange(IMainNode mainNode, PageCategory nextPage)
         {
             Sfc2dEditorNode.Sfc2dEditorControl.ApplyAllEdits();
             SaveDiagram();

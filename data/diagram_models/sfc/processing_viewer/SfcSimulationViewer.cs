@@ -31,7 +31,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Initializes the whole sfc editor
         /// </summary>
-        public override void InitialiseWith(MainNode _mainNode, ILessonEntity openedLesson)
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
             _processingData = InitialisePlant();

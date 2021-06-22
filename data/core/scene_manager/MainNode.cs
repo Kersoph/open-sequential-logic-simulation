@@ -8,7 +8,7 @@ namespace Osls
     /// Top node connected to the main tree. It will be rendered to the main window.
     /// Handles the visibility and layers of the modules.
     /// </summary>
-    public class MainNode : Node
+    public class MainNode : Node, IMainNode
     {
         #region ==================== Fields ====================
         private LessonController _lessonController;
