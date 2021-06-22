@@ -46,11 +46,14 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 _isExecutable = false;
             }
+            if (!_isExecutable)
+            {
+                _stage = Stages.CreateResult;
+            }
         }
         
         public override void _Process(float delta)
         {
-            if (!_isExecutable) return;
             switch (_stage)
             {
                 case Stages.Regular:
@@ -105,7 +108,7 @@ namespace Osls.Plants.ElectricalBarrier
             }
             else if ((_turnOffTime > 20000 && _turnOffTime < 29000) || _turnOffTime > 31000 || _turnOffTimout > 40000)
             {
-                if (!_simulation.SimulationInput.PollBoolean(Lights.LightsKey))
+                if (!_simulation.SimulationInput.PollBoolean(Lights.LightsKey) || _turnOffTimout > 40000)
                 {
                     if (_turnOffTime > 28000 && _turnOffTime < 32000) _turnOffClose = true;
                     CreateResult();
@@ -145,6 +148,10 @@ namespace Osls.Plants.ElectricalBarrier
                 result.Append("\nOn behalf of the whole Secret Bases GmbH, we would like to thank you for your excellent work at EX02.\n");
                 if (_turnOffClose) result.Append("Just our guard reports a slightly incorrect turning off time of the lamps.\n");
                 result.Append("We are looking forward to work together in our next project.\n");
+            }
+            else if (!_isExecutable)
+            {
+                result.Append("I was told we can test the installation at EX02 today [b]but nothing seems to work[/b]. The red ERROR-LED on the controller is on.\n\nI hope you can have a look soon and solve the problem.\n");
             }
             else
             {
