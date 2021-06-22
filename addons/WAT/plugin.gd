@@ -14,6 +14,7 @@ var script_editor: ScriptEditor
 
 func _enter_tree():
 	Settings.initialize()
+	Rebuild.initialize()
 	_initialize_metadata()
 	instance = GUI.instance()
 	docker = Docker.new(self, instance)
