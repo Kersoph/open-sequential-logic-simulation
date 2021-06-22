@@ -20,7 +20,7 @@ namespace Osls.LandingPage
         {
             try
             {
-                LessonEntity[] lessons = LessonCollector.LoadLessons();
+                ILessonEntity[] lessons = LessonCollector.LoadLessons();
                 CreateButtons(lessons);
             }
             catch (System.Exception e)
@@ -57,7 +57,7 @@ namespace Osls.LandingPage
         
         
         #region ==================== Helpers ====================
-        private void CreateButtons(LessonEntity[] lessons)
+        private void CreateButtons(ILessonEntity[] lessons)
         {
             _lessonNodes = new LessonControllerNode[lessons.Length];
             for (int i = 0; i < lessons.Length; i++)

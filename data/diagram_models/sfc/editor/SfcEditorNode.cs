@@ -14,7 +14,7 @@ namespace Osls.SfcEditor
         [Export] private NodePath LessonViewPath = "LessonView";
         [Export] private NodePath Sfc2dEditorPath = "Sfc2dBackground/Sfc2dEditor";
         
-        public LessonEntity OpenedLesson { get; private set; }
+        public ILessonEntity OpenedLesson { get; private set; }
         public MainNode MainNode { get; private set; }
         public LessonView LessonView { get; private set; }
         public Sfc2dEditorNode Sfc2dEditorNode { get; private set; }
@@ -25,7 +25,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
+        public override void InitialiseWith(MainNode mainNode, ILessonEntity openedLesson)
         {
             MainNode = mainNode;
             OpenedLesson = openedLesson;

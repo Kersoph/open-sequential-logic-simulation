@@ -24,7 +24,7 @@ namespace Osls.Core
         /// <summary>
         /// Exchanges the current simulation view to the given simulation.
         /// </summary>
-        public void UpdateLessonEntity(LessonEntity lessonEntity)
+        public void UpdateLessonEntity(ILessonEntity lessonEntity)
         {
             if (LoadedSimulationNode != null && IsInstanceValid(LoadedSimulationNode))
             {

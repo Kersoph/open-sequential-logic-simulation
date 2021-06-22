@@ -13,11 +13,11 @@ namespace Osls
         /// If it does not exist we try to create a default directory at
         /// res://lessons/ and as an alternative user://lessons
         /// </summary>
-        public static LessonEntity[] LoadLessons()
+        public static ILessonEntity[] LoadLessons()
         {
             string[] LessonPaths = GetLessonPaths();
             System.Array.Sort<string>(LessonPaths);
-            LessonEntity[] lessonEntities = new LessonEntity[LessonPaths.Length];
+            ILessonEntity[] lessonEntities = new ILessonEntity[LessonPaths.Length];
             for (int i = 0; i < LessonPaths.Length; i++)
             {
                 LessonEntity lessonData = new LessonEntity(LessonPaths[i]);

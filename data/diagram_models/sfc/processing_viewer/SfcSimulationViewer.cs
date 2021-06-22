@@ -13,7 +13,7 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields / Properties ====================
         private LessonView _lessonView;
-        private LessonEntity _openedLesson;
+        private ILessonEntity _openedLesson;
         private Master _simulationMaster;
         private bool _isExecutable;
         private Sfc2dEditorNode _sfc2dEditorNode;
@@ -31,7 +31,7 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Initializes the whole sfc editor
         /// </summary>
-        public override void InitialiseWith(MainNode _mainNode, LessonEntity openedLesson)
+        public override void InitialiseWith(MainNode _mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
             _processingData = InitialisePlant();

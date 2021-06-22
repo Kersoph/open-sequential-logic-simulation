@@ -17,7 +17,7 @@ namespace Osls
         /// <summary>
         /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public virtual void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
+        public virtual void InitialiseWith(MainNode mainNode, ILessonEntity openedLesson)
         {
         }
         

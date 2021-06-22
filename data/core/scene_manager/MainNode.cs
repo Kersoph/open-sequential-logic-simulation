@@ -36,7 +36,7 @@ namespace Osls
         /// <summary>
         /// Opens up a new lesson and changes the view to the editor step.
         /// </summary>
-        public void OpenNewLesson(LessonEntity lessonData)
+        public void OpenNewLesson(ILessonEntity lessonData)
         {
             _lessonController.ApplyNewLesson(lessonData);
             _navigationSteps.VisibleViewIs(PageCategory.LogicEditor);

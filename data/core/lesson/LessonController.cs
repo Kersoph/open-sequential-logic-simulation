@@ -13,7 +13,7 @@ namespace Osls
         private const string EditorPath = "res://data/diagram_models/sfc/editor/SfcEditor.tscn";
         private const string SimulationPath = "res://data/diagram_models/sfc/processing_viewer/SfcSimulationViewer.tscn";
         private readonly MainNode _mainNode;
-        private LessonEntity _openedLesson;
+        private ILessonEntity _openedLesson;
         
         private PageModule _currentPage;
         #endregion
@@ -31,7 +31,7 @@ namespace Osls
         /// <summary>
         /// Changes the main lesson to the given lesson.
         /// </summary>
-        public void ApplyNewLesson(LessonEntity lesson)
+        public void ApplyNewLesson(ILessonEntity lesson)
         {
             _openedLesson = lesson;
         }

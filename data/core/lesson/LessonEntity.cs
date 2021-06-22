@@ -8,7 +8,7 @@ namespace Osls
     /// It loads and stores all content in the given lesson folder.
     /// Todo: Swap godot JSON parser to something else.
     /// </summary>
-    public class LessonEntity
+    public class LessonEntity : ILessonEntity
     {
         #region ==================== Fields ====================
         public const string DescriptionFilePath = "/Description.json";

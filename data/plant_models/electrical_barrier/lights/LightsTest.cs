@@ -12,7 +12,7 @@ namespace Osls.Plants.ElectricalBarrier
         #region ==================== Fields / Properties ====================
         private enum Stages { Regular, TurnOffTime, CreateResult, DisplayResults };
         private Stages _stage = Stages.Regular;
-        private LessonEntity _openedLesson;
+        private ILessonEntity _openedLesson;
         
         private bool _isExecutable;
         private Master _simulationMaster;
@@ -30,7 +30,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Initializes the whole test viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
+        public override void InitialiseWith(MainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
             string filepath = _openedLesson.TemporaryDiagramFilePath;

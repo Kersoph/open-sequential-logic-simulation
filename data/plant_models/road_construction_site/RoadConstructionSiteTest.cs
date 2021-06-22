@@ -14,7 +14,7 @@ namespace Osls.Plants.RoadConstructionSite
         private const int SimulatedCycleTime = 16;
         
         private enum TestState { Simulate, CalculateResults, Done };
-        private LessonEntity _openedLesson;
+        private ILessonEntity _openedLesson;
         private TestState _testState;
         private float _lambdaState = 0.01f;
         private bool _isExecutable;
@@ -27,7 +27,7 @@ namespace Osls.Plants.RoadConstructionSite
         /// <summary>
         /// Initializes the whole twat viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
+        public override void InitialiseWith(MainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
             _simulation = GetNode<RoadConstructionSite>("PlantViewportContainer/PlantViewport/RoadConstructionSite");
