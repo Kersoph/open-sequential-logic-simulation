@@ -19,6 +19,7 @@ jobs:
         run: msbuild
       - name: Reimport Assets
         run: godot --editor addons/WAT/rebuild_and_close.tscn
+        timeout-minutes: 1
       - name: Run
         run: godot addons/WAT/cli.tscn -run_all
       - name: Upload Test Results
