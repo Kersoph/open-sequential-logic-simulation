@@ -39,6 +39,7 @@ namespace Osls.Plants.ElectricalBarrier
             _simulation = GetNode<Lights>("Lights");
             if (sfcEntity != null)
             {
+                _simulation.InitialiseWith(mainNode, openedLesson);
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }

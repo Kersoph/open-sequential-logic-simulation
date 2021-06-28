@@ -35,19 +35,21 @@ namespace Osls.Plants.RoadConstructionSite
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             if (sfcEntity != null)
             {
+                _simulation.InitialiseWith(mainNode, openedLesson);
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }
-            else
+            if (sfcEntity == null || !_isExecutable)
             {
                 _isExecutable = false;
+                _testState = TestState.Done;
+                _openedLesson.SetAndSaveStars(0);
             }
             SpawnTimeGenerator.ResetGenerator();
         }
         
         public override void _Process(float delta)
         {
-            if (!_isExecutable) return;
             switch (_testState)
             {
                 case TestState.Simulate:

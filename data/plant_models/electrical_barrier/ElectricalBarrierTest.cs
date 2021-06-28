@@ -31,13 +31,13 @@ namespace Osls.Plants.ElectricalBarrier
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             
             _regularOperation = GetNode<RegularOperation>("Tests/RegularOperation");
-            _regularOperation.InitialiseWith(sfcEntity);
+            _regularOperation.InitialiseWith(mainNode, openedLesson, sfcEntity);
             _startOpen = GetNode<StartOpen>("Tests/StartOpen");
-            _startOpen.InitialiseWith(sfcEntity);
+            _startOpen.InitialiseWith(mainNode, openedLesson, sfcEntity);
             _startPassing = GetNode<StartPassing>("Tests/StartPassing");
-            _startPassing.InitialiseWith(sfcEntity);
+            _startPassing.InitialiseWith(mainNode, openedLesson, sfcEntity);
             _noiseAndBlackout = GetNode<NoiseAndBlackout>("Tests/NoiseAndBlackout");
-            _noiseAndBlackout.InitialiseWith(sfcEntity);
+            _noiseAndBlackout.InitialiseWith(mainNode, openedLesson, sfcEntity);
         }
         
         public override void _Process(float delta)

@@ -26,6 +26,7 @@ namespace Osls.Plants.MinimalExample
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             if (sfcEntity != null)
             {
+                _simulation.InitialiseWith(mainNode, openedLesson);
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }

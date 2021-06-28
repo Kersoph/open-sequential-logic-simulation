@@ -24,11 +24,12 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Initializes the whole test viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public void InitialiseWith(SfcEntity sfcEntity)
+        public void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson, SfcEntity sfcEntity)
         {
             _simulation = GetNode<ElectricalBarrier>("Viewport/ElectricalBarrier");
             if (sfcEntity != null)
             {
+                _simulation.InitialiseWith(mainNode, openedLesson);
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
                 _simulation.Barrier.SetAsOpened();

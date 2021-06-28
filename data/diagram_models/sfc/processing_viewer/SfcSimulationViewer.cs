@@ -36,7 +36,7 @@ namespace Osls.SfcEditor
             _openedLesson = openedLesson;
             _processingData = InitialisePlant();
             InitialiseDiagram();
-            InitialiseSimulation();
+            InitialiseSimulation(mainNode, openedLesson);
             if (!_isExecutable) GetNode<Label>("Sfc2dViewer/ErrorLabel").Visible = true;
         }
         
@@ -91,8 +91,9 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Loads the simulation node and creates a simulation master
         /// </summary>
-        private void InitialiseSimulation()
+        private void InitialiseSimulation(IMainNode mainNode, ILessonEntity openedLesson)
         {
+            _loadedSimulationNode.InitialiseWith(mainNode, openedLesson);
             _simulationMaster = new Master(_processingData.SfcEntity, _loadedSimulationNode);
             _loadedSimulationNode.SetupUi();
             _isExecutable = _simulationMaster.IsProgramSimulationValid();
