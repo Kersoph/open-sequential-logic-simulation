@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://data/plant_models/road_construction_site/RoadConstructionSite.cs" type="Script" id=1]
-[ext_resource path="res://data/core/environment/Default.tres" type="Environment" id=2]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/Road.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/BarrierFence.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/BarrierPole.tscn" type="PackedScene" id=5]
@@ -16,13 +15,39 @@
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=14]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/WoodenFence.tscn" type="PackedScene" id=15]
 
-[sub_resource type="Curve3D" id=1]
+[sub_resource type="ProceduralSky" id=1]
+radiance_size = 1
+sky_top_color = Color( 0.466667, 0.568627, 0.694118, 1 )
+sky_horizon_color = Color( 0.94902, 0.701961, 0.313726, 1 )
+sky_energy = 0.5
+ground_bottom_color = Color( 0.0666667, 0.0784314, 0.0901961, 1 )
+ground_horizon_color = Color( 0.698039, 0.203922, 0.0627451, 1 )
+sun_latitude = 25.0
+sun_longitude = 40.0
+sun_angle_max = 20.0
+sun_energy = 20.0
+texture_size = 0
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_energy = 2.0
+tonemap_mode = 3
+tonemap_exposure = 1.2
+tonemap_white = 3.0
+ssao_radius = 4.0
+ssao_intensity = 10.0
+glow_enabled = true
+glow_levels/1 = true
+glow_bicubic_upscale = true
+
+[sub_resource type="Curve3D" id=3]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 47.0044, 0, -1.56622, 0, 0, 0, 0, 0, 0, 26.2351, 0, -1.51356, 0, 0, 0, 0, 0, 0, 25.4453, 0, -1.43783, 0, 0, 0, 0, 0, 0, 24.0064, 0, -1.01589, 0, 0, 0, 0, 0, 0, 22.9786, 0, -0.886058, 0, 0, 0, 0, 0, 0, 21.9399, 0, -0.994248, 0, 0, 0, 0, 0, 0, 19.0321, 0, -1.49434, 0, 0, 0, 0, 0, 0, 18.4935, 0, -1.55631, 0, 0, 0, 0, 0, 0, -9.01929, 0, -1.52933, 0, 0, 0, 0, 0, 0, -19.0085, 0, -1.54411, 0, 0, 0, 0, 0, 0, -47.7262, 0, -1.46145 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=2]
+[sub_resource type="Curve3D" id=4]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -47.7551, 0, 1.55589, 0, 0, 0, 0, 0, 0, -22.7656, 0, 1.56549, 0, 0, 0, 0, 0, 0, -21.6543, 0, 1.44958, 0, 0, 0, 0, 0, 0, -20.3112, 0, 1.02006, 0, 0, 0, 0, 0, 0, -16.2229, 0, -1.06689, 0, 0, 0, 0, 0, 0, -14.7519, 0, -1.4347, 0, 0, 0, 0, 0, 0, -13.0317, 0, -1.52125, 0, 0, 0, 0, 0, 0, -0.0414238, 0, -1.57657, 0, 0, 0, 0, 0, 0, 14.9887, 0, -1.54297, 0, 0, 0, 0, 0, 0, 16.9968, 0, -1.28929, 0, 0, 0, 0, 0, 0, 21.9952, 0, 1.35055, 0, 0, 0, 0, 0, 0, 24.0103, 0, 1.60576, 0, 0, 0, 0, 0, 0, 27.0209, 0, 1.60383, 0, 0, 0, 0, 0, 0, 47.839, 0, 1.51691 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
@@ -36,14 +61,14 @@ script = ExtResource( 1 )
 [node name="Camera" type="Camera" parent="Enviroment"]
 transform = Transform( 1, 0, 0, 0, 0.104528, 0.994522, 0, -0.994522, 0.104528, 0, 50, 7 )
 keep_aspect = 0
-environment = ExtResource( 2 )
+environment = SubResource( 2 )
 fov = 80.0
 far = 80.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Enviroment"]
 transform = Transform( -0.707107, -0.353553, 0.612372, 0, 0.866026, 0.5, -0.707107, 0.353553, -0.612372, 0, 10, 0 )
 light_color = Color( 1, 0.929412, 0.811765, 1 )
-light_energy = 2.0
+light_energy = 1.5
 shadow_enabled = true
 shadow_bias = 0.2
 directional_shadow_mode = 0
@@ -147,11 +172,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.627586, 0, 1.05184 )
 [node name="DynamicCars" type="Node" parent="."]
 
 [node name="TopPath" type="Path" parent="DynamicCars"]
-curve = SubResource( 1 )
+curve = SubResource( 3 )
 script = ExtResource( 9 )
 
 [node name="BotPath" type="Path" parent="DynamicCars"]
-curve = SubResource( 2 )
+curve = SubResource( 4 )
 script = ExtResource( 9 )
 TrafficControlSystemDistance = 24.0
 
