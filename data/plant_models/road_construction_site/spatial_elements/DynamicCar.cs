@@ -1,4 +1,6 @@
 using Godot;
+using Osls.Bubbles;
+
 
 namespace Osls.Plants.RoadConstructionSite
 {
@@ -24,6 +26,7 @@ namespace Osls.Plants.RoadConstructionSite
         private DynamicCar _precursoryCar;
         private DynamicCar _followingCar;
         private TrafficControlSystem _trafficLight;
+        private BubbleSprite _bubble;
         
         public DynamicCarReport Report { get; private set; }
         #endregion
@@ -37,6 +40,7 @@ namespace Osls.Plants.RoadConstructionSite
             if (LastCarModel >= CarModels.Length) LastCarModel = 0;
             MeshInstance mesh = (MeshInstance)((PackedScene)GD.Load(CarModels[LastCarModel])).Instance();
             AddChild(mesh);
+            _bubble = GetNode<BubbleSprite>("BubbleSprite");
         }
         
         /// <summary>
@@ -63,6 +67,7 @@ namespace Osls.Plants.RoadConstructionSite
             if (Report.HadAnAccident) return;
             GetNode<Particles>("ExplosionParticles").Emitting = true;
             Report.HadAnAccident = true;
+            _bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Surprised, 3, true);
         }
         
         /// <summary>
@@ -103,6 +108,11 @@ namespace Osls.Plants.RoadConstructionSite
             else
             {
                 Report.WaitingCycles++;
+                if (Report.WaitingCycles == 1000) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Waiting, 1);
+                if (Report.WaitingCycles == 1200) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Sad, 1);
+                if (Report.WaitingCycles == 2000) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Frustrated, 1);
+                if (Report.WaitingCycles == 3700) _bubble.ShowAs(BubbleSprite.Bubble.Say, BubbleSprite.Expression.Angry, 1);
+                if (Report.WaitingCycles == 4000) _bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Frustrated, 1);
             }
             if (UnitOffset > 0.98f) Report.SimulationCompleted = true;
         }

@@ -4,9 +4,6 @@
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/BarrierCone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/plant_models/road_construction_site/spatial_elements/meshes/Signaling.tscn" type="PackedScene" id=3]
 
-
-
-
 [node name="TrafficControlSystem" type="Spatial"]
 transform = Transform( -0.193149, 0, -0.981169, 0, 1, 0, 0.981169, 0, -0.193149, -19.2944, 0, 3.48299 )
 script = ExtResource( 1 )
@@ -16,9 +13,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.384216, 0, -0.0028286 )
 
 [node name="SignalLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0331488, 1.15921, 1.03056 )
-light_color = Color( 1, 0, 0, 1 )
+light_color = Color( 1, 0.392157, 0.392157, 1 )
 light_energy = 6.0
 light_bake_mode = 0
+omni_range = 10.0
 
 [node name="Signaling2" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )

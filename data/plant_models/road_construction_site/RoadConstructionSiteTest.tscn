@@ -20,9 +20,10 @@ __meta__ = {
 [node name="PlantViewport" type="Viewport" parent="PlantViewportContainer"]
 size = Vector2( 1840, 1017 )
 handle_input_locally = false
-hdr = false
+msaa = 1
 render_target_update_mode = 3
 gui_disable_input = true
+shadow_atlas_size = 1042
 
 [node name="RoadConstructionSite" parent="PlantViewportContainer/PlantViewport" instance=ExtResource( 3 )]
 
