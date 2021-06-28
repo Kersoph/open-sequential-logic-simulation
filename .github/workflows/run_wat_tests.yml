@@ -17,6 +17,10 @@ jobs:
           cp /usr/local/bin/GodotSharp/Api/Release/* .mono/assemblies/Debug
       - name: Compile
         run: msbuild
+      - name: Reimport Assets
+        run: godot --editor addons/WAT/rebuild_and_close.tscn
+        timeout-minutes: 1
+        continue-on-error: true
       - name: Run
         run: godot addons/WAT/cli.tscn -run_all
       - name: Upload Test Results
