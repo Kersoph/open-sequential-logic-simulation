@@ -30,7 +30,7 @@ namespace Osls.Plants.RoadConstructionSite
         
         
         #region ==================== Public ====================
-        public override void _Ready()
+        public void Initialise()
         {
             Report = new DynamicCarReport();
             LastCarModel++;

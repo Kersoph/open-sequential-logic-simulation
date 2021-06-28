@@ -32,7 +32,7 @@ namespace Tests.PlantModels
             while (lessonEntityMock.Stars == -1 && processingRounds < expectedTime)
             {
                 processingRounds++;
-                scene._Process(50f);
+                scene._Process(0.05f);
             }
             wat.Assert.IsEqual(lessonEntityMock.Stars, expectedStars, "Rounds: " + processingRounds);
             wat.RemoveChild(scene);

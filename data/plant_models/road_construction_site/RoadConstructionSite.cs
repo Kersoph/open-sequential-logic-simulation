@@ -51,6 +51,7 @@ namespace Osls.Plants.RoadConstructionSite
         /// </summary>
         public override void SetupUi()
         {
+            GetNode<UI>("UI").Setup();
         }
         #endregion
         

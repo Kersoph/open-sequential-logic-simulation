@@ -282,9 +282,13 @@ transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984,
 transform = Transform( 0.999984, 0, -0.0057072, 0, 1, 0, 0.0057072, 0, 0.999984, -40.5656, 3.39389, -16.2484 )
 
 [node name="UI" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LambdaOption" type="HSlider" parent="UI"]
 margin_left = 2.0
