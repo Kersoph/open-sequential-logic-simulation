@@ -4,6 +4,7 @@ extends EditorPlugin
 const RUN_CURRENT_SCENE_GODOT_3_2: int = 39
 const RUN_CURRENT_SCENE_GODOT_3_1: int = 33
 const Title: String = "Tests"
+const Rebuild: Script = preload("res://addons/WAT/rebuild_and_close.gd")
 const Settings: Script = preload("res://addons/WAT/settings.gd")
 const GUI: PackedScene = preload("res://addons/WAT/gui.tscn")
 const Docker: Script = preload("res://addons/WAT/ui/scripts/docker.gd")
