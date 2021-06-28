@@ -15,7 +15,7 @@ namespace Tests.PlantModels.ElectricalBarrier
         {
             string scenePath = "res://data/plant_models/electrical_barrier/ElectricalBarrierTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/electrical_barrier/ThreeStar.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 6000);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 1200);
         }
         
         [Test]
@@ -23,7 +23,7 @@ namespace Tests.PlantModels.ElectricalBarrier
         {
             string scenePath = "res://data/plant_models/electrical_barrier/ElectricalBarrierTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/electrical_barrier/TwoStar.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 2, 6000);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 2, 1200);
         }
         
         [Test]
@@ -31,7 +31,7 @@ namespace Tests.PlantModels.ElectricalBarrier
         {
             string scenePath = "res://data/plant_models/electrical_barrier/ElectricalBarrierTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/electrical_barrier/Empty.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 6000);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 1200);
         }
         
         [Test]
@@ -39,7 +39,7 @@ namespace Tests.PlantModels.ElectricalBarrier
         {
             string scenePath = "res://data/plant_models/electrical_barrier/lights/LightsTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/electrical_barrier/LightsThreeStar.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 2900);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 1200);
         }
         
         [Test]
@@ -47,15 +47,15 @@ namespace Tests.PlantModels.ElectricalBarrier
         {
             string scenePath = "res://data/plant_models/electrical_barrier/lights/LightsTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/electrical_barrier/LightsOneStar.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 1, 2900);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 1, 1200);
         }
         
         [Test]
         public void LightsZeroStars()
         {
             string scenePath = "res://data/plant_models/electrical_barrier/lights/LightsTest.tscn";
-            string sfcPath = "res://wat_tests/plant_models/electrical_barrier/Empty.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 6000);
+            string sfcPath = "res://wat_tests/plant_models/Empty.sfc";
+            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 1200);
         }
     }
 }
