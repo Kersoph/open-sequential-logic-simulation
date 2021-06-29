@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorReload.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/FileDialog.cs" type="Script" id=8]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorControls.cs" type="Script" id=9]
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=10]
+[ext_resource path="res://data/diagram_models/sfc/help/HelpPage.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 10 )
@@ -127,3 +128,6 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Help" parent="." instance=ExtResource( 11 )]
+visible = false
