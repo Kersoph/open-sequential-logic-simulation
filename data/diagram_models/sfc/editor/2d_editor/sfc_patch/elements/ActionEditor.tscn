@@ -14,6 +14,7 @@ border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 5.0
 
 [sub_resource type="StyleBoxFlat" id=4]
 draw_center = false
@@ -44,20 +45,24 @@ custom_styles/panel = SubResource( 1 )
 [node name="ActionTextEditor" type="TextEdit" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 35.0
-margin_top = 1.0
+margin_left = 30.0
+margin_top = 2.0
 margin_right = -0.00012207
-margin_bottom = -1.0
 rect_min_size = Vector2( 0, 28 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/symbol_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 1, 1, 0.705882, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_constants/line_spacing = 2
+custom_colors/mark_color = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -1
 text = "X = Y"
 syntax_highlighting = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ActionQualifierSelector" type="MenuButton" parent="."]
 margin_right = 30.0

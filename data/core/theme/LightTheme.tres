@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=19 format=2]
 
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://data/core/theme/rect/LightNormalStyle.tres" type="StyleBox" id=2]
@@ -7,6 +7,23 @@
 [ext_resource path="res://data/core/theme/rect/LightHoverStyle.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.470588, 0.470588, 0.470588, 0.588235 )
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 0.705882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 0.705882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_bottom = 5.0
+bg_color = Color( 0.313726, 0.313726, 0.313726, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 0.705882, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -14,7 +31,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=7]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 2.0
@@ -26,7 +43,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=8]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 5.0
@@ -37,6 +54,21 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.470588, 0.470588, 0.470588, 0.588235 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 1, 1, 0.705882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 0.705882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_left = 5.0
+bg_color = Color( 0.313726, 0.313726, 0.313726, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=13]
 
 [resource]
 default_font = ExtResource( 1 )
@@ -49,6 +81,11 @@ Button/styles/focus = null
 Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 2 )
 Button/styles/pressed = ExtResource( 4 )
+HScrollBar/styles/grabber = SubResource( 1 )
+HScrollBar/styles/grabber_highlight = SubResource( 2 )
+HScrollBar/styles/grabber_pressed = SubResource( 3 )
+HScrollBar/styles/scroll = SubResource( 4 )
+HScrollBar/styles/scroll_focus = SubResource( 5 )
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
 PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 0.8 )
@@ -62,10 +99,15 @@ PopupMenu/icons/radio_checked = null
 PopupMenu/icons/radio_unchecked = null
 PopupMenu/icons/submenu = null
 PopupMenu/icons/unchecked = null
-PopupMenu/styles/hover = SubResource( 1 )
+PopupMenu/styles/hover = SubResource( 6 )
 PopupMenu/styles/labeled_separator_left = null
 PopupMenu/styles/labeled_separator_right = null
-PopupMenu/styles/panel = SubResource( 2 )
+PopupMenu/styles/panel = SubResource( 7 )
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = null
-TooltipPanel/styles/panel = SubResource( 3 )
+TooltipPanel/styles/panel = SubResource( 8 )
+VScrollBar/styles/grabber = SubResource( 9 )
+VScrollBar/styles/grabber_highlight = SubResource( 10 )
+VScrollBar/styles/grabber_pressed = SubResource( 11 )
+VScrollBar/styles/scroll = SubResource( 12 )
+VScrollBar/styles/scroll_focus = SubResource( 13 )
