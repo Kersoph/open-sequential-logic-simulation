@@ -33,13 +33,13 @@ namespace Osls.St.Assignment
         /// </summary>
         public override bool IsValid()
         {
-            return _valid && _source.IsValid();
+            return _valid && _source != null && _source.IsValid();
         }
         
         public override string ToString()
         {
             string target = (_valid ? _target : "?");
-            return target + " = " + (_source.IsValid() ? _source.ToString() : "?");
+            return target + " = " + (_source != null && _source.IsValid() ? _source.ToString() : "?");
         }
         #endregion
     }
