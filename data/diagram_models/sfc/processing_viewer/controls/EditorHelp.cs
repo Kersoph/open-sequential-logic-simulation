@@ -3,17 +3,17 @@ using Godot;
 
 namespace Osls.SfcSimulation.EditorControls
 {
-    public class EditorResetController : Button
+    public class EditorHelp : Button
     {
         #region ==================== Public Methods ====================
         public override void _Ready()
         {
-            Connect("button_up", this, nameof(ButtonUpEvent));
+            Connect("pressed", this, nameof(OnPressed));
         }
         
-        public void ButtonUpEvent()
+        public void OnPressed()
         {
-            GetNode<Sfc2dControls>("..").SfcSimulationViewer.ResetController();
+            GetNode<Control>("../Help").Visible = true;
         }
         #endregion
     }

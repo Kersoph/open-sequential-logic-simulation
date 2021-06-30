@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=1]
 [ext_resource path="res://data/diagram_models/sfc/help/source/Times.png" type="Texture" id=2]
@@ -6,11 +6,16 @@
 [ext_resource path="res://data/diagram_models/sfc/help/source/ST.png" type="Texture" id=4]
 [ext_resource path="res://data/diagram_models/sfc/help/source/OR.png" type="Texture" id=5]
 [ext_resource path="res://data/diagram_models/sfc/help/source/AND.png" type="Texture" id=6]
+[ext_resource path="res://data/diagram_models/sfc/help/HelpPage.cs" type="Script" id=7]
 
-[node name="Help" type="Control"]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+
+[node name="HelpPage" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -22,25 +27,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
 scroll_horizontal_enabled = false
-scroll_vertical = 587
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer2"]
-margin_top = -587.0
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1895.0
-margin_bottom = 1238.0
+margin_bottom = 1825.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
-[node name="Step" type="Control" parent="ScrollContainer2/VBoxContainer"]
+[node name="Step" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_right = 1895.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 600, 300 )
@@ -49,7 +52,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer2/VBoxContainer/Step"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Step"]
 anchor_bottom = 1.0
 margin_right = 370.0
 texture = ExtResource( 2 )
@@ -57,7 +60,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" parent="ScrollContainer2/VBoxContainer/Step" instance=ExtResource( 3 )]
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/Step" instance=ExtResource( 3 )]
 margin_left = 380.0
 margin_top = 0.0
 margin_right = 0.0
@@ -77,7 +80,7 @@ Actions: Consists of a ST instruction and a modifier (selectable in the drop dow
 Transition: Fires the transition if the ST instruction is true.
 Connections: Connects steps in an exclusive or simultaneous way."
 
-[node name="ST" type="Control" parent="ScrollContainer2/VBoxContainer"]
+[node name="ST" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_top = 310.0
 margin_right = 1895.0
 margin_bottom = 660.0
@@ -87,7 +90,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer2/VBoxContainer/ST"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/ST"]
 anchor_bottom = 1.0
 margin_right = 370.0
 texture = ExtResource( 4 )
@@ -95,7 +98,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" parent="ScrollContainer2/VBoxContainer/ST" instance=ExtResource( 3 )]
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/ST" instance=ExtResource( 3 )]
 margin_left = 380.0
 margin_top = 0.0
 margin_right = -2.0
@@ -119,17 +122,17 @@ Constants: TRUE (True, true), FALSE (False, false), any integer number
 Inputs: Use the same as in the input table, STEP.Q returns the step state, STEP.T returns time in Ms the step is active
 Outputs: Use the same as in the output table"
 
-[node name="Choice" type="Control" parent="ScrollContainer2/VBoxContainer"]
+[node name="Choice" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_top = 670.0
 margin_right = 1895.0
 margin_bottom = 1270.0
-rect_min_size = Vector2( 1000, 600 )
+rect_min_size = Vector2( 700, 600 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer2/VBoxContainer/Choice"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Choice"]
 anchor_bottom = 1.0
 margin_right = 370.0
 texture = ExtResource( 5 )
@@ -137,7 +140,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" parent="ScrollContainer2/VBoxContainer/Choice" instance=ExtResource( 3 )]
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/Choice" instance=ExtResource( 3 )]
 margin_left = 560.0
 margin_top = 0.0
 margin_right = 0.0
@@ -159,17 +162,17 @@ In the right example: If S1 is active and the input of the sensor B100 is true w
 
 No Search For Stability: If S1 is active and B100 and B101 are true, either S2 or S3 will get active and S1 inactive in the next update. In the follow up update the next transition fires if B100 and B101 are still true which will activate S4."
 
-[node name="Parallel" type="Control" parent="ScrollContainer2/VBoxContainer"]
+[node name="Parallel" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_top = 1280.0
 margin_right = 1895.0
 margin_bottom = 1825.0
-rect_min_size = Vector2( 200, 545 )
+rect_min_size = Vector2( 700, 545 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer2/VBoxContainer/Parallel"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Parallel"]
 anchor_bottom = 1.0
 margin_right = 370.0
 texture = ExtResource( 6 )
@@ -177,7 +180,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" parent="ScrollContainer2/VBoxContainer/Parallel" instance=ExtResource( 3 )]
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/Parallel" instance=ExtResource( 3 )]
 margin_left = 560.0
 margin_top = 0.0
 margin_right = 0.0
@@ -192,3 +195,17 @@ A connection with a double line to two or more transitions states the start or e
 Start: If the transition fires all connected steps will get active
 End: All connected steps and transition need to be active to fire
 "
+
+[node name="CloseHint" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -269.0
+margin_right = -15.0
+margin_bottom = 24.0
+custom_styles/normal = SubResource( 1 )
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+text = "Press ESC to close this view"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

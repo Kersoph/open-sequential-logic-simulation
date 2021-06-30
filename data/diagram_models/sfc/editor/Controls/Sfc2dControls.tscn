@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorReload.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorControls.cs" type="Script" id=9]
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=10]
 [ext_resource path="res://data/diagram_models/sfc/help/HelpPage.tscn" type="PackedScene" id=11]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/EditorHelp.cs" type="Script" id=12]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 10 )
@@ -28,10 +29,10 @@ __meta__ = {
 [node name="EditorZoomOut" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -39.0
-margin_top = -1.47192
-margin_right = 1.0
-margin_bottom = 38.5281
+margin_left = -237.0
+margin_top = -1.0
+margin_right = -197.0
+margin_bottom = 39.0
 hint_tooltip = "Zoom Out"
 focus_mode = 0
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
@@ -42,9 +43,9 @@ script = ExtResource( 2 )
 [node name="EditorZoomIn" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -78.1323
+margin_left = -276.0
 margin_top = -1.0
-margin_right = -38.1323
+margin_right = -236.0
 margin_bottom = 39.0
 hint_tooltip = "Zoom In"
 focus_mode = 0
@@ -56,37 +57,37 @@ script = ExtResource( 3 )
 [node name="EditorWrite" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -157.0
+margin_left = -99.0
 margin_top = -1.0
-margin_right = -77.0
+margin_right = 1.0
 margin_bottom = 39.0
 hint_tooltip = "Saves the diagram to a custom file"
 focus_mode = 0
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
-text = "Write..."
+text = "Write File"
 script = ExtResource( 7 )
 
 [node name="EditorLoad" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -236.0
+margin_left = -198.0
 margin_top = -1.0
-margin_right = -156.0
+margin_right = -98.0
 margin_bottom = 39.0
 hint_tooltip = "Loads a diagram from a custom file"
 focus_mode = 0
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
-text = "Load..."
+text = "Load File"
 script = ExtResource( 6 )
 
 [node name="EditorSave" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -315.0
+margin_left = -355.0
 margin_top = -1.0
-margin_right = -235.0
+margin_right = -275.0
 margin_bottom = 39.0
 hint_tooltip = "Saves the diagram to the currently opened file [F9]"
 focus_mode = 0
@@ -98,9 +99,9 @@ script = ExtResource( 5 )
 [node name="EditorReload" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -394.0
+margin_left = -434.0
 margin_top = -1.0
-margin_right = -314.0
+margin_right = -354.0
 margin_bottom = 39.0
 hint_tooltip = "Reloads the file [F5]"
 focus_mode = 0
@@ -108,6 +109,19 @@ custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "Reload"
 script = ExtResource( 1 )
+
+[node name="EditorHelp" parent="." instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -513.0
+margin_top = -1.0
+margin_right = -433.0
+margin_bottom = 39.0
+hint_tooltip = "Opens the help page [F1]"
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+toggle_mode = false
+text = "Help"
+script = ExtResource( 12 )
 
 [node name="FileDialog" type="FileDialog" parent="."]
 visible = true
