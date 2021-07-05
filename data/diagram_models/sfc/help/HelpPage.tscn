@@ -37,16 +37,26 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 1895.0
-margin_bottom = 1825.0
+margin_right = 1575.0
+margin_bottom = 1945.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
+[node name="Spacer" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_right = 1575.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 600, 10 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Step" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_right = 1895.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 600, 300 )
+margin_top = 20.0
+margin_right = 1575.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 600, 350 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -81,10 +91,10 @@ Transition: Fires the transition if the ST instruction is true.
 Connections: Connects steps in an exclusive or simultaneous way."
 
 [node name="ST" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 310.0
-margin_right = 1895.0
-margin_bottom = 660.0
-rect_min_size = Vector2( 600, 350 )
+margin_top = 380.0
+margin_right = 1575.0
+margin_bottom = 780.0
+rect_min_size = Vector2( 600, 400 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -123,9 +133,9 @@ Inputs: Use the same as in the input table, STEP.Q returns the step state, STEP.
 Outputs: Use the same as in the output table"
 
 [node name="Choice" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 670.0
-margin_right = 1895.0
-margin_bottom = 1270.0
+margin_top = 790.0
+margin_right = 1575.0
+margin_bottom = 1390.0
 rect_min_size = Vector2( 700, 600 )
 size_flags_horizontal = 3
 __meta__ = {
@@ -163,9 +173,9 @@ In the right example: If S1 is active and the input of the sensor B100 is true w
 No Search For Stability: If S1 is active and B100 and B101 are true, either S2 or S3 will get active and S1 inactive in the next update. In the follow up update the next transition fires if B100 and B101 are still true which will activate S4."
 
 [node name="Parallel" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 1280.0
-margin_right = 1895.0
-margin_bottom = 1825.0
+margin_top = 1400.0
+margin_right = 1575.0
+margin_bottom = 1945.0
 rect_min_size = Vector2( 700, 545 )
 size_flags_horizontal = 3
 __meta__ = {
