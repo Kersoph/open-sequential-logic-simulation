@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/SfcEditorNode.cs" type="Script" id=1]
-[ext_resource path="res://data/diagram_models/sfc/editor/HscRelative.cs" type="Script" id=2]
+[ext_resource path="res://data/core/theme/nodes/HscRelative.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/Sfc2dEditor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/Sfc2dControls.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/core/lesson/viewer/LessonView.tscn" type="PackedScene" id=7]
@@ -11,17 +11,7 @@ script = ExtResource( 1 )
 LessonViewPath = NodePath("HscRelative/LessonView")
 Sfc2dEditorPath = NodePath("HscRelative/Sfc2dBackground/Sfc2dEditor")
 
-[node name="HscRelative" type="HSplitContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 80.0
-margin_top = 1.0
-custom_constants/separation = 8
-split_offset = 1320
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HscRelative" parent="." instance=ExtResource( 2 )]
 
 [node name="Sfc2dBackground" type="Control" parent="HscRelative"]
 margin_right = 1320.0
