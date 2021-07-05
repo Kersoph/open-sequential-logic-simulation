@@ -15,6 +15,7 @@ Sfc2dEditorPath = NodePath("HscRelative/Sfc2dBackground/Sfc2dEditor")
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
+margin_top = 1.0
 custom_constants/separation = 8
 split_offset = 1320
 script = ExtResource( 2 )
@@ -24,7 +25,7 @@ __meta__ = {
 
 [node name="Sfc2dBackground" type="Control" parent="HscRelative"]
 margin_right = 1320.0
-margin_bottom = 1017.0
+margin_bottom = 1016.0
 
 [node name="ColorRect" type="ColorRect" parent="HscRelative/Sfc2dBackground"]
 anchor_right = 1.0
@@ -48,5 +49,5 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1328.0
 margin_right = 1840.0
-margin_bottom = 1017.0
+margin_bottom = 1016.0
 mouse_filter = 2

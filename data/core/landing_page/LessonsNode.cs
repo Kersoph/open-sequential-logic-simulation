@@ -12,7 +12,7 @@ namespace Osls.LandingPage
     {
         #region ==================== Fields / Properties ====================
         [Export] private NodePath _landingPagePath = "..";
-        [Export] private NodePath _lessonViewPath = "LessonView";
+        [Export] private NodePath _lessonViewPath = "HscRelative/LessonView";
         
         private LandingPageNode _landingPageNode;
         private LessonView _lessonView;

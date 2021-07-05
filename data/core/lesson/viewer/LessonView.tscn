@@ -44,7 +44,6 @@ shadow_atlas_size = 1024
 [node name="LessonInfo" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = 1.0
 margin_bottom = -178.5
 grow_horizontal = 0
 grow_vertical = 0

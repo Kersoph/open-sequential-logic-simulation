@@ -16,7 +16,13 @@ namespace Osls
         #region ==================== Public Methods ====================
         public override void _Ready()
         {
-            SplitOffset = Mathf.RoundToInt(RectSize.x * RelativeOffst);
+            float minSizeOffset = 0;
+            Control control = GetChildOrNull<Control>(0);
+            if (control != null)
+            {
+                minSizeOffset = control.RectMinSize.x;
+            }
+            SplitOffset = Mathf.RoundToInt(RectSize.x * RelativeOffst - minSizeOffset);
         }
         #endregion
     }

@@ -10,6 +10,7 @@ namespace Osls.LandingPage
     public class LessonSelectionGridNode : GridContainer
     {
         #region ==================== Fields ====================
+        [Export] private NodePath LessonsNodePath = "../../../..";
         [Export] private PackedScene _lessonControllerScene;
         private LessonControllerNode[] _lessonNodes;
         #endregion
@@ -41,7 +42,7 @@ namespace Osls.LandingPage
         /// </summary>
         public void SelectionChangedTo(LessonControllerNode node)
         {
-            LessonsNode lessonsNode = GetNode<LessonsNode>("../../..");
+            LessonsNode lessonsNode = GetNode<LessonsNode>(LessonsNodePath);
             lessonsNode.SelectionChangedTo(node.LessonEntity);
         }
         
@@ -50,7 +51,7 @@ namespace Osls.LandingPage
         /// </summary>
         public void StartSelectedLesson(LessonControllerNode node)
         {
-            LessonsNode lessonsNode = GetNode<LessonsNode>("../../..");
+            LessonsNode lessonsNode = GetNode<LessonsNode>(LessonsNodePath);
             lessonsNode.StartSelectedLesson(node.LessonEntity);
         }
         #endregion
