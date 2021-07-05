@@ -1161,5 +1161,7 @@ file_logging/enable_file_logging=true
 
 [rendering]
 
+batching/options/use_batching=false
+batching/options/use_batching_in_editor=false
 environment/default_clear_color=Color( 0.470588, 0.470588, 0.470588, 1 )
 environment/default_environment="res://data/core/environment/Default.tres"
