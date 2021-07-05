@@ -1,27 +1,52 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/SfcEditorNode.cs" type="Script" id=1]
+[ext_resource path="res://data/diagram_models/sfc/editor/HscRelative.cs" type="Script" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/Sfc2dEditor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/Sfc2dControls.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/core/lesson/viewer/LessonView.tscn" type="PackedScene" id=7]
 
 [node name="SfcEditorNode" type="Node"]
 script = ExtResource( 1 )
+LessonViewPath = NodePath("HscRelative/LessonView")
+Sfc2dEditorPath = NodePath("HscRelative/Sfc2dBackground/Sfc2dEditor")
 
-[node name="LessonView" parent="." instance=ExtResource( 7 )]
-
-[node name="Sfc2dBackground" type="ColorRect" parent="."]
+[node name="HscRelative" type="HSplitContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
-margin_top = 1.0
-margin_right = -513.0
+custom_constants/separation = 8
+split_offset = 1320
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sfc2dEditor" parent="Sfc2dBackground" instance=ExtResource( 5 )]
+[node name="Sfc2dBackground" type="Control" parent="HscRelative"]
+margin_right = 1320.0
+margin_bottom = 1017.0
+
+[node name="ColorRect" type="ColorRect" parent="HscRelative/Sfc2dBackground"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 7.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sfc2dEditor" parent="HscRelative/Sfc2dBackground" instance=ExtResource( 5 )]
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
-[node name="Sfc2dControls" parent="Sfc2dBackground" instance=ExtResource( 6 )]
+[node name="Sfc2dControls" parent="HscRelative/Sfc2dBackground" instance=ExtResource( 6 )]
+margin_right = 7.0
+
+[node name="LessonView" parent="HscRelative" instance=ExtResource( 7 )]
+anchor_left = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1328.0
+margin_right = 1840.0
+margin_bottom = 1017.0
+mouse_filter = 2

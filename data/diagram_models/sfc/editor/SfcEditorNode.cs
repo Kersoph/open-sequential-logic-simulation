@@ -11,8 +11,8 @@ namespace Osls.SfcEditor
     public class SfcEditorNode : ModelEditor
     {
         #region ==================== Fields / Properties ====================
-        [Export] private NodePath LessonViewPath = "LessonView";
-        [Export] private NodePath Sfc2dEditorPath = "Sfc2dBackground/Sfc2dEditor";
+        [Export] private NodePath LessonViewPath = "HSplitContainer/LessonView";
+        [Export] private NodePath Sfc2dEditorPath = "HSplitContainer/Sfc2dBackground/Sfc2dEditor";
         
         public ILessonEntity OpenedLesson { get; private set; }
         public IMainNode MainNode { get; private set; }
