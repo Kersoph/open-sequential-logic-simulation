@@ -8,7 +8,7 @@ namespace Osls.SfcSimulation.EditorControls
     {
         #region ==================== Fields / Properties ====================
         [Export] private NodePath _sfc2dEditorNodePath = "../Sfc2dEditor";
-        [Export] private NodePath _sfcSimulationViewerPath = "../..";
+        [Export] private NodePath _sfcSimulationViewerPath = "../../..";
         
         /// <summary>
         /// Gets the sfc editor node

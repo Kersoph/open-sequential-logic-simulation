@@ -37,7 +37,7 @@ namespace Osls.SfcEditor
             _processingData = InitialisePlant();
             InitialiseDiagram();
             InitialiseSimulation(mainNode, openedLesson);
-            if (!_isExecutable) GetNode<Label>("Sfc2dViewer/ErrorLabel").Visible = true;
+            if (!_isExecutable) GetNode<Label>("HscRelative/Sfc2dViewer/ErrorLabel").Visible = true;
         }
         
         public override void _Process(float delta)
@@ -68,7 +68,7 @@ namespace Osls.SfcEditor
         /// </summary>
         private ProcessingData InitialisePlant()
         {
-            _lessonView = GetNode<LessonView>("LessonView");
+            _lessonView = GetNode<LessonView>("HscRelative/LessonView");
             _lessonView.LoadAndShowInfo(_openedLesson);
             _loadedSimulationNode = _lessonView.PlantView.LoadedSimulationNode;
             ProcessingData data = new ProcessingData();
@@ -82,7 +82,7 @@ namespace Osls.SfcEditor
         /// </summary>
         private void InitialiseDiagram()
         {
-            _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("Sfc2dViewer/Sfc2dEditor");
+            _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("HscRelative/Sfc2dViewer/Sfc2dEditor");
             _sfc2dEditorNode.InitializeEditor(_processingData);
             string filepath = _openedLesson.TemporaryDiagramFilePath;
             _sfc2dEditorNode.TryLoadDiagram(filepath);
