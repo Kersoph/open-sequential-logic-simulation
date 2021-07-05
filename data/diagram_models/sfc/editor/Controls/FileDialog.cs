@@ -46,11 +46,11 @@ namespace Osls.SfcEditor
             entity.CustomDiagramFilePath = ProjectSettings.GlobalizePath(path);
             if (Mode == ModeEnum.SaveFile)
             {
-                Controller.SfcEditorNode.SaveDiagram();
+                Controller.OnSaveDiagram();
             }
             else
             {
-                Controller.SfcEditorNode.TryLoadDiagram();
+                Controller.OnLoadDiagram();
             }
             Hide();
         }

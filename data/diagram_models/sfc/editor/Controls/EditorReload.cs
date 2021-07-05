@@ -13,14 +13,14 @@ namespace Osls.SfcEditor
         
         public void OnButtonPressed()
         {
-            GetNode<SfcEditorNode>("../../..").TryLoadDiagram();
+            GetNode<EditorControls>("..").OnLoadDiagram();
         }
         
         public override void _UnhandledKeyInput(InputEventKey @event)
         {
             if (@event.IsActionPressed("main_load"))
             {
-                GetNode<SfcEditorNode>("../../..").TryLoadDiagram();
+                GetNode<EditorControls>("..").OnLoadDiagram();
             }
         }
         #endregion

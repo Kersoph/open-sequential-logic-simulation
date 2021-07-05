@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorReload.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=10]
 [ext_resource path="res://data/diagram_models/sfc/help/HelpPage.tscn" type="PackedScene" id=11]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/EditorHelp.cs" type="Script" id=12]
+[ext_resource path="res://data/core/theme/font/RobotoRegularShadedFont.tres" type="DynamicFont" id=13]
+[ext_resource path="res://data/diagram_models/sfc/editor/controls/TextInfo.cs" type="Script" id=14]
+[ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=15]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 10 )
@@ -21,6 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
 mouse_filter = 2
+theme = ExtResource( 15 )
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -145,3 +149,17 @@ __meta__ = {
 
 [node name="Help" parent="." instance=ExtResource( 11 )]
 visible = false
+
+[node name="TextInfo" type="Label" parent="."]
+anchor_right = 1.0
+margin_left = 12.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Loaded: Diagram.sfc"
+valign = 1
+clip_text = true
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
