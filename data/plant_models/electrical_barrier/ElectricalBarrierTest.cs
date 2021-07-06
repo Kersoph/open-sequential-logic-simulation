@@ -12,6 +12,8 @@ namespace Osls.Plants.ElectricalBarrier
         private enum Stages { ExecuteTests, DisplayResults };
         private Stages _stage = Stages.ExecuteTests;
         private ILessonEntity _openedLesson;
+        [Godot.Export] private Godot.NodePath _resultLabelPath = "Stars/Result";
+        [Godot.Export] private Godot.NodePath _starPath = "Stars";
         
         private RegularOperation _regularOperation;
         private StartOpen _startOpen;
@@ -78,21 +80,27 @@ namespace Osls.Plants.ElectricalBarrier
         
         private void CreateResult()
         {
+            GetNode<Godot.Control>(_starPath).Visible = true;
+            Godot.Label resultLabel = GetNode<Godot.Label>(_resultLabelPath);
             if (_regularOperation.Result == 0)
             {
                 _openedLesson.SetAndSaveStars(0);
+                resultLabel.Text = "0 Stars";
             }
             else if (_startOpen.Result == 0 || _startPassing.Result == 0)
             {
                 _openedLesson.SetAndSaveStars(1);
+                resultLabel.Text = "1 Star";
             }
             else if (_noiseAndBlackout.Result == 0)
             {
                 _openedLesson.SetAndSaveStars(2);
+                resultLabel.Text = "2 Stars!";
             }
             else
             {
                 _openedLesson.SetAndSaveStars(3);
+                resultLabel.Text = "3 Stars! Nice!";
             }
         }
         #endregion
