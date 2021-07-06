@@ -108,11 +108,11 @@ namespace Osls.Plants.RoadConstructionSite
             else
             {
                 Report.WaitingCycles++;
-                if (Report.WaitingCycles == 1000) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Waiting, 1);
-                if (Report.WaitingCycles == 1200) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Sad, 1);
-                if (Report.WaitingCycles == 2000) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Frustrated, 1);
-                if (Report.WaitingCycles == 3700) _bubble.ShowAs(BubbleSprite.Bubble.Say, BubbleSprite.Expression.Angry, 1);
-                if (Report.WaitingCycles == 4000) _bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Frustrated, 1);
+                if (Report.WaitingCycles == 2000) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Waiting, 1);
+                if (Report.WaitingCycles == 2200) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Sad, 1);
+                if (Report.WaitingCycles == 4000) _bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Frustrated, 1);
+                if (Report.WaitingCycles == 5700) _bubble.ShowAs(BubbleSprite.Bubble.Say, BubbleSprite.Expression.Angry, 1);
+                if (Report.WaitingCycles == 5000) _bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Frustrated, 1);
             }
             if (UnitOffset > 0.98f) Report.SimulationCompleted = true;
         }
