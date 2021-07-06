@@ -11,7 +11,7 @@ namespace Osls.SfcEditor
         public void UpdateLine(PatchEntity entity, SfcPatchControl control)
         {
             GetNode<ColorRect>("TransitionLineTop").Visible = entity.SfcStepType != StepType.Unused && entity.SfcStepType != StepType.Jump;
-            GetNode<ColorRect>("TransitionLineMid").Visible = entity.ContainsTransition() || entity.SfcStepType == StepType.Pass;
+            GetNode<ColorRect>("TransitionLineMid").Visible = entity.ContainsTransition() || control.SfcPatchMeta.HasPossibleTransitionSkip;
             GetNode<ColorRect>("TransitionLineBot").Visible = control.SfcPatchMeta.RequestsLowerStepConnection;
         }
         #endregion
