@@ -40,7 +40,7 @@ namespace Osls.SfcEditor
             GetNode<SfcLineButton>("SfcLineButtonBot").UpdateBranchLine(data.LowerBranch);
             GetNode<SfcTransitionNode>("SfcTransition").UpdateTransition(data.TransitionText, SfcPatchControl.Master);
             GetNode<ActionEditorBox>("ActionEditorBox").UpdateActions(data, SfcPatchControl.Master.Data);
-            GetNode<SfcConnectionLine>("SfcConnectionLine").UpdateLine(data);
+            GetNode<SfcConnectionLine>("SfcConnectionLine").UpdateLine(data, SfcPatchControl);
         }
         
         /// <summary>

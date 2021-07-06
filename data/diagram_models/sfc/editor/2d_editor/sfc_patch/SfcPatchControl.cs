@@ -25,6 +25,11 @@ namespace Osls.SfcEditor
         /// The connected node controlled by this class
         /// </summary>
         public SfcPatchNode SfcPatchNode { get; private set; }
+        
+        /// <summary>
+        /// Contains metadata to visualise the SFC
+        /// </summary>
+        public SfcPatchMeta SfcPatchMeta { get; private set; }
         #endregion
         
         
@@ -36,6 +41,7 @@ namespace Osls.SfcEditor
         {
             Data = data;
             Master = control;
+            SfcPatchMeta = new SfcPatchMeta();
             Node node = ((PackedScene)GD.Load(_patchReferencePath)).Instance();
             SfcPatchNode = (SfcPatchNode)node;
             SfcPatchNode.InitializeWith(this, data);
@@ -47,6 +53,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void UpdatePatchNodes()
         {
+            SfcPatchMeta.UpdatePatch(this);
             SfcPatchNode.UpdateNodes(Data);
         }
         

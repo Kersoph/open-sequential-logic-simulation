@@ -22,6 +22,7 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="TransitionLineBot" type="ColorRect" parent="."]
 margin_left = 74.0
-margin_top = -35.0
+margin_top = 185.0
 margin_right = 76.0
+margin_bottom = 220.0
 color = Color( 0, 0, 0, 1 )
