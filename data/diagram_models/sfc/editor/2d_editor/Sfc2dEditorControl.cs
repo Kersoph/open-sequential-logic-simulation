@@ -62,7 +62,7 @@ namespace Osls.SfcEditor
             {
                 if (Data.SfcEntity.Lookup(1, 0) == null)
                 {
-                    PatchEntity entity = new PatchEntity(1, 0)
+                    PatchEntity entity = new PatchEntity(1, 1)
                     {
                         SfcStepType = StepType.StartingStep
                     };
