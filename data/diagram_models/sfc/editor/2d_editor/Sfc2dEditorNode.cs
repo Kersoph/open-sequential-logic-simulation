@@ -106,13 +106,29 @@ namespace Osls.SfcEditor
         {
             if (@event.IsActionPressed("ui_translate_idle"))
             {
-                _lastDragPosition = GetViewport().GetMousePosition();
-                _isDragging = true;
+                StartDrag();
             }
             else if (@event.IsActionReleased("ui_translate_idle"))
             {
-                _isDragging = false;
+                StopDrag();
             }
+        }
+        
+        /// <summary>
+        /// Called if the user wants to drag the editor
+        /// </summary>
+        public void StartDrag()
+        {
+            _lastDragPosition = GetViewport().GetMousePosition();
+            _isDragging = true;
+        }
+        
+        /// <summary>
+        /// Called if the user stops to drag the editor
+        /// </summary>
+        public void StopDrag()
+        {
+            _isDragging = false;
         }
         #endregion
         
