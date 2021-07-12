@@ -13,14 +13,14 @@ namespace Osls.SfcEditor.Controls
         
         public void OnButtonPressed()
         {
-            GetNode<EditorControls>("..").OnSaveDiagram();
+            GetNode<EditorControls>("..").SaveDiagram();
         }
         
         public override void _UnhandledKeyInput(InputEventKey @event)
         {
             if (@event.IsActionPressed("main_save"))
             {
-                GetNode<EditorControls>("..").OnSaveDiagram();
+                GetNode<EditorControls>("..").SaveDiagram();
             }
         }
         #endregion

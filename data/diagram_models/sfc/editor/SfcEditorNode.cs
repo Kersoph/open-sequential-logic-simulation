@@ -11,8 +11,9 @@ namespace Osls.SfcEditor
     public class SfcEditorNode : ModelEditor
     {
         #region ==================== Fields / Properties ====================
-        [Export] private NodePath LessonViewPath = "HSplitContainer/LessonView";
-        [Export] private NodePath Sfc2dEditorPath = "HSplitContainer/Sfc2dBackground/Sfc2dEditor";
+        [Export] private NodePath LessonViewPath = "HscRelative/LessonView";
+        [Export] private NodePath Sfc2dEditorPath = "HscRelative/Sfc2dBackground/Sfc2dEditor";
+        [Export] private NodePath EditorControlsPath = "HscRelative/Sfc2dBackground/Sfc2dControls";
         
         public ILessonEntity OpenedLesson { get; private set; }
         public IMainNode MainNode { get; private set; }
@@ -46,6 +47,7 @@ namespace Osls.SfcEditor
         {
             string filepath = OpenedLesson.CustomDiagramFilePath;
             Sfc2dEditorNode.SaveDiagram(filepath);
+            GetNode<EditorControls>(EditorControlsPath).OnSaveDiagram();
         }
         
         /// <summary>
@@ -60,6 +62,7 @@ namespace Osls.SfcEditor
                 OpenedLesson.CustomDiagramFilePath = filepath;
             }
             Sfc2dEditorNode.TryLoadDiagram(filepath);
+            GetNode<EditorControls>(EditorControlsPath).OnLoadDiagram();
         }
         
         /// <summary>

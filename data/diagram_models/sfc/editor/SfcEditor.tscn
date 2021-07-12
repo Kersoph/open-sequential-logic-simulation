@@ -8,8 +8,6 @@
 
 [node name="SfcEditorNode" type="Node"]
 script = ExtResource( 1 )
-LessonViewPath = NodePath("HscRelative/LessonView")
-Sfc2dEditorPath = NodePath("HscRelative/Sfc2dBackground/Sfc2dEditor")
 
 [node name="HscRelative" parent="." instance=ExtResource( 2 )]
 

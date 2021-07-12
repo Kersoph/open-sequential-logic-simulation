@@ -14,11 +14,6 @@ namespace Osls.SfcEditor
         
         
         #region ==================== Public Methods ====================
-        public override void _Ready()
-        {
-            ShowMessage("Loaded Diagram.sfc");
-        }
-        
         public override void _Process(float delta)
         {
             switch (_stages)
