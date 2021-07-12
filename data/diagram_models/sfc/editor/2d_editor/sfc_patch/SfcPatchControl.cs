@@ -78,6 +78,7 @@ namespace Osls.SfcEditor
             if (Data.UpperBranch == BranchType.Unused)
             {
                 Data.UpperBranch = BranchType.Single;
+                Master.UpdateGrid();
             }
             else if (Data.UpperBranch == BranchType.Single)
             {
@@ -99,6 +100,7 @@ namespace Osls.SfcEditor
             if (Data.LowerBranch == BranchType.Unused)
             {
                 Data.LowerBranch = BranchType.Single;
+                Master.UpdateGrid();
             }
             else if (Data.LowerBranch == BranchType.Single)
             {
@@ -119,6 +121,7 @@ namespace Osls.SfcEditor
         {
             Data.TransitionText = transitionText;
             UpdatePatchNodes();
+            Master.UpdateGrid();
         }
         
         /// <summary>
