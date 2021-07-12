@@ -24,6 +24,11 @@ namespace Osls.SfcEditor
         /// Gets the scene page type
         /// </summary>
         public override PageCategory ScenePage { get { return PageCategory.Simulation; } }
+        
+        /// <summary>
+        /// The currently set execution type of the simulation
+        /// </summary>
+        public ExecutionType ExecutionType { get; set; }
         #endregion
         
         
@@ -44,11 +49,18 @@ namespace Osls.SfcEditor
         {
             if (_isExecutable)
             {
-                _lessonView.IoInfo.UpdateText(_processingData.InputRegisters, _processingData.OutputRegisters);
-                int timeMs = (int)(delta * 1000);
-                timeMs = timeMs < 1 ? 1 : (timeMs > 1000 ? 1000 : timeMs);
-                _simulationMaster.UpdateSimulation(timeMs);
-                _simulationMaster.VisualiseStatus(_sfc2dEditorNode.Sfc2dEditorControl);
+                switch (ExecutionType)
+                {
+                    case ExecutionType.RunContinuously:
+                        ExecuteSimulation(delta);
+                        break;
+                    case ExecutionType.RunOneStep:
+                        ExecuteSimulation(0.05f);
+                        ExecutionType = ExecutionType.Paused;
+                        break;
+                    case ExecutionType.Paused:
+                        break;
+                }
             }
         }
         
@@ -97,6 +109,18 @@ namespace Osls.SfcEditor
             _simulationMaster = new Master(_processingData.SfcEntity, _loadedSimulationNode);
             _loadedSimulationNode.SetupUi();
             _isExecutable = _simulationMaster.IsProgramSimulationValid();
+        }
+        
+        /// <summary>
+        /// Executes one step in the simulation with the given delta time
+        /// </summary>
+        private void ExecuteSimulation(float delta)
+        {
+            _lessonView.IoInfo.UpdateText(_processingData.InputRegisters, _processingData.OutputRegisters);
+            int timeMs = (int)(delta * 1000);
+            timeMs = timeMs < 1 ? 1 : (timeMs > 1000 ? 1000 : timeMs);
+            _simulationMaster.UpdateSimulation(timeMs);
+            _simulationMaster.VisualiseStatus(_sfc2dEditorNode.Sfc2dEditorControl);
         }
         #endregion
     }

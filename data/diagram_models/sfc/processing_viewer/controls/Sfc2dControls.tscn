@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/ControlButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/EditorZoomOut.cs" type="Script" id=2]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/EditorZoomIn.cs" type="Script" id=3]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/Sfc2dControls.cs" type="Script" id=4]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/EditorResetController.cs" type="Script" id=5]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/icons/RunContinuously.png" type="Texture" id=6]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/icons/StepOne.png" type="Texture" id=7]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/ExecutionStepControl.cs" type="Script" id=8]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/ExecutionControl.cs" type="Script" id=9]
+[ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/icons/Paused.png" type="Texture" id=10]
 
 [node name="Sfc2dControls" type="Control"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -147.0
+margin_left = -225.0
 margin_bottom = 39.0
 rect_clip_content = true
 script = ExtResource( 4 )
@@ -24,6 +29,7 @@ margin_left = -39.0
 margin_top = -1.0
 margin_right = 1.0
 margin_bottom = 39.0
+hint_tooltip = "Zoom out"
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "-"
@@ -36,6 +42,7 @@ margin_left = -78.0
 margin_top = -1.0
 margin_right = -38.0
 margin_bottom = 39.0
+hint_tooltip = "Zoom in"
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "+"
@@ -53,3 +60,56 @@ custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "Reset"
 script = ExtResource( 5 )
+
+[node name="ExecutionStepControl" parent="." instance=ExtResource( 1 )]
+margin_left = 39.0
+margin_top = -1.0
+margin_right = 79.0
+margin_bottom = 39.0
+hint_tooltip = "[F10] Execute one calculation cycle."
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+toggle_mode = false
+script = ExtResource( 8 )
+
+[node name="Icon" type="TextureRect" parent="ExecutionStepControl"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -6.0
+mouse_filter = 2
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ExecutionControl" parent="." instance=ExtResource( 1 )]
+margin_top = -1.0
+margin_right = 40.0
+margin_bottom = 39.0
+hint_tooltip = "[F6] Pauses or continues the simulation."
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+toggle_mode = false
+script = ExtResource( 9 )
+_runContinuouslyTexture = ExtResource( 6 )
+_pausedTexture = ExtResource( 10 )
+
+[node name="Icon" type="TextureRect" parent="ExecutionControl"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -6.0
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
