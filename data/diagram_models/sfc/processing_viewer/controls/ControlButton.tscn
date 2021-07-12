@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=1]
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -49,6 +50,7 @@ anti_aliasing = false
 [node name="NavigationButton" type="Button"]
 margin_right = 80.0
 margin_bottom = 40.0
+theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )

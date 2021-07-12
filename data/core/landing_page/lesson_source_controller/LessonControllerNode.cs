@@ -15,7 +15,7 @@ namespace Osls.LandingPage
         /// <summary>
         /// Gets the lesson information saved in the lesson folder.
         /// </summary>
-        public LessonEntity LessonEntity { get; private set; }
+        public ILessonEntity LessonEntity { get; private set; }
         #endregion
         
         
@@ -29,7 +29,7 @@ namespace Osls.LandingPage
         /// <summary>
         /// Sets the texts and stores the lesson entity
         /// </summary>
-        public void SetLessonInfo(LessonEntity info, LessonSelectionGridNode gridController)
+        public void SetLessonInfo(ILessonEntity info, LessonSelectionGridNode gridController)
         {
             LessonEntity = info;
             _gridController = gridController;

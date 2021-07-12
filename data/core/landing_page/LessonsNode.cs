@@ -12,7 +12,7 @@ namespace Osls.LandingPage
     {
         #region ==================== Fields / Properties ====================
         [Export] private NodePath _landingPagePath = "..";
-        [Export] private NodePath _lessonViewPath = "LessonView";
+        [Export] private NodePath _lessonViewPath = "HscRelative/LessonView";
         
         private LandingPageNode _landingPageNode;
         private LessonView _lessonView;
@@ -32,7 +32,7 @@ namespace Osls.LandingPage
         /// <summary>
         /// Informs the grid, that the selection has changed to this button and the UI needs to be updated.
         /// </summary>
-        public void SelectionChangedTo(LessonEntity selectedLesson)
+        public void SelectionChangedTo(ILessonEntity selectedLesson)
         {
             _lessonView.LoadAndShowInfo(selectedLesson);
         }
@@ -41,7 +41,7 @@ namespace Osls.LandingPage
         /// The given lesson will be forwarded to the main view to
         /// switch from the landing page to the editor.
         /// </summary>
-        public void StartSelectedLesson(LessonEntity selectedLesson)
+        public void StartSelectedLesson(ILessonEntity selectedLesson)
         {
             if (_lessonView.PlantView.LoadedSimulationNode != null)
             {

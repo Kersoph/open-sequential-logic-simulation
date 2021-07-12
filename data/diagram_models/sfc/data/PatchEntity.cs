@@ -46,7 +46,7 @@ namespace Osls.SfcEditor
         
         /// <summary>
         /// The raw condition text when the transition should fire.
-        /// It is interpreted and formed to a logical model (Can be invaild).
+        /// It is interpreted and formed to a logical model (Can be invalid).
         /// </summary>
         public string TransitionText { get; set; }
         

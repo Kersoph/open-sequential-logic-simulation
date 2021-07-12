@@ -18,7 +18,7 @@ namespace Osls.Core
         /// <summary>
         /// Updates the BBCode description of the lesson entity.
         /// </summary>
-        public void UpdateLessonEntity(LessonEntity lessonEntity)
+        public void UpdateLessonEntity(ILessonEntity lessonEntity)
         {
             StringBuilder builder = new StringBuilder(100);
             builder.AppendLine("[center][b][u]Lesson Description[/u][/b][/center]");

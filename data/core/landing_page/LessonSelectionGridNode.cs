@@ -10,6 +10,7 @@ namespace Osls.LandingPage
     public class LessonSelectionGridNode : GridContainer
     {
         #region ==================== Fields ====================
+        [Export] private NodePath LessonsNodePath = "../../../..";
         [Export] private PackedScene _lessonControllerScene;
         private LessonControllerNode[] _lessonNodes;
         #endregion
@@ -20,7 +21,7 @@ namespace Osls.LandingPage
         {
             try
             {
-                LessonEntity[] lessons = LessonCollector.LoadLessons();
+                ILessonEntity[] lessons = LessonCollector.LoadLessons();
                 CreateButtons(lessons);
             }
             catch (System.Exception e)
@@ -41,7 +42,7 @@ namespace Osls.LandingPage
         /// </summary>
         public void SelectionChangedTo(LessonControllerNode node)
         {
-            LessonsNode lessonsNode = GetNode<LessonsNode>("../../..");
+            LessonsNode lessonsNode = GetNode<LessonsNode>(LessonsNodePath);
             lessonsNode.SelectionChangedTo(node.LessonEntity);
         }
         
@@ -50,14 +51,14 @@ namespace Osls.LandingPage
         /// </summary>
         public void StartSelectedLesson(LessonControllerNode node)
         {
-            LessonsNode lessonsNode = GetNode<LessonsNode>("../../..");
+            LessonsNode lessonsNode = GetNode<LessonsNode>(LessonsNodePath);
             lessonsNode.StartSelectedLesson(node.LessonEntity);
         }
         #endregion
         
         
         #region ==================== Helpers ====================
-        private void CreateButtons(LessonEntity[] lessons)
+        private void CreateButtons(ILessonEntity[] lessons)
         {
             _lessonNodes = new LessonControllerNode[lessons.Length];
             for (int i = 0; i < lessons.Length; i++)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/Sfc2dControls.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/core/theme/nodes/HscRelative.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/Sfc2dEditor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/SfcSimulationViewer.cs" type="Script" id=5]
 [ext_resource path="res://data/core/lesson/viewer/LessonView.tscn" type="PackedScene" id=6]
@@ -8,21 +9,26 @@
 [node name="SfcSimulationViewer" type="Node"]
 script = ExtResource( 5 )
 
-[node name="LessonView" parent="." instance=ExtResource( 6 )]
+[node name="HscRelative" parent="." instance=ExtResource( 2 )]
 
-[node name="Sfc2dViewer" type="ColorRect" parent="."]
+[node name="Sfc2dViewer" type="Control" parent="HscRelative"]
+margin_right = 1320.0
+margin_bottom = 1016.0
+
+[node name="ColorRect" type="ColorRect" parent="HscRelative/Sfc2dViewer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 80.0
-margin_top = 1.0
-margin_right = -513.0
-rect_clip_content = true
+margin_right = 7.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Sfc2dEditor" parent="Sfc2dViewer" instance=ExtResource( 3 )]
+[node name="Sfc2dEditor" parent="HscRelative/Sfc2dViewer" instance=ExtResource( 3 )]
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
-[node name="MouseFilter" type="ColorRect" parent="Sfc2dViewer"]
+[node name="MouseFilter" type="ColorRect" parent="HscRelative/Sfc2dViewer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_default_cursor_shape = 8
@@ -31,18 +37,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sfc2dControls" parent="Sfc2dViewer" instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_bottom = 0.0
-margin_left = 1.0
-margin_top = -1.0
-margin_right = 1.0
-margin_bottom = -1.0
+[node name="Sfc2dControls" parent="HscRelative/Sfc2dViewer" instance=ExtResource( 1 )]
+margin_left = -140.0
+margin_right = 7.0
 mouse_default_cursor_shape = 8
 
-[node name="ErrorLabel" type="Label" parent="Sfc2dViewer"]
+[node name="ErrorLabel" type="Label" parent="HscRelative/Sfc2dViewer"]
 visible = false
 margin_right = 40.0
 margin_bottom = 38.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "SFC contains errors!"
+
+[node name="LessonView" parent="HscRelative" instance=ExtResource( 6 )]
+anchor_left = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1328.0
+margin_right = 1840.0
+margin_bottom = 1016.0

@@ -5,7 +5,7 @@ namespace Osls.SfcSimulation.EditorControls
 {
     public class EditorResetController : Button
     {
-        #region ==================== Fields / Properties ====================
+        #region ==================== Public Methods ====================
         public override void _Ready()
         {
             Connect("button_up", this, nameof(ButtonUpEvent));

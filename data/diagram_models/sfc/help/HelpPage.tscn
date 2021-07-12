@@ -1,0 +1,221 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=1]
+[ext_resource path="res://data/diagram_models/sfc/help/source/Times.png" type="Texture" id=2]
+[ext_resource path="res://data/core/landing_page/RichTextLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/diagram_models/sfc/help/source/ST.png" type="Texture" id=4]
+[ext_resource path="res://data/diagram_models/sfc/help/source/OR.png" type="Texture" id=5]
+[ext_resource path="res://data/diagram_models/sfc/help/source/AND.png" type="Texture" id=6]
+[ext_resource path="res://data/diagram_models/sfc/help/HelpPage.cs" type="Script" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+
+[node name="HelpPage" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 1575.0
+margin_bottom = 1945.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="Spacer" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_right = 1575.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 600, 10 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Step" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 1575.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 600, 350 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Step"]
+anchor_bottom = 1.0
+margin_right = 370.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/Step" instance=ExtResource( 3 )]
+margin_left = 380.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+bbcode_text = "[b]SFC Step Composition[/b]
+[b]Step:[/b] Can be a starting step (double lined rectangle) or a regular step (single line rectangle)
+--> Instead of a step there can be a connection line (skip) or a jump (jumping to the given step name)
+[b]Actions:[/b] Consists of a ST instruction and a modifier (selectable in the drop down menu)
+--> Modifier: P+ is executed when the step is joined, P when the step is active, P- when the step is left.
+[b]Transition:[/b] Fires the transition if the ST instruction is true.
+[b]Connections:[/b] Connects steps in an exclusive or simultaneous way."
+text = "SFC Step Composition
+Step: Can be a starting step (double lined rectangle) or a regular step (single line rectangle)
+--> Instead of a step there can be a connection line (skip) or a jump (jumping to the given step name)
+Actions: Consists of a ST instruction and a modifier (selectable in the drop down menu)
+--> Modifier: P+ is executed when the step is joined, P when the step is active, P- when the step is left.
+Transition: Fires the transition if the ST instruction is true.
+Connections: Connects steps in an exclusive or simultaneous way."
+
+[node name="ST" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 380.0
+margin_right = 1575.0
+margin_bottom = 780.0
+rect_min_size = Vector2( 600, 400 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/ST"]
+anchor_bottom = 1.0
+margin_right = 370.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/ST" instance=ExtResource( 3 )]
+margin_left = 380.0
+margin_top = 0.0
+margin_right = -2.0
+margin_bottom = 0.0
+bbcode_text = "[b]ST Action or Transition Instruction[/b]
+[b]Logical conjunction:[/b] [b]AND[/b] (And, and, &&, &) of the previous and the next Boolean element
+[b]Logical disjunction:[/b] [b]OR[/b] (Or, or, ||, |) of the previous and the next Boolean element
+[b]Negation:[/b] [b]NOT[/b] (Not, not, !) of the next Boolean element
+[b]Grouping:[/b] [b]( )[/b] of the statements in between of the round brackets
+[b]Relational Operation:[/b] [b]>[/b] (bigger as) [b]<[/b] (smaller as) [b]>=[/b] (bigger or equal as) [b]<=[/b] (smaller or equal as) [b]=[/b] (==) (is equal to) of the previous and the next numeric element. The result of this operation is a Boolean.
+[b]Constants:[/b] [b]TRUE[/b] (True, true), [b]FALSE[/b] (False, false), any integer number
+[b]Inputs:[/b] Use the same as in the [b]input table[/b], [b]STEP.Q[/b] returns the step state, [b]STEP.T[/b] returns time in Ms the step is active
+[b]Outputs:[/b] Use the same as in the [b]output table[/b]"
+text = "ST Action or Transition Instruction
+Logical conjunction: AND (And, and, &&, &) of the previous and the next Boolean element
+Logical disjunction: OR (Or, or, ||, |) of the previous and the next Boolean element
+Negation: NOT (Not, not, !) of the next Boolean element
+Grouping: ( ) of the statements in between of the round brackets
+Relational Operation: > (bigger as) < (smaller as) >= (bigger or equal as) <= (smaller or equal as) = (==) (is equal to) of the previous and the next numeric element. The result of this operation is a Boolean.
+Constants: TRUE (True, true), FALSE (False, false), any integer number
+Inputs: Use the same as in the input table, STEP.Q returns the step state, STEP.T returns time in Ms the step is active
+Outputs: Use the same as in the output table"
+
+[node name="Choice" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 790.0
+margin_right = 1575.0
+margin_bottom = 1390.0
+rect_min_size = Vector2( 700, 600 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Choice"]
+anchor_bottom = 1.0
+margin_right = 370.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/Choice" instance=ExtResource( 3 )]
+margin_left = 560.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+bbcode_text = "[b]SFC Choice / Exclusive Path[/b]
+A connection with a [b]single line[/b] to two or more transitions states a choice.
+Only one transition can fire if the previous step is active to a connected step.
+If they are not logically exclusive and both transitions get active at the same time only one is selected at random.
+
+In the right example: If S1 is active and the input of the sensor B100 is true while B101 is false, S1 will get inactive and S2 active in the next update.
+
+[b]No Search For Stability[/b]: If S1 is active and B100 and B101 are true, either S2 or S3 will get active and S1 inactive in the next update. In the follow up update the next transition fires if B100 and B101 are still true which will activate S4."
+text = "SFC Choice / Exclusive Path
+A connection with a single line to two or more transitions states a choice.
+Only one transition can fire if the previous step is active to a connected step.
+If they are not logically exclusive and both transitions get active at the same time only one is selected at random.
+
+In the right example: If S1 is active and the input of the sensor B100 is true while B101 is false, S1 will get inactive and S2 active in the next update.
+
+No Search For Stability: If S1 is active and B100 and B101 are true, either S2 or S3 will get active and S1 inactive in the next update. In the follow up update the next transition fires if B100 and B101 are still true which will activate S4."
+
+[node name="Parallel" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 1400.0
+margin_right = 1575.0
+margin_bottom = 1945.0
+rect_min_size = Vector2( 700, 545 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Parallel"]
+anchor_bottom = 1.0
+margin_right = 370.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer/Parallel" instance=ExtResource( 3 )]
+margin_left = 560.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+bbcode_text = "[b]SFC Parallel Operation / Simultaneous Path[/b]
+A connection with a double line to two or more transitions states the start or end of a parallel operation.
+Start: If the transition fires all connected steps will get active
+End: All connected steps and transition need to be active to fire
+"
+text = "SFC Parallel Operation / Simultaneous Path
+A connection with a double line to two or more transitions states the start or end of a parallel operation.
+Start: If the transition fires all connected steps will get active
+End: All connected steps and transition need to be active to fire
+"
+
+[node name="CloseHint" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -269.0
+margin_right = -15.0
+margin_bottom = 24.0
+custom_styles/normal = SubResource( 1 )
+custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+text = "Press ESC to close this view"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

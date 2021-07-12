@@ -75,6 +75,7 @@ namespace Osls.Plants.RoadConstructionSite
                 if (referencePath.SpawnPossible())
                 {
                     DynamicCar car = (DynamicCar)((PackedScene)GD.Load(CarReference)).Instance();
+                    car.Initialise();
                     referencePath.AddChildAndStart(car);
                     _activeCars.Add(car);
                 }

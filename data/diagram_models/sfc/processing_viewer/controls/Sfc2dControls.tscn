@@ -7,8 +7,11 @@
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/EditorResetController.cs" type="Script" id=5]
 
 [node name="Sfc2dControls" type="Control"]
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = -147.0
+margin_bottom = 39.0
+rect_clip_content = true
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -17,8 +20,10 @@ __meta__ = {
 [node name="EditorZoomOut" parent="." instance=ExtResource( 1 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -40.0
-margin_right = 0.0
+margin_left = -39.0
+margin_top = -1.0
+margin_right = 1.0
+margin_bottom = 39.0
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "-"
@@ -27,8 +32,10 @@ script = ExtResource( 2 )
 [node name="EditorZoomIn" parent="." instance=ExtResource( 1 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -79.0
-margin_right = -39.0
+margin_left = -78.0
+margin_top = -1.0
+margin_right = -38.0
+margin_bottom = 39.0
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false
 text = "+"
@@ -37,8 +44,10 @@ script = ExtResource( 3 )
 [node name="EditorResetController" parent="." instance=ExtResource( 1 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -148.0
-margin_right = -78.0
+margin_left = -147.0
+margin_top = -1.0
+margin_right = -77.0
+margin_bottom = 39.0
 hint_tooltip = "Resets the controller. Similar to when there is a blackout."
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 toggle_mode = false

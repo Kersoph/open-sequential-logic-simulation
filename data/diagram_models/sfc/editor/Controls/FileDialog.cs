@@ -42,15 +42,15 @@ namespace Osls.SfcEditor
         #region ==================== Helpers ====================
         private void OnFileSelected(string path)
         {
-            LessonEntity entity = Controller.SfcEditorNode.OpenedLesson;
+            ILessonEntity entity = Controller.SfcEditorNode.OpenedLesson;
             entity.CustomDiagramFilePath = ProjectSettings.GlobalizePath(path);
             if (Mode == ModeEnum.SaveFile)
             {
-                Controller.SfcEditorNode.SaveDiagram();
+                Controller.SaveDiagram();
             }
             else
             {
-                Controller.SfcEditorNode.TryLoadDiagram();
+                Controller.LoadDiagram();
             }
             Hide();
         }

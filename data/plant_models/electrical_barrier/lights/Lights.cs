@@ -36,6 +36,14 @@ namespace Osls.Plants.ElectricalBarrier
         
         #region ==================== Public Methods ====================
         /// <summary>
+        /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
+        /// </summary>
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
+        {
+            Subcontroller.Initialise();
+        }
+        
+        /// <summary>
         /// Called when the user can have options to influence the simulation.
         /// Normally called by the by the simulation UI
         /// </summary>

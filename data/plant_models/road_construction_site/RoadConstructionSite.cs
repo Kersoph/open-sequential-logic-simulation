@@ -20,7 +20,10 @@ namespace Osls.Plants.RoadConstructionSite
         
         
         #region ==================== Public Methods ====================
-        public override void _Ready()
+        /// <summary>
+        /// Initializes the whole page. Called before the node is added to the tree by the lesson controller.
+        /// </summary>
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _topTrafficLight = GetNode<TrafficControlSystem>("Signalisation/TrafficControlSystemTop");
             _topTrafficLight.SetToGreen(SimulationInput.PollBoolean(_topTrafficLightKey));
@@ -48,6 +51,7 @@ namespace Osls.Plants.RoadConstructionSite
         /// </summary>
         public override void SetupUi()
         {
+            GetNode<UI>("UI").Setup();
         }
         #endregion
         

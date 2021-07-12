@@ -12,7 +12,7 @@ namespace Osls.Plants.ElectricalBarrier
         #region ==================== Fields / Properties ====================
         private enum Stages { Regular, TurnOffTime, CreateResult, DisplayResults };
         private Stages _stage = Stages.Regular;
-        private LessonEntity _openedLesson;
+        private ILessonEntity _openedLesson;
         
         private bool _isExecutable;
         private Master _simulationMaster;
@@ -30,7 +30,7 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Initializes the whole test viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
             string filepath = _openedLesson.TemporaryDiagramFilePath;
@@ -39,6 +39,7 @@ namespace Osls.Plants.ElectricalBarrier
             _simulation = GetNode<Lights>("Lights");
             if (sfcEntity != null)
             {
+                _simulation.InitialiseWith(mainNode, openedLesson);
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }
@@ -46,11 +47,14 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 _isExecutable = false;
             }
+            if (!_isExecutable)
+            {
+                _stage = Stages.CreateResult;
+            }
         }
         
         public override void _Process(float delta)
         {
-            if (!_isExecutable) return;
             switch (_stage)
             {
                 case Stages.Regular:
@@ -105,7 +109,7 @@ namespace Osls.Plants.ElectricalBarrier
             }
             else if ((_turnOffTime > 20000 && _turnOffTime < 29000) || _turnOffTime > 31000 || _turnOffTimout > 40000)
             {
-                if (!_simulation.SimulationInput.PollBoolean(Lights.LightsKey))
+                if (!_simulation.SimulationInput.PollBoolean(Lights.LightsKey) || _turnOffTimout > 40000)
                 {
                     if (_turnOffTime > 28000 && _turnOffTime < 32000) _turnOffClose = true;
                     CreateResult();
@@ -145,6 +149,10 @@ namespace Osls.Plants.ElectricalBarrier
                 result.Append("\nOn behalf of the whole Secret Bases GmbH, we would like to thank you for your excellent work at EX02.\n");
                 if (_turnOffClose) result.Append("Just our guard reports a slightly incorrect turning off time of the lamps.\n");
                 result.Append("We are looking forward to work together in our next project.\n");
+            }
+            else if (!_isExecutable)
+            {
+                result.Append("I was told we can test the installation at EX02 today [b]but nothing seems to work[/b]. The red ERROR-LED on the controller is on.\n\nI hope you can have a look soon and solve the problem.\n");
             }
             else
             {

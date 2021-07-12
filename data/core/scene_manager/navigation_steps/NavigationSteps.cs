@@ -10,7 +10,7 @@ namespace Osls.Navigation
     public class NavigationSteps : Node
     {
         #region ==================== Fields ====================
-        private MainNode _mainNode;
+        private IMainNode _mainNode;
         private Button _landingPageButton;
         private Button _sfcStepButton;
         private Button _simulationStepButton;

@@ -22,6 +22,7 @@ namespace Osls.SfcEditor
             _controller = controller;
             _actionDescriptionNode = GetNode<TextEdit>("ActionTextEditor");
             _actionDescriptionNode.Connect("focus_exited", this, nameof(OnTextEditorFocusExited));
+            _actionDescriptionNode.Connect("text_changed", this, nameof(OnActionTextChanged));
             _qualifierNode = GetNode<MenuButton>("ActionQualifierSelector");
             ConfigureQualifierPopupMenu();
             ActionMaster.UpdateColorKeys(_actionDescriptionNode, data);
@@ -73,6 +74,22 @@ namespace Osls.SfcEditor
         {
             CheckRelevancy();
             if (_isRelevant) _controller.UserChangedData(this, _selectedQualifier, _actionDescriptionNode.Text);
+        }
+        
+        /// <summary>
+        /// Called if the string in the text editor changed.
+        /// If a newline is added (enter pressed) we want to loose focus to push the changes.
+        /// </summary>
+        private void OnActionTextChanged()
+        {
+            string currentText = _actionDescriptionNode.Text;
+            int escapePosition = currentText.IndexOf('\n');
+            if (escapePosition >= 0)
+            {
+                string subtext = currentText.Remove(escapePosition, 1);
+                _actionDescriptionNode.Text = subtext;
+                _actionDescriptionNode.ReleaseFocus();
+            }
         }
         
         private void OnPopupElementSelected(int id)

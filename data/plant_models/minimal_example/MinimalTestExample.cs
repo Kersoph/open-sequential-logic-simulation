@@ -19,13 +19,14 @@ namespace Osls.Plants.MinimalExample
         /// <summary>
         /// Initializes the whole twat viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public override void InitialiseWith(MainNode mainNode, LessonEntity openedLesson)
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _simulation = GetNode<MinimalSimulationExample>("MinimalSimulationExample");
             string filepath = openedLesson.TemporaryDiagramFilePath;
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             if (sfcEntity != null)
             {
+                _simulation.InitialiseWith(mainNode, openedLesson);
                 _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }

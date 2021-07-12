@@ -11,7 +11,7 @@ namespace Osls.LandingPage
     {
         #region ==================== Fields / Properties ====================
         private const string MainViewPath = "..";
-        private MainNode _mainNode;
+        private IMainNode _mainNode;
         
         /// <summary>
         /// Gets the scene page type
@@ -30,7 +30,7 @@ namespace Osls.LandingPage
         /// The currently selected lesson will be told tho the main view to
         /// switch from the landing page to the SFC editor.
         /// </summary>
-        public void StartLesson(LessonEntity lesson)
+        public void StartLesson(ILessonEntity lesson)
         {
             _mainNode.OpenNewLesson(lesson);
         }

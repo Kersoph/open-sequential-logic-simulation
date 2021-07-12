@@ -13,7 +13,7 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields / Properties ====================
         private LessonView _lessonView;
-        private LessonEntity _openedLesson;
+        private ILessonEntity _openedLesson;
         private Master _simulationMaster;
         private bool _isExecutable;
         private Sfc2dEditorNode _sfc2dEditorNode;
@@ -31,13 +31,13 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Initializes the whole sfc editor
         /// </summary>
-        public override void InitialiseWith(MainNode _mainNode, LessonEntity openedLesson)
+        public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
             _processingData = InitialisePlant();
             InitialiseDiagram();
-            InitialiseSimulation();
-            if (!_isExecutable) GetNode<Label>("Sfc2dViewer/ErrorLabel").Visible = true;
+            InitialiseSimulation(mainNode, openedLesson);
+            if (!_isExecutable) GetNode<Label>("HscRelative/Sfc2dViewer/ErrorLabel").Visible = true;
         }
         
         public override void _Process(float delta)
@@ -68,7 +68,7 @@ namespace Osls.SfcEditor
         /// </summary>
         private ProcessingData InitialisePlant()
         {
-            _lessonView = GetNode<LessonView>("LessonView");
+            _lessonView = GetNode<LessonView>("HscRelative/LessonView");
             _lessonView.LoadAndShowInfo(_openedLesson);
             _loadedSimulationNode = _lessonView.PlantView.LoadedSimulationNode;
             ProcessingData data = new ProcessingData();
@@ -82,7 +82,7 @@ namespace Osls.SfcEditor
         /// </summary>
         private void InitialiseDiagram()
         {
-            _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("Sfc2dViewer/Sfc2dEditor");
+            _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("HscRelative/Sfc2dViewer/Sfc2dEditor");
             _sfc2dEditorNode.InitializeEditor(_processingData);
             string filepath = _openedLesson.TemporaryDiagramFilePath;
             _sfc2dEditorNode.TryLoadDiagram(filepath);
@@ -91,8 +91,9 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Loads the simulation node and creates a simulation master
         /// </summary>
-        private void InitialiseSimulation()
+        private void InitialiseSimulation(IMainNode mainNode, ILessonEntity openedLesson)
         {
+            _loadedSimulationNode.InitialiseWith(mainNode, openedLesson);
             _simulationMaster = new Master(_processingData.SfcEntity, _loadedSimulationNode);
             _loadedSimulationNode.SetupUi();
             _isExecutable = _simulationMaster.IsProgramSimulationValid();

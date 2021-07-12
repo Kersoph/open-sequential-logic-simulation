@@ -11,7 +11,10 @@ namespace Osls.Plants.ElectricalBarrier
         
         
         #region ==================== Public Methods ====================
-        public override void _Ready()
+        /// <summary>
+        /// Initializes the controller.
+        /// </summary>
+        public void Initialise()
         {
             _simulation = GetNode<ElectricalBarrier>("../ElectricalBarrier");
         }

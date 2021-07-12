@@ -35,18 +35,14 @@ __meta__ = {
 
 [node name="PlantViewport" type="Viewport" parent="PlantView"]
 size = Vector2( 512, 384 )
-transparent_bg = true
 handle_input_locally = false
-msaa = 1
+msaa = 2
 render_target_update_mode = 3
 shadow_atlas_size = 1024
 
 [node name="LessonInfo" type="ColorRect" parent="."]
-anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = 1.0
 margin_bottom = -178.5
 grow_horizontal = 0
 grow_vertical = 0
@@ -56,8 +52,10 @@ __meta__ = {
 }
 
 [node name="LessonInfoLabel" parent="LessonInfo" instance=ExtResource( 7 )]
-margin_top = 8.052
-margin_bottom = -11.948
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
 
 [node name="ColorRect" type="ColorRect" parent="LessonInfo"]
 anchor_top = 1.0

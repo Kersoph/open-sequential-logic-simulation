@@ -25,6 +25,11 @@ namespace Osls.SfcEditor
         /// The connected node controlled by this class
         /// </summary>
         public SfcPatchNode SfcPatchNode { get; private set; }
+        
+        /// <summary>
+        /// Contains metadata to visualise the SFC
+        /// </summary>
+        public SfcPatchMeta SfcPatchMeta { get; private set; }
         #endregion
         
         
@@ -36,6 +41,7 @@ namespace Osls.SfcEditor
         {
             Data = data;
             Master = control;
+            SfcPatchMeta = new SfcPatchMeta();
             Node node = ((PackedScene)GD.Load(_patchReferencePath)).Instance();
             SfcPatchNode = (SfcPatchNode)node;
             SfcPatchNode.InitializeWith(this, data);
@@ -47,6 +53,7 @@ namespace Osls.SfcEditor
         /// </summary>
         public void UpdatePatchNodes()
         {
+            SfcPatchMeta.UpdatePatch(this);
             SfcPatchNode.UpdateNodes(Data);
         }
         
@@ -71,6 +78,7 @@ namespace Osls.SfcEditor
             if (Data.UpperBranch == BranchType.Unused)
             {
                 Data.UpperBranch = BranchType.Single;
+                Master.UpdateGrid();
             }
             else if (Data.UpperBranch == BranchType.Single)
             {
@@ -92,6 +100,7 @@ namespace Osls.SfcEditor
             if (Data.LowerBranch == BranchType.Unused)
             {
                 Data.LowerBranch = BranchType.Single;
+                Master.UpdateGrid();
             }
             else if (Data.LowerBranch == BranchType.Single)
             {
@@ -112,6 +121,7 @@ namespace Osls.SfcEditor
         {
             Data.TransitionText = transitionText;
             UpdatePatchNodes();
+            Master.UpdateGrid();
         }
         
         /// <summary>

@@ -21,7 +21,7 @@ namespace Osls.SfcEditor.Controls
         
         public void OnButtonPressed()
         {
-            GetNode<SfcEditorNode>("../../..").Sfc2dEditorNode.ZoomIn();
+            GetNode<EditorControls>("..").SfcEditorNode.Sfc2dEditorNode.ZoomIn();
         }
         #endregion
     }

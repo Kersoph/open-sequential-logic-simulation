@@ -14,7 +14,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// </summary>
         public static List<SfcTransition> CollectTransitionSources(SfcStep source, ProgrammableLogicController pu)
         {
-            List<SfcTransition> alternativeBranches = CollectUpperAlternativeBranches(source, pu);
+            List<SfcTransition> alternativeBranches = CollectUpperAlternativeBranches(source, source.Id, pu);
             List<SfcTransition> SimultaneousMerge = CollectUpperSimultaneousMerge(source, pu);
             if (alternativeBranches.Count > 1)
             {
@@ -39,10 +39,10 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// Collects all alternative branches from this step.
         /// If it returns only one transition is not an alternative branch but a normal transition.
         /// </summary>
-        private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, ProgrammableLogicController pu)
+        private static List<SfcTransition> CollectUpperAlternativeBranches(SfcStep source, int patchId, ProgrammableLogicController pu)
         {
             List<SfcTransition> transitions = new List<SfcTransition>();
-            List<int> collected = Collector.CollectHorizontal(source.Id, pu.SfcProgramData, BranchType.Single, true);
+            List<int> collected = Collector.CollectHorizontal(patchId, pu.SfcProgramData, BranchType.Single, true);
             foreach (int step in collected)
             {
                 if (pu.SfcProgramData.SfcEntity.Lookup(step).ContainsTransition())
@@ -50,6 +50,14 @@ namespace Osls.SfcSimulation.Engine.Builder
                     SfcTransition transition = CreateTransition(step, pu);
                     transition.DependingSteps.Add(source);
                     transitions.Add(transition);
+                }
+                else
+                {
+                    int lowerStepId = step + 1;
+                    if (pu.SfcProgramData.SfcEntity.Lookup(lowerStepId).SfcStepType == StepType.Pass)
+                    {
+                        transitions.AddRange(CollectUpperAlternativeBranches(source, lowerStepId, pu));
+                    }
                 }
             }
             return transitions;

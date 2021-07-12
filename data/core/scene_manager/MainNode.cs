@@ -8,7 +8,7 @@ namespace Osls
     /// Top node connected to the main tree. It will be rendered to the main window.
     /// Handles the visibility and layers of the modules.
     /// </summary>
-    public class MainNode : Node
+    public class MainNode : Node, IMainNode
     {
         #region ==================== Fields ====================
         private LessonController _lessonController;
@@ -36,7 +36,7 @@ namespace Osls
         /// <summary>
         /// Opens up a new lesson and changes the view to the editor step.
         /// </summary>
-        public void OpenNewLesson(LessonEntity lessonData)
+        public void OpenNewLesson(ILessonEntity lessonData)
         {
             _lessonController.ApplyNewLesson(lessonData);
             _navigationSteps.VisibleViewIs(PageCategory.LogicEditor);
