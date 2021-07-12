@@ -2,7 +2,7 @@ using Godot;
 using Osls.SfcEditor;
 
 
-namespace Osls.SfcSimulation.EditorControls
+namespace Osls.SfcSimulation.Viewer
 {
     public class Sfc2dControls : Control
     {

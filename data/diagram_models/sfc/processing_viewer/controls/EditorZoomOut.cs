@@ -1,7 +1,7 @@
 using Godot;
 
 
-namespace Osls.SfcSimulation.EditorControls
+namespace Osls.SfcSimulation.Viewer
 {
     public class EditorZoomOut : Button
     {

@@ -1,8 +1,9 @@
 using Osls.SfcSimulation.Engine;
 using Osls.Plants;
+using Osls.SfcEditor;
 
 
-namespace Osls.SfcEditor
+namespace Osls.SfcSimulation.Viewer
 {
     /// <summary>
     /// The simulation engine master which controls and updates the plant and the PLC.

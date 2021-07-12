@@ -1,9 +1,10 @@
 using Godot;
 using Osls.Plants;
 using Osls.Core;
+using Osls.SfcEditor;
 
 
-namespace Osls.SfcEditor
+namespace Osls.SfcSimulation.Viewer
 {
     /// <summary>
     /// Top node for the whole sfc simulation view.

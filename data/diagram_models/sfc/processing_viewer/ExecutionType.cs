@@ -1,4 +1,4 @@
-namespace Osls.SfcEditor
+namespace Osls.SfcSimulation.Viewer
 {
     public enum ExecutionType
     {
