@@ -21,13 +21,14 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called only once when the node is created by the patch control.
         /// </summary>
-        public void InitializeWith(SfcPatchControl sfcPatchControl, PatchEntity data)
+        public void InitializeWith(SfcPatchControl sfcPatchControl, PatchEntity data, bool setMouseFilter)
         {
             SfcPatchControl = sfcPatchControl;
             SetCellPosition(data.X, data.Y);
             GetNode<SfcTransitionNode>("SfcTransition").Initialise();
             Connect("mouse_entered", this, nameof(OnMouseEntered));
             Connect("mouse_exited", this, nameof(OnMouseExited));
+            GetNode<Control>("MouseFilterEdit").Visible = setMouseFilter;
         }
         
         /// <summary>
@@ -60,6 +61,14 @@ namespace Osls.SfcEditor
         public void MarkStep(bool setMark)
         {
             GetNode<SfcStepNode>("SfcStepNode").MarkStep(setMark);
+        }
+        
+        /// <summary>
+        /// Adds the node as an overlay. Below the mouse filter.
+        /// </summary>
+        public void OverlayWith(Node overlay)
+        {
+            AddChild(overlay);
         }
         #endregion
         

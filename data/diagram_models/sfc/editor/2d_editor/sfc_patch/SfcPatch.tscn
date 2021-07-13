@@ -73,3 +73,25 @@ margin_left = -10.0
 margin_top = 14.0
 margin_bottom = 16.0
 color = Color( 0.705882, 0.705882, 0.705882, 1 )
+
+[node name="MouseFilterEdit" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+mouse_default_cursor_shape = 8
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LineFilter" type="Control" parent="MouseFilterEdit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 70.0
+margin_right = 75.0
+mouse_filter = 1
+mouse_default_cursor_shape = 8
+__meta__ = {
+"_edit_lock_": true
+}

@@ -1,6 +1,7 @@
 using Osls.SfcSimulation.Engine;
 using Osls.Plants;
 using Osls.SfcEditor;
+using System.Collections.Generic;
 
 
 namespace Osls.SfcSimulation.Viewer
@@ -65,6 +66,23 @@ namespace Osls.SfcSimulation.Viewer
         public bool IsProgramSimulationValid()
         {
             return Plc.IsLogicValid();
+        }
+        
+        /// <summary>
+        /// Returns true if at least one SFC soon active step is marked from the given set.
+        /// Can be called between updates to know which steps will be active.
+        /// </summary>
+        public bool HasSoonActiveSteps(HashSet<int> checkSet)
+        {
+            foreach (int entry in checkSet)
+            {
+                if (Plc.SfcProgramData.ControlMap.ContainsKey(entry)
+                && Plc.SfcProgramData.SoonActiveSteps.Contains(Plc.SfcProgramData.ControlMap[entry]))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         
         /// <summary>

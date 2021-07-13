@@ -19,6 +19,11 @@ namespace Osls.SfcSimulation.Viewer
         /// Gets the simulation viewer
         /// </summary>
         public SfcSimulationViewer SfcSimulationViewer { get { return GetNode<SfcSimulationViewer>(_sfcSimulationViewerPath); } }
+        
+        /// <summary>
+        /// Gets the sfc execution control node
+        /// </summary>
+        public ExecutionControl ExecutionControl { get { return GetNode<ExecutionControl>("ExecutionControl"); } }
         #endregion
     }
 }

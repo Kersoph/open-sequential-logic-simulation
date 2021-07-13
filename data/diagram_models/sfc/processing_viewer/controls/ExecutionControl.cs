@@ -24,6 +24,21 @@ namespace Osls.SfcSimulation.Viewer
                 OnButtonPressed();
             }
         }
+        
+        /// <summary>
+        /// Applies the texture according to targetExecution
+        /// </summary>
+        public void UpdateTextureTo(ExecutionType targetExecution)
+        {
+            if (targetExecution == ExecutionType.RunContinuously)
+            {
+                GetNode<TextureRect>("Icon").Texture = _runContinuouslyTexture;
+            }
+            else
+            {
+                GetNode<TextureRect>("Icon").Texture = _pausedTexture;
+            }
+        }
         #endregion
         
         
@@ -33,13 +48,13 @@ namespace Osls.SfcSimulation.Viewer
             SfcSimulationViewer viewer = GetNode<Sfc2dControls>("..").SfcSimulationViewer;
             if (viewer.ExecutionType == ExecutionType.RunContinuously)
             {
+                UpdateTextureTo(ExecutionType.Paused);
                 viewer.ExecutionType = ExecutionType.Paused;
-                GetNode<TextureRect>("Icon").Texture = _pausedTexture;
             }
             else
             {
+                UpdateTextureTo(ExecutionType.RunContinuously);
                 viewer.ExecutionType = ExecutionType.RunContinuously;
-                GetNode<TextureRect>("Icon").Texture = _runContinuouslyTexture;
             }
         }
         #endregion

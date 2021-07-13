@@ -36,7 +36,7 @@ namespace Osls.SfcEditor
             ProcessingData data = new ProcessingData();
             data.InputRegisters = new StateTable(LessonView.PlantView.LoadedSimulationNode.SimulationOutput);
             data.OutputRegisters = new StateTable(LessonView.PlantView.LoadedSimulationNode.SimulationInput);
-            Sfc2dEditorNode.InitializeEditor(data);
+            Sfc2dEditorNode.InitializeEditor(data, true);
             TryLoadDiagram();
         }
         
