@@ -12,6 +12,12 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields Properties ====================
         private readonly Dictionary<int, SfcPatchControl> _controlMap = new Dictionary<int, SfcPatchControl>();
+        private bool _isEditable;
+        
+        /// <summary>
+        /// Returns the patch control map
+        /// </summary>
+        public IReadOnlyDictionary<int, SfcPatchControl> ControlMap { get { return _controlMap; } }
         
         /// <summary>
         /// Reference patch to hold the nodes
@@ -26,10 +32,11 @@ namespace Osls.SfcEditor
         
         
         #region ==================== Public ====================
-        public Sfc2dEditorControl(ReferenceRect referenceRect, ProcessingData data)
+        public Sfc2dEditorControl(ReferenceRect referenceRect, ProcessingData data, bool isEditable)
         {
             ReferenceRect = referenceRect;
             Data = data;
+            _isEditable = isEditable;
         }
         
         /// <summary>
@@ -111,7 +118,7 @@ namespace Osls.SfcEditor
             IReadOnlyCollection<PatchEntity> patches = Data.SfcEntity.Patches;
             foreach (PatchEntity entity in patches)
             {
-                SfcPatchControl control = new SfcPatchControl(entity, this);
+                SfcPatchControl control = new SfcPatchControl(entity, this, !_isEditable);
                 _controlMap.Add(entity.Key, control);
             }
             UpdateGrid();
@@ -122,13 +129,16 @@ namespace Osls.SfcEditor
         /// </summary>
         private void UpdateLogicalModel()
         {
-            // We want a copy because we will add empty forward patches to the dict
-            PatchEntity[] patches = Data.SfcEntity.Patches.ToArray();
-            foreach (PatchEntity patch in patches)
+            if (_isEditable)
             {
-                if (patch.ContainsRelevantData())
+                // We want a copy because we will add empty forward patches to the dict
+                PatchEntity[] patches = Data.SfcEntity.Patches.ToArray();
+                foreach (PatchEntity patch in patches)
                 {
-                    EnsureNeighbours(patch);
+                    if (patch.ContainsRelevantData())
+                    {
+                        EnsureNeighbours(patch);
+                    }
                 }
             }
             Data.StepMaster.UpdateStepNames(Data.SfcEntity);
@@ -155,7 +165,7 @@ namespace Osls.SfcEditor
             {
                 Data.SfcEntity.CreatePatchAt((short)x, (short)y);
                 patch = Data.SfcEntity.Lookup(x, y);
-                SfcPatchControl control = new SfcPatchControl(patch, this);
+                SfcPatchControl control = new SfcPatchControl(patch, this, _isEditable);
                 _controlMap.Add(patch.Key, control);
             }
         }

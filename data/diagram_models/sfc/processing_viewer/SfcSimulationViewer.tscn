@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/Sfc2dControls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/core/theme/nodes/HscRelative.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/Sfc2dEditor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/diagram_models/sfc/processing_viewer/MouseFilter.cs" type="Script" id=4]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/SfcSimulationViewer.cs" type="Script" id=5]
 [ext_resource path="res://data/core/lesson/viewer/LessonView.tscn" type="PackedScene" id=6]
 
@@ -28,16 +27,6 @@ __meta__ = {
 [node name="Sfc2dEditor" parent="HscRelative/Sfc2dViewer" instance=ExtResource( 3 )]
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
-
-[node name="MouseFilter" type="ColorRect" parent="HscRelative/Sfc2dViewer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_default_cursor_shape = 8
-color = Color( 1, 1, 1, 0 )
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sfc2dControls" parent="HscRelative/Sfc2dViewer" instance=ExtResource( 1 )]
 margin_left = -218.0
