@@ -165,7 +165,7 @@ namespace Osls.SfcEditor
             {
                 Data.SfcEntity.CreatePatchAt((short)x, (short)y);
                 patch = Data.SfcEntity.Lookup(x, y);
-                SfcPatchControl control = new SfcPatchControl(patch, this, _isEditable);
+                SfcPatchControl control = new SfcPatchControl(patch, this, !_isEditable);
                 _controlMap.Add(patch.Key, control);
             }
         }
