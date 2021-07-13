@@ -94,11 +94,13 @@ namespace Osls.SfcSimulation.Viewer
         /// <summary>
         /// Loads the file and builds the SFC diagram
         /// </summary>
-        private void InitialiseDiagram(ILessonEntity openedLesson)        {
+        private void InitialiseDiagram(ILessonEntity openedLesson)
+        {
             _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("HscRelative/Sfc2dViewer/Sfc2dEditor");
             _sfc2dEditorNode.InitializeEditor(_processingData, false);
             string filepath = openedLesson.TemporaryDiagramFilePath;
-            _sfc2dEditorNode.TryLoadDiagram(filepath);        }
+            _sfc2dEditorNode.TryLoadDiagram(filepath);
+        }
         
         /// <summary>
         /// Loads the simulation node and creates a simulation master

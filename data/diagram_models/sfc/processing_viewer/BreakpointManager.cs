@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Osls.SfcEditor;
 
 
-
 namespace Osls.SfcSimulation.Viewer
 {
     public class BreakpointManager

@@ -8,10 +8,10 @@ namespace Osls.SfcSimulation.Viewer
         #region ==================== Public Methods ====================
         public override void _Ready()
         {
-            Connect("pressed", this, nameof(OnPressed));
+            Connect("pressed", this, nameof(OnButtonPressed));
         }
         
-        public void OnPressed()
+        public void OnButtonPressed()
         {
             GetNode<Control>("../Help").Visible = true;
         }
