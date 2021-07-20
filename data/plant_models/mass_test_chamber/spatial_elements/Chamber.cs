@@ -65,7 +65,7 @@ namespace Osls.Plants.MassTestChamber
             }
             else
             {
-                _emitter.ShowAsOff();
+                _emitter.ShowAsOff(_emitterCart);
             }
             master.SimulationOutput.SetValue(MassTestChamber.EmitterFrontKey, _emitterCart.FrontPositionReached);
             master.SimulationOutput.SetValue(MassTestChamber.EmitterBackKey, _emitterCart.BackPositionReached);
@@ -91,8 +91,10 @@ namespace Osls.Plants.MassTestChamber
         private void UpdateCentralMass(MassTestChamber master, int deltaTime)
         {
             bool field = master.SimulationInput.PollBoolean(MassTestChamber.FieldGeneratorKey);
+            bool focusOn = master.SimulationInput.PollBoolean(MassTestChamber.FocusKey);
+            bool cagedParticles = field || focusOn;
             bool laserActive = master.SimulationInput.PollBoolean(MassTestChamber.LaserKey);
-            _central.ProcessState(_emitter.IsProvidingMass, field, _isDischarging, laserActive, deltaTime);
+            _central.ProcessState(_emitter.IsProvidingMass, cagedParticles, _isDischarging, laserActive, deltaTime);
             int measuredNoise = Mathf.RoundToInt(GD.Randf() * 16f - 8f);
             int measuredTemperature = _central.CentralTemperature + measuredNoise;
             master.SimulationOutput.SetValue(MassTestChamber.TemperatureSensorKey, measuredTemperature);
@@ -111,7 +113,7 @@ namespace Osls.Plants.MassTestChamber
             if (_isDischarging)
             {
                 _recordedDischargedTime += deltaTime;
-                if (!field || centralTemperature < TemperatureNeeded -100 || centralMass <= 0f)
+                if (!field || centralTemperature < TemperatureNeeded - 300 || centralMass <= 0f)
                 {
                     _isDischarging = false;
                 }

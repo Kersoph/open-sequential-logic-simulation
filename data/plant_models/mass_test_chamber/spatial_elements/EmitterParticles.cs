@@ -27,10 +27,11 @@ namespace Osls.Plants.MassTestChamber
         /// <summary>
         /// The particles will run out with TIME
         /// </summary>
-        public void ShowAsOff()
+        public void ShowAsOff(Cart cart)
         {
             if (Emitting) Emitting = false;
             IsProvidingMass = false;
+            ShowAsToFarAway(1f - cart.RailPosition);
         }
         
         /// <summary>
@@ -74,8 +75,7 @@ namespace Osls.Plants.MassTestChamber
         private void ShowAsCorrect()
         {
             _processMaterial.Spread = 20f;
-            _processMaterial.Gravity = new Vector3(0f, -5f, 0f);
-            _processMaterial.InitialVelocity = -13f;
+            _processMaterial.Gravity = new Vector3(-5f, 0f, 0f);
             _processMaterial.RadialAccel = -10f;
             _processMaterial.TangentialAccel = 0f;
             _processMaterial.Damping = 5f;
@@ -88,10 +88,9 @@ namespace Osls.Plants.MassTestChamber
         private void ShowAsToFarAway(float amount)
         {
             _processMaterial.Spread = 20f;
-            _processMaterial.Gravity = new Vector3(0f, -5f, 0f);
-            _processMaterial.InitialVelocity = -13f;
+            _processMaterial.Gravity = new Vector3(-5f, 0f, 0f);
             _processMaterial.RadialAccel = -10f;
-            _processMaterial.TangentialAccel = 5f * amount;
+            _processMaterial.TangentialAccel = 6f * amount;
             _processMaterial.Damping = 5f;
         }
         
@@ -100,9 +99,8 @@ namespace Osls.Plants.MassTestChamber
         /// </summary>
         private void ShowAsNoFocus()
         {
-            _processMaterial.Spread = 1f;
-            _processMaterial.Gravity = new Vector3(0f, 5.5f, 0f);
-            _processMaterial.InitialVelocity = -13f;
+            _processMaterial.Spread = 7f;
+            _processMaterial.Gravity = new Vector3(5.5f, 0f, 0f);
             _processMaterial.RadialAccel = 0f;
             _processMaterial.TangentialAccel = 0f;
             _processMaterial.Damping = 4f;
@@ -114,8 +112,7 @@ namespace Osls.Plants.MassTestChamber
         private void ShowAsInvalidField()
         {
             _processMaterial.Spread = 10f;
-            _processMaterial.Gravity = new Vector3(0f, 5f, 0f);
-            _processMaterial.InitialVelocity = -13f;
+            _processMaterial.Gravity = new Vector3(5f, 0f, 0f);
             _processMaterial.RadialAccel = 0f;
             _processMaterial.TangentialAccel = 0f;
             _processMaterial.Damping = 5f;

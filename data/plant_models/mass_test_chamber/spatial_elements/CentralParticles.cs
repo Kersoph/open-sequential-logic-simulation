@@ -6,9 +6,9 @@ namespace Osls.Plants.MassTestChamber
     public class CentralParticles : Particles
     {
         #region ==================== Fields / Properties ====================
-        private const float SpecificHeatCapacity = 10f;
-        private const float MassCollectionPerSecond = 0.1f;
-        private const float LaserHeatingPower = 0.1f;
+        private const float SpecificHeatCapacity = 4f;
+        private const float MassCollectionPerSecond = 0.05f;
+        private const float LaserHeatingPower = 300.0f;
         private ParticlesMaterial _processMaterial;
         
         /// <summary>
@@ -52,7 +52,7 @@ namespace Osls.Plants.MassTestChamber
             if (caged)
             {
                 ShowAsOrbiting();
-                if (Emitting == discharging) Emitting = !discharging;
+                Emitting = CollectedMass > 0.2f && !discharging;
             }
             else if (buildingUpMass)
             {
@@ -69,6 +69,11 @@ namespace Osls.Plants.MassTestChamber
         /// <summary>
         /// Updates the mass and temperature simulation
         /// </summary>
+        /// <param name="buildingUpMass">If new mass is added</param>
+        /// <param name="caged">If the particles are hold by the field of focus</param>
+        /// <param name="discharging">If we are discharging</param>
+        /// <param name="heating">If the laser is on</param>
+        /// <param name="deltaTime">delta frame time in ms</param>
         public void ProcessState(bool buildingUpMass, bool caged, bool discharging, bool heating, int deltaTime)
         {
             if (buildingUpMass)
@@ -78,20 +83,20 @@ namespace Osls.Plants.MassTestChamber
             }
             if (!caged)
             {
-                float escapedMass = CollectedMass * deltaTime * 0.001f;
-                CollectedMass -= escapedMass;
+                CollectedMass *= 0.9f;
+                CollectedEnergy *= 0.9f;
             }
             if (heating)
             {
                 float newEnergy = LaserHeatingPower * deltaTime * 0.001f;
                 CollectedEnergy += newEnergy;
             }
-            float emittedEnergy = CollectedEnergy * deltaTime * 0.001f * 0.1f;
+            float emittedEnergy = CollectedEnergy * deltaTime * 0.001f * 0.07f;
             CollectedEnergy -= emittedEnergy;
             if (discharging)
             {
-                CollectedMass *= 0.98f;
-                CollectedEnergy *= 0.97f;
+                CollectedMass *= 0.997f;
+                CollectedEnergy *= 0.997f;
             }
         }
         #endregion
