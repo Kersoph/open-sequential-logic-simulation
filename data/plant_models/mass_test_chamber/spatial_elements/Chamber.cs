@@ -15,6 +15,8 @@ namespace Osls.Plants.MassTestChamber
         private EmitterParticles _emitter;
         private Cart _focusCart;
         private CentralParticles _central;
+        private Particles _discharge;
+        private Particles _laser;
         #endregion
         
         
@@ -32,6 +34,8 @@ namespace Osls.Plants.MassTestChamber
             _focusCart.Setup();
             _central = GetNode<CentralParticles>("CentralParticles");
             _central.Setup();
+            _discharge = GetNode<Particles>("DischargeParticles");
+            _laser = GetNode<Particles>("LaserParticles");
         }
         
         /// <summary>
@@ -95,6 +99,7 @@ namespace Osls.Plants.MassTestChamber
             bool cagedParticles = field || focusOn;
             bool laserActive = master.SimulationInput.PollBoolean(MassTestChamber.LaserKey);
             _central.ProcessState(_emitter.IsProvidingMass, cagedParticles, _isDischarging, laserActive, deltaTime);
+            _laser.Visible = laserActive;
             int measuredNoise = Mathf.RoundToInt(GD.Randf() * 16f - 8f);
             int measuredTemperature = _central.CentralTemperature + measuredNoise;
             master.SimulationOutput.SetValue(MassTestChamber.TemperatureSensorKey, measuredTemperature);
@@ -113,9 +118,11 @@ namespace Osls.Plants.MassTestChamber
             if (_isDischarging)
             {
                 _recordedDischargedTime += deltaTime;
-                if (!field || centralTemperature < TemperatureNeeded - 300 || centralMass <= 0f)
+                if (!field || centralTemperature < TemperatureNeeded - 300 || centralMass <= 0.002f)
                 {
                     _isDischarging = false;
+                    _discharge.Emitting = false;
+                    Finish();
                 }
             }
             else
@@ -123,9 +130,15 @@ namespace Osls.Plants.MassTestChamber
                 if (field && centralTemperature > TemperatureNeeded && centralMass > MassNeeded)
                 {
                     _isDischarging = true;
+                    _discharge.Emitting = true;
                 }
             }
             master.SimulationOutput.SetValue(MassTestChamber.DetectorKey, _isDischarging);
+        }
+        
+        private void Finish()
+        {
+            _central.Visible = false;
         }
         #endregion
     }

@@ -95,8 +95,8 @@ namespace Osls.Plants.MassTestChamber
             CollectedEnergy -= emittedEnergy;
             if (discharging)
             {
-                CollectedMass *= 0.997f;
-                CollectedEnergy *= 0.997f;
+                CollectedMass -= CollectedMass * deltaTime * 0.001f * 0.4f;
+                CollectedEnergy -= CollectedEnergy * deltaTime * 0.001f * 0.4f;
             }
         }
         #endregion

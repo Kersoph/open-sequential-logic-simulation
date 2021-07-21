@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/Test_Chamber.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/EmitterCart.tscn" type="PackedScene" id=2]
@@ -49,28 +49,56 @@ albedo_color = Color( 0.827451, 0.45098, 0.247059, 1 )
 material = SubResource( 5 )
 size = Vector2( 0.1, 0.1 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=11]
+emission_shape = 2
+emission_box_extents = Vector3( 0, 1, 0 )
+direction = Vector3( 0, 1, 0 )
+spread = 20.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 720.0
+angular_velocity_random = 1.0
+radial_accel = 20.0
+
+[sub_resource type="SpatialMaterial" id=16]
+flags_unshaded = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.466667, 0.823529, 1, 1 )
+
+[sub_resource type="QuadMesh" id=13]
+material = SubResource( 16 )
+size = Vector2( 0.1, 0.4 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+emission_shape = 2
+emission_box_extents = Vector3( 0, 18, 0 )
+direction = Vector3( 0, 1, 0 )
+spread = 20.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity_random = 1.0
+
+[sub_resource type="SpatialMaterial" id=12]
+flags_unshaded = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.235294, 0, 1 )
+
+[sub_resource type="QuadMesh" id=15]
+material = SubResource( 12 )
+size = Vector2( 0.1, 0.1 )
+
+[sub_resource type="ParticlesMaterial" id=10]
 spread = 20.0
 flatness = 0.7
 gravity = Vector3( -5, 0, 0 )
 initial_velocity = -13.0
 radial_accel = -10.0
-damping = 5.0
-scale_curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=8]
-spread = 7.0
-flatness = 0.7
-gravity = Vector3( 5.5, 0, 0 )
-initial_velocity = -13.0
-damping = 4.0
-scale_curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=9]
-spread = 10.0
-flatness = 0.7
-gravity = Vector3( 5, 0, 0 )
-initial_velocity = -13.0
 damping = 5.0
 scale_curve = SubResource( 3 )
 
@@ -113,6 +141,21 @@ process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 6 )
 script = ExtResource( 6 )
 
+[node name="DischargeParticles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+emitting = false
+amount = 300
+process_material = SubResource( 11 )
+draw_pass_1 = SubResource( 13 )
+
+[node name="LaserParticles" type="Particles" parent="."]
+transform = Transform( -0.0370071, 0.706138, -0.707107, -0.99863, -0.0523359, 0, -0.0370071, 0.706138, 0.707107, 0, 10, 0 )
+visible = false
+amount = 300
+lifetime = 0.1
+process_material = SubResource( 14 )
+draw_pass_1 = SubResource( 15 )
+
 [node name="EmitterCart" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -13, 3, 0 )
 _speed = 0.15
@@ -127,33 +170,7 @@ amount = 600
 lifetime = 15.0
 speed_scale = 4.0
 local_coords = false
-process_material = SubResource( 7 )
-draw_pass_1 = SubResource( 6 )
-script = ExtResource( 5 )
-
-[node name="EmitterParticles2" type="Particles" parent="EmitterCart"]
-transform = Transform( -1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, -13, 7, -1.1365e-06 )
-visible = false
-cast_shadow = 0
-generate_lightmap = false
-amount = 600
-lifetime = 15.0
-speed_scale = 4.0
-local_coords = false
-process_material = SubResource( 8 )
-draw_pass_1 = SubResource( 6 )
-script = ExtResource( 5 )
-
-[node name="EmitterParticles3" type="Particles" parent="EmitterCart"]
-transform = Transform( -1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, -13, 7, -1.1365e-06 )
-visible = false
-cast_shadow = 0
-generate_lightmap = false
-amount = 600
-lifetime = 15.0
-speed_scale = 4.0
-local_coords = false
-process_material = SubResource( 9 )
+process_material = SubResource( 10 )
 draw_pass_1 = SubResource( 6 )
 script = ExtResource( 5 )
 
