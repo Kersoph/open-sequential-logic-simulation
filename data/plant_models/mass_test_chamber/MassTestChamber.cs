@@ -24,6 +24,18 @@ namespace Osls.Plants.MassTestChamber
         public const string FocusKey = "=C1-U1";
         public const string FocusBackKey = "=C1-B0";
         public const string FocusFrontKey = "=C1-B1";
+        
+        public bool FieldGeneratorInput { get; private set; }
+        public bool LaserInput { get; private set; }
+        public bool EmitterInput { get; private set; }
+        public bool FocusInput { get; private set; }
+        public int EmitterMotorInput { get; private set; }
+        public int FocusMotorInput { get; private set; }
+        
+        /// <summary>
+        /// Links the test chamber
+        /// </summary>
+        public Chamber Chamber { get { return GetNode<Chamber>("Chamber"); } }
         #endregion
         
         
@@ -33,7 +45,7 @@ namespace Osls.Plants.MassTestChamber
         /// </summary>
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
-            GetNode<Chamber>("Chamber").Setup();
+            Chamber.Setup();
         }
         
         /// <summary>
@@ -96,7 +108,18 @@ namespace Osls.Plants.MassTestChamber
         /// </summary>
         protected override void CalculateNextStep(int deltaTime)
         {
-            GetNode<Chamber>("Chamber").Update(this, deltaTime);
+            UpdateInputs();
+            Chamber.Update(this, deltaTime);
+        }
+        
+        private void UpdateInputs()
+        {
+            FieldGeneratorInput = SimulationInput.PollBoolean(FieldGeneratorKey);
+            LaserInput = SimulationInput.PollBoolean(LaserKey);
+            EmitterInput = SimulationInput.PollBoolean(EmitterKey);
+            FocusInput = SimulationInput.PollBoolean(FocusKey);
+            EmitterMotorInput = SimulationInput.PollInteger(EmitterMotorKey);
+            FocusMotorInput = SimulationInput.PollInteger(FocusMotorKey);
         }
         #endregion
     }

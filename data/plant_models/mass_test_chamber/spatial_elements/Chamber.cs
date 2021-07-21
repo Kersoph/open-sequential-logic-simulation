@@ -6,17 +6,18 @@ namespace Osls.Plants.MassTestChamber
     public class Chamber : Spatial
     {
         #region ==================== Fields / Properties ====================
-        private const float MassNeeded = 0.4f;
-        private const int TemperatureNeeded = 2000;
-        private bool _isDischarging;
-        private int _recordedDischargedTime;
-        
-        private Cart _emitterCart;
-        private EmitterParticles _emitter;
-        private Cart _focusCart;
-        private CentralParticles _central;
-        private Particles _discharge;
-        private Particles _laser;
+        public const float MassNeeded = 0.4f;
+        public const float BurnOutMass = 0.002f;
+        public const int TemperatureNeeded = 2000;
+        public const int TurnOffTemperature = 1700;
+        public bool IsDischarging { get; private set; }
+        public int RecordedDischargedTime { get; private set; }
+        public Cart EmitterCart { get; private set; }
+        public EmitterParticles Emitter { get; private set; }
+        public Cart FocusCart { get; private set; }
+        public CentralParticles Central { get; private set; }
+        public Particles Discharge { get; private set; }
+        public Particles Laser { get; private set; }
         #endregion
         
         
@@ -26,16 +27,16 @@ namespace Osls.Plants.MassTestChamber
         /// </summary>
         public void Setup()
         {
-            _emitterCart = GetNode<Cart>("EmitterCart");
-            _emitterCart.Setup();
-            _emitter = GetNode<EmitterParticles>("EmitterCart/EmitterParticles");
-            _emitter.Setup();
-            _focusCart = GetNode<Cart>("FocusCart");
-            _focusCart.Setup();
-            _central = GetNode<CentralParticles>("CentralParticles");
-            _central.Setup();
-            _discharge = GetNode<Particles>("DischargeParticles");
-            _laser = GetNode<Particles>("LaserParticles");
+            EmitterCart = GetNode<Cart>("EmitterCart");
+            EmitterCart.Setup();
+            Emitter = GetNode<EmitterParticles>("EmitterCart/EmitterParticles");
+            Emitter.Setup();
+            FocusCart = GetNode<Cart>("FocusCart");
+            FocusCart.Setup();
+            Central = GetNode<CentralParticles>("CentralParticles");
+            Central.Setup();
+            Discharge = GetNode<Particles>("DischargeParticles");
+            Laser = GetNode<Particles>("LaserParticles");
         }
         
         /// <summary>
@@ -57,22 +58,22 @@ namespace Osls.Plants.MassTestChamber
             int direction = master.SimulationInput.PollInteger(MassTestChamber.EmitterMotorKey);
             if (direction != 0)
             {
-                _emitterCart.Drive(direction > 0, deltaTime);
+                EmitterCart.Drive(direction > 0, deltaTime);
             }
             bool emitting = master.SimulationInput.PollBoolean(MassTestChamber.EmitterKey);
             if (emitting)
             {
                 bool field = master.SimulationInput.PollBoolean(MassTestChamber.FieldGeneratorKey);
                 bool focusOn = master.SimulationInput.PollBoolean(MassTestChamber.FocusKey);
-                bool focusValid = _focusCart.FrontPositionReached && focusOn;
-                _emitter.ShowAsActiveWith(_emitterCart, field, focusValid);
+                bool focusValid = FocusCart.FrontPositionReached && focusOn;
+                Emitter.ShowAsActiveWith(EmitterCart, field, focusValid);
             }
             else
             {
-                _emitter.ShowAsOff(_emitterCart);
+                Emitter.ShowAsOff(EmitterCart);
             }
-            master.SimulationOutput.SetValue(MassTestChamber.EmitterFrontKey, _emitterCart.FrontPositionReached);
-            master.SimulationOutput.SetValue(MassTestChamber.EmitterBackKey, _emitterCart.BackPositionReached);
+            master.SimulationOutput.SetValue(MassTestChamber.EmitterFrontKey, EmitterCart.FrontPositionReached);
+            master.SimulationOutput.SetValue(MassTestChamber.EmitterBackKey, EmitterCart.BackPositionReached);
         }
         
         private void UpdateFocus(MassTestChamber master, int deltaTime)
@@ -80,12 +81,12 @@ namespace Osls.Plants.MassTestChamber
             int direction = master.SimulationInput.PollInteger(MassTestChamber.FocusMotorKey);
             if (direction != 0)
             {
-                _focusCart.Drive(direction > 0, deltaTime);
+                FocusCart.Drive(direction > 0, deltaTime);
             }
             bool field = master.SimulationInput.PollBoolean(MassTestChamber.FieldGeneratorKey);
-            _central.ShowAs(_emitter.IsProvidingMass, field, _isDischarging);
-            master.SimulationOutput.SetValue(MassTestChamber.FocusFrontKey, _focusCart.FrontPositionReached);
-            master.SimulationOutput.SetValue(MassTestChamber.FocusBackKey, _focusCart.BackPositionReached);
+            Central.ShowAs(Emitter.IsProvidingMass, field, IsDischarging);
+            master.SimulationOutput.SetValue(MassTestChamber.FocusFrontKey, FocusCart.FrontPositionReached);
+            master.SimulationOutput.SetValue(MassTestChamber.FocusBackKey, FocusCart.BackPositionReached);
         }
         
         /// <summary>
@@ -98,12 +99,12 @@ namespace Osls.Plants.MassTestChamber
             bool focusOn = master.SimulationInput.PollBoolean(MassTestChamber.FocusKey);
             bool cagedParticles = field || focusOn;
             bool laserActive = master.SimulationInput.PollBoolean(MassTestChamber.LaserKey);
-            _central.ProcessState(_emitter.IsProvidingMass, cagedParticles, _isDischarging, laserActive, deltaTime);
-            _laser.Visible = laserActive;
+            Central.ProcessState(Emitter.IsProvidingMass, cagedParticles, IsDischarging, laserActive, deltaTime);
+            Laser.Visible = laserActive;
             int measuredNoise = Mathf.RoundToInt(GD.Randf() * 16f - 8f);
-            int measuredTemperature = _central.CentralTemperature + measuredNoise;
+            int measuredTemperature = Central.CentralTemperature + measuredNoise;
             master.SimulationOutput.SetValue(MassTestChamber.TemperatureSensorKey, measuredTemperature);
-            bool massOK = _central.CollectedMass > MassNeeded;
+            bool massOK = Central.CollectedMass > MassNeeded;
             master.SimulationOutput.SetValue(MassTestChamber.MassSufficientKey, massOK);
         }
         
@@ -113,15 +114,15 @@ namespace Osls.Plants.MassTestChamber
         private void UpdateDischarge(MassTestChamber master, int deltaTime)
         {
             bool field = master.SimulationInput.PollBoolean(MassTestChamber.FieldGeneratorKey);
-            int centralTemperature = _central.CentralTemperature;
-            float centralMass = _central.CollectedMass;
-            if (_isDischarging)
+            int centralTemperature = Central.CentralTemperature;
+            float centralMass = Central.CollectedMass;
+            if (IsDischarging)
             {
-                _recordedDischargedTime += deltaTime;
-                if (!field || centralTemperature < TemperatureNeeded - 300 || centralMass <= 0.002f)
+                RecordedDischargedTime += deltaTime;
+                if (!field || centralTemperature < TurnOffTemperature || centralMass < BurnOutMass)
                 {
-                    _isDischarging = false;
-                    _discharge.Emitting = false;
+                    IsDischarging = false;
+                    Discharge.Emitting = false;
                     Finish();
                 }
             }
@@ -129,16 +130,16 @@ namespace Osls.Plants.MassTestChamber
             {
                 if (field && centralTemperature > TemperatureNeeded && centralMass > MassNeeded)
                 {
-                    _isDischarging = true;
-                    _discharge.Emitting = true;
+                    IsDischarging = true;
+                    Discharge.Emitting = true;
                 }
             }
-            master.SimulationOutput.SetValue(MassTestChamber.DetectorKey, _isDischarging);
+            master.SimulationOutput.SetValue(MassTestChamber.DetectorKey, IsDischarging);
         }
         
         private void Finish()
         {
-            _central.Visible = false;
+            Central.Visible = false;
         }
         #endregion
     }

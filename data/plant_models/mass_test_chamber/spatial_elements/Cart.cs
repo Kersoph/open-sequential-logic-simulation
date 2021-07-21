@@ -27,6 +27,11 @@ namespace Osls.Plants.MassTestChamber
         public bool BackPositionReached { get; private set; }
         
         /// <summary>
+        /// True if the cart was damaged
+        /// </summary>
+        public bool Damaged { get; private set; }
+        
+        /// <summary>
         /// True if the cart is broken
         /// </summary>
         public bool IsBroken { get; private set; }
@@ -53,6 +58,15 @@ namespace Osls.Plants.MassTestChamber
             RailPosition += movement;
             CheckPosition(deltaTime);
         }
+        
+        /// <summary>
+        /// Immediately sets the cart to the given rail position
+        /// </summary>
+        public void WarpToPosition(float railPosition)
+        {
+            RailPosition = railPosition;
+            CheckPosition(0);
+        }
         #endregion
         
         
@@ -65,12 +79,14 @@ namespace Osls.Plants.MassTestChamber
             {
                 RailPosition = 1f;
                 _endStopCollisionTime += deltaTime;
+                Damaged = true;
                 CheckBreakdown();
             }
             else if (RailPosition < 0f)
             {
                 RailPosition = 0f;
                 _endStopCollisionTime += deltaTime;
+                Damaged = true;
                 CheckBreakdown();
             }
             Vector3 position = (1f - RailPosition) * _backPosition + RailPosition * _frontPosition;

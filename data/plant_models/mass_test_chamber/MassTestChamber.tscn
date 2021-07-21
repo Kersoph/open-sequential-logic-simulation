@@ -11,4 +11,5 @@ script = ExtResource( 2 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 30 )
 keep_aspect = 0
+current = true
 fov = 78.0
