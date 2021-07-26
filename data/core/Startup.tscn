@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/core/Startup.cs" type="Script" id=1]
+[ext_resource path="res://data/core/scene_manager/Main.tscn" type="PackedScene" id=2]
+
+[node name="Startup" type="Node"]
+script = ExtResource( 1 )
+_mainScene = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_default_cursor_shape = 5
+color = Color( 0.12549, 0.145098, 0.192157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
