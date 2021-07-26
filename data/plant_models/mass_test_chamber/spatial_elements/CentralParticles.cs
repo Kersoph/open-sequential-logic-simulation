@@ -6,6 +6,7 @@ namespace Osls.Plants.MassTestChamber
     public class CentralParticles : Particles
     {
         #region ==================== Fields / Properties ====================
+        public const int MaxTemperature = 2300;
         private const float SpecificHeatCapacity = 4f;
         private const float MassCollectionPerSecond = 0.05f;
         private const float LaserHeatingPower = 300.0f;
@@ -49,12 +50,13 @@ namespace Osls.Plants.MassTestChamber
         /// </summary>
         public void ShowAs(bool buildingUpMass, bool caged, bool discharging)
         {
-            if (caged)
+            int temperature = CentralTemperature;
+            if (caged && temperature < MaxTemperature)
             {
                 ShowAsOrbiting();
                 Emitting = CollectedMass > 0.2f && !discharging;
             }
-            else if (buildingUpMass)
+            else if (buildingUpMass && temperature < MaxTemperature)
             {
                 if (!Emitting) Emitting = true;
                 ShowAsBuildingUp();

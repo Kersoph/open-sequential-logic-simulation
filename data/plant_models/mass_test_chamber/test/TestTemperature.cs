@@ -17,7 +17,7 @@ namespace Osls.Plants.MassTestChamber
         {
             int temperature = master.Simulation.Chamber.Central.CentralTemperature;
             float centralMass = master.Simulation.Chamber.Central.CollectedMass;
-            if (temperature > 2300 && centralMass > 0.01)
+            if (temperature > CentralParticles.MaxTemperature && centralMass > 0.01)
             {
                 if (!ReportedExceededTemperature)
                 {
