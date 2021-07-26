@@ -54,7 +54,8 @@ namespace Osls.SfcSimulation.Engine.Builder
                 else
                 {
                     int lowerStepId = step + 1;
-                    if (pu.SfcProgramData.SfcEntity.Lookup(lowerStepId).SfcStepType == StepType.Pass)
+                    PatchEntity lowerEntry = pu.SfcProgramData.SfcEntity.Lookup(lowerStepId);
+                    if (lowerEntry != null && lowerEntry.SfcStepType == StepType.Pass)
                     {
                         transitions.AddRange(CollectUpperAlternativeBranches(source, lowerStepId, pu));
                     }
