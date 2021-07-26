@@ -140,6 +140,7 @@ namespace Osls.Plants.MassTestChamber
         private void Finish()
         {
             Central.Visible = false;
+            Central.CollectedMass = 0f;
         }
         #endregion
     }

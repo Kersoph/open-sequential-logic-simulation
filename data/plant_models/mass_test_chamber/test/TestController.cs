@@ -5,8 +5,9 @@ namespace Osls.Plants.MassTestChamber
         #region ==================== Fields / Properties ====================
         private const int StepTime = 20;
         private readonly Test _master;
+        private bool _leakedHighEnergeticParticles;
         
-        public enum Stages { Setup, Rails, BuildMass, Cage, Discharge, Reset, Done };
+        public enum Stages { Setup, Rails, BuildMass, Cage, Discharge, Reset, PostObservation, Done };
         public Stages Stage { get; private set; } = Stages.Setup;
         
         public TestCart EmitterCart { get; private set; }
@@ -29,7 +30,7 @@ namespace Osls.Plants.MassTestChamber
         public TestController(Test master)
         {
             _master = master;
-            StageTime = new int[7];
+            StageTime = new int[8];
         }
         #endregion
         
@@ -76,8 +77,67 @@ namespace Osls.Plants.MassTestChamber
                 case Stages.Reset:
                     StageReset(StepTime);
                     break;
+                case Stages.PostObservation:
+                    StagePostObservation(StepTime);
+                    break;
                 case Stages.Done:
                     break;
+            }
+        }
+        
+        /// <summary>
+        /// Creates a result according to the protocoll log
+        /// </summary>
+        public int CreateResult()
+        {
+            _master.PaperLog.Append("\nThe lance on the focus chart was exposed for " + TestFocus.ExposedLanceTime + "ms\n");
+            _master.PaperLog.Append("Field generator was active for " + TestFieldGenerator.ActiveTime + "ms\n");
+            _master.PaperLog.Append("The laser was active for " + TestLaser.ActiveLaserTime + "ms\n");
+            _master.PaperLog.Append("The core temperature exceeded for " + TestTemperature.ExceededTemperatureTime + "ms\n");
+            _master.PaperLog.Append("\n*** Stopped protocol ***\n\n");
+            if (CheckForTimeoutBetween(Stages.Setup, Stages.Discharge)
+            || EmitterCart.ReportedBreakdown
+            || FocusCart.ReportedBreakdown
+            || TestTemperature.ReportedExceededTemperature
+            || _leakedHighEnergeticParticles)
+            {
+                _master.PaperLog.Append("[b]Result: 0 Stars[/b]\n");
+                return 0;
+            }
+            if (TestTemperature.ExceededTemperatureTime == 0
+            && !EmitterCart.ReportedDamage
+            && !FocusCart.ReportedDamage
+            && !TestEmitter.ReportedLostParticles
+            && TestFocus.ExposedLanceTime < 14000
+            && !TestFocus.ReportedUnusualActivation
+            && TestLaser.ActiveLaserTime < 30000
+            && TestFieldGenerator.ActiveTime < 50000
+            && StageTime[5] != -1)
+            {
+                if (TestLaser.ActiveLaserTime < 17000
+                && TestFieldGenerator.ActiveTime < 20500
+                && TestFocus.ExposedLanceTime < 11000
+                && StageTime[0] < 100
+                && StageTime[1] < 3300
+                && StageTime[2] < 8100
+                && StageTime[3] < 6900
+                && StageTime[4] < 14000
+                && StageTime[5] < 200)
+                {
+                    _master.PaperLog.Append("[b]Result: 3 Stars[/b]\n");
+                    _master.PaperLog.Append("Please call Dr. Rosenberg - this will mark a new era!\n");
+                    return 3;
+                }
+                else
+                {
+                    _master.PaperLog.Append("[b]Result: 2 Stars[/b]\n");
+                    return 2;
+                }
+            }
+            else
+            {
+                _master.PaperLog.Append("[b]Result: 1 Star[/b]\n");
+                return 1;
             }
         }
         #endregion
@@ -149,6 +209,7 @@ namespace Osls.Plants.MassTestChamber
                 if (massLeft > Chamber.BurnOutMass)
                 {
                     _master.PaperLog.AppendError("Detecting high energetic particles injú®`Wù‰©ãhö#3ÿG\n”8q(ú|ûI¯àrFcƒëoÅjÍ1Û(¶jTÃÚŸìæ\n");
+                    _leakedHighEnergeticParticles = true;
                 }
             }
             CheckPostCondition(!discharging || !field, Stages.Reset, 20000, "discharge");
@@ -164,7 +225,17 @@ namespace Osls.Plants.MassTestChamber
             bool emitter = _master.Simulation.EmitterInput;
             bool focus = _master.Simulation.FocusInput;
             bool done = emitterAtBack && focusAtBack && !field && !emitter && !focus;
-            CheckPostCondition(done, Stages.Done, 20000, "reset");
+            CheckPostCondition(done, Stages.PostObservation, 10000, "reset");
+        }
+        
+        private void StagePostObservation(int timeMs)
+        {
+            ObserveOverallState(timeMs);
+            if (StageTime[(int)Stages.PostObservation] > 10000)
+            {
+                _master.PaperLog.Append("-- Stage post observation done\n");
+                Stage = Stages.Done;
+            }
         }
         
         private void ObserveOverallState(int timeMs)
@@ -187,9 +258,19 @@ namespace Osls.Plants.MassTestChamber
             }
             else if (StageTime[(int)Stage] > timeout)
             {
-                _master.PaperLog.Append("-- Stage " + logname + " timed out after: " + StageTime[(int)Stage] + "ms\n");
+                _master.PaperLog.AppendError("-- Stage " + logname + " timed out after: " + StageTime[(int)Stage] + "ms\n");
+                StageTime[(int)Stage] = -1;
                 Stage = Stages.Done;
             }
+        }
+        
+        private bool CheckForTimeoutBetween(Stages start, Stages end)
+        {
+            for (int i = (int)start; i <= (int)end; i++)
+            {
+                if (StageTime[i] < 0) return true;
+            }
+            return false;
         }
         #endregion
     }

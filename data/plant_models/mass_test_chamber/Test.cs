@@ -11,7 +11,7 @@ namespace Osls.Plants.MassTestChamber
     public class Test : TestPage
     {
         #region ==================== Fields / Properties ====================
-        private enum Stages { ExecuteTests, DisplayResults };
+        private enum Stages { ExecuteTests, DisplayResults, Done };
         private Stages _stage = Stages.ExecuteTests;
         private ILessonEntity _openedLesson;
         [Export] private NodePath _testChamberPath = "ViewportContainer/Viewport/MassTestChamber";
@@ -57,8 +57,13 @@ namespace Osls.Plants.MassTestChamber
             {
                 case Stages.ExecuteTests:
                     TestController.ExecuteProtocoll();
+                    if (TestController.Stage == TestController.Stages.Done) _stage = Stages.DisplayResults;
                     break;
                 case Stages.DisplayResults:
+                    int stars = TestController.CreateResult();
+                    SetResult(stars);
+                    GetNode<Viewport>("ViewportContainer/Viewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
+                    _stage = Stages.Done;
                     break;
             }
         }
@@ -66,9 +71,9 @@ namespace Osls.Plants.MassTestChamber
         
         
         #region ==================== Helpers ====================
-        private void CreateResult()
+        private void SetResult(int stars)
         {
-             _openedLesson.SetAndSaveStars(3);
+             _openedLesson.SetAndSaveStars(stars);
         }
         #endregion
     }
