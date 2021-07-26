@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=1]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/import/Test_Chamber.mesh" type="ArrayMesh" id=2]
+
+[node name="Test_Chamber" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )

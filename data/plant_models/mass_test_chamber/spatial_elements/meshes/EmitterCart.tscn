@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=1]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/import/Emitter.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/import/Cart.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/Cart.cs" type="Script" id=4]
+
+[node name="EmitterCart" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Cart" type="MeshInstance" parent="."]
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 1 )
+
+[node name="Head" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
