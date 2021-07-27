@@ -2,7 +2,7 @@ using Godot;
 using Osls.SfcEditor;
 
 
-namespace Osls.SfcSimulation.EditorControls
+namespace Osls.SfcSimulation.Viewer
 {
     public class Sfc2dControls : Control
     {
@@ -19,6 +19,11 @@ namespace Osls.SfcSimulation.EditorControls
         /// Gets the simulation viewer
         /// </summary>
         public SfcSimulationViewer SfcSimulationViewer { get { return GetNode<SfcSimulationViewer>(_sfcSimulationViewerPath); } }
+        
+        /// <summary>
+        /// Gets the sfc execution control node
+        /// </summary>
+        public ExecutionControl ExecutionControl { get { return GetNode<ExecutionControl>("ExecutionControl"); } }
         #endregion
     }
 }

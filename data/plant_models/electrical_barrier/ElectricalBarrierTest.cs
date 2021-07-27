@@ -4,7 +4,7 @@ using Osls.SfcEditor;
 namespace Osls.Plants.ElectricalBarrier
 {
     /// <summary>
-    /// Minimal example class for a test viewer.
+    /// Contains the tests for this plant
     /// </summary>
     public class ElectricalBarrierTest : TestPage
     {

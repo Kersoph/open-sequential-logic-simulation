@@ -1,4 +1,5 @@
 using Osls.SfcEditor;
+using Osls.SfcSimulation.Viewer;
 
 
 namespace Osls.Plants.MinimalExample

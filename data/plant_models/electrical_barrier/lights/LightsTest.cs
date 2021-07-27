@@ -1,5 +1,6 @@
 using Osls.SfcEditor;
 using System.Text;
+using Osls.SfcSimulation.Viewer;
 
 
 namespace Osls.Plants.ElectricalBarrier

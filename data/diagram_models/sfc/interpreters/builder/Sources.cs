@@ -15,7 +15,7 @@ namespace Osls.SfcSimulation.Engine.Builder
         public static List<SfcTransition> CollectTransitionSources(SfcStep source, ProgrammableLogicController pu)
         {
             List<SfcTransition> alternativeBranches = CollectUpperAlternativeBranches(source, source.Id, pu);
-            List<SfcTransition> SimultaneousMerge = CollectUpperSimultaneousMerge(source, pu);
+            List<SfcTransition> SimultaneousMerge = CollectUpperSimultaneousMerge(source.Id, pu);
             if (alternativeBranches.Count > 1)
             {
                 return alternativeBranches;
@@ -54,7 +54,8 @@ namespace Osls.SfcSimulation.Engine.Builder
                 else
                 {
                     int lowerStepId = step + 1;
-                    if (pu.SfcProgramData.SfcEntity.Lookup(lowerStepId).SfcStepType == StepType.Pass)
+                    PatchEntity lowerEntry = pu.SfcProgramData.SfcEntity.Lookup(lowerStepId);
+                    if (lowerEntry != null && lowerEntry.SfcStepType == StepType.Pass)
                     {
                         transitions.AddRange(CollectUpperAlternativeBranches(source, lowerStepId, pu));
                     }
@@ -67,13 +68,22 @@ namespace Osls.SfcSimulation.Engine.Builder
         /// Collects all Simultaneous branches to merge from this step.
         /// null if there is none.
         /// </summary>
-        private static List<SfcTransition> CollectUpperSimultaneousMerge(SfcStep source, ProgrammableLogicController pu)
+        private static List<SfcTransition> CollectUpperSimultaneousMerge(int sourceId, ProgrammableLogicController pu)
         {
-            List<int> collected = Collector.CollectHorizontal(source.Id, pu.SfcProgramData, BranchType.Double, true);
-            if (collected.Count <= 1) return null;
+            List<int> collected = Collector.CollectHorizontal(sourceId, pu.SfcProgramData, BranchType.Double, true);
+            if (collected.Count <= 1)
+            {
+                PatchEntity currentPatch = pu.SfcProgramData.SfcEntity.Lookup(sourceId);
+                int lowerId = sourceId + 1;
+                PatchEntity lowerPatch = pu.SfcProgramData.SfcEntity.Lookup(lowerId);
+                if (!currentPatch.ContainsTransition() && lowerPatch != null && lowerPatch.SfcStepType == StepType.Pass)
+                {
+                    return CollectUpperSimultaneousMerge(lowerId, pu);
+                }
+                return null;
+            }
             PatchEntity transitionPatch = FindSimultaneousTransition(collected, pu.SfcProgramData);
             List<SfcStep> connectedSteps = CollectConnectedSteps(collected, pu.SfcProgramData);
-            if (!IsMinimalId(connectedSteps, source.Id)) return new List<SfcTransition> { };
             SfcTransition transition = CreateTransition(transitionPatch.Key, pu);
             transition.DependingSteps = connectedSteps;
             return new List<SfcTransition> { transition };
@@ -104,15 +114,6 @@ namespace Osls.SfcSimulation.Engine.Builder
             }
             if (connectedSteps.Count < 2) Godot.GD.PushError("It does not make sense to merge one branch.");
             return connectedSteps;
-        }
-        
-        private static bool IsMinimalId(List<SfcStep> steps, int id)
-        {
-            for (int i = 0; i < steps.Count; i++)
-            {
-                if (steps[i].Id < id) return false;
-            }
-            return true;
         }
         
         /// <summary>

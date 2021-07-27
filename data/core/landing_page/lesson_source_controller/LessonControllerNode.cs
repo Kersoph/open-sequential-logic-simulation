@@ -35,6 +35,11 @@ namespace Osls.LandingPage
             _gridController = gridController;
             SetTitle(info.Title);
             SetStars(info.Stars);
+            if (string.IsNullOrEmpty(info.SimulationPath))
+            {
+                GetNode<Button>("LessonButton").Disabled = true;
+                GetNode<Button>("LessonButton").MouseDefaultCursorShape = CursorShape.Forbidden;
+            }
         }
         #endregion
         

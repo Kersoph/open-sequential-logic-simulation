@@ -1,25 +1,25 @@
 using Godot;
 
 
-namespace Osls.SfcSimulation.EditorControls
+namespace Osls.SfcSimulation.Viewer
 {
     public class EditorZoomIn : Button
     {
         #region ==================== Public Methods ====================
         public override void _Ready()
         {
-            Connect("button_up", this, nameof(ButtonUpEvent));
+            Connect("pressed", this, nameof(OnButtonPressed));
         }
         
         public override void _UnhandledKeyInput(InputEventKey @event)
         {
             if (@event.IsActionPressed("ui_do_more"))
             {
-                ButtonUpEvent();
+                OnButtonPressed();
             }
         }
         
-        public void ButtonUpEvent()
+        public void OnButtonPressed()
         {
             GetNode<Sfc2dControls>("..").Sfc2dEditorNode.ZoomIn();
         }

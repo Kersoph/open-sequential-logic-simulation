@@ -56,6 +56,8 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = -2.0
 margin_bottom = -2.0
+focus_mode = 2
+selection_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="LessonInfo"]
 anchor_top = 1.0

@@ -23,10 +23,10 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Creates a controller and initializes the patch fields.
         /// </summary>
-        public void InitializeEditor(ProcessingData data)
+        public void InitializeEditor(ProcessingData data, bool isEditable)
         {
             _renderViewportReferenceRect = GetNode<ReferenceRect>("RenderViewportReferenceRect");
-            Sfc2dEditorControl = new Sfc2dEditorControl(_renderViewportReferenceRect, data);
+            Sfc2dEditorControl = new Sfc2dEditorControl(_renderViewportReferenceRect, data, isEditable);
         }
         
         public override void _Process(float delta)
@@ -106,13 +106,29 @@ namespace Osls.SfcEditor
         {
             if (@event.IsActionPressed("ui_translate_idle"))
             {
-                _lastDragPosition = GetViewport().GetMousePosition();
-                _isDragging = true;
+                StartDrag();
             }
             else if (@event.IsActionReleased("ui_translate_idle"))
             {
-                _isDragging = false;
+                StopDrag();
             }
+        }
+        
+        /// <summary>
+        /// Called if the user wants to drag the editor
+        /// </summary>
+        public void StartDrag()
+        {
+            _lastDragPosition = GetViewport().GetMousePosition();
+            _isDragging = true;
+        }
+        
+        /// <summary>
+        /// Called if the user stops to drag the editor
+        /// </summary>
+        public void StopDrag()
+        {
+            _isDragging = false;
         }
         #endregion
         
