@@ -98,6 +98,7 @@ namespace Osls.Plants.MassTestChamber
             if (_endStopCollisionTime > 500)
             {
                 IsBroken = true;
+                GetNode<Particles>("Smoke").Visible = true;
             }
         }
         #endregion
