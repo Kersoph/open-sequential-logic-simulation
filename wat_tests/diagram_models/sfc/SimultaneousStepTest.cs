@@ -292,8 +292,8 @@ namespace Tests.SfcEditor.Interpreters
             Assert.IsFalse(sfc.IsStepActive(0, 2), "1 Step");
             Assert.IsFalse(sfc.IsStepActive(1, 2), "1 Step");
             sfc.UpdateStep();
+            Assert.IsFalse(sfc.IsStepActive(0, 0), "2 Steps");
             Assert.IsFalse(sfc.IsStepActive(1, 0), "2 Steps");
-            Assert.IsFalse(sfc.IsStepActive(0, 1), "2 Steps");
             Assert.IsTrue(sfc.IsStepActive(0, 2), "2 Steps");
             Assert.IsTrue(sfc.IsStepActive(1, 2), "2 Steps");
         }
