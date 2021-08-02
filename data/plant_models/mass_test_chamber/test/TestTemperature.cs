@@ -13,7 +13,7 @@ namespace Osls.Plants.MassTestChamber
         
         
         #region ==================== Public Methods ====================
-        public void ObserveUpperBound(Test master, int timeMs)
+        public void ObserveUpperBound(MassTestChamberTest master, int timeMs)
         {
             int temperature = master.Simulation.Chamber.Central.CentralTemperature;
             float centralMass = master.Simulation.Chamber.Central.CollectedMass;

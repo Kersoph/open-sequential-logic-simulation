@@ -12,7 +12,7 @@ namespace Osls.Plants.MassTestChamber
         
         
         #region ==================== Public Methods ====================
-        public void Observe(Test master, int timeMs)
+        public void Observe(MassTestChamberTest master, int timeMs)
         {
             if (master.Simulation.FieldGeneratorInput)
             {

@@ -4,7 +4,7 @@ namespace Osls.Plants.MassTestChamber
     {
         #region ==================== Fields / Properties ====================
         private const int StepTime = 20;
-        private readonly Test _master;
+        private readonly MassTestChamberTest _master;
         private bool _leakedHighEnergeticParticles;
         
         public enum Stages { Setup, Rails, BuildMass, Cage, Discharge, Reset, PostObservation, Done };
@@ -27,7 +27,7 @@ namespace Osls.Plants.MassTestChamber
         
         
         #region ==================== Constructor ====================
-        public TestController(Test master)
+        public TestController(MassTestChamberTest master)
         {
             _master = master;
             StageTime = new int[8];

@@ -23,7 +23,7 @@ namespace Osls.Plants.MassTestChamber
         /// <summary>
         /// Observes the cart and reports damage
         /// </summary>
-        public void Observe(Test master)
+        public void Observe(MassTestChamberTest master)
         {
             if (_cart.Damaged && !ReportedDamage)
             {
