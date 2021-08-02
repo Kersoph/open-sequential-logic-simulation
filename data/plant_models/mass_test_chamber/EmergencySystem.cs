@@ -18,14 +18,39 @@ namespace Osls.Plants.MassTestChamber
         private ParticleState _particleState;
         private int _particleTime;
         
+        /// <summary>
+        /// True if the controller set the signal to active
+        /// </summary>
         public bool AlarmLightSignal { get; private set; }
+        /// <summary>
+        /// True if the controller set the signal to active
+        /// </summary>
         public bool AlarmHornSignal { get; private set; }
         
+        /// <summary>
+        /// Links the central particle controller
+        /// </summary>
         public CentralParticles CentralParticles { get; private set; }
+        /// <summary>
+        /// Links the central particle controller
+        /// </summary>
         public EmergencyActors EmergencyActors { get; private set; }
         
+        /// <summary>
+        /// Can be set to force the particle sensor to false
+        /// </summary>
+        public bool SurpressParticleSensorSignal { get; set; }
+        /// <summary>
+        /// True if the particle sensor receives a signal and is not surpressed
+        /// </summary>
         public bool ParticleSensorSignal { get; private set; }
+        /// <summary>
+        /// True if someone wants to ack the error
+        /// </summary>
         public bool AcknowledgeButtonSignal { get; private set; }
+        /// <summary>
+        /// True if someone wants to mute the horn
+        /// </summary>
         public bool MuteButtonSignal { get; private set; }
         #endregion
         
@@ -100,7 +125,7 @@ namespace Osls.Plants.MassTestChamber
                 new List<StateEntry<bool>>()
                 {
                     { new StateEntry<bool>(ParticleSensorKey, false, "Particle Sensor", "True if roaming particles were detected,\nFalse otherwise.") },
-                    { new StateEntry<bool>(AcknowledgeButtonKey, false, "Acknowledge Button", "True if someone is acknowledges the alarm,\nFalse otherwise.") },
+                    { new StateEntry<bool>(AcknowledgeButtonKey, false, "Acknowledge Alarm Button", "True if someone is acknowledges the alarm,\nFalse otherwise.") },
                     { new StateEntry<bool>(MuteButtonKey, false, "Alarm Mute Button", "True if someone wants to mute the alarm horn,\nFalse otherwise.") },
                 },
                 new List<StateEntry<int>>()
@@ -169,7 +194,7 @@ namespace Osls.Plants.MassTestChamber
         
         private void UpdateOutputs()
         {
-            SimulationOutput.SetValue(ParticleSensorKey, ParticleSensorSignal);
+            SimulationOutput.SetValue(ParticleSensorKey, ParticleSensorSignal && !SurpressParticleSensorSignal);
             SimulationOutput.SetValue(AcknowledgeButtonKey, AcknowledgeButtonSignal);
             SimulationOutput.SetValue(MuteButtonKey, MuteButtonSignal);
         }

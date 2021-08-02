@@ -22,6 +22,7 @@ fov = 78.0
 [node name="EmergencyActors" parent="." instance=ExtResource( 3 )]
 
 [node name="UI" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
