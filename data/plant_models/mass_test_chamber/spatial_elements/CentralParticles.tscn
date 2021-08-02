@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/CentralParticles.cs" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.252308, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.750769, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+width = 128
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 20.0
+gravity = Vector3( 0, 0, 0 )
+radial_accel = -10.0
+tangential_accel = 3.0
+damping = 3.0
+scale_curve = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.827451, 0.45098, 0.247059, 1 )
+
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 4 )
+size = Vector2( 0.1, 0.1 )
+
+[node name="CentralParticles" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+cast_shadow = 0
+generate_lightmap = false
+emitting = false
+amount = 6000
+lifetime = 40.0
+speed_scale = 2.0
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 5 )
+script = ExtResource( 1 )
