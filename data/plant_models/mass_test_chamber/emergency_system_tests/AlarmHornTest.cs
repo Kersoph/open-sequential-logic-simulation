@@ -10,7 +10,7 @@ namespace Osls.Plants.MassTestChamber
         
         #region ==================== Public Methods ====================
         /// <summary>
-        /// Called by the stage test check the actor status
+        /// Called by the stage test to check the actor status
         /// </summary>
         public void Check(EmergencySystemTest master, bool exceptedState)
         {

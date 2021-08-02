@@ -8,10 +8,6 @@ namespace Osls.Plants.MassTestChamber
         #endregion
         
         
-        #region ==================== Constructor ====================
-        #endregion
-        
-        
         #region ==================== Public Methods ====================
         public void ObserveUpperBound(MassTestChamberTest master, int timeMs)
         {

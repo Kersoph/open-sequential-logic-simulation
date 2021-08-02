@@ -7,10 +7,6 @@ namespace Osls.Plants.MassTestChamber
         #endregion
         
         
-        #region ==================== Constructor ====================
-        #endregion
-        
-        
         #region ==================== Public Methods ====================
         /// <summary>
         /// Observes the cart and reports damage

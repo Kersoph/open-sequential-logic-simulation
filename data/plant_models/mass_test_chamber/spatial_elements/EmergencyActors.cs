@@ -23,9 +23,5 @@ namespace Osls.Plants.MassTestChamber
             Alarm = GetNode<BubbleSprite>("Alarm");
         }
         #endregion
-        
-        
-        #region ==================== Helpers ====================
-        #endregion
     }
 }

@@ -51,9 +51,5 @@ namespace Osls.Plants.MassTestChamber
             if (total > visible) _label.VisibleCharacters++;
         }
         #endregion
-        
-        
-        #region ==================== Helpers ====================
-        #endregion
     }
 }

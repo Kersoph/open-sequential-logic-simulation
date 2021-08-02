@@ -5,10 +5,6 @@ namespace Osls.Plants.MassTestChamber
 {
     public class EmergencyLight : SpotLight
     {
-        #region ==================== Fields / Properties ====================
-        #endregion
-        
-        
         #region ==================== Public Methods ====================
         /// <summary>
         /// Calculates the next simulation step.
@@ -25,10 +21,6 @@ namespace Osls.Plants.MassTestChamber
                 Visible = false;
             }
         }
-        #endregion
-        
-        
-        #region ==================== Helpers ====================
         #endregion
     }
 }
