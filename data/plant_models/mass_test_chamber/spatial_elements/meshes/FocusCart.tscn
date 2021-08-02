@@ -21,6 +21,5 @@ material/0 = ExtResource( 1 )
 
 [node name="Smoke" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
-visible = true
 
 [node name="CrashSparkles" parent="." instance=ExtResource( 6 )]

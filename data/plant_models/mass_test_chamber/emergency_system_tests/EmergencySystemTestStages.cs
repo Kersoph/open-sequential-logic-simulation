@@ -3,7 +3,7 @@ namespace Osls.Plants.MassTestChamber
     public class EmergencySystemTestStages
     {
         #region ==================== Fields / Properties ====================
-        private const int StepTime = 15;
+        private const int StepTime = 10;
         private EmergencySystemTest _master;
         private int _currentStageTime;
         private bool _secondExecution = false;

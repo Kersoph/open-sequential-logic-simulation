@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/ChamberCore.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/plant_models/mass_test_chamber/EmergencySystem.cs" type="Script" id=2]
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/EmergencyActors.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/CentralParticles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=5]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/EmitterCart.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/FocusCart.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/DecorationNode.tscn" type="PackedScene" id=8]
 
 [node name="EmergencySystem" type="Node"]
 script = ExtResource( 2 )
@@ -49,3 +52,11 @@ text = "Mute Horn"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="EmitterCart" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -13, 3, 0 )
+
+[node name="FocusCart" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 0 )
+
+[node name="DecorationNode" parent="." instance=ExtResource( 8 )]

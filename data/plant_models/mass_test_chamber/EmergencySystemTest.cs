@@ -98,7 +98,7 @@ namespace Osls.Plants.MassTestChamber
             }
             else
             {
-                PaperLog.Append("No problems found.\n");
+                PaperLog.Append("No problems were noted in the emergency protocol.\n");
                 PaperLog.Append("[b]Result: 3 Stars![/b]\n");
                 _openedLesson.SetAndSaveStars(3);
             }

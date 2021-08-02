@@ -17,6 +17,7 @@ namespace Osls.Plants.MassTestChamber
         private enum ParticleState { BuildUp, Release, Idle }
         private ParticleState _particleState;
         private int _particleTime;
+        private DecorationNode _decoration;
         
         /// <summary>
         /// True if the controller set the signal to active
@@ -65,6 +66,8 @@ namespace Osls.Plants.MassTestChamber
             CentralParticles.Setup();
             EmergencyActors = GetNode<EmergencyActors>("EmergencyActors");
             EmergencyActors.Setup();
+            _decoration = GetNode<DecorationNode>("DecorationNode");
+            _decoration.Initialise();
         }
         
         /// <summary>
@@ -186,6 +189,7 @@ namespace Osls.Plants.MassTestChamber
                 case ParticleState.BuildUp:
                     CentralParticles.ShowAs(true, false, false);
                     _particleTime += deltaTime;
+                    _decoration.UpdateToFailure(8000 - _particleTime);
                     if (_particleTime >= 8000)
                     {
                         _particleTime = 0;
