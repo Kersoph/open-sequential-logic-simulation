@@ -18,7 +18,7 @@ namespace Osls.Plants.MassTestChamber
             {
                 if (exceptedState && !ReportedEarlyDeactivation)
                 {
-                    master.PaperLog.AppendError("The alarm light turned should be active.\n");
+                    master.PaperLog.AppendError("The alarm light should be active.\n");
                     ReportedEarlyDeactivation = true;
                 }
                 else if (!exceptedState && !ReportedEarlyActivation)
