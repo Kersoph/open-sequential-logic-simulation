@@ -95,6 +95,22 @@ namespace Osls.Plants.MassTestChamber
         {
             MuteButtonSignal = pressed;
         }
+        
+        /// <summary>
+        /// Resets the simulation back to the start
+        /// </summary>
+        public void ResetSimulation()
+        {
+            _particleState = ParticleState.BuildUp;
+            _particleTime = 0;
+            AlarmLightSignal = false;
+            AlarmHornSignal = false;
+            CentralParticles.Reset();
+            SurpressParticleSensorSignal = false;
+            ParticleSensorSignal = false;
+            AcknowledgeButtonSignal = false;
+            MuteButtonSignal = false;
+        }
         #endregion
         
         

@@ -101,6 +101,16 @@ namespace Osls.Plants.MassTestChamber
                 CollectedEnergy -= CollectedEnergy * deltaTime * 0.001f * 0.4f;
             }
         }
+        
+        /// <summary>
+        /// Resets the central particles data and visuals
+        /// </summary>
+        public void Reset()
+        {
+            Restart();
+            CollectedMass = 0f;
+            CollectedEnergy = 0f;
+        }
         #endregion
         
         

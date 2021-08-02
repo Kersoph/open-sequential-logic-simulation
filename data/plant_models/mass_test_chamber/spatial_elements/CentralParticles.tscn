@@ -38,7 +38,6 @@ size = Vector2( 0.1, 0.1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
 cast_shadow = 0
 generate_lightmap = false
-emitting = false
 amount = 6000
 lifetime = 40.0
 speed_scale = 2.0

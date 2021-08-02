@@ -15,7 +15,7 @@ namespace Tests.PlantModels.MassTestChamber
         {
             string scenePath = "res://data/plant_models/mass_test_chamber/EmergencySystemTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/mass_test_chamber/EmergencySystemThreeStars.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 1000);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 2000);
         }
         
         [Test]

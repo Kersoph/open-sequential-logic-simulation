@@ -6,6 +6,7 @@ namespace Osls.Plants.MassTestChamber
         private const int StepTime = 15;
         private EmergencySystemTest _master;
         private int _currentStageTime;
+        private bool _secondExecution = false;
         
         public enum Stages { Startup, BuildUp, Leakage, DetectorGap, HornReset, CoolDown, Reset, Wait, Done };
         public Stages Stage { get; private set; } = Stages.Startup;
@@ -225,9 +226,27 @@ namespace Osls.Plants.MassTestChamber
         {
             AlarmHornTest.Check(_master, false);
             AlarmLightTest.Check(_master, false);
-            _master.PaperLog.Append("\n*** Stopped protocol ***\n\n");
-            _currentStageTime = 0;
-            Stage = Stages.Done;
+            if (_currentStageTime > 5000)
+            {
+                bool hadErrors = AlarmHornTest.ReportedEarlyActivation
+                    || AlarmHornTest.ReportedEarlyDeactivation
+                    || AlarmLightTest.ReportedEarlyActivation
+                    || AlarmLightTest.ReportedEarlyDeactivation;
+                if (hadErrors || _secondExecution)
+                {
+                    _master.PaperLog.Append("\n*** Stopped protocol ***\n\n");
+                    _currentStageTime = 0;
+                    Stage = Stages.Done;
+                }
+                else
+                {
+                    _secondExecution = true;
+                    _master.PaperLog.Append("\n*** Trying to reset and execute again ***\n\n");
+                    _master.Simulation.ResetSimulation();
+                    _currentStageTime = 0;
+                    Stage = Stages.BuildUp;
+                }
+            }
         }
         #endregion
     }
