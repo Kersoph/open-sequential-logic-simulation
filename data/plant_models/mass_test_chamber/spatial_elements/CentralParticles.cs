@@ -33,6 +33,11 @@ namespace Osls.Plants.MassTestChamber
                 return Mathf.RoundToInt(CollectedEnergy / (CollectedMass * SpecificHeatCapacity)) + 300;
             }
         }
+        
+        /// <summary>
+        /// true if the particles are not caged and start roaming in the area
+        /// </summary>
+        public bool IsLeakingParticles { get; private set; }
         #endregion
         
         
@@ -55,16 +60,19 @@ namespace Osls.Plants.MassTestChamber
             {
                 ShowAsOrbiting();
                 Emitting = CollectedMass > 0.2f && !discharging;
+                IsLeakingParticles = false;
             }
             else if (buildingUpMass && temperature < MaxTemperature)
             {
                 if (!Emitting) Emitting = true;
                 ShowAsBuildingUp();
+                IsLeakingParticles = false;
             }
             else
             {
                 if (Emitting) Emitting = false;
                 ShowAsBreakFree();
+                if (CollectedMass > 0.001) IsLeakingParticles = true;
             }
         }
         
@@ -110,6 +118,7 @@ namespace Osls.Plants.MassTestChamber
             Restart();
             CollectedMass = 0f;
             CollectedEnergy = 0f;
+            IsLeakingParticles = false;
         }
         #endregion
         
