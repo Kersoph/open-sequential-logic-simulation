@@ -95,6 +95,7 @@ namespace Osls.Plants.MassTestChamber
             _master.PaperLog.Append("The core temperature exceeded for " + TestTemperature.ExceededTemperatureTime + "ms\n");
             _master.PaperLog.Append("\n*** Stopped protocol ***\n\n");
             if (CheckForTimeoutBetween(Stages.Setup, Stages.Discharge)
+            || !_master.IsExecutable
             || EmitterCart.ReportedBreakdown
             || FocusCart.ReportedBreakdown
             || TestTemperature.ReportedExceededTemperature
@@ -154,9 +155,11 @@ namespace Osls.Plants.MassTestChamber
                 _master.PaperLog.AppendError("SFC is invalid.\n");
                 Stage = Stages.Done;
             }
-            
-            _master.SimulationMaster.UpdateSimulation(timeMs);
-            Stage = Stages.Rails;
+            else
+            {
+                _master.SimulationMaster.UpdateSimulation(timeMs);
+                Stage = Stages.Rails;
+            }
         }
         
         private void StageRails(int timeMs)

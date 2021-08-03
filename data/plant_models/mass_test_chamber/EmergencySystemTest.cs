@@ -58,7 +58,7 @@ namespace Osls.Plants.MassTestChamber
                 case Stages.Startup:
                     if (!IsExecutable)
                     {
-                        PaperLog.AppendError("SFC is invalid!\n");
+                        PaperLog.AppendError("SFC is invalid!\nAborting tests.\n");
                         _stage = Stages.CollectResults;
                     }
                     else
