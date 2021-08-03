@@ -136,12 +136,15 @@ namespace Osls.SfcEditor
         #region ==================== Helpers ====================
         private void ApplyDiagramScale(Vector2 scale)
         {
+            Vector2 oldPosition = _renderViewportReferenceRect.RectPosition;
+            Vector2 oldScale = _renderViewportReferenceRect.RectScale;
             _renderViewportReferenceRect.RectScale = scale;
+            ApplyDiagramOffset(new Vector2((oldPosition.x * scale.x) / oldScale.x, (oldPosition.y * scale.y) / oldScale.y));
         }
         
         private void ApplyDiagramOffset(Vector2 position)
         {
-            _renderViewportReferenceRect.SetPosition(position);
+            _renderViewportReferenceRect.RectPosition = position;
         }
         #endregion
     }
