@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Osls.SfcEditor
 {
     /// <summary>
-    /// Entity calss to store the informations for a SFC patch
+    /// Entity class to store the informations for a SFC patch
     /// </summary>
     public class SfcPatchEntity
     {
@@ -44,7 +44,7 @@ namespace Osls.SfcEditor
         /// Contains the action entries for the step in this patch.
         /// </summary>
         public List<SfcActionEntity> ActionEntries { get; private set; }
-        #endregion;
+        #endregion
         
         
         #region ==================== Public ====================

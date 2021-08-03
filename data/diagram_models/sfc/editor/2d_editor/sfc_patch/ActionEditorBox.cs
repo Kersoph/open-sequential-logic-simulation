@@ -7,17 +7,22 @@ namespace Osls.SfcEditor
     public class ActionEditorBox : Control
     {
         #region ==================== Fields / Properties ====================
-        private const string _editorScenePath = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/ActionEditor.tscn";
+        private const string EditorScenePath = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/ActionEditor.tscn";
         
         private SfcPatchControl _patchController;
         private readonly List<ActionEditor> _actionEditors = new List<ActionEditor>();
+        private bool _isEditable;
         #endregion
         
         
         #region ==================== Public Methods ====================
-        public override void _Ready()
+        /// <summary>
+        /// Called only once when the node is created by the patch node.
+        /// </summary>
+        public void InitializeWith(SfcPatchControl sfcPatchControl, bool isEditable)
         {
-            _patchController = GetNode<SfcPatchNode>("..").SfcPatchControl;
+            _patchController = sfcPatchControl;
+            _isEditable = isEditable;
         }
         
         /// <summary>
@@ -31,13 +36,14 @@ namespace Osls.SfcEditor
                 if (i >= _actionEditors.Count) AddActionEditor(context);
                 _actionEditors[i].UpdateAction(entity.ActionEntries[i], context);
             }
-            
-            if (entity.ActionEntries.Count >= _actionEditors.Count) AddActionEditor(context);
-            _actionEditors[entity.ActionEntries.Count].ResetAction();
-            
-            for (int i = entity.ActionEntries.Count + 1; i < _actionEditors.Count; i++)
+            if (_isEditable)
             {
-                RemoveActionEditor(_actionEditors[i]);
+                if (entity.ActionEntries.Count >= _actionEditors.Count) AddActionEditor(context);
+                _actionEditors[entity.ActionEntries.Count].ResetAction();
+                for (int i = entity.ActionEntries.Count + 1; i < _actionEditors.Count; i++)
+                {
+                    RemoveActionEditor(_actionEditors[i]);
+                }
             }
         }
         
@@ -88,7 +94,7 @@ namespace Osls.SfcEditor
         
         private void AddActionEditor(IProcessingData data)
         {
-            Node node = ((PackedScene)GD.Load(_editorScenePath)).Instance();
+            Node node = ((PackedScene)GD.Load(EditorScenePath)).Instance();
             ActionEditor actionEditor = (ActionEditor)node;
             _actionEditors.Add(actionEditor);
             GetNode<BoxContainer>("ScrollContainer/VerticalBoxContainer").AddChild(actionEditor);

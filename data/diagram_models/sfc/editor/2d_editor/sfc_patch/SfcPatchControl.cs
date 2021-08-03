@@ -37,14 +37,14 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Constructor. It will add the patch to the 2d editor.
         /// </summary>
-        public SfcPatchControl(PatchEntity data, Sfc2dEditorControl control, bool setMouseFilter)
+        public SfcPatchControl(PatchEntity data, Sfc2dEditorControl control, bool isEditable)
         {
             Data = data;
             Master = control;
             SfcPatchMeta = new SfcPatchMeta();
             Node node = ((PackedScene)GD.Load(_patchReferencePath)).Instance();
             SfcPatchNode = (SfcPatchNode)node;
-            SfcPatchNode.InitializeWith(this, data, setMouseFilter);
+            SfcPatchNode.InitializeWith(this, data, isEditable);
             control.ReferenceRect.AddChild(SfcPatchNode);
         }
         
