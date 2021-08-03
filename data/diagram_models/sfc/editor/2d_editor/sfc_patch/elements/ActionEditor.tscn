@@ -29,7 +29,6 @@ anti_aliasing = false
 
 [node name="ActionEditor" type="Control"]
 anchor_right = 1.0
-margin_right = 0.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 30 )
 script = ExtResource( 1 )
@@ -47,7 +46,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 30.0
 margin_top = 2.0
-margin_right = 0.0
 rect_min_size = Vector2( 0, 28 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
@@ -80,3 +78,6 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 shortcut_in_tooltip = false
 text = "N"
 flat = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -55,7 +55,7 @@ namespace Osls.Plants.ElectricalBarrier
                 },
                 new List<StateEntry<int>>()
                 {
-                    { new StateEntry<int>(ElectricalBarrierNode.MotorKey, 0, "Barrier Motor", "A signal of 1 will lift the barrier,\na signal of -1 wil lower it and\na signal of 0 will keep it in position.") },
+                    { new StateEntry<int>(ElectricalBarrierNode.MotorKey, 0, "Barrier motor", "A signal of 1 will lift the barrier,\na signal of -1 wil lower it and\na signal of 0 will keep it in position.") },
                 }
             );
         }
@@ -70,7 +70,7 @@ namespace Osls.Plants.ElectricalBarrier
                 {
                     { new StateEntry<bool>(ElectricalBarrierNode.SensorOpenedKey, false, "Opened position limit switch", "True if the upper position is reached.\nFalse otherwise.") },
                     { new StateEntry<bool>(ElectricalBarrierNode.SensorClosedKey, false, "Closed position limit switch", "True if the lower position is reached.\nFalse otherwise.") },
-                    { new StateEntry<bool>(GuardAgent.OpenGateSwitchKey, false, "open barrier signal", "True if the barrier should be open\nto let a vehicle pass.\nIt remains true until it\nis save to lower the barrier.") },
+                    { new StateEntry<bool>(GuardAgent.OpenGateSwitchKey, false, "Open barrier signal", "True if the barrier should be open\nto let a vehicle pass.\nIt remains true until it\nis save to lower the barrier.") },
                 },
                 new List<StateEntry<int>>()
                 {

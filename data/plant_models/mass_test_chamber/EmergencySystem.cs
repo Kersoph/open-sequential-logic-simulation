@@ -126,8 +126,8 @@ namespace Osls.Plants.MassTestChamber
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(AlarmLightKey, false, "Alarm Light", "True will activate the alarm light in the chamber,\nfalse will turn it off.") },
-                    { new StateEntry<bool>(AlarmHornKey, false, "Alarm Horn", "True will turn on the alarm horn,\nfalse will turn it off.") },
+                    { new StateEntry<bool>(AlarmLightKey, false, "Alarm light", "True will activate the alarm light in the chamber.\nFalse will turn it off.") },
+                    { new StateEntry<bool>(AlarmHornKey, false, "Alarm horn", "True will turn on the alarm horn.\nFalse will turn it off.") },
                 },
                 new List<StateEntry<int>>()
                 {
@@ -143,9 +143,9 @@ namespace Osls.Plants.MassTestChamber
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(ParticleSensorKey, false, "Particle Sensor", "True if roaming particles were detected,\nFalse otherwise.") },
-                    { new StateEntry<bool>(AcknowledgeButtonKey, false, "Acknowledge Alarm Button", "True if someone is acknowledges the alarm,\nFalse otherwise.") },
-                    { new StateEntry<bool>(MuteButtonKey, false, "Alarm Mute Button", "True if someone wants to mute the alarm horn,\nFalse otherwise.") },
+                    { new StateEntry<bool>(ParticleSensorKey, false, "Particle sensor", "True if roaming particles were detected.\nFalse otherwise.") },
+                    { new StateEntry<bool>(AcknowledgeButtonKey, false, "Acknowledge alarm button", "True if someone is acknowledges the alarm.\nFalse otherwise.") },
+                    { new StateEntry<bool>(MuteButtonKey, false, "Alarm mute button", "True if someone wants to mute the alarm horn.\nFalse otherwise.") },
                 },
                 new List<StateEntry<int>>()
                 {
