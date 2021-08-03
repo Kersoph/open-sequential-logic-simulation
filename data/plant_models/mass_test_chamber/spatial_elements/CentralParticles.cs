@@ -30,7 +30,7 @@ namespace Osls.Plants.MassTestChamber
             get
             {
                 if (CollectedMass <= 0.001) return 293;
-                return Mathf.RoundToInt(CollectedEnergy / (CollectedMass * SpecificHeatCapacity)) + 300;
+                return Mathf.RoundToInt(CollectedEnergy / ((CollectedMass + 0.01f) * SpecificHeatCapacity)) + 300;
             }
         }
         
@@ -72,7 +72,10 @@ namespace Osls.Plants.MassTestChamber
             {
                 if (Emitting) Emitting = false;
                 ShowAsBreakFree();
-                if (CollectedMass > 0.001) IsLeakingParticles = true;
+                if (CollectedMass > Chamber.BurnOutMass)
+                {
+                    IsLeakingParticles = true;
+                }
             }
         }
         

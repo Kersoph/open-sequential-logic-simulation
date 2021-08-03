@@ -171,7 +171,7 @@ namespace Osls.Plants.MassTestChamber
             EmergencyActors.EmergencyLight.Update(AlarmLightSignal, deltaTime);
             if (AlarmHornSignal)
             {
-                EmergencyActors.Alarm.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 1f, true);
+                EmergencyActors.Alarm.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 0.2f, true);
             }
         }
         

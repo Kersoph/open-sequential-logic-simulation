@@ -5,7 +5,6 @@ namespace Osls.Plants.MassTestChamber
         #region ==================== Fields / Properties ====================
         private const int StepTime = 20;
         private readonly MassTestChamberTest _master;
-        private bool _leakedHighEnergeticParticles;
         
         public enum Stages { Setup, Rails, BuildMass, Cage, Discharge, Reset, PostObservation, Done };
         public Stages Stage { get; private set; } = Stages.Setup;
@@ -99,7 +98,7 @@ namespace Osls.Plants.MassTestChamber
             || EmitterCart.ReportedBreakdown
             || FocusCart.ReportedBreakdown
             || TestTemperature.ReportedExceededTemperature
-            || _leakedHighEnergeticParticles)
+            || TestFieldGenerator.LeakedHighEnergeticParticles)
             {
                 _master.PaperLog.Append("[b]Result: 0 Stars[/b]\n");
                 return 0;
@@ -111,16 +110,16 @@ namespace Osls.Plants.MassTestChamber
             && TestFocus.ExposedLanceTime < 14000
             && !TestFocus.ReportedUnusualActivation
             && TestLaser.ActiveLaserTime < 30000
-            && TestFieldGenerator.ActiveTime < 50000
+            && TestFieldGenerator.ActiveTime < 30000
             && StageTime[5] != -1)
             {
-                if (TestLaser.ActiveLaserTime < 17000
-                && TestFieldGenerator.ActiveTime < 20500
+                if (TestLaser.ActiveLaserTime < 18800
+                && TestFieldGenerator.ActiveTime < 20700
                 && TestFocus.ExposedLanceTime < 11000
                 && StageTime[0] < 100
                 && StageTime[1] < 3300
                 && StageTime[2] < 8100
-                && StageTime[3] < 6900
+                && StageTime[3] < 7440
                 && StageTime[4] < 14000
                 && StageTime[5] < 200)
                 {
@@ -201,15 +200,6 @@ namespace Osls.Plants.MassTestChamber
                     {
                         _master.PaperLog.AppendError("Temperature was too low to sustain the reaction\n");
                     }
-                }
-            }
-            if (!field)
-            {
-                float massLeft = _master.Simulation.Chamber.Central.CollectedMass;
-                if (massLeft > Chamber.BurnOutMass)
-                {
-                    _master.PaperLog.AppendError("Detecting high energetic particles injú®`Wù‰©ãhö#3ÿG\n”8q(ú|ûI¯àrFcƒëoÅjÍ1Û(¶jTÃÚŸìæ\n");
-                    _leakedHighEnergeticParticles = true;
                 }
             }
             CheckPostCondition(!discharging || !field, Stages.Reset, 20000, "discharge");
