@@ -8,9 +8,9 @@ namespace Osls.SfcSimulation.Engine
     public class ProgrammableLogicController : IProcessingUnit
     {
         #region ==================== Fields Properties ====================
-        private ResettingStateTable _inputRegisters;
-        private ResettingStateTable _outputRegisters;
-        private SimulationPage _simulationPage;
+        private readonly ResettingStateTable _inputRegisters;
+        private readonly ResettingStateTable _outputRegisters;
+        private readonly SimulationPage _simulationPage;
         
         /// <summary>
         /// Links the input register of the processing unit
@@ -38,7 +38,7 @@ namespace Osls.SfcSimulation.Engine
             _simulationPage = simulationPage;
             _inputRegisters = new ResettingStateTable(_simulationPage.SimulationOutput);
             _outputRegisters = new ResettingStateTable(_simulationPage.SimulationInput);
-            SfcProgramData = new SfcProgramData(sfcEntity, this);
+            SfcProgramData = new SfcProgramData(sfcEntity);
             SfcProgram = new SfcProgram(this, SfcProgramData);
         }
         #endregion

@@ -3,8 +3,8 @@ namespace Osls.Plants.MassTestChamber
     public class TestCart
     {
         #region ==================== Fields / Properties ====================
-        private Cart _cart;
-        private string _name;
+        private readonly Cart _cart;
+        private readonly string _name;
         public bool ReportedDamage { get; set; }
         public bool ReportedBreakdown { get; set; }
         #endregion

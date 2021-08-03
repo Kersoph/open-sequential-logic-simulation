@@ -6,7 +6,7 @@ namespace Osls.Plants.ElectricalBarrier
     public class TunnelLights : Spatial
     {
         #region ==================== Fields / Properties ====================
-        private bool[] _signalHistory = new bool[] { true, true, true, true, true, true };
+        private readonly bool[] _signalHistory = new bool[] { true, true, true, true, true, true };
         private int _flickerCount;
         
         /// <summary>

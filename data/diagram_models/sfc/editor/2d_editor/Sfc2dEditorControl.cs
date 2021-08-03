@@ -12,7 +12,7 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields Properties ====================
         private readonly Dictionary<int, SfcPatchControl> _controlMap = new Dictionary<int, SfcPatchControl>();
-        private bool _isEditable;
+        private readonly bool _isEditable;
         
         /// <summary>
         /// Returns the patch control map

@@ -9,7 +9,7 @@ namespace Osls.St.Boolean
         public const string Open = "(";
         public const string Close = ")";
         private readonly BooleanExpression _target;
-        private bool _validClosing;
+        private readonly bool _validClosing;
         #endregion
         
         
