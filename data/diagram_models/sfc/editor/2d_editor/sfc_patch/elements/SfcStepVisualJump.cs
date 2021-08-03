@@ -9,6 +9,7 @@ namespace Osls.SfcEditor
         public override void _Ready()
         {
             GetNode<TextEdit>("StepNameEditor").Connect("focus_exited", this, nameof(OnTextEditorFocusExited));
+            GetNode<TextEdit>("StepNameEditor").Connect("text_changed", this, nameof(OnTextChanged));
         }
         
         /// <summary>
@@ -42,6 +43,22 @@ namespace Osls.SfcEditor
         private void OnTextEditorFocusExited()
         {
             ApplyEdits();
+        }
+        
+        /// <summary>
+        /// Called if the string in the text editor changed.
+        /// If a newline is added (enter pressed) we want to loose focus to push the changes.
+        /// </summary>
+        private void OnTextChanged()
+        {
+            string currentText = GetNode<TextEdit>("StepNameEditor").Text;
+            int escapePosition = currentText.IndexOf('\n');
+            if (escapePosition >= 0)
+            {
+                string subtext = currentText.Remove(escapePosition, 1);
+                GetNode<TextEdit>("StepNameEditor").Text = subtext;
+                GetNode<TextEdit>("StepNameEditor").ReleaseFocus();
+            }
         }
         #endregion
     }
