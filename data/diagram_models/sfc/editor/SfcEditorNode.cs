@@ -33,9 +33,11 @@ namespace Osls.SfcEditor
             LessonView = GetNode<LessonView>(LessonViewPath);
             LessonView.LoadAndShowInfo(openedLesson);
             Sfc2dEditorNode = GetNode<Sfc2dEditorNode>(Sfc2dEditorPath);
-            ProcessingData data = new ProcessingData();
-            data.InputRegisters = new StateTable(LessonView.PlantView.LoadedSimulationNode.SimulationOutput);
-            data.OutputRegisters = new StateTable(LessonView.PlantView.LoadedSimulationNode.SimulationInput);
+            ProcessingData data = new ProcessingData
+            {
+                InputRegisters = new StateTable(LessonView.PlantView.LoadedSimulationNode.SimulationOutput),
+                OutputRegisters = new StateTable(LessonView.PlantView.LoadedSimulationNode.SimulationInput)
+            };
             Sfc2dEditorNode.InitializeEditor(data, true);
             TryLoadDiagram();
         }

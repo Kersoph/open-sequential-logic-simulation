@@ -8,7 +8,7 @@ namespace Osls.Plants.MassTestChamber
     /// <summary>
     /// Contains the tests for this plant
     /// </summary>
-    public class Test : TestPage
+    public class MassTestChamberTest : TestPage
     {
         #region ==================== Fields / Properties ====================
         private enum Stages { ExecuteTests, DisplayResults, Done };

@@ -24,9 +24,11 @@ namespace Osls.SfcEditor
         /// </summary>
         public static ActionEntity CreateFrom(System.IO.BinaryReader reader)
         {
-            ActionEntity entity = new ActionEntity();
-            entity.Qualifier = (ActionQualifier)reader.ReadInt32();
-            entity.Action = reader.ReadString();
+            ActionEntity entity = new ActionEntity
+            {
+                Qualifier = (ActionQualifier)reader.ReadInt32(),
+                Action = reader.ReadString()
+            };
             return entity;
         }
         

@@ -12,7 +12,7 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields Properties ====================
         private readonly Dictionary<int, SfcPatchControl> _controlMap = new Dictionary<int, SfcPatchControl>();
-        private bool _isEditable;
+        private readonly bool _isEditable;
         
         /// <summary>
         /// Returns the patch control map
@@ -118,7 +118,7 @@ namespace Osls.SfcEditor
             IReadOnlyCollection<PatchEntity> patches = Data.SfcEntity.Patches;
             foreach (PatchEntity entity in patches)
             {
-                SfcPatchControl control = new SfcPatchControl(entity, this, !_isEditable);
+                SfcPatchControl control = new SfcPatchControl(entity, this, _isEditable);
                 _controlMap.Add(entity.Key, control);
             }
             UpdateGrid();
@@ -150,9 +150,13 @@ namespace Osls.SfcEditor
         private void EnsureNeighbours(PatchEntity patchData)
         {
             EnsurePatchAt(patchData.X + 1, patchData.Y);
+            EnsurePatchAt(patchData.X + 1, patchData.Y + 1);
             EnsurePatchAt(patchData.X, patchData.Y + 1);
+            EnsurePatchAt(patchData.X - 1, patchData.Y + 1);
             EnsurePatchAt(patchData.X - 1, patchData.Y);
+            EnsurePatchAt(patchData.X - 1, patchData.Y - 1);
             EnsurePatchAt(patchData.X, patchData.Y - 1);
+            EnsurePatchAt(patchData.X + 1, patchData.Y - 1);
         }
         
         /// <summary>
@@ -165,7 +169,7 @@ namespace Osls.SfcEditor
             {
                 Data.SfcEntity.CreatePatchAt((short)x, (short)y);
                 patch = Data.SfcEntity.Lookup(x, y);
-                SfcPatchControl control = new SfcPatchControl(patch, this, !_isEditable);
+                SfcPatchControl control = new SfcPatchControl(patch, this, _isEditable);
                 _controlMap.Add(patch.Key, control);
             }
         }

@@ -20,7 +20,7 @@ namespace Osls.SfcSimulation.Engine
         
         
         #region ==================== Constructor ====================
-        public SfcProgramData(SfcEntity sfcEntity, ProgrammableLogicController pu)
+        public SfcProgramData(SfcEntity sfcEntity)
         {
             SfcEntity = sfcEntity;
             StepMaster = new StepMaster();

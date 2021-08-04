@@ -30,9 +30,14 @@ namespace Osls.Plants.MassTestChamber
             get
             {
                 if (CollectedMass <= 0.001) return 293;
-                return Mathf.RoundToInt(CollectedEnergy / (CollectedMass * SpecificHeatCapacity)) + 300;
+                return Mathf.RoundToInt(CollectedEnergy / ((CollectedMass + 0.01f) * SpecificHeatCapacity)) + 300;
             }
         }
+        
+        /// <summary>
+        /// true if the particles are not caged and start roaming in the area
+        /// </summary>
+        public bool IsLeakingParticles { get; private set; }
         #endregion
         
         
@@ -55,16 +60,22 @@ namespace Osls.Plants.MassTestChamber
             {
                 ShowAsOrbiting();
                 Emitting = CollectedMass > 0.2f && !discharging;
+                IsLeakingParticles = false;
             }
             else if (buildingUpMass && temperature < MaxTemperature)
             {
                 if (!Emitting) Emitting = true;
                 ShowAsBuildingUp();
+                IsLeakingParticles = false;
             }
             else
             {
                 if (Emitting) Emitting = false;
                 ShowAsBreakFree();
+                if (CollectedMass > Chamber.BurnOutMass)
+                {
+                    IsLeakingParticles = true;
+                }
             }
         }
         
@@ -100,6 +111,17 @@ namespace Osls.Plants.MassTestChamber
                 CollectedMass -= CollectedMass * deltaTime * 0.001f * 0.4f;
                 CollectedEnergy -= CollectedEnergy * deltaTime * 0.001f * 0.4f;
             }
+        }
+        
+        /// <summary>
+        /// Resets the central particles data and visuals
+        /// </summary>
+        public void Reset()
+        {
+            Restart();
+            CollectedMass = 0f;
+            CollectedEnergy = 0f;
+            IsLeakingParticles = false;
         }
         #endregion
         

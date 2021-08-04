@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=1]
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/import/Test_Chamber.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/FuseStation.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/ControlStation.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/DetectorStation.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/TerminalStation.tscn" type="PackedScene" id=6]
 
 [node name="Test_Chamber" type="Spatial"]
 
@@ -9,3 +13,85 @@
 use_in_baked_light = true
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BL" type="Spatial" parent="."]
+
+[node name="FuseStation" parent="BL" instance=ExtResource( 3 )]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, -10, 3, -28 )
+
+[node name="ControlStation" parent="BL" instance=ExtResource( 4 )]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, -10, 3, -21 )
+
+[node name="TerminalStation" parent="BL" instance=ExtResource( 6 )]
+transform = Transform( -8.74228e-08, 0, 1, 0, 2, 0, -2, 0, -4.37114e-08, -10, 3, -23 )
+
+[node name="BR" type="Spatial" parent="."]
+
+[node name="FuseStation" parent="BR" instance=ExtResource( 3 )]
+transform = Transform( -8.74228e-08, 0, -1, 0, 2, 0, 2, 0, -4.37114e-08, 10, 8, -25 )
+
+[node name="FuseStation2" parent="BR" instance=ExtResource( 3 )]
+transform = Transform( -8.74228e-08, 0, -1, 0, 2, 0, 2, 0, -4.37114e-08, 10, 3, -25 )
+
+[node name="ControlStation" parent="BR" instance=ExtResource( 4 )]
+transform = Transform( -8.74228e-08, 0, -1, 0, 2, 0, 2, 0, -4.37114e-08, 10, 3, -22 )
+
+[node name="TerminalStation" parent="BR" instance=ExtResource( 6 )]
+transform = Transform( -8.74228e-08, 0, -1, 0, 2, 0, 2, 0, -4.37114e-08, 10, 3, -20 )
+
+[node name="CR" type="Spatial" parent="."]
+
+[node name="ControlStation" parent="CR" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, -10 )
+
+[node name="FuseStation" parent="CR" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 3, -10 )
+
+[node name="DetectorStation" parent="CR" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, -10 )
+
+[node name="CL" type="Spatial" parent="."]
+
+[node name="ControlStation" parent="CL" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, -10 )
+
+[node name="FuseStation" parent="CL" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, 3, -10 )
+
+[node name="DetectorStation" parent="CL" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, -10 )
+
+[node name="FC" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -30 )
+
+[node name="FuseStation" parent="FC" instance=ExtResource( 3 )]
+
+[node name="FuseStation3" parent="FC" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0 )
+
+[node name="FuseStation2" parent="FC" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0 )
+
+[node name="ControlStation" parent="FC" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0 )
+
+[node name="ControlStation2" parent="FC" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
+
+[node name="ControlStation3" parent="FC" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 0 )
+
+[node name="TerminalStation" parent="FC" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1.25, 0, 0, 0, 1, 1, 0, 0 )
+
+[node name="TerminalStation2" parent="FC" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1.25, 0, 0, 0, 1, 3, 0, 0 )
+
+[node name="DetectorStation" parent="FC" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -12, 0 )
+
+[node name="DetectorStation2" parent="FC" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -12, 0 )

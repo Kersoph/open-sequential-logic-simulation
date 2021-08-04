@@ -1,6 +1,7 @@
 <Project Sdk="Godot.NET.Sdk/3.3.0">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
+    <NoWarn>IDE0044</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="netstandard" />

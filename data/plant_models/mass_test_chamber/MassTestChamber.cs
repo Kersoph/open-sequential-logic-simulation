@@ -67,15 +67,15 @@ namespace Osls.Plants.MassTestChamber
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(FieldGeneratorKey, false, "Field Generator", "True will activate the field generator,\nfalse will turn it off.") },
-                    { new StateEntry<bool>(LaserKey, false, "Heating Laser", "True will turn on the laser heater,\nfalse will turn it off.") },
-                    { new StateEntry<bool>(EmitterKey, false, "Emitter", "True will turn on the particle emitter,\nfalse will turn it off.") },
-                    { new StateEntry<bool>(FocusKey, false, "Focus", "True will keep objects in the intended position,\nfalse will turn it off.") },
+                    { new StateEntry<bool>(FieldGeneratorKey, false, "Field generator", "True will activate the field generator.\nFalse will turn it off.") },
+                    { new StateEntry<bool>(LaserKey, false, "Heating laser", "True will turn on the laser heater.\nFalse will turn it off.") },
+                    { new StateEntry<bool>(EmitterKey, false, "Emitter", "True will turn on the particle emitter.\nFalse will turn it off.") },
+                    { new StateEntry<bool>(FocusKey, false, "Focus", "True will keep objects in the intended position.\nFalse will turn it off.") },
                 },
                 new List<StateEntry<int>>()
                 {
-                    { new StateEntry<int>(EmitterMotorKey, 0, "Emitter Cart Motor", "A signal of 1 will move the chart \ntowards the center and -1 away from it.\nA signal of 0 will keep it in position.") },
-                    { new StateEntry<int>(FocusMotorKey, 0, "Focus Cart Motor", "A signal of 1 will move the chart \ntowards the center and -1 away from it.\nA signal of 0 will keep it in position.") },
+                    { new StateEntry<int>(EmitterMotorKey, 0, "Emitter cart motor", "A signal of 1 will move the chart \ntowards the center and -1 away from it.\nA signal of 0 will keep it in position.") },
+                    { new StateEntry<int>(FocusMotorKey, 0, "Focus cart motor", "A signal of 1 will move the chart \ntowards the center and -1 away from it.\nA signal of 0 will keep it in position.") },
                 }
             );
         }
@@ -88,16 +88,16 @@ namespace Osls.Plants.MassTestChamber
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(EmitterBackKey, false, "Emitter Cart Position: Back", "True if the chart is at the distant position\nFalse otherwise.") },
-                    { new StateEntry<bool>(EmitterFrontKey, false, "Emitter Cart Position: Front", "True if the chart is at the front position\nFalse otherwise.") },
-                    { new StateEntry<bool>(FocusBackKey, false, "Focus Cart Position: Back", "True if the chart is at the distant position\nFalse otherwise.") },
-                    { new StateEntry<bool>(FocusFrontKey, false, "Focus Cart Position: Front", "True if the chart is at the front position\nFalse otherwise.") },
-                    { new StateEntry<bool>(MassSufficientKey, false, "Mass OK", "True if the trapped mass is sufficient\nFalse otherwise.") },
-                    { new StateEntry<bool>(DetectorKey, false, "Discharge Detector", "True if the detector receives a signal\nFalse otherwise.") },
+                    { new StateEntry<bool>(EmitterBackKey, false, "Emitter cart position: Back", "True if the chart is at the distant position.\nFalse otherwise.") },
+                    { new StateEntry<bool>(EmitterFrontKey, false, "Emitter cart position: Front", "True if the chart is at the front position.\nFalse otherwise.") },
+                    { new StateEntry<bool>(FocusBackKey, false, "Focus cart position: Back", "True if the chart is at the distant position.\nFalse otherwise.") },
+                    { new StateEntry<bool>(FocusFrontKey, false, "Focus cart position: Front", "True if the chart is at the front position.\nFalse otherwise.") },
+                    { new StateEntry<bool>(MassSufficientKey, false, "Mass OK", "True if the trapped mass is sufficient.\nFalse otherwise.") },
+                    { new StateEntry<bool>(DetectorKey, false, "Discharge detector", "True if the detector receives a signal.\nFalse otherwise.") },
                 },
                 new List<StateEntry<int>>()
                 {
-                    { new StateEntry<int>(TemperatureSensorKey, 293, "Central Temperature K", "Measured temperature of the central mass.") },
+                    { new StateEntry<int>(TemperatureSensorKey, 293, "Central temperature K", "Measured temperature of the central mass.") },
                 }
             );
         }

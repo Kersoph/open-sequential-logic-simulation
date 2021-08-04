@@ -21,14 +21,15 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Called only once when the node is created by the patch control.
         /// </summary>
-        public void InitializeWith(SfcPatchControl sfcPatchControl, PatchEntity data, bool setMouseFilter)
+        public void InitializeWith(SfcPatchControl sfcPatchControl, PatchEntity data, bool isEditable)
         {
             SfcPatchControl = sfcPatchControl;
             SetCellPosition(data.X, data.Y);
             GetNode<SfcTransitionNode>("SfcTransition").Initialise();
+            GetNode<ActionEditorBox>("ActionEditorBox").InitializeWith(SfcPatchControl, isEditable);
             Connect("mouse_entered", this, nameof(OnMouseEntered));
             Connect("mouse_exited", this, nameof(OnMouseExited));
-            GetNode<Control>("MouseFilterEdit").Visible = setMouseFilter;
+            GetNode<Control>("MouseFilterEdit").Visible = !isEditable;
         }
         
         /// <summary>

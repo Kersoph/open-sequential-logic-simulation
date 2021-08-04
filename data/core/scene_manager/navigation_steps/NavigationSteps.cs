@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 
 namespace Osls.Navigation
@@ -25,15 +26,15 @@ namespace Osls.Navigation
         {
             _mainNode = GetNode<MainNode>("..");
             _landingPageButton = GetNode<Button>("LandingPageButton");
-            _landingPageButton.Connect("toggled", this, nameof(LandingPageButtonToggled));
+            _landingPageButton.Connect("toggled", this, nameof(UpdateButtonState), new Array { PageCategory.LandingPage });
             _sfcStepButton = GetNode<Button>("SfcStepButton");
-            _sfcStepButton.Connect("toggled", this, nameof(SfcStepButtonToggled));
+            _sfcStepButton.Connect("toggled", this, nameof(UpdateButtonState), new Array { PageCategory.LogicEditor });
             _simulationStepButton = GetNode<Button>("SimulationStepButton");
-            _simulationStepButton.Connect("toggled", this, nameof(SimulationStepButtonToggled));
+            _simulationStepButton.Connect("toggled", this, nameof(UpdateButtonState), new Array { PageCategory.Simulation });
             _examinationStepButton = GetNode<Button>("ExaminationStepButton");
-            _examinationStepButton.Connect("toggled", this, nameof(ExaminationStepButtonToggled));
+            _examinationStepButton.Connect("toggled", this, nameof(UpdateButtonState), new Array { PageCategory.Examination });
             _exitButton = GetNode<Button>("ExitButton");
-            _exitButton.Connect("toggled", this, nameof(ExitButtonToggled));
+            _exitButton.Connect("toggled", this, nameof(UpdateButtonState), new Array { PageCategory.Exit });
         }
         
         /// <summary>
@@ -55,32 +56,7 @@ namespace Osls.Navigation
         
         
         #region ==================== Helpers ====================
-        private void LandingPageButtonToggled(bool pressed)
-        {
-            UpdateButtonState(_landingPageButton, PageCategory.LandingPage, pressed);
-        }
-        
-        private void SfcStepButtonToggled(bool pressed)
-        {
-            UpdateButtonState(_sfcStepButton, PageCategory.LogicEditor, pressed);
-        }
-        
-        private void SimulationStepButtonToggled(bool pressed)
-        {
-            UpdateButtonState(_simulationStepButton, PageCategory.Simulation, pressed);
-        }
-        
-        private void ExaminationStepButtonToggled(bool pressed)
-        {
-            UpdateButtonState(_examinationStepButton, PageCategory.Examination, pressed);
-        }
-        
-        private void ExitButtonToggled(bool pressed)
-        {
-            UpdateButtonState(_exitButton, PageCategory.Exit, pressed);
-        }
-        
-        private void UpdateButtonState(Button button, PageCategory pages, bool pressed)
+        private void UpdateButtonState(bool pressed, PageCategory pages)
         {
             if (pressed)
             {

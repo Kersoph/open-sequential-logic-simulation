@@ -7,7 +7,7 @@ namespace Osls.St.Boolean
     {
         #region ==================== Fields Properties ====================
         private readonly BooleanExpression _target;
-        private string _trail;
+        private readonly string _trail;
         #endregion
         
         

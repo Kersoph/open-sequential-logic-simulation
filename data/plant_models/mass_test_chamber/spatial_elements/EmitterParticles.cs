@@ -12,6 +12,11 @@ namespace Osls.Plants.MassTestChamber
         /// true if the process is valid and mass is added
         /// </summary>
         public bool IsProvidingMass { get; private set; }
+        
+        /// <summary>
+        /// true if the particles are not caged and start roaming in the area
+        /// </summary>
+        public bool IsLeakingParticles { get; private set; }
         #endregion
         
         
@@ -32,6 +37,7 @@ namespace Osls.Plants.MassTestChamber
             if (Emitting) Emitting = false;
             IsProvidingMass = false;
             ShowAsToFarAway(1f - cart.RailPosition);
+            IsLeakingParticles = false;
         }
         
         /// <summary>
@@ -45,6 +51,7 @@ namespace Osls.Plants.MassTestChamber
             {
                 ShowAsInvalidField();
                 IsProvidingMass = false;
+                IsLeakingParticles = true;
             }
             else
             {
@@ -54,17 +61,20 @@ namespace Osls.Plants.MassTestChamber
                     {
                         ShowAsCorrect();
                         IsProvidingMass = true;
+                        IsLeakingParticles = false;
                     }
                     else
                     {
                         ShowAsToFarAway(1f - cart.RailPosition);
                         IsProvidingMass = false;
+                        IsLeakingParticles = false;
                     }
                 }
                 else
                 {
                     ShowAsNoFocus();
                     IsProvidingMass = false;
+                    IsLeakingParticles = true;
                 }
             }
         }

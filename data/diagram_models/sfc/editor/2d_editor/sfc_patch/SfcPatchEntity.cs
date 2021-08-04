@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Osls.SfcEditor
 {
     /// <summary>
-    /// Entity calss to store the informations for a SFC patch
+    /// Entity class to store the informations for a SFC patch
     /// </summary>
     public class SfcPatchEntity
     {
@@ -37,14 +37,14 @@ namespace Osls.SfcEditor
         public SfcBranchLineType LowerBranch { get; set; }
         /// <summary>
         /// The raw condition text when the transition should fire.
-        /// It is interpreted and formed to a logical model. (Can be invaild)
+        /// It is interpreted and formed to a logical model. (Can be invalid)
         /// </summary>
         public string TransitionText { get; set; }
         /// <summary>
         /// Contains the action entries for the step in this patch.
         /// </summary>
         public List<SfcActionEntity> ActionEntries { get; private set; }
-        #endregion;
+        #endregion
         
         
         #region ==================== Public ====================
@@ -94,12 +94,14 @@ namespace Osls.SfcEditor
         {
             int x = reader.ReadInt32();
             int y = reader.ReadInt32();
-            SfcPatchEntity entity = new SfcPatchEntity(x, y);
-            entity.SfcStepType = (SfcStepType)reader.ReadInt32();
-            entity.StepName = reader.ReadString();
-            entity.UpperBranch = (SfcBranchLineType)reader.ReadInt32();
-            entity.LowerBranch = (SfcBranchLineType)reader.ReadInt32();
-            entity.TransitionText = reader.ReadString();
+            SfcPatchEntity entity = new SfcPatchEntity(x, y)
+            {
+                SfcStepType = (SfcStepType)reader.ReadInt32(),
+                StepName = reader.ReadString(),
+                UpperBranch = (SfcBranchLineType)reader.ReadInt32(),
+                LowerBranch = (SfcBranchLineType)reader.ReadInt32(),
+                TransitionText = reader.ReadString()
+            };
             int entryCount = reader.ReadInt32();
             for (int i = 0; i < entryCount; i++)
             {
@@ -149,7 +151,7 @@ namespace Osls.SfcEditor
         /// </summary>
         StartingStep,
         /// <summary>
-        /// This step cell is a jump, connectiong it to another cell.
+        /// This step cell is a jump, connecting it to another cell.
         /// </summary>
         Jump
     }
@@ -165,7 +167,7 @@ namespace Osls.SfcEditor
         /// </summary>
         Single,
         /// <summary>
-        /// This branch line is used as a aprallel branch/merge
+        /// This branch line is used as a parallel branch/merge
         /// </summary>
         Double,
     }

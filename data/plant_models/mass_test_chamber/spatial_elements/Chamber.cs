@@ -1,4 +1,5 @@
 using Godot;
+using Osls.Bubbles;
 
 
 namespace Osls.Plants.MassTestChamber
@@ -18,6 +19,8 @@ namespace Osls.Plants.MassTestChamber
         public CentralParticles Central { get; private set; }
         public Particles Discharge { get; private set; }
         public Particles Laser { get; private set; }
+        public EmergencyActors EmergencyActors { get; private set; }
+        public bool HadParticleLeakage { get; private set; }
         #endregion
         
         
@@ -37,6 +40,8 @@ namespace Osls.Plants.MassTestChamber
             Central.Setup();
             Discharge = GetNode<Particles>("DischargeParticles");
             Laser = GetNode<Particles>("LaserParticles");
+            EmergencyActors = GetNode<EmergencyActors>("EmergencyActors");
+            EmergencyActors.Setup();
         }
         
         /// <summary>
@@ -48,6 +53,7 @@ namespace Osls.Plants.MassTestChamber
             UpdateFocus(master, deltaTime);
             UpdateCentralMass(master, deltaTime);
             UpdateDischarge(master, deltaTime);
+            UpdateEmergencyActors(deltaTime);
         }
         #endregion
         
@@ -141,6 +147,22 @@ namespace Osls.Plants.MassTestChamber
         {
             Central.Visible = false;
             Central.CollectedMass = 0f;
+        }
+        
+        /// <summary>
+        /// Decoration to be consistent with the emergency system lesson
+        /// </summary>
+        private void UpdateEmergencyActors(int deltaTime)
+        {
+            if (Emitter.IsLeakingParticles || Central.IsLeakingParticles)
+            {
+                HadParticleLeakage = true;
+            }
+            if (HadParticleLeakage)
+            {
+                EmergencyActors.EmergencyLight.Update(true, deltaTime);
+                EmergencyActors.Alarm.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 1.0f);
+            }
         }
         #endregion
     }

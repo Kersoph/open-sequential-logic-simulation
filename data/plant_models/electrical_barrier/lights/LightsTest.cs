@@ -180,15 +180,15 @@ namespace Osls.Plants.ElectricalBarrier
         private void SetStars()
         {
             bool lightsBroken = _simulation.Subscene.TunnelLights.Broken;
-            if (_lightsOk && _turnOffOk && !lightsBroken)
+            if (_lightsOk && _turnOffOk && !lightsBroken && _isExecutable)
             {
                 _openedLesson.SetAndSaveStars(3);
             }
-            else if (_lightsOk && (_turnOffOk || _turnOffClose))
+            else if (_lightsOk && (_turnOffOk || _turnOffClose) && _isExecutable)
             {
                 _openedLesson.SetAndSaveStars(2);
             }
-            else if (_lightsOk)
+            else if (_lightsOk && _isExecutable)
             {
                 _openedLesson.SetAndSaveStars(1);
             }

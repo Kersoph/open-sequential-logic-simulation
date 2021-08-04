@@ -80,6 +80,8 @@ namespace Osls.Plants.MassTestChamber
                 RailPosition = 1f;
                 _endStopCollisionTime += deltaTime;
                 Damaged = true;
+                GetNode<Particles>("CrashSparkles").Emitting = true;
+                GetNode<Particles>("CrashSparkles").Visible = true;
                 CheckBreakdown();
             }
             else if (RailPosition < 0f)
@@ -87,7 +89,13 @@ namespace Osls.Plants.MassTestChamber
                 RailPosition = 0f;
                 _endStopCollisionTime += deltaTime;
                 Damaged = true;
+                GetNode<Particles>("CrashSparkles").Emitting = true;
+                GetNode<Particles>("CrashSparkles").Visible = true;
                 CheckBreakdown();
+            }
+            else
+            {
+                GetNode<Particles>("CrashSparkles").Emitting = false;
             }
             Vector3 position = (1f - RailPosition) * _backPosition + RailPosition * _frontPosition;
             Translation = position;
@@ -99,6 +107,7 @@ namespace Osls.Plants.MassTestChamber
             {
                 IsBroken = true;
                 GetNode<Particles>("Smoke").Visible = true;
+                GetNode<Particles>("CrashSparkles").Emitting = false;
             }
         }
         #endregion

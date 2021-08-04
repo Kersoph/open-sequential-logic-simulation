@@ -85,9 +85,11 @@ namespace Osls.SfcSimulation.Viewer
             _lessonView = GetNode<LessonView>("HscRelative/LessonView");
             _lessonView.LoadAndShowInfo(openedLesson);
             _loadedSimulationNode = _lessonView.PlantView.LoadedSimulationNode;
-            ProcessingData data = new ProcessingData();
-            data.InputRegisters = new StateTable(_loadedSimulationNode.SimulationOutput);
-            data.OutputRegisters = new StateTable(_loadedSimulationNode.SimulationInput);
+            ProcessingData data = new ProcessingData
+            {
+                InputRegisters = new StateTable(_loadedSimulationNode.SimulationOutput),
+                OutputRegisters = new StateTable(_loadedSimulationNode.SimulationInput)
+            };
             return data;
         }
         

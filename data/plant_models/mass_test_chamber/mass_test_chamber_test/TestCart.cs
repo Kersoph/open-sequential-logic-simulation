@@ -3,8 +3,8 @@ namespace Osls.Plants.MassTestChamber
     public class TestCart
     {
         #region ==================== Fields / Properties ====================
-        private Cart _cart;
-        private string _name;
+        private readonly Cart _cart;
+        private readonly string _name;
         public bool ReportedDamage { get; set; }
         public bool ReportedBreakdown { get; set; }
         #endregion
@@ -23,7 +23,7 @@ namespace Osls.Plants.MassTestChamber
         /// <summary>
         /// Observes the cart and reports damage
         /// </summary>
-        public void Observe(Test master)
+        public void Observe(MassTestChamberTest master)
         {
             if (_cart.Damaged && !ReportedDamage)
             {
