@@ -1,7 +1,7 @@
 {
     "Title": "[center]Electrical Road Barrier[/center]",
-    "Description": "There are various electrical road barriers installed to prevent access to vehicles. As an introduction example we use a simple barrier with a motor to lift or lower the barrier and a sensor when the opened or closed position are reached. A Guard in the right green building next to the barrier signals when the road should be blocked or passable.",
-    "Goal": "Create a sequential function chart to let vehicles pass the checkpoint according to the guards signal.",
+    "Description": "[fill]There are various electrical road barriers installed to prevent access to vehicles. As an introduction example we use a simple [b]barrier with a motor[/b] to lift or lower the barrier and a [b]sensor when the opened or closed position are reached[/b]. A Guard in the right green building next to the barrier signals when the road should be blocked or passable.[/fill]",
+    "Goal": "[fill]Create a sequential function chart to let vehicles pass the checkpoint according to the guards signal.[/fill]",
 	"Simulation": "res://data/plant_models/electrical_barrier/ElectricalBarrier.tscn",
 	"Test": "res://data/plant_models/electrical_barrier/ElectricalBarrierTest.tscn"
 }
