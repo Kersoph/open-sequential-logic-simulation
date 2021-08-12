@@ -7,7 +7,7 @@
 [ext_resource path="res://data/core/theme/rect/LightHoverStyle.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.470588, 0.470588, 0.470588, 0.588235 )
+bg_color = Color( 0.627451, 0.627451, 0.627451, 1 )
 corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id=2]
@@ -18,7 +18,7 @@ bg_color = Color( 1, 1, 0.705882, 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 content_margin_bottom = 5.0
-bg_color = Color( 0.313726, 0.313726, 0.313726, 1 )
+bg_color = Color( 0.235294, 0.235294, 0.235294, 1 )
 anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id=5]
@@ -56,7 +56,7 @@ border_width_bottom = 1
 border_color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.470588, 0.470588, 0.470588, 0.588235 )
+bg_color = Color( 0.627451, 0.627451, 0.627451, 1 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 1, 1, 0.705882, 1 )
@@ -66,7 +66,7 @@ bg_color = Color( 1, 1, 0.705882, 1 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 content_margin_left = 5.0
-bg_color = Color( 0.313726, 0.313726, 0.313726, 1 )
+bg_color = Color( 0.235294, 0.235294, 0.235294, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=13]
 
