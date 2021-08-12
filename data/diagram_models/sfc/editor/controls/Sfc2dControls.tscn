@@ -147,6 +147,7 @@ __meta__ = {
 
 [node name="Help" parent="." instance=ExtResource( 11 )]
 visible = false
+margin_right = -4.0
 
 [node name="TextInfo" type="Label" parent="."]
 anchor_right = 1.0
