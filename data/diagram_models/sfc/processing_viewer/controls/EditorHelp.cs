@@ -1,7 +1,8 @@
 using Godot;
+using Osls.SfcEditor;
 
 
-namespace Osls.SfcSimulation.Viewer
+namespace Osls.SfcEditor
 {
     public class EditorHelp : Button
     {
@@ -13,7 +14,7 @@ namespace Osls.SfcSimulation.Viewer
         
         public void OnButtonPressed()
         {
-            GetNode<Control>("../Help").Visible = true;
+            GetNode<EditorControls>("..").SfcEditorNode.HelpPage.Visible = true;
         }
         #endregion
     }

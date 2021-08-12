@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorReload.cs" type="Script" id=1]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorZoomOut.cs" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/FileDialog.cs" type="Script" id=8]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/EditorControls.cs" type="Script" id=9]
 [ext_resource path="res://data/core/theme/font/RobotoRegularFont.tres" type="DynamicFont" id=10]
-[ext_resource path="res://data/diagram_models/sfc/help/HelpPage.tscn" type="PackedScene" id=11]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/controls/EditorHelp.cs" type="Script" id=12]
 [ext_resource path="res://data/core/theme/font/RobotoRegularShadedFont.tres" type="DynamicFont" id=13]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/TextInfo.cs" type="Script" id=14]
@@ -144,10 +143,6 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Help" parent="." instance=ExtResource( 11 )]
-visible = false
-margin_right = -4.0
 
 [node name="TextInfo" type="Label" parent="."]
 anchor_right = 1.0
