@@ -90,17 +90,17 @@ namespace Osls.SfcEditor
         {
             if (@event.IsActionPressed("ui_translate"))
             {
-                _lastDragPosition = GetViewport().GetMousePosition();
-                _isDragging = true;
+                StartDrag();
             }
             else if (@event.IsActionReleased("ui_translate"))
             {
-                _isDragging = false;
+                StopDrag();
             }
         }
         
         /// <summary>
         /// Using secondary move buttons only when they are not used for another control
+        /// Generally used here for mouse interactions.
         /// </summary>
         public override void _GuiInput(InputEvent @event)
         {
@@ -111,6 +111,56 @@ namespace Osls.SfcEditor
             else if (@event.IsActionReleased("ui_translate_idle"))
             {
                 StopDrag();
+            }
+            else if (@event.IsActionPressed("ui_left", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(50f, 0f);
+            }
+            else if (@event.IsActionPressed("ui_right", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(-50f, 0f);
+            }
+            else if (@event.IsActionPressed("ui_up", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(0f, 50f);
+            }
+            else if (@event.IsActionPressed("ui_down", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(0f, -50f);
+            }
+        }
+        
+        /// <summary>
+        /// Called when an Godot.InputEvent hasn't been consumed by Godot.Node._Input(Godot.InputEvent)
+        /// or any GUI. The input event propagates up through the node tree until a node consumes it.
+        /// Generally used here for key interactions.
+        /// </summary>
+        public override void _UnhandledInput(InputEvent @event)
+        {
+            if (@event.IsActionPressed("ui_left", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(50f, 0f);
+                GetTree().SetInputAsHandled();
+            }
+            else if (@event.IsActionPressed("ui_right", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(-50f, 0f);
+                GetTree().SetInputAsHandled();
+            }
+            else if (@event.IsActionPressed("ui_up", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(0f, 50f);
+                GetTree().SetInputAsHandled();
+            }
+            else if (@event.IsActionPressed("ui_down", true))
+            {
+                _renderViewportReferenceRect.RectPosition += new Vector2(0f, -50f);
+                GetTree().SetInputAsHandled();
+            }
+            else if (@event.IsActionPressed("ui_home"))
+            {
+                _renderViewportReferenceRect.RectPosition = new Vector2(0f, 0f);
+                GetTree().SetInputAsHandled();
             }
         }
         
