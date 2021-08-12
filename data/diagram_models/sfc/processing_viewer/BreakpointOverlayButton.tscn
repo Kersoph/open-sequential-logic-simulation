@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepNormal.png" type="Texture" id=1]
 [ext_resource path="res://data/diagram_models/sfc/processing_viewer/BreakpointOverlayButton.cs" type="Script" id=2]
 
+[sub_resource type="StyleBoxEmpty" id=1]
+
 [node name="BreakpointOverlayButton" type="Button"]
 margin_right = 150.0
 margin_bottom = 70.0
+hint_tooltip = "Toggles a breakpoint on this step.
+The simulation will be stopped when a marker activates this step."
 mouse_default_cursor_shape = 2
+custom_styles/focus = SubResource( 1 )
 toggle_mode = true
 flat = true
 script = ExtResource( 2 )
