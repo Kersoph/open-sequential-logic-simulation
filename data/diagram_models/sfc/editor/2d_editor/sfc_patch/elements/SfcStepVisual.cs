@@ -45,8 +45,8 @@ namespace Osls.SfcEditor
         /// </summary>
         public override void OnCreationFocus()
         {
-            GetNode<TextEdit>("StepNameEditor").SelectAll();
-            GetNode<TextEdit>("StepNameEditor").GrabFocus();
+            GetNode<TextEdit>("StepNameEditor").CallDeferred("grab_focus");
+            GetNode<TextEdit>("StepNameEditor").CallDeferred("select_all");
         }
         #endregion
         
