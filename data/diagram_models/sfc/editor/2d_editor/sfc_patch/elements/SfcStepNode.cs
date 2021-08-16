@@ -40,6 +40,7 @@ namespace Osls.SfcEditor
         {
             SfcPatchControl controller = GetNode<SfcPatchNode>("..").SfcPatchControl;
             controller.UpdateSfcStepTo(selectedType);
+            _stepNode.OnCreationFocus();
         }
         
         /// <summary>

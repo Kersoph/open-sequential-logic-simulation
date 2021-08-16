@@ -28,5 +28,12 @@ namespace Osls.SfcEditor
         public virtual void ApplyEdits()
         {
         }
+        
+        /// <summary>
+        /// Called when this step was changed to directly delegate the focus to the control if needed.
+        /// </summary>
+        public virtual void OnCreationFocus()
+        {
+        }
     }
 }
