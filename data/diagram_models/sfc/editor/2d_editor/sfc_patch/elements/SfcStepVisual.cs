@@ -36,6 +36,7 @@ namespace Osls.SfcEditor
         public override void ApplyEdits()
         {
             string stepName = GetNode<TextEdit>("StepNameEditor").Text;
+            if (!string.IsNullOrEmpty(stepName)) stepName = stepName.Replace(' ', '_');
             GetNode<SfcStepNode>("..").NotifyUserUpdatedName(stepName);
         }
         
