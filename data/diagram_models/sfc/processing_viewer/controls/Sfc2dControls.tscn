@@ -109,6 +109,20 @@ toggle_mode = false
 script = ExtResource( 9 )
 _runContinuouslyTexture = ExtResource( 6 )
 _pausedTexture = ExtResource( 10 )
+RunningColor = Color( 0.476563, 1, 0, 0.101961 )
+
+[node name="Color" type="ColorRect" parent="ExecutionControl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Icon" type="TextureRect" parent="ExecutionControl"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
