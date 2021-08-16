@@ -12,6 +12,8 @@ namespace Osls.SfcEditor
     {
         #region ==================== Fields / Properties ====================
         public const int XKeyShift = 16;
+        public const int YKeyMask = 0b1111111111111111;
+        public const int KeyOffset = 1 << 15;
         private readonly Dictionary<int, PatchEntity> _patchMap = new Dictionary<int, PatchEntity>();
         
         /// <summary>
@@ -45,7 +47,9 @@ namespace Osls.SfcEditor
         /// </summary>
         public static int CalculateMapKey(int x, int y)
         {
-            return checked((x << XKeyShift) | y);
+            int xKey = (KeyOffset + x) << XKeyShift;
+            int yKey = (KeyOffset + y) & YKeyMask;
+            return checked(xKey | yKey);
         }
         
         /// <summary>
