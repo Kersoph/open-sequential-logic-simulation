@@ -1,5 +1,4 @@
 using Godot;
-using Osls.Bubbles;
 
 
 namespace Osls.Plants.MassTestChamber
@@ -161,7 +160,6 @@ namespace Osls.Plants.MassTestChamber
             if (HadParticleLeakage)
             {
                 EmergencyActors.EmergencyLight.Update(true, deltaTime);
-                EmergencyActors.Alarm.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 1.0f);
             }
         }
         #endregion

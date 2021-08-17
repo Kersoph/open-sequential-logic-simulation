@@ -6,13 +6,16 @@ namespace Osls.Plants.MassTestChamber
         private const int StepTime = 10;
         private EmergencySystemTest _master;
         private int _currentStageTime;
-        private bool _secondExecution = false;
+        private bool _resetControllerDone;
         
-        public enum Stages { Startup, BuildUp, Leakage, DetectorGap, HornReset, CoolDown, Reset, Wait, Done };
+        public enum Stages { Startup, BuildUp, Leakage, WaitCharges, Reset, Redo, Blackout, DirectReset, Wait, CoolDown, Done };
         public Stages Stage { get; private set; } = Stages.Startup;
         
-        public AlarmHornTest AlarmHornTest { get; private set; }
+        public BatteryTest BatteryTest { get; private set; }
+        public TankTest TankTest { get; private set; }
+        public SafeguardTest SafeguardTest { get; private set; }
         public AlarmLightTest AlarmLightTest { get; private set; }
+        public bool StageRechargeTimedOut { get; private set; }
         #endregion
         
         
@@ -23,7 +26,9 @@ namespace Osls.Plants.MassTestChamber
         public void InitialiseWith(EmergencySystemTest master)
         {
             _master = master;
-            AlarmHornTest = new AlarmHornTest();
+            BatteryTest = new BatteryTest();
+            TankTest = new TankTest();
+            SafeguardTest = new SafeguardTest();
             AlarmLightTest = new AlarmLightTest();
         }
         
@@ -33,8 +38,7 @@ namespace Osls.Plants.MassTestChamber
         public void TestStage()
         {
             _master.SimulationMaster.UpdateSimulation(StepTime);
-            _master.SimulationMaster.UpdateSimulation(StepTime);
-            _currentStageTime += StepTime * 2;
+            _currentStageTime += StepTime;
             switch (Stage)
             {
                 case Stages.Startup:
@@ -46,20 +50,26 @@ namespace Osls.Plants.MassTestChamber
                 case Stages.Leakage:
                     StageLeakage();
                     break;
-                case Stages.DetectorGap:
-                    StageDetectorGap();
-                    break;
-                case Stages.HornReset:
-                    StageHornReset();
-                    break;
-                case Stages.CoolDown:
-                    StageCoolDown();
+                case Stages.WaitCharges:
+                    StageWaitCharges();
                     break;
                 case Stages.Reset:
                     StageReset();
                     break;
+                case Stages.Redo:
+                    StageRedo();
+                    break;
+                case Stages.Blackout:
+                    StageBlackout();
+                    break;
+                case Stages.DirectReset:
+                    StageDirectReset();
+                    break;
                 case Stages.Wait:
                     StageWait();
+                    break;
+                case Stages.CoolDown:
+                    StageCoolDown();
                     break;
             }
         }
@@ -72,16 +82,16 @@ namespace Osls.Plants.MassTestChamber
             _master.PaperLog.Append("[u][b][center]Automated Initial Emergency Test Protocoll[/center][/b][/u]\n");
             _master.PaperLog.Append("[center]Author: HPK    Version: 1.0.17    Supervisor: Dr. Rosenberg[/center]\n\n");
             _master.PaperLog.Append("***Starting protocoll***\n\n");
-            _master.PaperLog.Append("Trying to reset the alarms in every step...\n");
             _currentStageTime = 0;
             Stage = Stages.BuildUp;
         }
         
         private void StageBuildUp()
         {
-            AlarmHornTest.Check(_master, false);
+            BatteryTest.Check(_master, false);
+            TankTest.Check(_master, false);
             AlarmLightTest.Check(_master, false);
-            if (_master.Simulation.ParticleSensorSignal)
+            if (_master.Simulation.SafeguardSignal)
             {
                 _currentStageTime = 0;
                 _master.PaperLog.Append("-- Stage build up done\n");
@@ -90,162 +100,179 @@ namespace Osls.Plants.MassTestChamber
             else if (_currentStageTime > 2500 && _currentStageTime < 2550)
             {
                 _master.Simulation.OnAcknowledgeButtonChange(false);
-                _master.Simulation.OnMuteButtonChange(false);
             }
             else if (_currentStageTime > 500 && _currentStageTime < 550)
             {
                 _master.Simulation.OnAcknowledgeButtonChange(true);
-                _master.Simulation.OnMuteButtonChange(true);
             }
         }
         
         private void StageLeakage()
         {
-            AlarmHornTest.Check(_master, true);
-            AlarmLightTest.Check(_master, true);
-            if (_currentStageTime > 1000)
+            BatteryTest.Check(_master);
+            TankTest.Check(_master);
+            if (_currentStageTime > 100)
             {
+                AlarmLightTest.Check(_master, true);
+                SafeguardTest.Check(_master, true);
                 _currentStageTime = 0;
                 _master.PaperLog.Append("-- Stage leakage done\n");
-                Stage = Stages.DetectorGap;
-            }
-            else if (_currentStageTime > 600)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(false);
-            }
-            else if (_currentStageTime > 500)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(true);
+                Stage = Stages.WaitCharges;
             }
         }
         
-        private void StageDetectorGap()
+        private void StageWaitCharges()
         {
-            AlarmHornTest.Check(_master, true);
+            BatteryTest.Check(_master);
+            TankTest.Check(_master);
+            SafeguardTest.Check(_master, true);
             AlarmLightTest.Check(_master, true);
-            _master.Simulation.SurpressParticleSensorSignal = true;
-            if (_currentStageTime > 500)
+            if ((_master.Simulation.PressureSignal >= 2000 && _master.Simulation.BatterySignal >= 45f)
+            || _currentStageTime > 10000)
             {
+                if (_currentStageTime < 5000)
+                {
+                    _master.PaperLog.Append("Time needed to charge: " + _currentStageTime + "\n");
+                    _master.PaperLog.Append("-- Stage wait for battery and tank done\n");
+                }
+                else
+                {
+                    StageRechargeTimedOut = true;
+                    _master.PaperLog.AppendWarning("-- Stage wait for battery and tank timed out!\n");
+                }
                 _currentStageTime = 0;
-                _master.Simulation.SurpressParticleSensorSignal = false;
-                _master.PaperLog.Append("The particle detector had a gap of 500ms for a short time.\n");
-                _master.PaperLog.Append("-- Stage detector gap done\n");
-                Stage = Stages.HornReset;
-            }
-            else if (_currentStageTime > 300)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(false);
-            }
-            else if (_currentStageTime > 200)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(true);
-            }
-        }
-        
-        private void StageHornReset()
-        {
-            if (_currentStageTime > 500)
-            {
-                _currentStageTime = 0;
-                _master.PaperLog.Append("Operators tried to reset the horn and light\n");
-                _master.PaperLog.Append("-- Stage horn reset done\n");
-                Stage = Stages.CoolDown;
-            }
-            else if (_currentStageTime > 200)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(false);
-                _master.Simulation.OnMuteButtonChange(false);
-                AlarmHornTest.Check(_master, false);
-                AlarmLightTest.Check(_master, true);
-            }
-            else if (_currentStageTime > 100)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(true);
-                _master.Simulation.OnMuteButtonChange(true);
-            }
-        }
-        
-        private void StageCoolDown()
-        {
-            AlarmHornTest.Check(_master, false);
-            AlarmLightTest.Check(_master, true);
-            if (!_master.Simulation.ParticleSensorSignal)
-            {
-                _currentStageTime = 0;
-                _master.PaperLog.Append("-- Stage cool down done\n");
                 Stage = Stages.Reset;
-            }
-            else if (_currentStageTime > 200)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(false);
-                _master.Simulation.OnMuteButtonChange(false);
-            }
-            else if (_currentStageTime > 100)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(true);
-                _master.Simulation.OnMuteButtonChange(true);
             }
         }
         
         private void StageReset()
         {
-            if (_currentStageTime > 1500)
+            if (_currentStageTime > 300)
             {
-                _currentStageTime = 0;
-                _master.PaperLog.Append("Operators tried to reset the horn and light at 100ms and 1100ms\n");
-                _master.PaperLog.Append("-- Stage reset done\n");
-                Stage = Stages.Wait;
-            }
-            else if (_currentStageTime > 1200)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(false);
-                _master.Simulation.OnMuteButtonChange(false);
-                AlarmHornTest.Check(_master, false);
                 AlarmLightTest.Check(_master, false);
-            }
-            else if (_currentStageTime > 1100)
-            {
-                _master.Simulation.OnAcknowledgeButtonChange(true);
-                _master.Simulation.OnMuteButtonChange(true);
+                SafeguardTest.Check(_master, false);
+                _currentStageTime = 0;
+                _master.PaperLog.Append("-- Stage reset alarm done\n");
+                _master.PaperLog.Append("***Reset Simulation***\n");
+                _master.Simulation.ResetSimulation();
+                Stage = Stages.Redo;
             }
             else if (_currentStageTime > 200)
             {
                 _master.Simulation.OnAcknowledgeButtonChange(false);
-                _master.Simulation.OnMuteButtonChange(false);
-                AlarmHornTest.Check(_master, false);
-                AlarmLightTest.Check(_master, true);
             }
             else if (_currentStageTime > 100)
             {
+                BatteryTest.Check(_master, false);
+                TankTest.Check(_master, false);
                 _master.Simulation.OnAcknowledgeButtonChange(true);
-                _master.Simulation.OnMuteButtonChange(true);
+            }
+        }
+        
+        private void StageRedo()
+        {
+            BatteryTest.Check(_master, false);
+            TankTest.Check(_master, false);
+            AlarmLightTest.Check(_master, false);
+            if (_master.Simulation.SafeguardSignal)
+            {
+                _currentStageTime = 0;
+                _master.PaperLog.Append("-- Stage wait for second error done \n");
+                Stage = Stages.Blackout;
+            }
+        }
+        
+        private void StageBlackout()
+        {
+            if (_currentStageTime > 300)
+            {
+                SafeguardTest.Check(_master, true);
+                AlarmLightTest.Check(_master, true);
+                _master.PaperLog.Append("-- Stage controller reset done \n");
+                _currentStageTime = 0;
+                Stage = Stages.DirectReset;
+            }
+            else if (_currentStageTime > 200)
+            {
+            }
+            else if (_currentStageTime > 100)
+            {
+                if (!_resetControllerDone)
+                {
+                    _master.SimulationMaster.Reset();
+                    _master.PaperLog.Append("Recorded controller blackout - restarting... \n");
+                    _resetControllerDone = true;
+                }
+            }
+            else if (_currentStageTime > 50)
+            {
+                AlarmLightTest.Check(_master, true);
+            }
+        }
+        
+        private void StageDirectReset()
+        {
+            BatteryTest.Check(_master, true);
+            TankTest.Check(_master, true);
+            if (_currentStageTime > 450)
+            {
+                SafeguardTest.Check(_master, true);
+                AlarmLightTest.Check(_master, false);
+                _master.PaperLog.Append("-- Stage quickly acknowledge the alarm done \n");
+                _currentStageTime = 0;
+                Stage = Stages.Wait;
+            }
+            else if (_currentStageTime > 300)
+            {
+                _master.Simulation.OnAcknowledgeButtonChange(false);
+            }
+            else if (_currentStageTime > 150)
+            {
+                _master.Simulation.OnAcknowledgeButtonChange(true);
+            }
+            else if (_currentStageTime > 50)
+            {
+                AlarmLightTest.Check(_master, true);
             }
         }
         
         private void StageWait()
         {
-            AlarmHornTest.Check(_master, false);
+            BatteryTest.Check(_master, true);
+            TankTest.Check(_master, true);
             AlarmLightTest.Check(_master, false);
-            if (_currentStageTime > 5000)
+            if ((_master.Simulation.PressureSignal >= 2000 && _master.Simulation.BatterySignal >= 45f)
+            || _currentStageTime > 10000)
             {
-                bool hadErrors = AlarmHornTest.ReportedEarlyActivation
-                    || AlarmHornTest.ReportedEarlyDeactivation
-                    || AlarmLightTest.ReportedEarlyActivation
-                    || AlarmLightTest.ReportedEarlyDeactivation;
-                if (hadErrors || _secondExecution)
+                if (_currentStageTime < 4600)
                 {
-                    _master.PaperLog.Append("\n*** Stopped protocol ***\n\n");
-                    _currentStageTime = 0;
-                    Stage = Stages.Done;
+                    _master.PaperLog.Append("Time needed to charge: " + _currentStageTime + "\n");
+                    _master.PaperLog.Append("-- Stage wait for battery and tank done\n");
                 }
                 else
                 {
-                    _secondExecution = true;
-                    _master.PaperLog.Append("\n*** Trying to reset and execute again ***\n\n");
-                    _master.Simulation.ResetSimulation();
-                    _currentStageTime = 0;
-                    Stage = Stages.BuildUp;
+                    StageRechargeTimedOut = true;
+                    _master.PaperLog.AppendWarning("-- Stage wait for battery and tank timed out!\n");
                 }
+                _currentStageTime = 0;
+                Stage = Stages.CoolDown;
+            }
+        }
+        
+        private void StageCoolDown()
+        {
+            AlarmLightTest.Check(_master, false);
+            if (_currentStageTime > 1000)
+            {
+                _master.PaperLog.Append("\n*** Stopped protocol ***\n\n");
+                _currentStageTime = 0;
+                Stage = Stages.Done;
+            }
+            if (_currentStageTime > 100)
+            {
+                BatteryTest.Check(_master, false);
+                TankTest.Check(_master, false);
+                SafeguardTest.Check(_master, false);
             }
         }
         #endregion

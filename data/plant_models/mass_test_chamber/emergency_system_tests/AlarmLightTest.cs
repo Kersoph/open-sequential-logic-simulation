@@ -23,7 +23,7 @@ namespace Osls.Plants.MassTestChamber
                 }
                 else if (!exceptedState && !ReportedEarlyActivation)
                 {
-                    master.PaperLog.AppendError("The alarm light surprisingly turned on.\n");
+                    master.PaperLog.AppendError("The alarm light is in the wrong state.\n");
                     ReportedEarlyActivation = true;
                 }
             }

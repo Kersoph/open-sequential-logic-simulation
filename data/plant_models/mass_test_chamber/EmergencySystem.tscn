@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/ChamberCore.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/plant_models/mass_test_chamber/EmergencySystem.cs" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/EmitterCart.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/meshes/FocusCart.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/plant_models/mass_test_chamber/spatial_elements/DecorationNode.tscn" type="PackedScene" id=8]
+[ext_resource path="res://data/core/theme/font/RobotoT0FontShaded.tres" type="DynamicFont" id=9]
 
 [node name="EmergencySystem" type="Node"]
 script = ExtResource( 2 )
@@ -26,32 +27,39 @@ fov = 78.0
 
 [node name="UI" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Ack" type="Button" parent="UI"]
 margin_left = -1.0
+margin_top = -1.0
 margin_right = 119.0
-margin_bottom = 26.0
+margin_bottom = 25.0
 theme = ExtResource( 5 )
 text = "ACK Alarm"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Mute" type="Button" parent="UI"]
-margin_left = -1.0
-margin_top = 25.0
-margin_right = 119.0
-margin_bottom = 51.0
-theme = ExtResource( 5 )
-text = "Mute Horn"
+[node name="Failure" type="Panel" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="UI/Failure"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Lost Signal"
+align = 1
+valign = 1
 
 [node name="EmitterCart" parent="." instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -13, 3, 0 )

@@ -15,7 +15,15 @@ namespace Tests.PlantModels.MassTestChamber
         {
             string scenePath = "res://data/plant_models/mass_test_chamber/EmergencySystemTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/mass_test_chamber/EmergencySystemThreeStars.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 2500);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 3, 4000);
+        }
+        
+        [Test]
+        public void OneStar()
+        {
+            string scenePath = "res://data/plant_models/mass_test_chamber/EmergencySystemTest.tscn";
+            string sfcPath = "res://wat_tests/plant_models/mass_test_chamber/EmergencySystemOneStar.sfc";
+            PlantModelRunner.Test(this, scenePath, sfcPath, 1, 4000);
         }
         
         [Test]
@@ -23,7 +31,7 @@ namespace Tests.PlantModels.MassTestChamber
         {
             string scenePath = "res://data/plant_models/mass_test_chamber/EmergencySystemTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/mass_test_chamber/EmergencySystemZeroStars.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 1500);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 4000);
         }
         
         [Test]
@@ -31,7 +39,7 @@ namespace Tests.PlantModels.MassTestChamber
         {
             string scenePath = "res://data/plant_models/mass_test_chamber/EmergencySystemTest.tscn";
             string sfcPath = "res://wat_tests/plant_models/Empty.sfc";
-            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 1500);
+            PlantModelRunner.Test(this, scenePath, sfcPath, 0, 4000);
         }
     }
 }

@@ -86,15 +86,23 @@ namespace Osls.Plants.MassTestChamber
         #region ==================== Helpers ====================
         private void CollectResults()
         {
-            bool hadErrors = !IsExecutable
-                || TestController.AlarmHornTest.ReportedEarlyActivation
-                || TestController.AlarmHornTest.ReportedEarlyDeactivation
+            if (!IsExecutable
+                || TestController.BatteryTest.Overcharged
+                || TestController.TankTest.Overcharged
+                || TestController.SafeguardTest.WrongTime
                 || TestController.AlarmLightTest.ReportedEarlyActivation
-                || TestController.AlarmLightTest.ReportedEarlyDeactivation;
-            if (hadErrors)
+                || TestController.AlarmLightTest.ReportedEarlyDeactivation
+                || Simulation.SystemState == EmergencySystem.State.Failure)
             {
                 PaperLog.Append("[b]Result: 0 Stars[/b]\n");
                 _openedLesson.SetAndSaveStars(0);
+            }
+            else if (TestController.BatteryTest.WrongTime
+                || TestController.TankTest.WrongTime
+                || TestController.StageRechargeTimedOut)
+            {
+                PaperLog.Append("[b]Result: 1 Star[/b]\n");
+                _openedLesson.SetAndSaveStars(1);
             }
             else
             {
