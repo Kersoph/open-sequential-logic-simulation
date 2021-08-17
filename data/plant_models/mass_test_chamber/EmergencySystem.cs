@@ -8,11 +8,11 @@ namespace Osls.Plants.MassTestChamber
     public class EmergencySystem : SimulationPage
     {
         #region ==================== Fields / Properties ====================
-        public const string AlarmLightKey = "=A4-H1";
-        public const string AlarmHornKey = "=A4-P1";
-        public const string ParticleSensorKey = "=A4-B1";
-        public const string AcknowledgeButtonKey = "=A4-S1";
-        public const string MuteButtonKey = "=A4-S2";
+        public const string AlarmLightKey = "H401";
+        public const string AlarmHornKey = "P401";
+        public const string ParticleSensorKey = "B401";
+        public const string AcknowledgeButtonKey = "S401";
+        public const string MuteButtonKey = "S402";
         
         private enum ParticleState { BuildUp, Release, Idle }
         private ParticleState _particleState;

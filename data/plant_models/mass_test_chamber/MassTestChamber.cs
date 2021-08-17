@@ -9,21 +9,21 @@ namespace Osls.Plants.MassTestChamber
     public class MassTestChamber : SimulationPage
     {
         #region ==================== Fields / Properties ====================
-        public const string LaserKey = "=C2-E1";
-        public const string TemperatureSensorKey = "=C2-B6";
-        public const string FieldGeneratorKey = "=A0-G1";
-        public const string MassSufficientKey = "=A0-B3";
-        public const string DetectorKey = "=A0-B4";
+        public const string LaserKey = "E301";
+        public const string TemperatureSensorKey = "B306";
+        public const string FieldGeneratorKey = "G001";
+        public const string MassSufficientKey = "B003";
+        public const string DetectorKey = "B004";
         
-        public const string EmitterMotorKey = "=C0-M1";
-        public const string EmitterKey = "=C0-H1";
-        public const string EmitterBackKey = "=C0-B0";
-        public const string EmitterFrontKey = "=C0-B1";
+        public const string EmitterMotorKey = "M101";
+        public const string EmitterKey = "H101";
+        public const string EmitterBackKey = "B100";
+        public const string EmitterFrontKey = "B101";
         
-        public const string FocusMotorKey = "=C1-M1";
-        public const string FocusKey = "=C1-U1";
-        public const string FocusBackKey = "=C1-B0";
-        public const string FocusFrontKey = "=C1-B1";
+        public const string FocusMotorKey = "M201";
+        public const string FocusKey = "U201";
+        public const string FocusBackKey = "B200";
+        public const string FocusFrontKey = "B201";
         
         public bool FieldGeneratorInput { get; private set; }
         public bool LaserInput { get; private set; }
