@@ -14,6 +14,8 @@ namespace Osls.SfcSimulation.Viewer
     {
         #region ==================== Fields / Properties ====================
         [Export] private NodePath _sfc2dControlsPath = "HscRelative/Sfc2dViewer/Sfc2dControls";
+        private IMainNode _mainNode;
+        
         private LessonView _lessonView;
         private Master _simulationMaster;
         private bool _isExecutable;
@@ -40,9 +42,10 @@ namespace Osls.SfcSimulation.Viewer
         /// </summary>
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
+            _mainNode = mainNode;
             _processingData = InitialisePlant(openedLesson);
             InitialiseDiagram(openedLesson);
-            InitialiseSimulation(mainNode, openedLesson);
+            InitialiseSimulation(openedLesson);
             _breakpoints = new BreakpointManager(_simulationMaster, _sfc2dEditorNode);
             if (!_isExecutable) GetNode<Label>("HscRelative/Sfc2dViewer/ErrorLabel").Visible = true;
         }
@@ -72,6 +75,14 @@ namespace Osls.SfcSimulation.Viewer
         public void ResetController()
         {
             _simulationMaster.Reset();
+        }
+        
+        /// <summary>
+        /// Resets the whole view
+        /// </summary>
+        public void ResetSimulation()
+        {
+            _mainNode.UserRequestsChangeTo(PageCategory.Simulation);
         }
         #endregion
         
@@ -107,9 +118,9 @@ namespace Osls.SfcSimulation.Viewer
         /// <summary>
         /// Loads the simulation node and creates a simulation master
         /// </summary>
-        private void InitialiseSimulation(IMainNode mainNode, ILessonEntity openedLesson)
+        private void InitialiseSimulation(ILessonEntity openedLesson)
         {
-            _loadedSimulationNode.InitialiseWith(mainNode, openedLesson);
+            _loadedSimulationNode.InitialiseWith(_mainNode, openedLesson);
             _simulationMaster = new Master(_processingData.SfcEntity, _loadedSimulationNode);
             _loadedSimulationNode.SetupUi();
             _isExecutable = _simulationMaster.IsProgramSimulationValid();

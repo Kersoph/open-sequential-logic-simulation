@@ -29,7 +29,7 @@ scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
 [node name="Sfc2dControls" parent="HscRelative/Sfc2dViewer" instance=ExtResource( 1 )]
-margin_left = -218.0
+margin_left = -387.0
 margin_right = 7.0
 mouse_default_cursor_shape = 8
 

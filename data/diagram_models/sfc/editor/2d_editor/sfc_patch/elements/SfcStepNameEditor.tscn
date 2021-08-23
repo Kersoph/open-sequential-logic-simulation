@@ -22,6 +22,7 @@ custom_constants/line_spacing = -2
 text = "StepName"
 wrap_enabled = true
 caret_blink = true
+caret_blink_speed = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -56,17 +56,21 @@ namespace Osls.Plants.ElectricalBarrier
         
         public override void _Process(float delta)
         {
-            switch (_stage)
+            int simulationSteps = LookupTargetSimulationCycles();
+            for (int i = 0; i < simulationSteps; i++)
             {
-                case Stages.Regular:
-                    TestRegular();
-                    break;
-                case Stages.TurnOffTime:
-                    TestTurnOff();
-                    break;
-                case Stages.CreateResult:
-                    CreateResult();
-                    break;
+                switch (_stage)
+                {
+                    case Stages.Regular:
+                        TestRegular();
+                        break;
+                    case Stages.TurnOffTime:
+                        TestTurnOff();
+                        break;
+                    case Stages.CreateResult:
+                        CreateResult();
+                        break;
+                }
             }
         }
         #endregion

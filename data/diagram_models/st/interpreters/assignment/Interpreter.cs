@@ -33,7 +33,7 @@ namespace Osls.St.Assignment
         {
             string targetWord = data.Current;
             data.MoveNext();
-            if (data.IsEndReached) return null;
+            if (data.IsEndReached) return InterpretAsDirectBooleanAssignment(targetWord, context);
             string assignmentSymbol = data.Current;
             data.MoveNext();
             if (!AssignmentSymbol.Contains(assignmentSymbol) || data.IsEndReached) return null;
@@ -49,6 +49,19 @@ namespace Osls.St.Assignment
                 return new Numerical(targetWord, sourceExpression, context);
             }
             return null; // not valid
+        }
+        
+        /// <summary>
+        /// If there is only one word in the action box, it can be assumed that the user likes to activate / set a boolean.
+        /// From a feature request: It seem to be like this in other SFC-ST actions.
+        /// </summary>
+        private static Boolean InterpretAsDirectBooleanAssignment(string targetWord, IProcessingData context)
+        {
+            if (context.OutputRegisters.ContainsBoolean(targetWord))
+            {
+                return new Boolean(targetWord, new St.Boolean.Constant("true"), context);
+            }
+            return null;
         }
         #endregion
     }

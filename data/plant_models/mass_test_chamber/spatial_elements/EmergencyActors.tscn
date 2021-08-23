@@ -21,6 +21,12 @@ spot_angle = 60.0
 spot_angle_attenuation = 4.14106
 script = ExtResource( 1 )
 
-[node name="Alarm" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 18, -8 )
+[node name="Pressure" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 8, -8 )
+visible = false
+pixel_size = 0.12
+
+[node name="Capacitor" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, -27 )
+visible = false
 pixel_size = 0.14

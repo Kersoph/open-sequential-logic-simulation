@@ -21,9 +21,13 @@ namespace Osls.SfcSimulation.Viewer
         {
             CheckSet = new HashSet<int>();
             _master = master;
-            foreach (var entity in _sfc2dEditorNode.Sfc2dEditorControl.ControlMap)
+            IReadOnlyDictionary<int, SfcPatchControl> map = _sfc2dEditorNode.Sfc2dEditorControl.ControlMap;
+            foreach (var entity in map)
             {
-                BreakpointOverlayButton.CreateAndSetup(entity.Key, entity.Value.SfcPatchNode, this);
+                if (entity.Value.Data.ContainsRealStep())
+                {
+                    BreakpointOverlayButton.CreateAndSetup(entity.Key, entity.Value.SfcPatchNode, this);
+                }
             }
         }
         #endregion

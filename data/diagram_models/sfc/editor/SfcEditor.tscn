@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://data/diagram_models/sfc/editor/SfcEditorNode.cs" type="Script" id=1]
 [ext_resource path="res://data/core/theme/nodes/HscRelative.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/diagram_models/sfc/help/HelpPage.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/diagram_models/sfc/editor/2d_editor/Sfc2dEditor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/diagram_models/sfc/editor/controls/Sfc2dControls.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/core/lesson/viewer/LessonView.tscn" type="PackedScene" id=7]
@@ -39,3 +40,8 @@ margin_left = 1328.0
 margin_right = 1840.0
 margin_bottom = 1016.0
 mouse_filter = 2
+
+[node name="HelpPage" parent="." instance=ExtResource( 3 )]
+visible = false
+margin_left = 80.0
+margin_top = 1.0

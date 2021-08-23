@@ -14,11 +14,13 @@ namespace Osls.SfcEditor
         [Export] private NodePath LessonViewPath = "HscRelative/LessonView";
         [Export] private NodePath Sfc2dEditorPath = "HscRelative/Sfc2dBackground/Sfc2dEditor";
         [Export] private NodePath EditorControlsPath = "HscRelative/Sfc2dBackground/Sfc2dControls";
+        [Export] private NodePath EditorHelpPath = "HelpPage";
         
         public ILessonEntity OpenedLesson { get; private set; }
         public IMainNode MainNode { get; private set; }
         public LessonView LessonView { get; private set; }
         public Sfc2dEditorNode Sfc2dEditorNode { get; private set; }
+        public HelpPage HelpPage { get; private set; }
         #endregion
         
         
@@ -33,6 +35,7 @@ namespace Osls.SfcEditor
             LessonView = GetNode<LessonView>(LessonViewPath);
             LessonView.LoadAndShowInfo(openedLesson);
             Sfc2dEditorNode = GetNode<Sfc2dEditorNode>(Sfc2dEditorPath);
+            HelpPage = GetNode<HelpPage>(EditorHelpPath);
             ProcessingData data = new ProcessingData
             {
                 InputRegisters = new StateTable(LessonView.PlantView.LoadedSimulationNode.SimulationOutput),

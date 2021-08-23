@@ -168,32 +168,33 @@ namespace Osls.Plants.ElectricalBarrier
         
         private void OnWait(ElectricalBarrier master, int deltaTime)
         {
+            if (!master.Guard.AllowVehiclePass) return;
             WaitingTime += deltaTime;
-            if (WaitingTime > 3000 && WaitingTime < 3500 && master.Guard.AllowVehiclePass)
+            if (WaitingTime > 3000 && WaitingTime < 3500)
             {
                 Bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Confused, 1);
             }
-            else if (WaitingTime > 6000 && WaitingTime < 6800 && master.Guard.AllowVehiclePass)
+            else if (WaitingTime > 6000 && WaitingTime < 6800)
             {
                 Bubble.ShowAs(BubbleSprite.Bubble.Think, BubbleSprite.Expression.Annoyed, 0.5f);
             }
-            else if (WaitingTime > 6800 && WaitingTime < 7500 && master.Guard.AllowVehiclePass)
+            else if (WaitingTime > 6800 && WaitingTime < 7500)
             {
                 Bubble.ShowAs(BubbleSprite.Bubble.Say, BubbleSprite.Expression.Confused, 1);
             }
-            else if (WaitingTime > 15000 && WaitingTime < 15500 && master.Guard.AllowVehiclePass)
+            else if (WaitingTime > 15000 && WaitingTime < 15500)
             {
                 Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Surprised, 1);
             }
-            else if (WaitingTime > 25000 && WaitingTime < 26000 && master.Guard.AllowVehiclePass)
+            else if (WaitingTime > 25000 && WaitingTime < 26000)
             {
                 Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Surprised, 1);
             }
-            else if (WaitingTime > 26000 && WaitingTime < 26500 && master.Guard.AllowVehiclePass)
+            else if (WaitingTime > 26000 && WaitingTime < 26500)
             {
                 Bubble.ShowAs(BubbleSprite.Bubble.Say, BubbleSprite.Expression.Frustrated, 1);
             }
-            else if (WaitingTime > 26500 && WaitingTime < 27000 && master.Guard.AllowVehiclePass)
+            else if (WaitingTime > 26500 && WaitingTime < 27000)
             {
                 Bubble.ShowAs(BubbleSprite.Bubble.Shout, BubbleSprite.Expression.Exclamation, 3);
             }

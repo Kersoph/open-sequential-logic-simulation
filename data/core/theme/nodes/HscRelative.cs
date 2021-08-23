@@ -9,7 +9,7 @@ namespace Osls
     public class HscRelative : HSplitContainer
     {
         #region ==================== Fields / Properties ====================
-        [Export] public float RelativeOffst = 1320f/1840f;
+        [Export] public float RelativeOffset = 1320f/1840f;
         #endregion
         
         
@@ -22,7 +22,7 @@ namespace Osls
             {
                 minSizeOffset = control.RectMinSize.x;
             }
-            SplitOffset = Mathf.RoundToInt(RectSize.x * RelativeOffst - minSizeOffset);
+            SplitOffset = Mathf.RoundToInt(RectSize.x * RelativeOffset - minSizeOffset);
         }
         #endregion
     }

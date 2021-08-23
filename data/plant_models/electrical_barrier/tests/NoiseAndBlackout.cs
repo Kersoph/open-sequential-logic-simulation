@@ -102,6 +102,10 @@ namespace Osls.Plants.ElectricalBarrier
             {
                 builder.AppendLine("At least one invalid car could pass");
             }
+            if (_simulation.Vehicle.WaitingTime > 6000)
+            {
+                builder.AppendLine("Customers complain about the behavior of the barrier.");
+            }
             
             if (builder.Length == 0)
             {

@@ -79,7 +79,7 @@ namespace Osls.Plants.ElectricalBarrier
             if (builder.Length == 0)
             {
                 Result = 1;
-                GetNode<Label>("Label").Text += "\nOk!";
+                GetNode<Label>("Label").Text += "\nPassed!";
             }
             else
             {

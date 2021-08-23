@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://data/core/lesson/viewer/LessonInfo.cs" type="Script" id=1]
 [ext_resource path="res://data/core/lesson/viewer/PlantView.cs" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://data/core/lesson/viewer/elements/DataEntry.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/core/landing_page/RichTextLabel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/core/theme/font/RobotoBoldFont.tres" type="DynamicFont" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="LessonView" type="Control"]
 anchor_left = 1.0
@@ -57,6 +59,8 @@ margin_top = 2.0
 margin_right = -2.0
 margin_bottom = -2.0
 focus_mode = 2
+custom_styles/focus = SubResource( 1 )
+custom_colors/selection_color = Color( 0, 0, 0, 0.196078 )
 selection_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="LessonInfo"]

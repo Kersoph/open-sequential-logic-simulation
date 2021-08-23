@@ -8,7 +8,8 @@ namespace Osls.Plants.MassTestChamber
     {
         #region ==================== Fields / Properties ====================
         public EmergencyLight EmergencyLight { get; private set; }
-        public BubbleSprite Alarm { get; private set; }
+        public BubbleSprite Pressure { get; private set; }
+        public BubbleSprite Battery { get; private set; }
         #endregion
         
         
@@ -20,7 +21,8 @@ namespace Osls.Plants.MassTestChamber
         {
             EmergencyLight = GetNode<EmergencyLight>("EmergencyLight");
             EmergencyLight.Update(false, 0);
-            Alarm = GetNode<BubbleSprite>("Alarm");
+            Pressure = GetNode<BubbleSprite>("Pressure");
+            Battery = GetNode<BubbleSprite>("Capacitor");
         }
         #endregion
     }

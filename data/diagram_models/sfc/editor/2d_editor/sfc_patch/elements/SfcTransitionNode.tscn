@@ -15,6 +15,9 @@ margin_right = 318.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 318, 40 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TransitionTextEditor" type="TextEdit" parent="."]
 anchor_right = 1.0
@@ -25,6 +28,7 @@ custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/selection_color = Color( 1, 1, 0.705882, 1 )
+custom_colors/caret_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_constants/line_spacing = -5
@@ -37,6 +41,7 @@ syntax_highlighting = true
 override_selected_font_color = true
 wrap_enabled = true
 caret_blink = true
+caret_blink_speed = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }

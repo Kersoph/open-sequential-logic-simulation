@@ -91,20 +91,41 @@ namespace Tests.SfcEditor.Interpreters
         }
         
         [Test]
-        public void BooleanIO()
+        [RunWith("testBool", "testBool", true, "outputBoolTest", "outputBoolTest = true", true)]
+        [RunWith("testBool", "invalidBool", false, "outputBoolTest", "outputBoolTest = 1", false)]
+        [RunWith("testBool", "testBool and true", true, "outputBoolTest", "outputBoolTest", true)]
+        public void BooleanIO(string iBKey, string bTest, bool iBValid, string iAKey, string assignment, bool iAValid)
         {
-            var boolKeys = new List<StateEntry<bool>>()
+            var inputBoolKeys = new List<StateEntry<bool>>()
             {
-                { new StateEntry<bool>("testBool", true, "", "") }
+                { new StateEntry<bool>(iBKey, true, "", "") }
             };
-            var inputRegisters = new StateTable(boolKeys, new List<StateEntry<int>>());
-            var outputRegisters = new StateTable(new List<StateEntry<bool>>(), new List<StateEntry<int>>());
+            var outputBoolKeys = new List<StateEntry<bool>>()
+            {
+                { new StateEntry<bool>(iAKey, true, "", "") }
+            };
+            var inputRegisters = new StateTable(inputBoolKeys, new List<StateEntry<int>>());
+            var outputRegisters = new StateTable(outputBoolKeys, new List<StateEntry<int>>());
             ProcessingUnitMock pu = new ProcessingUnitMock(inputRegisters, outputRegisters);
-            BooleanExpression expressionA = Interpreter.AsBooleanExpression("testBool", pu);
-            Assert.IsTrue(expressionA.IsValid());
-            Assert.IsEqual(expressionA.Result(pu), true);
-            BooleanExpression expressionB = Interpreter.AsBooleanExpression("invalidBool", pu);
-            Assert.IsTrue(expressionB == null || !expressionB.IsValid());
+            BooleanExpression expressionA = Interpreter.AsBooleanExpression(bTest, pu);
+            if (iBValid)
+            {
+                Assert.IsTrue(expressionA.IsValid());
+                Assert.IsEqual(expressionA.Result(pu), true);
+            }
+            else
+            {
+                Assert.IsTrue(expressionA == null || !expressionA.IsValid());
+            }
+            var ae = Osls.St.Assignment.Interpreter.AsAssignmentExpression(assignment, pu);
+            if (iAValid)
+            {
+                Assert.IsTrue(ae.IsValid());
+            }
+            else
+            {
+                Assert.IsTrue(ae == null || !ae.IsValid());
+            }
         }
         
         [Test]

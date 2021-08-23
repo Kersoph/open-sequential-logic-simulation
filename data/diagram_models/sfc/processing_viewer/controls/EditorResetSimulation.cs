@@ -1,10 +1,9 @@
 using Godot;
-using Osls.SfcEditor;
 
 
-namespace Osls.SfcEditor
+namespace Osls.SfcSimulation.Viewer
 {
-    public class EditorHelp : Button
+    public class EditorResetSimulation : Button
     {
         #region ==================== Public Methods ====================
         public override void _Ready()
@@ -14,7 +13,7 @@ namespace Osls.SfcEditor
         
         public void OnButtonPressed()
         {
-            GetNode<EditorControls>("..").SfcEditorNode.HelpPage.Visible = true;
+            GetNode<Sfc2dControls>("..").SfcSimulationViewer.ResetSimulation();
         }
         #endregion
     }

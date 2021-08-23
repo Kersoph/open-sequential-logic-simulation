@@ -53,31 +53,35 @@ namespace Osls.Plants.MassTestChamber
         
         public override void _Process(float delta)
         {
-            switch (_stage)
+            int simulationSteps = LookupTargetSimulationCycles();
+            for (int i = 0; i < simulationSteps; i++)
             {
-                case Stages.Startup:
-                    if (!IsExecutable)
-                    {
-                        PaperLog.AppendError("SFC is invalid!\nAborting tests.\n");
-                        _stage = Stages.CollectResults;
-                    }
-                    else
-                    {
-                        _stage = Stages.Test;
-                    }
-                    break;
-                case Stages.Test:
-                    TestController.TestStage();
-                    if (TestController.Stage == EmergencySystemTestStages.Stages.Done) _stage = Stages.CollectResults;
-                    break;
-                case Stages.CollectResults:
-                    CollectResults();
-                    _stage = Stages.Done;
-                    break;
-                case Stages.Done:
-                    GetNode<Viewport>("ViewportContainer/Viewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
-                    _stage = Stages.Idle;
-                    break;
+                switch (_stage)
+                {
+                    case Stages.Startup:
+                        if (!IsExecutable)
+                        {
+                            PaperLog.AppendError("SFC is invalid!\nAborting tests.\n");
+                            _stage = Stages.CollectResults;
+                        }
+                        else
+                        {
+                            _stage = Stages.Test;
+                        }
+                        break;
+                    case Stages.Test:
+                        TestController.TestStage();
+                        if (TestController.Stage == EmergencySystemTestStages.Stages.Done) _stage = Stages.CollectResults;
+                        break;
+                    case Stages.CollectResults:
+                        CollectResults();
+                        _stage = Stages.Done;
+                        break;
+                    case Stages.Done:
+                        GetNode<Viewport>("ViewportContainer/Viewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
+                        _stage = Stages.Idle;
+                        break;
+                }
             }
         }
         #endregion
@@ -86,15 +90,23 @@ namespace Osls.Plants.MassTestChamber
         #region ==================== Helpers ====================
         private void CollectResults()
         {
-            bool hadErrors = !IsExecutable
-                || TestController.AlarmHornTest.ReportedEarlyActivation
-                || TestController.AlarmHornTest.ReportedEarlyDeactivation
+            if (!IsExecutable
+                || TestController.BatteryTest.Overcharged
+                || TestController.TankTest.Overcharged
+                || TestController.SafeguardTest.WrongTime
                 || TestController.AlarmLightTest.ReportedEarlyActivation
-                || TestController.AlarmLightTest.ReportedEarlyDeactivation;
-            if (hadErrors)
+                || TestController.AlarmLightTest.ReportedEarlyDeactivation
+                || Simulation.SystemState == EmergencySystem.State.Failure)
             {
                 PaperLog.Append("[b]Result: 0 Stars[/b]\n");
                 _openedLesson.SetAndSaveStars(0);
+            }
+            else if (TestController.BatteryTest.WrongTime
+                || TestController.TankTest.WrongTime
+                || TestController.StageRechargeTimedOut)
+            {
+                PaperLog.Append("[b]Result: 1 Star[/b]\n");
+                _openedLesson.SetAndSaveStars(1);
             }
             else
             {

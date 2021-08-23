@@ -8,6 +8,8 @@ namespace Osls.SfcSimulation.Viewer
         #region ==================== Fields / Properties ====================
         [Export] private Texture _runContinuouslyTexture;
         [Export] private Texture _pausedTexture;
+        [Export] private Color RunningColor = new Color(0.5f, 1f, 0f, 0.1f);
+        [Export] private Color PausedColor = new Color(1f, 0.0f, 0.0f, 0.1f);
         #endregion
         
         
@@ -33,10 +35,12 @@ namespace Osls.SfcSimulation.Viewer
             if (targetExecution == ExecutionType.RunContinuously)
             {
                 GetNode<TextureRect>("Icon").Texture = _runContinuouslyTexture;
+                GetNode<ColorRect>("Color").Color = RunningColor;
             }
             else
             {
                 GetNode<TextureRect>("Icon").Texture = _pausedTexture;
+                GetNode<ColorRect>("Color").Color = PausedColor;
             }
         }
         #endregion

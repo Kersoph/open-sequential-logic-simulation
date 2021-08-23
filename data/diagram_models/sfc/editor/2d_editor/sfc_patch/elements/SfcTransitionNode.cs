@@ -14,6 +14,8 @@ namespace Osls.SfcEditor
         #region ==================== Fields Properties ====================
         private TextEdit _textEdit;
         private SfcPatchControl _patchController;
+        private bool _hover;
+        private bool _focus;
         #endregion
         
         
@@ -25,6 +27,8 @@ namespace Osls.SfcEditor
             _textEdit.Connect("focus_exited", this, nameof(OnTextEditorFocusExited));
             _textEdit.Connect("mouse_entered", this, nameof(OnMouseEntered));
             _textEdit.Connect("mouse_exited", this, nameof(OnMouseExited));
+            _textEdit.Connect("focus_entered", this, nameof(OnFocusEntered));
+            _textEdit.Connect("focus_exited", this, nameof(OnFocusExited));
             _textEdit.Connect("text_changed", this, nameof(OnTextChanged));
         }
         
@@ -76,9 +80,8 @@ namespace Osls.SfcEditor
         /// </summary>
         private void OnMouseEntered()
         {
-            GetNode<Control>("TransitionTexture").Visible = true;
-            GetNode<Control>("TransitionTexture").Modulate = new Color(1, 1, 1, 0.5f);
-            GetNode<Control>("TransitionTextureHint").Visible = true;
+            _hover = true;
+            UpdateVisualRepresentation();
         }
         
         /// <summary>
@@ -86,8 +89,25 @@ namespace Osls.SfcEditor
         /// </summary>
         private void OnMouseExited()
         {
-            GetNode<Control>("TransitionTexture").Modulate = new Color(1, 1, 1, 1);
-            GetNode<Control>("TransitionTextureHint").Visible = false;
+            _hover = false;
+            UpdateVisualRepresentation();
+        }
+        
+        /// <summary>
+        /// Visual feedback for the user when the transition is edited
+        /// </summary>
+        private void OnFocusEntered()
+        {
+            _focus = true;
+            UpdateVisualRepresentation();
+        }
+        
+        /// <summary>
+        /// Reset visual feedback
+        /// </summary>
+        private void OnFocusExited()
+        {
+            _focus = false;
             UpdateVisualRepresentation();
         }
         
@@ -106,17 +126,19 @@ namespace Osls.SfcEditor
                 _textEdit.ReleaseFocus();
             }
         }
-
+        
         private void UpdateVisualRepresentation()
         {
-            if (string.IsNullOrEmpty(_textEdit.Text))
+            if (string.IsNullOrEmpty(_textEdit.Text) && !_focus && !_hover)
             {
                 GetNode<Control>("TransitionTexture").Visible = false;
                 _textEdit.AddColorOverride("background_color", new Color(1, 0, 0, 0f));
+                GetNode<Control>("TransitionTextureHint").Visible = false;
             }
             else
             {
                 GetNode<Control>("TransitionTexture").Visible = true;
+                GetNode<Control>("TransitionTextureHint").Visible = true;
             }
         }
         #endregion

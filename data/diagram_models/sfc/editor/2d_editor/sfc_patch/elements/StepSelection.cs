@@ -14,6 +14,17 @@ namespace Osls.SfcEditor
             var popup = GetPopup();
             popup.Connect("id_pressed", this, nameof(OnItemSelected));
         }
+        
+        public override void _UnhandledKeyInput(InputEventKey key)
+        {
+            if (Pressed && key.IsActionPressed("main_remove"))
+            {
+                OnItemSelected(0);
+                Pressed = false;
+                ReleaseFocus();
+                GetPopup().Visible = false;
+            }
+        }
         #endregion
         
         

@@ -1,7 +1,7 @@
 {
     "Title": "[center]Reactor\nEmergency\nSystem[/center]",
-    "Description": "You are hired to build the emergency visualisation and reset behaviour system of an experimental reactor. The task is described by Dr. Rosenberg as follows: 'In case something goes wrong with the experiment and charged particles escape in the chamber, we want a controlled reset. If the particle detector triggers, the emergency warning light and siren must be turn on. Operators can turn off the siren while particles are still being detected, but the warning light must remain on as long the emergency state is active. If there are no particles detected for one second, operators can acknowledge and reset the error state to return to regular operation.'",
-    "Goal": "Build the emergency visualisation and reset behaviour of the reactor.",
+    "Description": "[fill]You are hired to build the emergency visualisation and reset behaviour system for an experimental reactor.\n\nThe task is described by Dr. Rosenberg as follows:\n'In case something goes wrong with the experiment and charged particles escape in the chamber, we want a controlled reset.\nIf the [b]protection device[/b] triggers, the [b]emergency warning light[/b] must be turned on, the [b]tank pressure[/b] refilled quickly to 2000hpa, and the [b]battery voltage[/b] recharged to 45V.\nOperators can acknowledge the error which will turn off the emergency warning light. If every system is back to normal, we can signal the [b]protection device to reset[/b] and return to the normal operation mode.'[fill]",
+    "Goal": "[fill]Build the emergency visualisation and reset behaviour of the reactor.[fill]",
     "Simulation": "res://data/plant_models/mass_test_chamber/EmergencySystem.tscn",
     "Test": "res://data/plant_models/mass_test_chamber/EmergencySystemTest.tscn"
 }

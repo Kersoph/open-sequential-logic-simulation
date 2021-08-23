@@ -32,6 +32,7 @@ namespace Osls.LandingPage
                 GD.PrintErr(e);
                 GD.PushError(e.Message);
             }
+            if (_lessonNodes != null && _lessonNodes.Length > 0) CallDeferred(nameof(SelectionChangedTo), _lessonNodes[0]);
         }
         #endregion
         

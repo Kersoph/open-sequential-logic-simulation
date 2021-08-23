@@ -36,7 +36,17 @@ namespace Osls.SfcEditor
         public override void ApplyEdits()
         {
             string stepName = GetNode<TextEdit>("StepNameEditor").Text;
+            if (!string.IsNullOrEmpty(stepName)) stepName = stepName.Replace(' ', '_');
             GetNode<SfcStepNode>("..").NotifyUserUpdatedName(stepName);
+        }
+        
+        /// <summary>
+        /// Called when this step was changed to directly delegate the focus to the control if needed.
+        /// </summary>
+        public override void OnCreationFocus()
+        {
+            GetNode<TextEdit>("StepNameEditor").CallDeferred("grab_focus");
+            GetNode<TextEdit>("StepNameEditor").CallDeferred("select_all");
         }
         #endregion
         

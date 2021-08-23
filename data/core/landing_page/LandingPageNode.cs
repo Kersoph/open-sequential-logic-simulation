@@ -1,6 +1,3 @@
-using Godot;
-
-
 namespace Osls.LandingPage
 {
     /// <summary>
