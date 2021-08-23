@@ -137,7 +137,7 @@ namespace Osls.Plants.MassTestChamber
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(SafeguardResetKey, false, "Reset protection device", "True will tell the protection device to reset.") },
+                    { new StateEntry<bool>(SafeguardResetKey, false, "Reset emergency state", "True will tell the protection device to reset\nto return to regular operation.") },
                     { new StateEntry<bool>(AlarmLightKey, false, "Alarm light", "True will activate the alarm light in the chamber.\nFalse will turn it off.") },
                     { new StateEntry<bool>(ChargingKey, false, "Charge batteries", "True will charge the batteries with a constant current.\nFalse will stop charging them.") },
                     { new StateEntry<bool>(FillingKey, false, "Build pressure", "True will turn on the air compressor.\nFalse will turn it off.") },
@@ -156,7 +156,7 @@ namespace Osls.Plants.MassTestChamber
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(SafeguardKey, false, "Protection device signal", "True after a system error has been detected\nand not yet reset.") },
+                    { new StateEntry<bool>(SafeguardKey, false, "Emergency state active", "True after a critical system error has been detected\nand not yet reset.") },
                     { new StateEntry<bool>(AcknowledgeButtonKey, false, "Acknowledge alarm button", "True if someone acknowledges the alarm.\nFalse otherwise.") },
                 },
                 new List<StateEntry<int>>()

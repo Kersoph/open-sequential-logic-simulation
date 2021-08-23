@@ -17,12 +17,12 @@ namespace Osls.Plants.MassTestChamber
             {
                 if (master.Simulation.SafeguardSignal && !expected)
                 {
-                    master.PaperLog.AppendWarning("The safeguard should be reset.\n");
+                    master.PaperLog.AppendWarning("The emergency state should be reset.\n");
                     WrongTime = true;
                 }
                 else if (!master.Simulation.SafeguardSignal && expected)
                 {
-                    master.PaperLog.AppendError("The safeguard reset at the wrong time!\n");
+                    master.PaperLog.AppendError("The emergency state was reset at the wrong time!\n");
                     WrongTime = true;
                 }
             }
