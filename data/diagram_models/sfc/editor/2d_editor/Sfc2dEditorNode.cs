@@ -14,6 +14,9 @@ namespace Osls.SfcEditor
         private static readonly float[] zoomLevels = new float[] { 0.5f, 1f, 1.5f, 2f, 3f };
         private bool _isDragging;
         private Vector2 _lastDragPosition;
+        private bool _markedToRestore;
+        private Vector2 _currentScale;
+        private Vector2 _currentPosition;
         
         public Sfc2dEditorControl Sfc2dEditorControl { get; private set; }
         #endregion
@@ -27,6 +30,8 @@ namespace Osls.SfcEditor
         {
             _renderViewportReferenceRect = GetNode<ReferenceRect>("RenderViewportReferenceRect");
             Sfc2dEditorControl = new Sfc2dEditorControl(_renderViewportReferenceRect, data, isEditable);
+            Connect("resized", this, nameof(MarkForResizeOffsetRestore));
+            _currentScale = new Vector2(1f, 1f);
         }
         
         public override void _Process(float delta)
@@ -38,6 +43,7 @@ namespace Osls.SfcEditor
                 ApplyDiagramOffset(deltaPosition + _renderViewportReferenceRect.RectPosition);
                 _lastDragPosition = currentMousePosition;
             }
+            if (_markedToRestore) OnResizeOffsetRestore();
         }
         
         /// <summary>
@@ -180,6 +186,27 @@ namespace Osls.SfcEditor
         {
             _isDragging = false;
         }
+        
+        /// <summary>
+        /// Called when the RECT size changed and we have to restore the position and scale in the next process update.
+        /// This is a workaround for this issue where pos/scale gets reset if the scroll container changes.
+        /// </summary>
+        public void MarkForResizeOffsetRestore()
+        {
+            _markedToRestore = true;
+        }
+        
+        /// <summary>
+        /// Called when the RECT size changed and we have to restore the position and scale.
+        /// </summary>
+        public void OnResizeOffsetRestore()
+        {
+            _markedToRestore = false;
+            Vector2 currentScale = _currentScale;
+            Vector2 currentPosition = _currentPosition;
+            CallDeferred(nameof(ApplyDiagramScale), currentScale);
+            CallDeferred(nameof(ApplyDiagramOffset), currentPosition);
+        }
         #endregion
         
         
@@ -189,12 +216,14 @@ namespace Osls.SfcEditor
             Vector2 oldPosition = _renderViewportReferenceRect.RectPosition;
             Vector2 oldScale = _renderViewportReferenceRect.RectScale;
             _renderViewportReferenceRect.RectScale = scale;
+            _currentScale = scale;
             ApplyDiagramOffset(new Vector2((oldPosition.x * scale.x) / oldScale.x, (oldPosition.y * scale.y) / oldScale.y));
         }
         
         private void ApplyDiagramOffset(Vector2 position)
         {
             _renderViewportReferenceRect.RectPosition = position;
+            _currentPosition = position;
         }
         #endregion
     }
