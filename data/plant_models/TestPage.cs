@@ -28,7 +28,6 @@ namespace Osls.Plants
         protected int LookupTargetSimulationCycles()
         {
             float fps = Godot.Engine.GetFramesPerSecond();
-            Godot.GD.Print(_previousSimulationFrames);
             switch (_previousSimulationFrames)
             {
                 case 1:
