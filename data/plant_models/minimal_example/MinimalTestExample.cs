@@ -39,9 +39,13 @@ namespace Osls.Plants.MinimalExample
         
         public override void _Process(float delta)
         {
-            if (_isExecutable)
+            int simulationSteps = LookupTargetSimulationCycles();
+            for (int i = 0; i < simulationSteps; i++)
             {
-                _simulationMaster.UpdateSimulation(16);
+                if (_isExecutable)
+                {
+                    _simulationMaster.UpdateSimulation(16);
+                }
             }
         }
         #endregion

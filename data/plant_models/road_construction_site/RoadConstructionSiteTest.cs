@@ -51,14 +51,18 @@ namespace Osls.Plants.RoadConstructionSite
         
         public override void _Process(float delta)
         {
-            switch (_testState)
+            int simulationSteps = LookupTargetSimulationCycles();
+            for (int i = 0; i < simulationSteps; i++)
             {
-                case TestState.Simulate:
-                    Simulate();
-                    break;
-                case TestState.CalculateResults:
-                    CalculateResults();
-                    break;
+                switch (_testState)
+                {
+                    case TestState.Simulate:
+                        Simulate();
+                        break;
+                    case TestState.CalculateResults:
+                        CalculateResults();
+                        break;
+                }
             }
         }
         #endregion

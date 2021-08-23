@@ -53,31 +53,35 @@ namespace Osls.Plants.MassTestChamber
         
         public override void _Process(float delta)
         {
-            switch (_stage)
+            int simulationSteps = LookupTargetSimulationCycles();
+            for (int i = 0; i < simulationSteps; i++)
             {
-                case Stages.Startup:
-                    if (!IsExecutable)
-                    {
-                        PaperLog.AppendError("SFC is invalid!\nAborting tests.\n");
-                        _stage = Stages.CollectResults;
-                    }
-                    else
-                    {
-                        _stage = Stages.Test;
-                    }
-                    break;
-                case Stages.Test:
-                    TestController.TestStage();
-                    if (TestController.Stage == EmergencySystemTestStages.Stages.Done) _stage = Stages.CollectResults;
-                    break;
-                case Stages.CollectResults:
-                    CollectResults();
-                    _stage = Stages.Done;
-                    break;
-                case Stages.Done:
-                    GetNode<Viewport>("ViewportContainer/Viewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
-                    _stage = Stages.Idle;
-                    break;
+                switch (_stage)
+                {
+                    case Stages.Startup:
+                        if (!IsExecutable)
+                        {
+                            PaperLog.AppendError("SFC is invalid!\nAborting tests.\n");
+                            _stage = Stages.CollectResults;
+                        }
+                        else
+                        {
+                            _stage = Stages.Test;
+                        }
+                        break;
+                    case Stages.Test:
+                        TestController.TestStage();
+                        if (TestController.Stage == EmergencySystemTestStages.Stages.Done) _stage = Stages.CollectResults;
+                        break;
+                    case Stages.CollectResults:
+                        CollectResults();
+                        _stage = Stages.Done;
+                        break;
+                    case Stages.Done:
+                        GetNode<Viewport>("ViewportContainer/Viewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
+                        _stage = Stages.Idle;
+                        break;
+                }
             }
         }
         #endregion

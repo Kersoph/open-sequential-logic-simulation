@@ -53,18 +53,22 @@ namespace Osls.Plants.MassTestChamber
         
         public override void _Process(float delta)
         {
-            switch (_stage)
+            int simulationSteps = LookupTargetSimulationCycles();
+            for (int i = 0; i < simulationSteps; i++)
             {
-                case Stages.ExecuteTests:
-                    TestController.ExecuteProtocoll();
-                    if (TestController.Stage == TestController.Stages.Done) _stage = Stages.DisplayResults;
-                    break;
-                case Stages.DisplayResults:
-                    int stars = TestController.CreateResult();
-                    SetResult(stars);
-                    GetNode<Viewport>("ViewportContainer/Viewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
-                    _stage = Stages.Done;
-                    break;
+                switch (_stage)
+                {
+                    case Stages.ExecuteTests:
+                        TestController.ExecuteProtocoll();
+                        if (TestController.Stage == TestController.Stages.Done) _stage = Stages.DisplayResults;
+                        break;
+                    case Stages.DisplayResults:
+                        int stars = TestController.CreateResult();
+                        SetResult(stars);
+                        GetNode<Viewport>("ViewportContainer/Viewport").RenderTargetUpdateMode = Viewport.UpdateMode.Once;
+                        _stage = Stages.Done;
+                        break;
+                }
             }
         }
         #endregion
