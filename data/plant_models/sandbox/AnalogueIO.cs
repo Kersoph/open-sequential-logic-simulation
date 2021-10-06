@@ -39,7 +39,20 @@ namespace Osls.Plants.Sandbox
         {
             for (int i = 0; i < _inputs.Length; i++)
             {
-                master.SimulationOutput.SetValue(_inputs[i].Name, System.Convert.ToInt32(_inputs[i].Value));
+                int result;
+                if (_inputs[i].Value >= int.MaxValue)
+                {
+                    result = int.MaxValue;
+                }
+                else if (_inputs[i].Value <= int.MinValue)
+                {
+                    result = int.MinValue;
+                }
+                else
+                {
+                    result = System.Convert.ToInt32(_inputs[i].Value);
+                }
+                master.SimulationOutput.SetValue(_inputs[i].Name, result);
             }
             for (int i = 0; i < _outputs.Length; i++)
             {
