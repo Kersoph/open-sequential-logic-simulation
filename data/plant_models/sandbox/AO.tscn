@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/core/theme/font/RobotoBoldFont.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+
+[node name="AO1" type="Label"]
+margin_top = 140.0
+margin_right = 638.0
+margin_bottom = 175.0
+rect_min_size = Vector2( 0, 30 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "AO1: "
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
