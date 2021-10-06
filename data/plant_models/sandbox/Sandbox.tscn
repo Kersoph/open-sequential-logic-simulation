@@ -1,0 +1,305 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://data/plant_models/sandbox/Sandbox.cs" type="Script" id=1]
+[ext_resource path="res://data/plant_models/sandbox/DigitalOutputs.cs" type="Script" id=2]
+[ext_resource path="res://data/plant_models/sandbox/AnalogueIO.cs" type="Script" id=3]
+[ext_resource path="res://data/plant_models/sandbox/DigitalInputs.cs" type="Script" id=4]
+[ext_resource path="res://data/plant_models/sandbox/DI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/plant_models/sandbox/DO.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/plant_models/sandbox/AI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://data/core/theme/font/RobotoBoldFont.tres" type="DynamicFont" id=9]
+[ext_resource path="res://data/plant_models/sandbox/AO.tscn" type="PackedScene" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.627451, 1, 0.431373, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+
+[node name="Sandbox" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 20.0
+margin_right = -15.0
+margin_bottom = -15.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DigitalInputs" type="ScrollContainer" parent="UI"]
+margin_right = 623.0
+margin_bottom = 982.0
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+script = ExtResource( 4 )
+
+[node name="List" type="VBoxContainer" parent="UI/DigitalInputs"]
+margin_right = 623.0
+margin_bottom = 348.0
+size_flags_horizontal = 3
+custom_constants/separation = 2
+
+[node name="AI4" type="Label" parent="UI/DigitalInputs/List"]
+margin_right = 623.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Digital
+Inputs"
+align = 1
+valign = 1
+
+[node name="DI1" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 62.0
+margin_right = 623.0
+margin_bottom = 92.0
+
+[node name="DI2" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 94.0
+margin_right = 623.0
+margin_bottom = 124.0
+text = "DI2"
+
+[node name="DI3" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 126.0
+margin_right = 623.0
+margin_bottom = 156.0
+text = "DI3"
+
+[node name="DI4" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 158.0
+margin_right = 623.0
+margin_bottom = 188.0
+text = "DI4"
+
+[node name="DI5" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 190.0
+margin_right = 623.0
+margin_bottom = 220.0
+text = "DI5"
+
+[node name="DI6" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 222.0
+margin_right = 623.0
+margin_bottom = 252.0
+text = "DI6"
+
+[node name="DI7" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 254.0
+margin_right = 623.0
+margin_bottom = 284.0
+text = "DI7"
+
+[node name="DI8" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 286.0
+margin_right = 623.0
+margin_bottom = 316.0
+text = "DI8"
+
+[node name="DI9" parent="UI/DigitalInputs/List" instance=ExtResource( 5 )]
+margin_top = 318.0
+margin_right = 623.0
+margin_bottom = 348.0
+focus_mode = 2
+text = "DI9"
+
+[node name="DigitalOutputs" type="ScrollContainer" parent="UI"]
+margin_left = 633.0
+margin_right = 1256.0
+margin_bottom = 982.0
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+script = ExtResource( 2 )
+_styleNormal = SubResource( 2 )
+_styleActive = SubResource( 3 )
+
+[node name="List" type="VBoxContainer" parent="UI/DigitalOutputs"]
+margin_right = 623.0
+margin_bottom = 348.0
+size_flags_horizontal = 3
+custom_constants/separation = 2
+
+[node name="DO" type="Label" parent="UI/DigitalOutputs/List"]
+margin_right = 623.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Digital
+Outputs"
+align = 1
+valign = 1
+
+[node name="DO1" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 62.0
+margin_right = 623.0
+margin_bottom = 92.0
+
+[node name="DO2" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 94.0
+margin_right = 623.0
+margin_bottom = 124.0
+text = "DO2"
+
+[node name="DO3" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 126.0
+margin_right = 623.0
+margin_bottom = 156.0
+text = "DO3"
+
+[node name="DO4" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 158.0
+margin_right = 623.0
+margin_bottom = 188.0
+text = "DO4"
+
+[node name="DO5" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 190.0
+margin_right = 623.0
+margin_bottom = 220.0
+text = "DO5"
+
+[node name="DO6" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 222.0
+margin_right = 623.0
+margin_bottom = 252.0
+text = "DO6"
+
+[node name="DO7" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 254.0
+margin_right = 623.0
+margin_bottom = 284.0
+text = "DO7"
+
+[node name="DO8" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 286.0
+margin_right = 623.0
+margin_bottom = 316.0
+text = "DO8"
+
+[node name="DO9" parent="UI/DigitalOutputs/List" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_top = 318.0
+margin_right = 623.0
+margin_bottom = 348.0
+text = "DO9"
+
+[node name="AnalogueIO" type="ScrollContainer" parent="UI"]
+margin_left = 1266.0
+margin_right = 1890.0
+margin_bottom = 982.0
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+script = ExtResource( 3 )
+
+[node name="List" type="VBoxContainer" parent="UI/AnalogueIO"]
+margin_right = 624.0
+margin_bottom = 348.0
+size_flags_horizontal = 3
+custom_constants/separation = 2
+
+[node name="AI" type="Label" parent="UI/AnalogueIO/List"]
+margin_right = 624.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Analogue
+Inputs"
+align = 1
+valign = 1
+
+[node name="AI1" parent="UI/AnalogueIO/List" instance=ExtResource( 8 )]
+margin_top = 62.0
+margin_right = 624.0
+margin_bottom = 92.0
+prefix = "AI1:"
+
+[node name="AI2" parent="UI/AnalogueIO/List" instance=ExtResource( 8 )]
+margin_top = 94.0
+margin_right = 624.0
+margin_bottom = 124.0
+prefix = "AI2:"
+
+[node name="AI3" parent="UI/AnalogueIO/List" instance=ExtResource( 8 )]
+margin_top = 126.0
+margin_right = 624.0
+margin_bottom = 156.0
+prefix = "AI3:"
+
+[node name="Spacer" type="Control" parent="UI/AnalogueIO/List"]
+margin_top = 158.0
+margin_right = 624.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="AO" type="Label" parent="UI/AnalogueIO/List"]
+margin_top = 192.0
+margin_right = 624.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 0, 60 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Analogue
+Outputs"
+align = 1
+valign = 1
+
+[node name="AO1" parent="UI/AnalogueIO/List" instance=ExtResource( 10 )]
+margin_top = 254.0
+margin_right = 624.0
+margin_bottom = 284.0
+text = "AO1: 0"
+
+[node name="AO2" parent="UI/AnalogueIO/List" instance=ExtResource( 10 )]
+margin_top = 286.0
+margin_right = 624.0
+margin_bottom = 316.0
+text = "AO2: 0"
+
+[node name="AO3" parent="UI/AnalogueIO/List" instance=ExtResource( 10 )]
+margin_top = 318.0
+margin_right = 624.0
+margin_bottom = 348.0
+text = "AO3: 0"
