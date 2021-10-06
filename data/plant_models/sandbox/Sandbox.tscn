@@ -49,7 +49,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
-margin_top = 15.0
+margin_top = 20.0
 margin_right = -15.0
 margin_bottom = -15.0
 size_flags_horizontal = 3
@@ -60,7 +60,7 @@ __meta__ = {
 
 [node name="DigitalInputs" type="ScrollContainer" parent="UI"]
 margin_right = 623.0
-margin_bottom = 987.0
+margin_bottom = 982.0
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 script = ExtResource( 4 )
@@ -139,7 +139,7 @@ text = "DI9"
 [node name="DigitalOutputs" type="ScrollContainer" parent="UI"]
 margin_left = 633.0
 margin_right = 1256.0
-margin_bottom = 987.0
+margin_bottom = 982.0
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 script = ExtResource( 2 )
@@ -228,7 +228,7 @@ text = "DO9"
 [node name="AnalogueIO" type="ScrollContainer" parent="UI"]
 margin_left = 1266.0
 margin_right = 1890.0
-margin_bottom = 987.0
+margin_bottom = 982.0
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 script = ExtResource( 3 )
