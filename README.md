@@ -27,16 +27,16 @@ Iterate over your solutions and see what will happen with your approaches.
 
 
 
-# Download
+## Download
 
-Select the latest version under "Releases" on the right side: https://github.com/Kersoph/open-sequential-logic-sandbox/releases
+Select the latest version under [Releases](https://github.com/Kersoph/open-sequential-logic-sandbox/releases) on the right side.
 
 
 
-# How to build it yourself
+## How to build it yourself
 
-1. Download Godot Mono version: https://godotengine.org/download
-2. Follow the mono version installation: https://docs.godotengine.org/en/stable/getting_started/scripting/c_sharp/c_sharp_basics.html
+1. Download [Godot Mono](https://godotengine.org/download) version
+2. Follow the mono version [installation](https://docs.godotengine.org/en/stable/getting_started/scripting/c_sharp/c_sharp_basics.html)
     - If you just want to compile it, you only need to follow the first step: Install ".NET Core SDK" e.g. from  https://dotnet.microsoft.com/download/dotnet
     - There are also many tips on that page on how to set up external editors and debuggers.
 3. Download this project (https://github.com/Kersoph/open-sequential-logic-sandbox) (Clone or download as zip)
@@ -45,6 +45,6 @@ Select the latest version under "Releases" on the right side: https://github.com
 
 
 
-# Background
+## Background
 
 Learning the fundamental principle of sequential logic in time dependent processes is critical for system engineers. The aim of this project is to investigate how using modern interactive technologies informed by pedagogical principles in learning applications, specifically, those with gamifications can help the students compared to the current theoretical approaches based on text or passive media.
