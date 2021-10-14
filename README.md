@@ -44,6 +44,23 @@ Select the latest version under [Releases](https://github.com/Kersoph/open-seque
 5. Press F5 or the small play button on the top right corner
 
 
+## How to contribute
+
+### Reporting bugs
+
+**Always open one issue for one bug.** If you notice several bugs and want to report them, make sure to create one new issue for each of them.
+
+Please provide **detailed information on how to reproduce the bug** and attach save files or screenshots if it could help. Include your platform you are working on and which version you are using. Making your bug report easy to reproduce will make it easier for contributors to fix the bug.
+
+### Contributing pull requests
+
+Please make sure the functionality is desired. Keep in mind that this is a **simulation tool to learn the basic principles of sequential logic in time dependant processes**. Open a feature proposal if you are unsure if your feature is needed or how to implement it best. For bugfixes, please refer to the issue in the issue tracker.
+
+Please follow the [C# style guide](https://github.com/Kersoph/open-sequential-logic-sandbox/blob/main/c-sharp-style-guide.rst) and use **clean code**.
+
+**Write Unit Tests**. Have a look on other tests in the folder [wat_tests](https://github.com/Kersoph/open-sequential-logic-sandbox/tree/main/wat_tests).
+
+Format your commit messages with readability in mind: A Git commit message is formatted as a **short title (first line)** and an **extended description (everything after the first line)**.
 
 ## Background
 
