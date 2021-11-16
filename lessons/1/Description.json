@@ -1,7 +1,7 @@
 {
-    "Title": "[center]Electrical Road Barrier[/center]",
-    "Description": "[fill]There are various electric road barriers installed to prevent vehicle access. As an introductory example, we use a simple [b]barrier with a motor[/b] to raise or lower the barrier and [b]sensors to detect the opened or closed position[/b]. A Guard in the right green building next to the barrier signals when the road should be blocked or passable.[/fill]",
-    "Goal": "[fill]Create a sequential function chart to let vehicles pass the checkpoint according to the guards signal.[/fill]",
-	"Simulation": "res://data/plant_models/electrical_barrier/ElectricalBarrier.tscn",
-	"Test": "res://data/plant_models/electrical_barrier/ElectricalBarrierTest.tscn"
+    "Title": "[center]Circular\nTable\nSaw[/center]",
+    "Description": "[fill]There are many electrical machines which, for safety reasons, must not start automatically after a power failure. Classically realised with a reset-dominated self-retaining contactor circuit and separate ON and OFF buttons.\nAs an introductory example, a controller for a [b]table saw[/b] should be modelled. When the ON button is pressed, the machine should turn on by activating the motor. If the OFF button is pressed, the machine should turn off by cutting the power to the motor. If both buttons are pressed at the same time, the motor shall be off.[/fill]",
+    "Goal": "[fill]Create a sequential function chart to switch the table saw on or off.[/fill]",
+    "Simulation": "res://data/plant_models/circular_saw/CircularSawModel.tscn",
+    "Test": "res://data/plant_models/circular_saw/CircularSawTest.tscn"
 }
