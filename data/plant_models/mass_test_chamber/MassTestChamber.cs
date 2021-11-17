@@ -67,10 +67,10 @@ namespace Osls.Plants.MassTestChamber
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(FieldGeneratorKey, false, "Field generator", "True will activate the field generator.\nFalse will turn it off.") },
-                    { new StateEntry<bool>(LaserKey, false, "Heating laser", "True will turn on the laser heater.\nFalse will turn it off.") },
-                    { new StateEntry<bool>(EmitterKey, false, "Emitter", "True will turn on the particle emitter.\nFalse will turn it off.") },
-                    { new StateEntry<bool>(FocusKey, false, "Focus", "True will keep objects in the intended position.\nFalse will turn it off.") },
+                    { new StateEntry<bool>(FieldGeneratorKey, false, "Field generator", "True will activate the field generator\nto trap particles from entering or leaving.\nFalse will turn it off.") },
+                    { new StateEntry<bool>(LaserKey, false, "Heating laser", "True will turn on the laser heater.\nFalse will turn it off.\nFast pulses are possible.") },
+                    { new StateEntry<bool>(EmitterKey, false, "Emitter", "True will turn on the particle emitter on the cart.\nFalse will turn it off.") },
+                    { new StateEntry<bool>(FocusKey, false, "Focus", "True will keep particles in the intended position\nused to build up mass.\nFalse will turn it off.") },
                 },
                 new List<StateEntry<int>>()
                 {

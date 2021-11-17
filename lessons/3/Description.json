@@ -1,7 +1,7 @@
 {
-    "Title": "[center]Simple\nTunnel\nLights[/center]",
-    "Description": "[fill]The client wants to add the possibility for the checkpoint to turn [b]on and off additional lights[/b] in the tunnel to save energy. After a fixed amount of time, the lights should turn off automatically.[/fill]",
-    "Goal": "[fill]Turn the lights on when the guard pushes the button. In case the lights are already on turn the lights off. The light should turn off automatically after 30'000 ms in case the guard forgot about them.[/fill]",
-	"Simulation": "res://data/plant_models/electrical_barrier/lights/Lights.tscn",
-	"Test": "res://data/plant_models/electrical_barrier/lights/LightsTest.tscn"
+    "Title": "[center]Tunnel\nLights[/center]",
+    "Description": "[fill]This lesson is used as an introductory example to timers.\nThe client wants to add the possibility for the checkpoint to turn [b]on and off additional lights[/b] in the tunnel to save energy. After a fixed amount of time, the lights should turn off automatically.[/fill]",
+    "Goal": "[fill]Turn the lights on or off when the guard pushes the ON/OFF button. So the guard has one button to toggle the lights.\nThe lights should turn off automatically after 30'000 ms in case the guard forgot about them.[/fill]",
+    "Simulation": "res://data/plant_models/electrical_barrier/lights/Lights.tscn",
+    "Test": "res://data/plant_models/electrical_barrier/lights/LightsTest.tscn"
 }

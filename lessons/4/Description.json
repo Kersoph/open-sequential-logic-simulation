@@ -1,7 +1,7 @@
 {
     "Title": "[center]Temporary\nTraffic\nLights[/center]",
     "Description": "[fill]Temporary traffic lights are installed on construction sites to control the traffic. Depending on the degree of maturity, the traffic light detects a waiting car and can react to the situation or simply switches through a fixed-time program.[/fill]",
-    "Goal": "Program the traffic light on the construction site.",
-	"Simulation": "res://data/plant_models/road_construction_site/RoadConstructionSite.tscn",
-	"Test": "res://data/plant_models/road_construction_site/RoadConstructionSiteTest.tscn"
+    "Goal": "Program the traffic light on the construction site. Think about the drivers and about different times of the day.",
+    "Simulation": "res://data/plant_models/road_construction_site/RoadConstructionSite.tscn",
+    "Test": "res://data/plant_models/road_construction_site/RoadConstructionSiteTest.tscn"
 }

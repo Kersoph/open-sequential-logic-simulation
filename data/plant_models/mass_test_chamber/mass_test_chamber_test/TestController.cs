@@ -168,7 +168,7 @@ namespace Osls.Plants.MassTestChamber
             _master.SimulationMaster.UpdateSimulation(timeMs);
             bool emitterAtFront = _master.Simulation.Chamber.EmitterCart.FrontPositionReached;
             bool focusAtFront = _master.Simulation.Chamber.FocusCart.FrontPositionReached;
-            CheckPostCondition(emitterAtFront && focusAtFront, Stages.BuildMass, 20000, "rails");
+            CheckPostCondition(emitterAtFront && focusAtFront, Stages.BuildMass, 20000, "rails (cart positions)");
         }
         
         private void StageBuildMass(int timeMs)
@@ -176,7 +176,7 @@ namespace Osls.Plants.MassTestChamber
             ObserveOverallState(timeMs);
             _master.SimulationMaster.UpdateSimulation(timeMs);
             bool massOk = _master.Simulation.SimulationOutput.PollBoolean(MassTestChamber.MassSufficientKey);
-            CheckPostCondition(massOk, Stages.Cage, 20000, "build mass");
+            CheckPostCondition(massOk, Stages.Cage, 20000, "build mass (checking emitter and focus)");
         }
         
         private void StageCage(int timeMs)
@@ -184,7 +184,7 @@ namespace Osls.Plants.MassTestChamber
             ObserveOverallState(timeMs);
             _master.SimulationMaster.UpdateSimulation(timeMs);
             bool discharging = _master.Simulation.Chamber.IsDischarging;
-            CheckPostCondition(discharging, Stages.Discharge, 20000, "cage");
+            CheckPostCondition(discharging, Stages.Discharge, 20000, "cage (trapping the particles)");
         }
         
         private void StageDischarge(int timeMs)
@@ -205,7 +205,7 @@ namespace Osls.Plants.MassTestChamber
                     }
                 }
             }
-            CheckPostCondition(!discharging || !field, Stages.Reset, 20000, "discharge");
+            CheckPostCondition(!discharging || !field, Stages.Reset, 20000, "discharge (correct reaction)");
         }
         
         private void StageReset(int timeMs)

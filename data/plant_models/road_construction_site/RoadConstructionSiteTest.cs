@@ -116,11 +116,11 @@ namespace Osls.Plants.RoadConstructionSite
             {
                 return "A Death Due To Faulty Control";
             }
-            if (results.AverageWaitingMs > 10000)
+            if (results.AverageWaitingMs > 10000 || results.MaximumWaitingCycles > 2000)
             {
                 return "Annoyance About Horrific Waiting Times";
             }
-            if (results.AverageWaitingMs > 7500)
+            if (results.AverageWaitingMs > 7500 || results.MaximumWaitingCycles > 1000)
             {
                 return "Annoyance About Long Waiting Times";
             }
@@ -159,7 +159,7 @@ namespace Osls.Plants.RoadConstructionSite
             }
             if (results.AverageWaitingMs > 6000)
             {
-                return "\"It's Not That Bad\"";
+                return "\"Waiting when there is absolutely no one around...\"";
             }
             return "\"My Most Favourite Signal Light!\"";
         }
@@ -167,7 +167,7 @@ namespace Osls.Plants.RoadConstructionSite
         private int CalculateStars(ResultCollector results)
         {
             if (results.MaximumWaitingCycles > 100000 || results.HadAnAccident > 0) return 0;
-            if (results.AverageWaitingMs > 7400) return 1;
+            if (results.AverageWaitingMs > 7400|| results.MaximumWaitingCycles > 1500) return 1;
             if (results.AverageWaitingMs > 6000 || results.MaximumWaitingCycles > 790) return 2;
             return 3;
         }

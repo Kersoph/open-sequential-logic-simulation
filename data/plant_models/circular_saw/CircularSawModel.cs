@@ -79,7 +79,7 @@ namespace Osls.Plants.CircularSaw
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(CircularSawNode.MotorKey, false, "Saw motor", "True will connect the motor to the power source") },
+                    { new StateEntry<bool>(CircularSawNode.MotorKey, false, "Saw motor", "True will connect the motor to the power source.\nFalse will disconnect the motor and stop the blade from turning.") },
                 },
                 new List<StateEntry<int>>()
                 {
@@ -95,8 +95,8 @@ namespace Osls.Plants.CircularSaw
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(ONButtonKey, false, "ON button pressed", "True if the saw should turn on") },
-                    { new StateEntry<bool>(OFFButtonKey, false, "OFF button pressed", "True if the saw should turn off") },
+                    { new StateEntry<bool>(ONButtonKey, false, "ON button pressed", "True if the user pushed the button to turn the saw on") },
+                    { new StateEntry<bool>(OFFButtonKey, false, "OFF button pressed", "True if the user pushes the button to turn the saw off") },
                 },
                 new List<StateEntry<int>>()
                 {

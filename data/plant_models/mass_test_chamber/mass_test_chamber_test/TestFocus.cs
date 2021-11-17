@@ -20,7 +20,7 @@ namespace Osls.Plants.MassTestChamber
                     _unusualActivationTime += timeMs;
                     if (_unusualActivationTime > 100 && !ReportedUnusualActivation)
                     {
-                        master.PaperLog.Append("Focus reports unusual long activation time\n");
+                        master.PaperLog.Append("Focus reports unusual long activation time. Do not expose it for too long to the particles.\n");
                         ReportedUnusualActivation = true;
                     }
                 }
