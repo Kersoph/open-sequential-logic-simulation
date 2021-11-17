@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 using Osls.SfcEditor;
 using Osls.SfcSimulation.Viewer;
 
@@ -11,11 +12,23 @@ namespace Osls.Plants.CircularSaw
     public class CircularSawTest : TestPage
     {
         #region ==================== Fields / Properties ====================
+        public enum TestStep { Deploy, Power, FirstOff, FirstOn, SecondOff, SecondOn, Both, Wait, Report, Done }
+        private Dictionary<TestStep, TestCase> _testCases;
+        private ILessonEntity _openedLesson;
         private bool _isExecutable;
-        private Master _simulationMaster;
-        private CircularSawModel _simulation;
-        private enum TestStep { Deploy, Power, FirstOff, FirstOn, SecondOff, SecondOn, Both, End, Report }
+        private int _testStepCounter;
         private TestStep _testStep;
+        private bool _pressingBothOk;
+        
+        /// <summary>
+        /// The CPU / actor in this simulation
+        /// </summary>
+        public Master SimulationMaster { get; private set; }
+        
+        /// <summary>
+        /// The simulated plant
+        /// </summary>
+        public CircularSawModel Simulation { get; private set; }
         #endregion
         
         
@@ -25,14 +38,16 @@ namespace Osls.Plants.CircularSaw
         /// </summary>
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
-            _simulation = GetNode<CircularSawModel>("ViewportContainer/Viewport/CircularSawModel");
+            _openedLesson = openedLesson;
+            Simulation = GetNode<CircularSawModel>("ViewportContainer/Viewport/CircularSawModel");
             string filepath = openedLesson.TemporaryDiagramFilePath;
             SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             if (sfcEntity != null)
             {
-                _simulation.InitialiseWith(mainNode, openedLesson);
-                _simulationMaster = new Master(sfcEntity, _simulation);
-                _isExecutable = _simulationMaster.IsProgramSimulationValid();
+                Simulation.InitialiseWith(mainNode, openedLesson);
+                SimulationMaster = new Master(sfcEntity, Simulation);
+                _isExecutable = SimulationMaster.IsProgramSimulationValid();
+                SetupTestSteps();
             }
             else
             {
@@ -51,25 +66,15 @@ namespace Osls.Plants.CircularSaw
                         TestStepDeploy();
                         break;
                     case TestStep.Power:
-                        TestStepPower();
-                        break;
                     case TestStep.FirstOff:
-                        TestStepFirstOff();
-                        break;
                     case TestStep.FirstOn:
-                        TestStepFirstOn();
-                        break;
                     case TestStep.SecondOff:
-                        TestStepSecondOff();
-                        break;
                     case TestStep.SecondOn:
-                        TestStepSecondOn();
+                    case TestStep.Wait:
+                        _testStep = _testCases[_testStep].Check(_testStep);
                         break;
                     case TestStep.Both:
                         TestStepBoth();
-                        break;
-                    case TestStep.End:
-                        TestStepEnd();
                         break;
                     case TestStep.Report:
                         TestStepReport();
@@ -77,7 +82,7 @@ namespace Osls.Plants.CircularSaw
                 }
                 if (_isExecutable)
                 {
-                    _simulationMaster.UpdateSimulation(16);
+                    SimulationMaster.UpdateSimulation(16);
                 }
             }
         }
@@ -85,50 +90,100 @@ namespace Osls.Plants.CircularSaw
         
         
         #region ==================== Helpers ====================
+        private void SetupTestSteps()
+        {
+            _testCases = new Dictionary<TestStep, TestCase>()
+            {
+                { TestStep.Power, new TestCase(this, false, false, false, "Panel/VBC/Power",
+                "OK!", "Immediately turned on?!", TestStep.FirstOff, TestStep.FirstOff) },
+                { TestStep.FirstOff, new TestCase(this, false, true, false, "Panel/VBC/FirstOff",
+                "OK!", "Turned on with the OFF button?!", TestStep.FirstOn, TestStep.FirstOn) },
+                { TestStep.FirstOn, new TestCase(this, true, false, true, "Panel/VBC/FirstOn",
+                "OK!", "It is not turning on.", TestStep.SecondOff, TestStep.SecondOff) },
+                { TestStep.SecondOff, new TestCase(this, false, true, false, "Panel/VBC/SecondOff",
+                "OK.", "It is not turning off!", TestStep.SecondOn, TestStep.SecondOn) },
+                { TestStep.SecondOn, new TestCase(this, true, false, true, "Panel/VBC/SecondOn",
+                "OK.", "It is not turning on!", TestStep.Both, TestStep.Both) },
+                { TestStep.Wait, new TestCase(this, false, true, false, "Panel/VBC/Wait",
+                "Done", "The motor is still on...", TestStep.Report, TestStep.Report) },
+            };
+        }
+        
         private void TestStepDeploy()
         {
             if (_isExecutable)
             {
-                _testStep = TestStep.Report;
+                GetNode<Label>("Panel/VBC/Deploy").Text += "OK!";
+                _testStep = TestStep.Power;
             }
             else
             {
                 GetNode<Label>("Panel/VBC/Deploy").Text += "FAILED: SFC error.";
-                _testStep = TestStep.Power;
+                _testStep = TestStep.Report;
             }
-            
-        }
-        
-        private void TestStepPower()
-        {
-        }
-        
-        private void TestStepFirstOff()
-        {
-        }
-        
-        private void TestStepFirstOn()
-        {
-        }
-        
-        private void TestStepSecondOff()
-        {
-        }
-        
-        private void TestStepSecondOn()
-        {
         }
         
         private void TestStepBoth()
         {
-        }
-        
-        private void TestStepEnd()
-        {
+            if (_testStepCounter < 5)
+            {
+                Simulation.ONButtonState = true;
+                Simulation.OFFButtonState = true;
+                _testStepCounter++;
+            }
+            else if (_testStepCounter < 60)
+            {
+                Simulation.ONButtonState = true;
+                Simulation.OFFButtonState = true;
+                if (Simulation.CircularSawNode.MotorSwitchedOn)
+                {
+                    Simulation.ONButtonState = false;
+                    Simulation.OFFButtonState = false;
+                    GetNode<Label>("Panel/VBC/Both").Text += "It is not reset dominant!";
+                    _pressingBothOk = false;
+                    _testStep = TestStep.Wait;
+                }
+                _testStepCounter++;
+            }
+            else
+            {
+                Simulation.ONButtonState = false;
+                Simulation.OFFButtonState = false;
+                _testStepCounter = 0;
+                GetNode<Label>("Panel/VBC/Both").Text += "Good";
+                _pressingBothOk = true;
+                _testStep = TestStep.Wait;
+            }
         }
         
         private void TestStepReport()
         {
+            if (HadHeavyErrors())
+            {
+                GetNode<Label>("Panel/VBC/Report").Text = "0 Stars";
+                _openedLesson.SetAndSaveStars(0);
+            }
+            else if (!_pressingBothOk)
+            {
+                GetNode<Label>("Panel/VBC/Report").Text = "2 Stars";
+                _openedLesson.SetAndSaveStars(2);
+            }
+            else
+            {
+                GetNode<Label>("Panel/VBC/Report").Text = "3 Stars! Nice";
+                _openedLesson.SetAndSaveStars(3);
+            }
+            _testStep = TestStep.Done;
+        }
+        
+        private bool HadHeavyErrors()
+        {
+            if (!_isExecutable) return true;
+            foreach (var testCase in _testCases)
+            {
+                if (testCase.Value.HadError) return true;
+            }
+            return false;
         }
         #endregion
     }

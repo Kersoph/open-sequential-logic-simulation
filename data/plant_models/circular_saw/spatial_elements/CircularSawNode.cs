@@ -12,6 +12,11 @@ namespace Osls.Plants.CircularSaw
         private MeshInstance _blade;
         
         /// <summary>
+        /// True if the motor has power
+        /// </summary>
+        public bool MotorSwitchedOn { get; private set; }
+        
+        /// <summary>
         /// True if the flicker amount was so high that it broke down.
         /// </summary>
         public bool Broken { get; private set; }
@@ -29,9 +34,9 @@ namespace Osls.Plants.CircularSaw
         
         public void CalculateNextStep(CircularSawModel master, int deltaTime)
         {
-            bool motorOn = master.SimulationInput.PollBoolean(MotorKey);
-            PushValue(motorOn);
-            if (motorOn && !Broken)
+            MotorSwitchedOn = master.SimulationInput.PollBoolean(MotorKey);
+            PushValue(MotorSwitchedOn);
+            if (MotorSwitchedOn && !Broken)
             {
                 _blade.RotateX(0.02f * deltaTime);
                 CheckFlicker();

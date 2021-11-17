@@ -11,7 +11,11 @@ namespace Osls.Plants.CircularSaw
         #region ==================== Fields / Properties ====================
         public const string ONButtonKey = "S1";
         public const string OFFButtonKey = "S2";
-        private CircularSawNode _circularSawNode;
+        
+        /// <summary>
+        /// Links the saw blade and motor controller
+        /// </summary>
+        public CircularSawNode CircularSawNode { get; private set; }
         
         /// <summary>
         /// Sets or gets the current button state in the simulation output table
@@ -51,8 +55,8 @@ namespace Osls.Plants.CircularSaw
         /// </summary>
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
-            _circularSawNode = GetNode<CircularSawNode>("CircularSawNode");
-            _circularSawNode.Setup();
+            CircularSawNode = GetNode<CircularSawNode>("CircularSawNode");
+            CircularSawNode.Setup();
         }
         
         /// <summary>
@@ -106,7 +110,7 @@ namespace Osls.Plants.CircularSaw
         /// </summary>
         protected override void CalculateNextStep(int deltaTime)
         {
-            _circularSawNode.CalculateNextStep(this, deltaTime);
+            CircularSawNode.CalculateNextStep(this, deltaTime);
         }
         #endregion
     }
