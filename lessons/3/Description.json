@@ -1,7 +1,7 @@
 {
-    "Title": "[center]Temporary\nTraffic\nLights[/center]",
-    "Description": "[fill]Temporary traffic lights are installed on construction sites to control the traffic. Depending on the degree of maturity, the traffic light detects a waiting car and can react to the situation or simply switches through a fixed-time program.[/fill]",
-    "Goal": "Program the traffic light on the construction site.",
-	"Simulation": "res://data/plant_models/road_construction_site/RoadConstructionSite.tscn",
-	"Test": "res://data/plant_models/road_construction_site/RoadConstructionSiteTest.tscn"
+    "Title": "[center]Simple\nTunnel\nLights[/center]",
+    "Description": "[fill]The client wants to add the possibility for the checkpoint to turn [b]on and off additional lights[/b] in the tunnel to save energy. After a fixed amount of time, the lights should turn off automatically.[/fill]",
+    "Goal": "[fill]Turn the lights on when the guard pushes the button. In case the lights are already on turn the lights off. The light should turn off automatically after 30'000 ms in case the guard forgot about them.[/fill]",
+	"Simulation": "res://data/plant_models/electrical_barrier/lights/Lights.tscn",
+	"Test": "res://data/plant_models/electrical_barrier/lights/LightsTest.tscn"
 }

@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://data/plant_models/circular_saw/spatial_elements/meshes/import/LookupMaterial.material" type="Material" id=1]
+[ext_resource path="res://data/plant_models/circular_saw/spatial_elements/meshes/import/CircularSaw.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://data/plant_models/circular_saw/spatial_elements/meshes/import/SawTable.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://data/plant_models/circular_saw/spatial_elements/CircularSawNode.cs" type="Script" id=4]
+[ext_resource path="res://data/plant_models/circular_saw/spatial_elements/BreakdownSmoke.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/plant_models/circular_saw/spatial_elements/Flash.cs" type="Script" id=6]
+
+[node name="CircularSawNode" type="MeshInstance"]
+mesh = ExtResource( 3 )
+skeleton = NodePath("")
+material/0 = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Blade" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
+
+[node name="BreakdownSmoke" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.15, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0, 0.2, 0 )
+
+[node name="BreakdownFlash" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.2, 0 )
+visible = false
+light_energy = 16.0
+omni_range = 0.5
+script = ExtResource( 6 )
