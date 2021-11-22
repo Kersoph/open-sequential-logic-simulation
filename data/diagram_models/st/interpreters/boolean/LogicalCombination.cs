@@ -8,7 +8,7 @@ namespace Osls.St.Boolean
     /// </summary>
     public class LogicalCombination : BooleanExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         public const string AND = "and";
         public const string OR = "or";
         public static HashSet<string> AndSet = new HashSet<string>(){ AND, "And", "AND", "&&", "&" };
@@ -21,7 +21,7 @@ namespace Osls.St.Boolean
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Holds a true or false constant
         /// </summary>

@@ -1,4 +1,5 @@
-using Godot;
+using 
+Godot;
 
 namespace Osls.SfcEditor
 {
@@ -8,7 +9,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public class SfcStepNode : ReferenceRect
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private const string UnusedStep = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisualUnused.tscn";
         private const string PassStep = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisualPass.tscn";
         private const string Step = "res://data/diagram_models/sfc/editor/2d_editor/sfc_patch/elements/SfcStepVisual.tscn";
@@ -19,7 +20,7 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Updates the visible nodes according to the given step type.
         /// </summary>

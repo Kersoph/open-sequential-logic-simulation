@@ -5,10 +5,6 @@ namespace Osls.Core
 {
     public class DataEntry : MarginContainer
     {
-        #region ==================== Fields / Properties ====================
-        #endregion
-        
-        
         #region ==================== Public Methods ====================
         /// <summary>
         /// Creates the text for the plant info panel according to the given entry

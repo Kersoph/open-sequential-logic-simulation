@@ -1,5 +1,6 @@
 using Godot;
 
+
 namespace Osls.SfcEditor
 {
     /// <summary>
@@ -8,6 +9,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public abstract class SfcStepVisualBasic : Control
     {
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Displays the text as a multi line string in the editor if possible.
         /// </summary>
@@ -35,5 +37,6 @@ namespace Osls.SfcEditor
         public virtual void OnCreationFocus()
         {
         }
+        #endregion
     }
 }

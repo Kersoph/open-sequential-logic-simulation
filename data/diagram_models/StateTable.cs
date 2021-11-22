@@ -40,6 +40,9 @@ namespace Osls
         
         
         #region ==================== Constructor ====================
+        /// <summary>
+        /// Initialises a state table from the given booleans and integers
+        /// </summary>
         public StateTable(List<StateEntry<bool>> booleans, List<StateEntry<int>> integers)
         {
             Booleans = new Dictionary<string, StateEntry<bool>>(booleans.Count);
@@ -57,7 +60,7 @@ namespace Osls
         }
         
         /// <summary>
-        /// Initialises a state table from the booleans and integers of the given one
+        /// Initialises a state table from the booleans and integers of the given state table
         /// </summary>
         public StateTable(StateTable other)
         {

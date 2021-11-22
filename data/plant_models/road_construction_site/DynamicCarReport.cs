@@ -2,7 +2,7 @@ namespace Osls.Plants.RoadConstructionSite
 {
     public class DynamicCarReport
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// True if this car has finished its simulation purpose
         /// </summary>

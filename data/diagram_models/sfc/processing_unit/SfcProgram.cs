@@ -21,7 +21,7 @@ namespace Osls.SfcSimulation.Engine
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Is called to calculate the next steps of the simulation.
         /// </summary>

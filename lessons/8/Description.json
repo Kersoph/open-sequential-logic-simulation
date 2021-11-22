@@ -2,6 +2,6 @@
     "Title": "[center]Internal Example[/center]",
     "Description": "This lesson is used as an internal development example to create new simulations.",
     "Goal": "No Goal.",
-	"Simulation": "res://data/plant_models/minimal_example/MinimalSimulationExample.tscn",
-	"Test": "res://data/plant_models/minimal_example/MinimalTestExample.tscn"
+    "Simulation": "res://data/plant_models/minimal_example/MinimalSimulationExample.tscn",
+    "Test": "res://data/plant_models/minimal_example/MinimalTestExample.tscn"
 }

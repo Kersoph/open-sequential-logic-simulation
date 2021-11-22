@@ -62,7 +62,7 @@ namespace Osls.Plants.ElectricalBarrier
         #endregion
         
         
-        #region ==================== Public Methods ====================
+        #region ==================== Helpers ====================
         /// <summary>
         /// Breaks down with a flash and smoke
         /// </summary>

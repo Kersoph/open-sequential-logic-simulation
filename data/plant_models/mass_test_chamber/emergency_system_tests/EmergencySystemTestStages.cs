@@ -133,12 +133,12 @@ namespace Osls.Plants.MassTestChamber
                 if (_currentStageTime < 5000)
                 {
                     _master.PaperLog.Append("Time needed to charge: " + _currentStageTime + "\n");
-                    _master.PaperLog.Append("-- Stage wait for battery and tank done\n");
+                    _master.PaperLog.Append("-- Stage wait for correct battery voltage and tank pressure done\n");
                 }
                 else
                 {
                     StageRechargeTimedOut = true;
-                    _master.PaperLog.AppendWarning("-- Stage wait for battery and tank timed out!\n");
+                    _master.PaperLog.AppendWarning("-- Stage wait for correct battery voltage and tank pressure timed out!\n");
                 }
                 _currentStageTime = 0;
                 Stage = Stages.Reset;

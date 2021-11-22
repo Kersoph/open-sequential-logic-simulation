@@ -6,7 +6,7 @@
 [ext_resource path="res://data/core/lesson/viewer/IoInfo.cs" type="Script" id=4]
 [ext_resource path="res://data/core/theme/LightTheme.tres" type="Theme" id=5]
 [ext_resource path="res://data/core/lesson/viewer/elements/DataEntry.tscn" type="PackedScene" id=6]
-[ext_resource path="res://data/core/landing_page/RichTextLabel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/core/theme/nodes/RichTextLabelSmall.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/core/theme/font/RobotoBoldFont.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]

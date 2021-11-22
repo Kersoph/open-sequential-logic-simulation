@@ -9,7 +9,7 @@ namespace Osls.St.Boolean
     /// </summary>
     public class RelationalOperation : BooleanExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         public const string GreaterThan = ">";
         public const string SmallerThan = "<";
         public const string GreaterEqual = ">=";
@@ -24,7 +24,7 @@ namespace Osls.St.Boolean
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Holds a true or false constant
         /// </summary>

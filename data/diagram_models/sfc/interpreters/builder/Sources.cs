@@ -28,7 +28,6 @@ namespace Osls.SfcSimulation.Engine.Builder
             {
                 return alternativeBranches;
             }
-            Godot.GD.PushWarning("TODO? " + source.Id);
             return new List<SfcTransition>() { };
         }
         #endregion

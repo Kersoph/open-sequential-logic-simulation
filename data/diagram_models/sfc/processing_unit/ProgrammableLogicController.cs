@@ -7,7 +7,7 @@ namespace Osls.SfcSimulation.Engine
 {
     public class ProgrammableLogicController : IProcessingUnit
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly ResettingStateTable _inputRegisters;
         private readonly ResettingStateTable _outputRegisters;
         private readonly SimulationPage _simulationPage;
@@ -27,7 +27,11 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public IEnumerable<string> IntVariables { get { return SfcProgramData.StepMaster.PatchStepTimeMap.Keys; } }
         
+        /// <summary>
+        /// Links the program data created from the entity
+        /// </summary>
         public SfcProgramData SfcProgramData { get; private set; }
+        
         protected SfcProgram SfcProgram { get; private set; }
         #endregion
         
@@ -44,7 +48,7 @@ namespace Osls.SfcSimulation.Engine
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Called to initialize the PLC
         /// </summary>
@@ -107,7 +111,7 @@ namespace Osls.SfcSimulation.Engine
         #endregion
         
         
-        #region ==================== Private ====================
+        #region ==================== Helpers ====================
         /// <summary>
         /// Resets the output registers to the standard value
         /// </summary>

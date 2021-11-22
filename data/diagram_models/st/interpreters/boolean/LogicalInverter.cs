@@ -8,7 +8,7 @@ namespace Osls.St.Boolean
     /// </summary>
     public class LogicalInverter : BooleanExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         public const string NOT = "not";
         public static HashSet<string> Values = new HashSet<string>(){ NOT, "Not", "NOT", "!" };
         
@@ -16,7 +16,7 @@ namespace Osls.St.Boolean
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Holds a true or false constant
         /// </summary>

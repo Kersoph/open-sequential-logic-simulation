@@ -7,7 +7,7 @@ namespace Osls.St.Assignment
 {
     public class Interpreter
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private static readonly HashSet<string> AssignmentSymbol = new HashSet<string>() { "=", ":=" };
         #endregion
         
@@ -24,7 +24,7 @@ namespace Osls.St.Assignment
         #endregion
         
         
-        #region ==================== Private Methods ====================
+        #region ==================== Helpers ====================
         /// <summary>
         /// Interprets the given words into a logical model.
         /// We follow a fixed y = x format according the requirements.

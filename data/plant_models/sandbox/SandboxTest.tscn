@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/plant_models/sandbox/SandboxTest.cs" type="Script" id=1]
+[ext_resource path="res://data/plant_models/sandbox/Sandbox.tscn" type="PackedScene" id=3]
+
+[node name="SandboxTest" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Sandbox" parent="." instance=ExtResource( 3 )]
+margin_left = 80.0
+margin_top = 1.0
+margin_bottom = -1.0

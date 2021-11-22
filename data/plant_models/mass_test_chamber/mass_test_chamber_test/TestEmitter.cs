@@ -15,7 +15,7 @@ namespace Osls.Plants.MassTestChamber
         {
             if (master.Simulation.Chamber.Emitter.IsLeakingParticles && !ReportedLostParticles)
             {
-                master.PaperLog.AppendWarning("Detecting roaming particles in the test chamber\n");
+                master.PaperLog.AppendWarning("Detecting roaming particles in the test chamber. They were not trapped by the field generator or a focus.\n");
                 ReportedLostParticles = true;
             }
         }

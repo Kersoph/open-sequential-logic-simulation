@@ -78,7 +78,7 @@ namespace Osls.Plants.ElectricalBarrier
             return new StateTable(
                 new List<StateEntry<bool>>()
                 {
-                    { new StateEntry<bool>(ButtonKey, false, "Lights ON/OFF", "True if the guard pushes the button.") },
+                    { new StateEntry<bool>(ButtonKey, false, "Lights ON/OFF", "True if the guard pushes the ON/OFF button to toggle the lights.") },
                 },
                 new List<StateEntry<int>>()
                 {

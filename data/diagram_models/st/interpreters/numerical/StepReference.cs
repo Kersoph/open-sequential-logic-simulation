@@ -5,12 +5,12 @@ namespace Osls.St.Numerical
     /// </summary>
     public class StepReference : NumericalExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly string _key;
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Holds a reference to a step integer output
         /// </summary>

@@ -11,7 +11,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public class SfcTransitionNode : Control
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private TextEdit _textEdit;
         private SfcPatchControl _patchController;
         private bool _hover;
@@ -66,7 +66,7 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Private Methods ====================
+        #region ==================== Helpers ====================
         /// <summary>
         /// The user modified the text: Update the model
         /// </summary>

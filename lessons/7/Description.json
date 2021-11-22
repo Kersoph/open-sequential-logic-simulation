@@ -2,6 +2,6 @@
     "Title": "[center]Sandbox\nPlant[/center]",
     "Description": "A general testing site to create and test diagrams.",
     "Goal": "Create your own scenario.",
-    "Simulation": "",
-    "Test": ""
+    "Simulation": "res://data/plant_models/sandbox/Sandbox.tscn",
+    "Test": "res://data/plant_models/sandbox/SandboxTest.tscn"
 }

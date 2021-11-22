@@ -18,7 +18,7 @@ namespace Osls.Plants.MassTestChamber
                 if (!ReportedExceededTemperature)
                 {
                     ReportedExceededTemperature = true;
-                    master.PaperLog.AppendWarning("Detected high temperatures in the core\n");
+                    master.PaperLog.AppendWarning("Detected high temperatures in the core. Turn off the laser if the temperature it soo high.\n");
                 }
                 ExceededTemperatureTime += timeMs;
             }

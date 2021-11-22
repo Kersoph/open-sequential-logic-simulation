@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.1, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.785156, 0.785156, 0.785156, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 256
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+width = 256
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3( 0, 0.2, 0 )
+angular_velocity = 20.0
+angular_velocity_random = 0.5
+tangential_accel = 0.1
+scale_random = 0.5
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 3
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
+
+[node name="BreakdownSmoke2" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1499, 0.200412 )
+visible = false
+amount = 100
+lifetime = 4.0
+visibility_aabb = AABB( -4, -1, -4, 8, 8, 8 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )

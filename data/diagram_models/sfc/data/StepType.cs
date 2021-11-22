@@ -23,7 +23,7 @@ namespace Osls.SfcEditor
         StartingStep,
         
         /// <summary>
-        /// This step cell is a jump, connectiong it to another cell.
+        /// This step cell is a jump, connecting it to another cell.
         /// </summary>
         Jump
     }

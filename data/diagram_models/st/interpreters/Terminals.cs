@@ -2,7 +2,7 @@ namespace Osls.St
 {
     internal class Terminals
     {
-        #region ==================== Public Methods ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// Gets all words
         /// </summary>

@@ -32,7 +32,7 @@ namespace Osls.Plants.MassTestChamber
             }
             if (_cart.IsBroken && !ReportedBreakdown)
             {
-                master.PaperLog.AppendError(_name + " returns error: Overheated\n");
+                master.PaperLog.AppendError(_name + " returns error: Motors overheated\n");
                 ReportedBreakdown = true;
             }
         }

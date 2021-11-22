@@ -124,6 +124,8 @@ anchor_bottom = 0.108268
 custom_fonts/font = ExtResource( 8 )
 text = "Testing the behaviour when the system got restarted
 while a car is blocking the barrier.
+(The guard reacts correct and
+will keep the button switched on)
 "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -160,9 +162,9 @@ anchor_top = 0.00787402
 anchor_right = 0.356522
 anchor_bottom = 0.161417
 custom_fonts/font = ExtResource( 8 )
-text = "Testing the stability when there is
-signal noise,  blackouts and
-when a slow processing unit is used.
+text = "Testing the stability when there is signal noise, 
+blackouts (hard reset) and when a slow
+processing unit is used (high cycle time).
 "
 __meta__ = {
 "_edit_use_anchors_": false

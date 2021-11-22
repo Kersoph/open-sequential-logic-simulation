@@ -6,7 +6,7 @@ namespace Osls.SfcSimulation.Engine
 {
     public class SfcTransition
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// returns the unique patch id this transition is on
         /// </summary>

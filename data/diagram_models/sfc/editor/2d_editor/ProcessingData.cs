@@ -7,7 +7,7 @@ namespace Osls.SfcEditor
 {
     public class ProcessingData : IProcessingData
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// Holds the input registers of the processing unit
         /// </summary>

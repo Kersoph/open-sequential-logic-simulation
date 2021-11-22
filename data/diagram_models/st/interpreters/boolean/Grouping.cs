@@ -5,7 +5,7 @@ namespace Osls.St.Boolean
     /// </summary>
     public class Grouping : BooleanExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         public const string Open = "(";
         public const string Close = ")";
         private readonly BooleanExpression _target;
@@ -13,7 +13,7 @@ namespace Osls.St.Boolean
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Groups the target expression. Set validClosing to false if there is no closing symbol
         /// </summary>

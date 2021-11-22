@@ -10,7 +10,7 @@ namespace Osls.SfcSimulation.Engine
 {
     public class SfcStep
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         public int Id { get; private set; }
         public int StepCounter { get; private set; }
         
