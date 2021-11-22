@@ -24,6 +24,6 @@ transform = Transform( 0.15, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0, 0.2, 0 )
 [node name="BreakdownFlash" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.2, 0 )
 visible = false
-light_energy = 16.0
+light_energy = 64.0
 omni_range = 0.5
 script = ExtResource( 6 )

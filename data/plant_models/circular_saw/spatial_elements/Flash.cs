@@ -29,7 +29,7 @@ namespace Osls.Plants.CircularSaw
         /// </summary>
         public void FlashNextFrame()
         {
-            _flashFrames = 3;
+            _flashFrames = 6;
         }
         #endregion
     }
