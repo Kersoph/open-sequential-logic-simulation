@@ -15,6 +15,11 @@ namespace Osls.Core
         
         
         #region ==================== Public Methods ====================
+        public override void _Ready()
+        {
+            Connect("resized", this, nameof(OnResized));
+        }
+        
         /// <summary>
         /// Updates the BBCode description of the lesson entity.
         /// </summary>
@@ -26,6 +31,17 @@ namespace Osls.Core
             builder.AppendLine("[center][b][u]Goal[/u][/b][/center]");
             builder.AppendLine(lessonEntity.Goal);
             GetNode<RichTextLabel>(LessonInfoLabelPath).BbcodeText = builder.ToString();
+        }
+        
+        /// <summary>
+        /// Called if the control was resized to update the block text.
+        /// This is fixed in the next Godot version:
+        /// https://github.com/godotengine/godot/issues/45488
+        /// https://github.com/godotengine/godot/pull/54031
+        /// </summary>
+        public void OnResized()
+        {
+            GetNode<RichTextLabel>(LessonInfoLabelPath).BbcodeText = GetNode<RichTextLabel>(LessonInfoLabelPath).BbcodeText;
         }
         #endregion
     }
