@@ -9,7 +9,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public class SfcPatchNode : ReferenceRect
     {
-        #region ==================== Properties ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// The controller for this node
         /// </summary>
@@ -74,7 +74,7 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Private ====================
+        #region ==================== Helpers ====================
         private void SetCellPosition(int x, int y)
         {
             Vector2 sizeOffset = RectMinSize;

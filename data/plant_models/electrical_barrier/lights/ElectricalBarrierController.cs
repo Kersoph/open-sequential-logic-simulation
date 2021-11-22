@@ -30,11 +30,11 @@ namespace Osls.Plants.ElectricalBarrier
         #endregion
         
         
-        #region ==================== Public Methods ====================
+        #region ==================== Helpers ====================
         /// <summary>
         /// Controls the barrier behaviour. Also possible to load and run a sfc solution
         /// </summary>
-        public void ControlBarrier()
+        private void ControlBarrier()
         {
             if (_simulation.SimulationOutput.PollBoolean(GuardAgent.OpenGateSwitchKey))
             {

@@ -1,5 +1,4 @@
 using Godot;
-using Osls.SfcEditor;
 
 
 namespace Osls.SfcEditor

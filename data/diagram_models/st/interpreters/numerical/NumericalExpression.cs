@@ -6,7 +6,7 @@ namespace Osls.St.Numerical
     /// </summary>
     public abstract class NumericalExpression
     {
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Calculates the result of this numerical expression
         /// </summary>

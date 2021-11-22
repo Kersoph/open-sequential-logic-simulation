@@ -2,7 +2,7 @@ namespace Osls
 {
     public interface ILessonEntity
     {
-        #region ==================== Fields ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// The lesson title as a BBCode.
         /// </summary>

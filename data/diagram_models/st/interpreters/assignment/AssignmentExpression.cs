@@ -5,7 +5,7 @@ namespace Osls.St.Assignment
     /// </summary>
     public abstract class AssignmentExpression
     {
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Executes the assignment according to the model.
         /// </summary>

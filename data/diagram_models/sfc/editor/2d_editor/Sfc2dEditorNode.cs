@@ -8,7 +8,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public class Sfc2dEditorNode : Control
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private ReferenceRect _renderViewportReferenceRect;
         private int _zoomLevel = 1;
         private static readonly float[] zoomLevels = new float[] { 0.5f, 1f, 1.5f, 2f, 3f };

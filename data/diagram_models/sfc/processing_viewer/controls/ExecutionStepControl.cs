@@ -22,7 +22,7 @@ namespace Osls.SfcSimulation.Viewer
         #endregion
         
         
-        #region ==================== Public Methods ====================
+        #region ==================== Helpers ====================
         private void OnButtonPressed()
         {
             SfcSimulationViewer viewer = GetNode<Sfc2dControls>("..").SfcSimulationViewer;

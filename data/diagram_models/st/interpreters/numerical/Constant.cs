@@ -5,12 +5,12 @@ namespace Osls.St.Numerical
     /// </summary>
     public class Constant : NumericalExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly int _number;
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         public Constant(int number)
         {
             _number = number;

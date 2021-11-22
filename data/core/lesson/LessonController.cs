@@ -4,7 +4,7 @@ using Godot;
 namespace Osls
 {
     /// <summary>
-    /// Control calass to the active lesson entity.
+    /// Control class to the active lesson entity.
     /// </summary>
     public class LessonController
     {

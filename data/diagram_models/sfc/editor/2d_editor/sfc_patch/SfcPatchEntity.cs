@@ -8,7 +8,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public class SfcPatchEntity
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         /// <summary>
         /// The logical x position in the grid
         /// </summary>
@@ -47,7 +47,7 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         public SfcPatchEntity(int x, int y)
         {
             X = x;
@@ -83,10 +83,7 @@ namespace Osls.SfcEditor
         {
             return SfcStepType == SfcStepType.Step || SfcStepType == SfcStepType.StartingStep;
         }
-        #endregion
         
-        
-        #region ==================== Persistence ====================
         /// <summary>
         /// Loads the data from the stream. Written in "WriteTo".
         /// </summary>

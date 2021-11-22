@@ -3,7 +3,7 @@ namespace Osls
     public static class PersistenceCheckHelper
     {
         /// <summary>
-        /// Binary sections are controlled by a serialized int which is checkeg against the expected value.
+        /// Binary sections are controlled by a serialized int which is checked against the expected value.
         /// </summary>
         public static bool CheckSectionNumber(System.IO.BinaryReader reader, int exceptedSection)
         {
@@ -18,7 +18,7 @@ namespace Osls
             + " at pos " + reader.BaseStream.Position);
             return false;
         }
-
+        
         /// <summary>
         /// Binary subsections are controlled by a serialized byte which is checked against the expected value.
         /// </summary>

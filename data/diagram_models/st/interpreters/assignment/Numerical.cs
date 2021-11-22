@@ -5,14 +5,14 @@ namespace Osls.St.Assignment
     /// </summary>
     public class Numerical : AssignmentExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly string _target;
         private readonly St.Numerical.NumericalExpression _source;
         private readonly bool _valid;
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         public Numerical(string target, St.Numerical.NumericalExpression source, IProcessingData data)
         {
             _target = target;

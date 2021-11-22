@@ -7,7 +7,7 @@ namespace Osls.SfcEditor.Interpreters
 {
     public static class ActionMaster
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private static Color BooleanInputColor   = Color.Color8(0, 150, 0, 255);
         private static Color BooleanOutputColor = Color.Color8(50, 180, 0, 255);
         private static Color IntegerInputColor   = Color.Color8(50, 50, 255, 255);
@@ -55,7 +55,7 @@ namespace Osls.SfcEditor.Interpreters
         /// </summary>
         public static AssignmentExpression InterpretTransitionText(string transition, IProcessingData processingData)
         {
-            return St.Assignment.Interpreter.AsAssignmentExpression(transition, processingData);
+            return Interpreter.AsAssignmentExpression(transition, processingData);
         }
         #endregion
     }

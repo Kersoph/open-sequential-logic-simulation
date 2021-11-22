@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Osls.Plants.Sandbox
 {
     /// <summary>
-    /// Sandbox lesson to test own
+    /// Sandbox lesson to test own ideas
     /// </summary>
     public class Sandbox : SimulationPage
     {

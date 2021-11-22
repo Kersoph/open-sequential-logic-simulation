@@ -8,7 +8,7 @@ namespace Osls.St.Boolean
     /// </summary>
     public class Constant : BooleanExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         public static string TRUE = "true";
         public static string FALSE = "false";
         public static HashSet<string> TrueSet = new HashSet<string>(){ "true", "True", "TRUE" };
@@ -19,7 +19,7 @@ namespace Osls.St.Boolean
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Holds a true or false constant
         /// </summary>

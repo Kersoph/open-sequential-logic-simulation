@@ -5,14 +5,14 @@ namespace Osls.St.Assignment
     /// </summary>
     public class Boolean : AssignmentExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly string _target;
         private readonly St.Boolean.BooleanExpression _source;
         private readonly bool _valid;
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         public Boolean(string target, St.Boolean.BooleanExpression source, IProcessingData data)
         {
             _target = target;

@@ -6,7 +6,7 @@ namespace Osls.SfcEditor.Interpreters
 {
     public static class TransitionMaster
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private static Color BooleanInputColor   = Color.Color8(0, 150, 0, 255);
         private static Color BooleanCommandColor = Color.Color8(50, 180, 0, 255);
         private static Color IntegerInputColor   = Color.Color8(50, 50, 255, 255);

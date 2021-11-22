@@ -5,7 +5,7 @@ namespace Osls.SfcEditor.Interpreters
 {
     public class StepMaster
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly Dictionary<string, int> _patchNameMap = new Dictionary<string, int>();
         private readonly Dictionary<string, int> _patchStepTimeMap = new Dictionary<string, int>();
         private readonly Dictionary<string, int> _patchStepStateMap = new Dictionary<string, int>();
@@ -14,10 +14,12 @@ namespace Osls.SfcEditor.Interpreters
         /// Contains the Step to patch id dictionary
         /// </summary>
         public IReadOnlyDictionary<string, int> PatchNameMap { get { return _patchNameMap; } }
+        
         /// <summary>
         /// Contains the key to the Step Time
         /// </summary>
         public IReadOnlyDictionary<string, int> PatchStepTimeMap { get { return _patchStepTimeMap; } }
+        
         /// <summary>
         /// Contains the key to the Step State
         /// </summary>

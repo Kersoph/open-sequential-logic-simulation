@@ -13,7 +13,7 @@ namespace Osls.SfcEditor
         Single,
         
         /// <summary>
-        /// This branch line is used as a aprallel branch/merge
+        /// This branch line is used as a parallel branch/merge
         /// </summary>
         Double,
     }

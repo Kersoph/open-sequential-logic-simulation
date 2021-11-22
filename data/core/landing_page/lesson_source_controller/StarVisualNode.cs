@@ -4,7 +4,7 @@ using Godot;
 namespace Osls.LandingPage
 {
     /// <summary>
-    /// Sets the star visuals of this node.
+    /// The visual stars of this node.
     /// </summary>
     public class StarVisualNode : TextureRect
     {
@@ -19,7 +19,7 @@ namespace Osls.LandingPage
         /// </summary>
         public void SetToActiveTexture(bool active)
         {
-            this.Texture = active ? ActiveTexture : InactiveTexture;
+            Texture = active ? ActiveTexture : InactiveTexture;
         }
         #endregion
     }

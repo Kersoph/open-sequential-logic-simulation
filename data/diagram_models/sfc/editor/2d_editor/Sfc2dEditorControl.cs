@@ -10,7 +10,7 @@ namespace Osls.SfcEditor
     /// </summary>
     public class Sfc2dEditorControl
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly Dictionary<int, SfcPatchControl> _controlMap = new Dictionary<int, SfcPatchControl>();
         private readonly bool _isEditable;
         
@@ -31,7 +31,7 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         public Sfc2dEditorControl(ReferenceRect referenceRect, ProcessingData data, bool isEditable)
         {
             ReferenceRect = referenceRect;

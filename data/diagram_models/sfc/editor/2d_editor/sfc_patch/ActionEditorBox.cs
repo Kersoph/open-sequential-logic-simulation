@@ -86,7 +86,7 @@ namespace Osls.SfcEditor
         #endregion
         
         
-        #region ==================== Private Methods ====================
+        #region ==================== Helpers ====================
         private void UpdateVisibility(PatchEntity entity)
         {
             Visible = entity.ContainsRealStep();

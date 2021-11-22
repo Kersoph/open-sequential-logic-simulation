@@ -9,7 +9,7 @@ namespace Tests.SfcEditor.Interpreters
 {
     public class SfcTestHelper
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly ProgrammableLogicController _controller;
         #endregion
         

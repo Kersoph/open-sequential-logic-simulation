@@ -5,13 +5,13 @@ namespace Osls.St.Boolean
     /// </summary>
     public class PlantReference : BooleanExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly string _key;
         private readonly bool _valid;
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Holds a reference to a boolean plant output
         /// </summary>

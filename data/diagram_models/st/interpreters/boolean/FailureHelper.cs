@@ -5,13 +5,13 @@ namespace Osls.St.Boolean
     /// </summary>
     public class FailureHelper : BooleanExpression
     {
-        #region ==================== Fields Properties ====================
+        #region ==================== Fields / Properties ====================
         private readonly BooleanExpression _target;
         private readonly string _trail;
         #endregion
         
         
-        #region ==================== Public ====================
+        #region ==================== Public Methods ====================
         /// <summary>
         /// Accepts the part that could be interpreted and shows the trail as an error
         /// </summary>
