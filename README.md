@@ -11,7 +11,7 @@ A programming language close to Sequential Function Chart (SFC EN 61131-3 / IEC 
 
 The lessons focus on different topics and have an increasing difficulty within the topics.
 
-![Select](https://user-images.githubusercontent.com/26461040/137284846-fe2b425e-2c6e-4c43-9794-46a09a756f3a.png)
+![LandingPage](https://user-images.githubusercontent.com/26461040/142898955-ec21c2c4-4bb7-4f1c-93f2-407f663d05b4.png)
 
 ### Create your solution and test it
 
