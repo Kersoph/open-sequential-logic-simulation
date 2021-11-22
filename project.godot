@@ -41,7 +41,7 @@ Auto_Refresh_Tests=false
 
 [application]
 
-config/name="open_sequential_logic_sandbox"
+config/name="open_sequential_logic_simulation"
 run/main_scene="res://data/core/Startup.tscn"
 boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
 

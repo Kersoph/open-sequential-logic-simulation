@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "open_sequential_logic_sandbox", "open_sequential_logic_sandbox.csproj", "{9C14AFCD-5D5F-4E13-B372-9DC1CA6BE67B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "open_sequential_logic_simulation", "open_sequential_logic_simulation.csproj", "{9C14AFCD-5D5F-4E13-B372-9DC1CA6BE67B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

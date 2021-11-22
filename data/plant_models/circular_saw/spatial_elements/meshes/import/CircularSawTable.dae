@@ -12,7 +12,7 @@
   </asset>
   <library_images>
     <image id="lookup_table_png" name="lookup_table_png">
-      <init_from>/G:/Projects/P9_MT/open-sequential-logic-sandbox/data/plant_models/circular_saw/spatial_elements/meshes/import/LookupTable.png</init_from>
+      <init_from>/G:/Projects/P9_MT/open-sequential-logic-simulation/data/plant_models/circular_saw/spatial_elements/meshes/import/LookupTable.png</init_from>
     </image>
   </library_images>
   <library_effects>

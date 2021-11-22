@@ -5,18 +5,18 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2021-04-21T12:22:44</created>
-    <modified>2021-04-21T12:22:44</modified>
+    <created>2021-11-22T16:45:54</created>
+    <modified>2021-11-22T16:45:54</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_images>
     <image id="lookup_table_png" name="lookup_table_png">
-      <init_from>/G:/Projects/P9_MT/open-sequential-logic-sandbox/data/plant_models/electrical_barrier/spatial_elements/meshes/import/lookup_table.png</init_from>
+      <init_from>/G:/Projects/P9_MT/open-sequential-logic-simulation/data/plant_models/electrical_barrier/spatial_elements/meshes/import/LookupTable.png</init_from>
     </image>
   </library_images>
   <library_effects>
-    <effect id="lookup_material-effect">
+    <effect id="LookupMaterial-effect">
       <profile_COMMON>
         <technique sid="common">
           <phong>
@@ -44,8 +44,8 @@
     </effect>
   </library_effects>
   <library_materials>
-    <material id="lookup_material-material" name="lookup_material">
-      <instance_effect url="#lookup_material-effect"/>
+    <material id="LookupMaterial-material" name="LookupMaterial">
+      <instance_effect url="#LookupMaterial-effect"/>
     </material>
   </library_materials>
   <library_geometries>
@@ -83,7 +83,7 @@
         <vertices id="HighCar_Yellow-mesh-vertices">
           <input semantic="POSITION" source="#HighCar_Yellow-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="510">
+        <triangles material="LookupMaterial-material" count="510">
           <input semantic="VERTEX" source="#HighCar_Yellow-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#HighCar_Yellow-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#HighCar_Yellow-mesh-map-0" offset="2" set="0"/>
@@ -125,7 +125,7 @@
         <vertices id="HighCar_Green-mesh-vertices">
           <input semantic="POSITION" source="#HighCar_Green-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="510">
+        <triangles material="LookupMaterial-material" count="510">
           <input semantic="VERTEX" source="#HighCar_Green-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#HighCar_Green-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#HighCar_Green-mesh-map-0" offset="2" set="0"/>
@@ -167,7 +167,7 @@
         <vertices id="HighCar_Blue-mesh-vertices">
           <input semantic="POSITION" source="#HighCar_Blue-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="510">
+        <triangles material="LookupMaterial-material" count="510">
           <input semantic="VERTEX" source="#HighCar_Blue-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#HighCar_Blue-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#HighCar_Blue-mesh-map-0" offset="2" set="0"/>
@@ -209,7 +209,7 @@
         <vertices id="HighCar_Orange-mesh-vertices">
           <input semantic="POSITION" source="#HighCar_Orange-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="510">
+        <triangles material="LookupMaterial-material" count="510">
           <input semantic="VERTEX" source="#HighCar_Orange-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#HighCar_Orange-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#HighCar_Orange-mesh-map-0" offset="2" set="0"/>
@@ -251,7 +251,7 @@
         <vertices id="HighCar_Red-mesh-vertices">
           <input semantic="POSITION" source="#HighCar_Red-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="510">
+        <triangles material="LookupMaterial-material" count="510">
           <input semantic="VERTEX" source="#HighCar_Red-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#HighCar_Red-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#HighCar_Red-mesh-map-0" offset="2" set="0"/>
@@ -293,7 +293,7 @@
         <vertices id="HighCar_Black-mesh-vertices">
           <input semantic="POSITION" source="#HighCar_Black-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="510">
+        <triangles material="LookupMaterial-material" count="510">
           <input semantic="VERTEX" source="#HighCar_Black-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#HighCar_Black-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#HighCar_Black-mesh-map-0" offset="2" set="0"/>
@@ -309,7 +309,7 @@
         <instance_geometry url="#HighCar_Yellow-mesh" name="HighCar_Yellow">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -319,7 +319,7 @@
         <instance_geometry url="#HighCar_Green-mesh" name="HighCar_Green">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -329,7 +329,7 @@
         <instance_geometry url="#HighCar_Blue-mesh" name="HighCar_Blue">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -339,7 +339,7 @@
         <instance_geometry url="#HighCar_Orange-mesh" name="HighCar_Orange">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -349,7 +349,7 @@
         <instance_geometry url="#HighCar_Red-mesh" name="HighCar_Red">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -359,7 +359,7 @@
         <instance_geometry url="#HighCar_Black-mesh" name="HighCar_Black">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>

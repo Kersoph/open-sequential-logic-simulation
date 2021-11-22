@@ -5,18 +5,18 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2021-04-27T14:07:15</created>
-    <modified>2021-04-27T14:07:15</modified>
+    <created>2021-11-22T16:42:51</created>
+    <modified>2021-11-22T16:42:51</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_images>
     <image id="lookup_table_png" name="lookup_table_png">
-      <init_from>/G:/Projects/P9_MT/open-sequential-logic-sandbox/data/plant_models/road_construction_site/spatial_elements/meshes/import/lookup_table.png</init_from>
+      <init_from>/G:/Projects/P9_MT/open-sequential-logic-simulation/data/plant_models/road_construction_site/spatial_elements/meshes/import/LookupTable.png</init_from>
     </image>
   </library_images>
   <library_effects>
-    <effect id="lookup_material-effect">
+    <effect id="LookupMaterial-effect">
       <profile_COMMON>
         <technique sid="common">
           <phong>
@@ -44,8 +44,8 @@
     </effect>
   </library_effects>
   <library_materials>
-    <material id="lookup_material-material" name="lookup_material">
-      <instance_effect url="#lookup_material-effect"/>
+    <material id="LookupMaterial-material" name="LookupMaterial">
+      <instance_effect url="#LookupMaterial-effect"/>
     </material>
   </library_materials>
   <library_geometries>
@@ -83,7 +83,7 @@
         <vertices id="Signaling-mesh-vertices">
           <input semantic="POSITION" source="#Signaling-mesh-positions"/>
         </vertices>
-        <triangles material="lookup_material-material" count="196">
+        <triangles material="LookupMaterial-material" count="196">
           <input semantic="VERTEX" source="#Signaling-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Signaling-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Signaling-mesh-map-0" offset="2" set="0"/>
@@ -99,7 +99,7 @@
         <instance_geometry url="#Signaling-mesh" name="Signaling">
           <bind_material>
             <technique_common>
-              <instance_material symbol="lookup_material-material" target="#lookup_material-material"/>
+              <instance_material symbol="LookupMaterial-material" target="#LookupMaterial-material"/>
             </technique_common>
           </bind_material>
         </instance_geometry>

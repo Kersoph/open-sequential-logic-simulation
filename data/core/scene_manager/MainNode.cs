@@ -58,7 +58,7 @@ namespace Osls
         {
             _lessonController.ApplyPage(page);
             _navigationSteps.VisibleViewIs(page);
-            if (page == PageCategory.Exit) QuitSfcSandbox();
+            if (page == PageCategory.Exit) QuitSfcSimulation();
         }
         #endregion
         
@@ -69,7 +69,7 @@ namespace Osls
             OS.WindowMaximized = true;
         }
         
-        private void QuitSfcSandbox()
+        private void QuitSfcSimulation()
         {
             GetTree().Quit();
         }

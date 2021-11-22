@@ -12,7 +12,7 @@
   </asset>
   <library_images>
     <image id="LookupTable_png" name="LookupTable_png">
-      <init_from>/G:/Projects/P9_MT/open-sequential-logic-sandbox/data/plant_models/mass_test_chamber/spatial_elements/meshes/import/LookupTable.png</init_from>
+      <init_from>/G:/Projects/P9_MT/open-sequential-logic-simulation/data/plant_models/mass_test_chamber/spatial_elements/meshes/import/LookupTable.png</init_from>
     </image>
   </library_images>
   <library_effects>

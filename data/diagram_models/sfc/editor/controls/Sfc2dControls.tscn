@@ -137,8 +137,8 @@ theme = SubResource( 1 )
 access = 2
 filters = PoolStringArray( "*.sfc ; SFC" )
 show_hidden_files = true
-current_dir = "/Projects/P9_MT/open-sequential-logic-sandbox"
-current_path = "/Projects/P9_MT/open-sequential-logic-sandbox/"
+current_dir = "/Projects/P9_MT/open-sequential-logic-simulation"
+current_path = "/Projects/P9_MT/open-sequential-logic-simulation/"
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false

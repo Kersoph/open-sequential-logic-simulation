@@ -1,6 +1,6 @@
 # Learn Sequential Logic in Time Dependant Processes
 
-[![  Run Tests on Godot 3.3  ](https://github.com/Kersoph/open-sequential-logic-sandbox/actions/workflows/run_wat_tests.yml/badge.svg)](https://github.com/Kersoph/open-sequential-logic-sandbox/actions/workflows/run_wat_tests.yml)
+[![  Run Tests on Godot 3.3  ](https://github.com/Kersoph/open-sequential-logic-simulation/actions/workflows/run_wat_tests.yml/badge.svg)](https://github.com/Kersoph/open-sequential-logic-simulation/actions/workflows/run_wat_tests.yml)
 
 Build solutions for real and fictional scenarios where cyclic working controllers work in time dependant environments (e.g. Programmable Logic Controller PLC).
 A programming language close to Sequential Function Chart (SFC EN 61131-3 / IEC 61131-3) is used while it is intended to add more languages later. SFC is used to learn the basic principles as it focuses exactly on the core elements of sequential logic and the control of serial or parallel tasks, is easy to learn, has similarities to petri-nets, GRAFCET, Activity Diagrams, State Machines or Statecharts and can be used to program PLCs.
@@ -29,7 +29,7 @@ Iterate over your solutions and see what will happen with your approaches.
 
 ## Download
 
-Select the latest version under [Releases](https://github.com/Kersoph/open-sequential-logic-sandbox/releases) on the right side.
+Select the latest version under [Releases](https://github.com/Kersoph/open-sequential-logic-simulation/releases) on the right side.
 
 
 
@@ -39,7 +39,7 @@ Select the latest version under [Releases](https://github.com/Kersoph/open-seque
 2. Follow the mono version [installation](https://docs.godotengine.org/en/stable/getting_started/scripting/c_sharp/c_sharp_basics.html)
     - If you just want to compile it, you only need to follow the first step: Install ".NET Core SDK" e.g. from  https://dotnet.microsoft.com/download/dotnet
     - There are also many tips on that page on how to set up external editors and debuggers.
-3. Download this project (https://github.com/Kersoph/open-sequential-logic-sandbox) (Clone or download as zip)
+3. Download this project (https://github.com/Kersoph/open-sequential-logic-simulation) (Clone or download as zip)
 4. Open Godot Mono and open the downloaded project with it
 5. Press F5 or the small play button on the top right corner
 
@@ -56,9 +56,9 @@ Please provide **detailed information on how to reproduce the bug** and attach s
 
 Please make sure the functionality is desired. Keep in mind that this is a **simulation tool to learn the basic principles of sequential logic in time dependant processes**. Open a feature proposal if you are unsure if your feature is needed or how to implement it best. For bugfixes, please refer to the issue in the issue tracker.
 
-Please follow the [C# style guide](https://github.com/Kersoph/open-sequential-logic-sandbox/blob/main/c-sharp-style-guide.rst) and use **clean code**.
+Please follow the [C# style guide](https://github.com/Kersoph/open-sequential-logic-simulation/blob/main/c-sharp-style-guide.rst) and use **clean code**.
 
-**Write Unit Tests**. Have a look on other tests in the folder [wat_tests](https://github.com/Kersoph/open-sequential-logic-sandbox/tree/main/wat_tests).
+**Write Unit Tests**. Have a look on other tests in the folder [wat_tests](https://github.com/Kersoph/open-sequential-logic-simulation/tree/main/wat_tests).
 
 Format your commit messages with readability in mind: A Git commit message is formatted as a **short title (first line)** and an **extended description (everything after the first line)**.
 
