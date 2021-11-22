@@ -10,8 +10,8 @@ namespace Osls.SfcEditor
     public class SfcLineButton : TextureButton
     {
         #region ==================== Fields ====================
-        [Export] private Texture _singleLineTexture;
-        [Export] private Texture _doubleLineTexture;
+        [Export] private Texture _singleLineTexture = null;
+        [Export] private Texture _doubleLineTexture = null;
         private static Color VisibleColor = new Color(1f, 1f, 1f, 1f);
         private static Color TiltColor = new Color(1f, 1f, 1f, 0.4f);
         private static Color HiddenColor = new Color(1f, 1f, 1f, 0.0f);

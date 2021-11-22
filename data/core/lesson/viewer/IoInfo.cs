@@ -10,7 +10,7 @@ namespace Osls.Core
     public class IoInfo : Control
     {
         #region ==================== Fields / Properties ====================
-        [Export] private PackedScene _dataEntryScene;
+        [Export] private PackedScene _dataEntryScene = null;
         private readonly List<DataEntry> _aviableInputs = new List<DataEntry>();
         private readonly List<DataEntry> _aviableOutputs = new List<DataEntry>();
         #endregion

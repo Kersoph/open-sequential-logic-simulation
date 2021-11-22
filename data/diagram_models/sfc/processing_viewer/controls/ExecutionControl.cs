@@ -6,8 +6,8 @@ namespace Osls.SfcSimulation.Viewer
     public class ExecutionControl : Button
     {
         #region ==================== Fields / Properties ====================
-        [Export] private Texture _runContinuouslyTexture;
-        [Export] private Texture _pausedTexture;
+        [Export] private Texture _runContinuouslyTexture = null;
+        [Export] private Texture _pausedTexture = null;
         [Export] private Color RunningColor = new Color(0.5f, 1f, 0f, 0.1f);
         [Export] private Color PausedColor = new Color(1f, 0.0f, 0.0f, 0.1f);
         #endregion

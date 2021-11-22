@@ -9,8 +9,8 @@ namespace Osls.Plants.Sandbox
     public class DigitalOutputs : ScrollContainer
     {
         #region ==================== Fields / Properties ====================
-        [Export] private StyleBox _styleNormal;
-        [Export] private StyleBox _styleActive;
+        [Export] private StyleBox _styleNormal = null;
+        [Export] private StyleBox _styleActive = null;
         private Label[] _outputs;
         #endregion
         
