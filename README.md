@@ -2,8 +2,8 @@
 
 [![  Run Tests on Godot 3.3  ](https://github.com/Kersoph/open-sequential-logic-simulation/actions/workflows/run_wat_tests.yml/badge.svg)](https://github.com/Kersoph/open-sequential-logic-simulation/actions/workflows/run_wat_tests.yml)
 
-Build solutions for real and fictional scenarios where cyclic working controllers work in time dependant environments (e.g. Programmable Logic Controller PLC).
-A programming language close to Sequential Function Chart (SFC EN 61131-3 / IEC 61131-3) is used while it is intended to add more languages later. SFC is used to learn the basic principles as it focuses exactly on the core elements of sequential logic and the control of serial or parallel tasks, is easy to learn, has similarities to petri-nets, GRAFCET, Activity Diagrams, State Machines or Statecharts and can be used to program PLCs.
+Build solutions for real and fictional scenarios where cyclic working controllers act in time dependant environments (e.g. Programmable Logic Controller PLC).
+A programming language close to Sequential Function Chart (SFC EN 61131-3 / IEC 61131-3) is currently used while it is intended to add more languages later. SFC is used to learn the basic principles as it focuses exactly on the core elements of sequential logic and the control of serial or parallel tasks, is easy to learn, has similarities to petri-nets, GRAFCET, Activity Diagrams, State Machines or Statecharts and can be used to program PLCs.
 
 
 
@@ -62,6 +62,9 @@ Please follow the [C# style guide](https://github.com/Kersoph/open-sequential-lo
 
 Format your commit messages with readability in mind: A Git commit message is formatted as a **short title (first line)** and an **extended description (everything after the first line)**.
 
+There is a [small tutorial](https://www.youtube.com/watch?v=HSprHCjgxKk) on how to add a new lesson.
+
+
 ## Background
 
-Learning the fundamental principle of sequential logic in time dependent processes is critical for system engineers. The aim of this project is to investigate how using modern interactive technologies informed by pedagogical principles in learning applications, specifically, those with gamifications can help the students compared to the current theoretical approaches based on text or passive media.
+Learning the fundamental principle of sequential logic in time dependent processes is critical for system engineers. The aim of this project is to investigate how using modern interactive technologies informed by pedagogical principles in learning applications, specifically, those with gamifications can help the students compared to the current theoretical approaches based on text or passive media. As the feedback was very positive, it is now used as an exercise and simulation tool at the FHNW University of Applied Sciences and Arts Northwestern Switzerland to introduce the students to the core elements of sequential logic in time-dependant enviroments.
