@@ -15,12 +15,12 @@ namespace Osls.SfcSimulation.Viewer
         /// <summary>
         /// The loaded simulation scene with the controller
         /// </summary>
-        public SimulationPage SimulationPage { get; }
+        protected SimulationPage SimulationPage { get; }
         
         /// <summary>
         /// The loaded Programmable Logic Controller
         /// </summary>
-        public ProgrammableLogicController Plc { get; }
+        protected ProgrammableLogicController Plc { get; }
         #endregion
         
         

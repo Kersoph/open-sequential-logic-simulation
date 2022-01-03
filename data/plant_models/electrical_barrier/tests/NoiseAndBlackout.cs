@@ -61,16 +61,15 @@ namespace Osls.Plants.ElectricalBarrier
         #region ==================== Helpers ====================
         private void SimulateStep()
         {
-            _simulationMaster.SimulationPage.UpdateModel(50);
             if ((_simulatedSteps % 70) == 0)
             {
-                _simulationMaster.SimulationPage.SimulationOutput.SetValue(GuardAgent.OpenGateSwitchKey, false);
+                _simulation.SimulationOutput.SetValue(GuardAgent.OpenGateSwitchKey, false);
             }
             if ((_simulatedSteps % 99) == 0)
             {
                 _simulationMaster.Reset();
             }
-            _simulationMaster.Plc.Update(50);
+            _simulationMaster.UpdateSimulation(50);
             if (_simulation.Vehicle.TimesPassedTrack == 5) _simulation.Guard.AllowVehiclePass = false;
             _simulatedSteps++;
             if (_simulatedSteps >= 600 * 5)
