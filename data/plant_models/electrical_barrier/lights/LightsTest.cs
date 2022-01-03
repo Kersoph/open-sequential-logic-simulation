@@ -34,14 +34,11 @@ namespace Osls.Plants.ElectricalBarrier
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
-            string filepath = _openedLesson.TemporaryDiagramFilePath;
-            SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
-            
             _simulation = GetNode<Lights>("Lights");
-            if (sfcEntity != null)
+            _simulationMaster = DiagramSimulationLoader.LoadTemp(openedLesson, _simulation);
+            if (_simulationMaster != null)
             {
                 _simulation.InitialiseWith(mainNode, openedLesson);
-                _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }
             else

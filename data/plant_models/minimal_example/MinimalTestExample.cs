@@ -23,12 +23,10 @@ namespace Osls.Plants.MinimalExample
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _simulation = GetNode<MinimalSimulationExample>("MinimalSimulationExample");
-            string filepath = openedLesson.TemporaryDiagramFilePath;
-            SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
-            if (sfcEntity != null)
+            _simulationMaster = DiagramSimulationLoader.LoadTemp(openedLesson, _simulation);
+            if (_simulationMaster != null)
             {
                 _simulation.InitialiseWith(mainNode, openedLesson);
-                _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }
             else

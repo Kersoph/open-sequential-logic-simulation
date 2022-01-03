@@ -37,13 +37,14 @@ namespace Osls
         public string FolderPath { get; private set; }
         
         /// <summary>
-        /// The complete path where the temporary sfc file is stored for this lesson.
+        /// The complete path where the temporary diagram data file is stored for this lesson.
         /// Used for test / scene communication and immediate saves.
+        /// Depending on the filetype, other diagram simulation masters are used. SFC is ".sfc"
         /// </summary>
         public string TemporaryDiagramFilePath { get { return FolderPath + TemporaryDiagram; } }
         
         /// <summary>
-        /// The complete path where the custom sfc file is stored for this lesson.
+        /// The complete path where the custom diagram data file is stored for this lesson.
         /// </summary>
         public string CustomDiagramFilePath { get; set; }
         

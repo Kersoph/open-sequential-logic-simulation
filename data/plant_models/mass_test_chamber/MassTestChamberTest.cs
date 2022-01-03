@@ -31,14 +31,11 @@ namespace Osls.Plants.MassTestChamber
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
-            string filepath = _openedLesson.TemporaryDiagramFilePath;
-            SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
-            
             Simulation = GetNode<MassTestChamber>(_testChamberPath);
-            if (sfcEntity != null)
+            SimulationMaster = DiagramSimulationLoader.LoadTemp(openedLesson, Simulation);
+            if (SimulationMaster != null)
             {
                 Simulation.InitialiseWith(mainNode, openedLesson);
-                SimulationMaster = new Master(sfcEntity, Simulation);
                 IsExecutable = SimulationMaster.IsProgramSimulationValid();
             }
             else

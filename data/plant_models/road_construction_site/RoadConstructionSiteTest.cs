@@ -32,15 +32,13 @@ namespace Osls.Plants.RoadConstructionSite
         {
             _openedLesson = openedLesson;
             _simulation = GetNode<RoadConstructionSite>("PlantViewportContainer/PlantViewport/RoadConstructionSite");
-            string filepath = _openedLesson.TemporaryDiagramFilePath;
-            SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
-            if (sfcEntity != null)
+            _simulationMaster = DiagramSimulationLoader.LoadTemp(openedLesson, _simulation);
+            if (_simulationMaster != null)
             {
                 _simulation.InitialiseWith(mainNode, openedLesson);
-                _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
             }
-            if (sfcEntity == null || !_isExecutable)
+            if (_simulationMaster == null || !_isExecutable)
             {
                 _isExecutable = false;
                 _testState = TestState.Done;

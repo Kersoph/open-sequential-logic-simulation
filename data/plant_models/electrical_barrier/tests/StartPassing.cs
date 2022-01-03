@@ -25,13 +25,13 @@ namespace Osls.Plants.ElectricalBarrier
         /// <summary>
         /// Initializes the whole test viewer. Called before the node is added to the tree by the lesson controller.
         /// </summary>
-        public void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson, SfcEntity sfcEntity)
+        public void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _simulation = GetNode<ElectricalBarrier>("Viewport/ElectricalBarrier");
-            if (sfcEntity != null)
+            _simulationMaster = DiagramSimulationLoader.LoadTemp(openedLesson, _simulation);
+            if (_simulationMaster != null)
             {
                 _simulation.InitialiseWith(mainNode, openedLesson);
-                _simulationMaster = new Master(sfcEntity, _simulation);
                 _isExecutable = _simulationMaster.IsProgramSimulationValid();
                 _simulation.Barrier.SetAsOpened();
                 _simulation.Vehicle.CarSpeed = 0;

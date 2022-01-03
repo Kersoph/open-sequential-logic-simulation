@@ -40,12 +40,10 @@ namespace Osls.Plants.CircularSaw
         {
             _openedLesson = openedLesson;
             Simulation = GetNode<CircularSawModel>("ViewportContainer/Viewport/CircularSawModel");
-            string filepath = openedLesson.TemporaryDiagramFilePath;
-            SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
-            if (sfcEntity != null)
+            SimulationMaster = DiagramSimulationLoader.LoadTemp(openedLesson, Simulation);
+            if (SimulationMaster != null)
             {
                 Simulation.InitialiseWith(mainNode, openedLesson);
-                SimulationMaster = new Master(sfcEntity, Simulation);
                 _isExecutable = SimulationMaster.IsProgramSimulationValid();
                 SetupTestSteps();
             }

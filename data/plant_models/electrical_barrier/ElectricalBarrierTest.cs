@@ -29,17 +29,15 @@ namespace Osls.Plants.ElectricalBarrier
         public override void InitialiseWith(IMainNode mainNode, ILessonEntity openedLesson)
         {
             _openedLesson = openedLesson;
-            string filepath = _openedLesson.TemporaryDiagramFilePath;
-            SfcEntity sfcEntity = SfcEntity.TryLoadFromFile(filepath);
             
             _regularOperation = GetNode<RegularOperation>("Tests/RegularOperation");
-            _regularOperation.InitialiseWith(mainNode, openedLesson, sfcEntity);
+            _regularOperation.InitialiseWith(mainNode, openedLesson);
             _startOpen = GetNode<StartOpen>("Tests/StartOpen");
-            _startOpen.InitialiseWith(mainNode, openedLesson, sfcEntity);
+            _startOpen.InitialiseWith(mainNode, openedLesson);
             _startPassing = GetNode<StartPassing>("Tests/StartPassing");
-            _startPassing.InitialiseWith(mainNode, openedLesson, sfcEntity);
+            _startPassing.InitialiseWith(mainNode, openedLesson);
             _noiseAndBlackout = GetNode<NoiseAndBlackout>("Tests/NoiseAndBlackout");
-            _noiseAndBlackout.InitialiseWith(mainNode, openedLesson, sfcEntity);
+            _noiseAndBlackout.InitialiseWith(mainNode, openedLesson);
         }
         
         public override void _Process(float delta)
