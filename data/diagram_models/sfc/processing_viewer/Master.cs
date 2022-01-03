@@ -9,7 +9,7 @@ namespace Osls.SfcSimulation.Viewer
     /// <summary>
     /// The simulation engine master which controls and updates the plant and the PLC.
     /// </summary>
-    public class Master
+    public class Master : IDiagramSimulationMaster
     {
         #region ==================== Fields / Properties ====================
         /// <summary>

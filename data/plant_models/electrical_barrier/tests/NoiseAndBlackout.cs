@@ -10,7 +10,7 @@ namespace Osls.Plants.ElectricalBarrier
     {
         #region ==================== Fields / Properties ====================
         private bool _isExecutable;
-        private Master _simulationMaster;
+        private IDiagramSimulationMaster _simulationMaster;
         private ElectricalBarrier _simulation;
         private int _simulatedSteps;
         

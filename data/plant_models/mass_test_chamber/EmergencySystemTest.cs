@@ -17,7 +17,7 @@ namespace Osls.Plants.MassTestChamber
         [Export] private NodePath _emergencySystemPath = "ViewportContainer/Viewport/EmergencySystem";
         
         public EmergencySystem Simulation { get; private set; }
-        public Master SimulationMaster { get; private set; }
+        public IDiagramSimulationMaster SimulationMaster { get; private set; }
         public bool IsExecutable { get; private set; }
         public PaperLog PaperLog { get; private set; }
         public EmergencySystemTestStages TestController { get; private set; }

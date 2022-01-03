@@ -19,7 +19,7 @@ namespace Osls.Plants.RoadConstructionSite
         private TestState _testState;
         private float _lambdaState = 0.01f;
         private bool _isExecutable;
-        private Master _simulationMaster;
+        private IDiagramSimulationMaster _simulationMaster;
         private RoadConstructionSite _simulation;
         #endregion
         

@@ -11,7 +11,7 @@ namespace Osls.Plants.MinimalExample
     {
         #region ==================== Fields / Properties ====================
         private bool _isExecutable;
-        private Master _simulationMaster;
+        private IDiagramSimulationMaster _simulationMaster;
         private MinimalSimulationExample _simulation;
         #endregion
         

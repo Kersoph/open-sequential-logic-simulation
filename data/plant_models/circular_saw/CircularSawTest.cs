@@ -23,7 +23,7 @@ namespace Osls.Plants.CircularSaw
         /// <summary>
         /// The CPU / actor in this simulation
         /// </summary>
-        public Master SimulationMaster { get; private set; }
+        public IDiagramSimulationMaster SimulationMaster { get; private set; }
         
         /// <summary>
         /// The simulated plant

@@ -16,7 +16,7 @@ namespace Osls.Plants.ElectricalBarrier
         private ILessonEntity _openedLesson;
         
         private bool _isExecutable;
-        private Master _simulationMaster;
+        private IDiagramSimulationMaster _simulationMaster;
         private Lights _simulation;
         private int _turnOffTime;
         private int _turnOffTimout;

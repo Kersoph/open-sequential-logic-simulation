@@ -11,7 +11,7 @@ namespace Osls.Plants.Sandbox
     {
         #region ==================== Fields / Properties ====================
         private bool _isExecutable;
-        private Master _simulationMaster;
+        private IDiagramSimulationMaster _simulationMaster;
         private Sandbox _simulation;
         #endregion
         
