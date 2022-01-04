@@ -43,7 +43,7 @@ namespace Osls.SfcSimulation.Engine
             _inputRegisters = new ResettingStateTable(_simulationPage.SimulationOutput);
             _outputRegisters = new ResettingStateTable(_simulationPage.SimulationInput);
             SfcProgramData = new SfcProgramData(sfcEntity);
-            SfcProgram = new SfcProgram(this, SfcProgramData);
+            SfcProgram = new SfcProgram(this);
         }
         #endregion
         

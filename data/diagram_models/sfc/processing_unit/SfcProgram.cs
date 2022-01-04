@@ -8,15 +8,13 @@ namespace Osls.SfcSimulation.Engine
     {
         #region ==================== Fields / Properties ====================
         public ProgrammableLogicController Plc { get; private set; }
-        public SfcProgramData Data { get; private set; }
         #endregion
         
         
         #region ==================== Constructor ====================
-        public SfcProgram(ProgrammableLogicController plc, SfcProgramData data)
+        public SfcProgram(ProgrammableLogicController plc)
         {
             Plc = plc;
-            Data = data;
         }
         #endregion
         
@@ -27,28 +25,28 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void UpdateProcess(int deltaTimeMs)
         {
-            Data.InactiveSteps.UnionWith(Data.SoonInactiveSteps);
-            Data.ActiveSteps.ExceptWith(Data.SoonInactiveSteps);
-            Data.SoonInactiveSteps.Clear();
-            foreach (var sfcStep in Data.SoonActiveSteps)
+            Plc.SfcProgramData.InactiveSteps.UnionWith(Plc.SfcProgramData.SoonInactiveSteps);
+            Plc.SfcProgramData.ActiveSteps.ExceptWith(Plc.SfcProgramData.SoonInactiveSteps);
+            Plc.SfcProgramData.SoonInactiveSteps.Clear();
+            foreach (var sfcStep in Plc.SfcProgramData.SoonActiveSteps)
             {
                 sfcStep.ExecuteActions(this, ActionQualifier.PPlus, deltaTimeMs);
             }
-            Data.ActiveSteps.UnionWith(Data.SoonActiveSteps);
-            Data.InactiveSteps.ExceptWith(Data.SoonActiveSteps);
-            Data.SoonActiveSteps.Clear();
+            Plc.SfcProgramData.ActiveSteps.UnionWith(Plc.SfcProgramData.SoonActiveSteps);
+            Plc.SfcProgramData.InactiveSteps.ExceptWith(Plc.SfcProgramData.SoonActiveSteps);
+            Plc.SfcProgramData.SoonActiveSteps.Clear();
             
-            foreach (var sfcStep in Data.ActiveSteps)
+            foreach (var sfcStep in Plc.SfcProgramData.ActiveSteps)
             {
                 sfcStep.ExecuteActions(this, ActionQualifier.N, deltaTimeMs);
             }
             
-            foreach (var sfcStep in Data.ActiveSteps)
+            foreach (var sfcStep in Plc.SfcProgramData.ActiveSteps)
             {
                 sfcStep.CalculateTransition(this);
             }
             
-            foreach (var sfcStep in Data.SoonInactiveSteps)
+            foreach (var sfcStep in Plc.SfcProgramData.SoonInactiveSteps)
             {
                 sfcStep.ExecuteActions(this, ActionQualifier.PMinus, deltaTimeMs);
             }
@@ -59,8 +57,8 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public void UpdateStepStatus(List<SfcStep> toActive, List<SfcStep> toInactive)
         {
-            Data.SoonActiveSteps.UnionWith(toActive);
-            Data.SoonInactiveSteps.UnionWith(toInactive);
+            Plc.SfcProgramData.SoonActiveSteps.UnionWith(toActive);
+            Plc.SfcProgramData.SoonInactiveSteps.UnionWith(toInactive);
         }
         
         /// <summary>
@@ -68,7 +66,7 @@ namespace Osls.SfcSimulation.Engine
         /// </summary>
         public bool IsProgramLogicValid()
         {
-            return Data.AreStepsValid();
+            return Plc.SfcProgramData.AreStepsValid();
         }
         #endregion
     }

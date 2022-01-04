@@ -51,7 +51,7 @@ namespace Osls.SfcSimulation.Engine
             // All dependent steps must be active
             foreach (SfcStep step in DependingSteps)
             {
-                if (!program.Data.IsStepActive(step)) return false;
+                if (!program.Plc.SfcProgramData.IsStepActive(step)) return false;
             }
             return Transition.Result(program.Plc);
         }
