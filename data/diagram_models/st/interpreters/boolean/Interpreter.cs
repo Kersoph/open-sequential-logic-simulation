@@ -52,14 +52,14 @@ namespace Osls.St.Boolean
                 data.MoveNext();
                 if (data.IsEndReached) return currentExpression;
             }
-            // B -> N V N
+            // B -> N R N
             else if (IsRepresentingNumerical(data.Current, context))
             {
                 // N -> n
                 Numerical.NumericalExpression leftNumber = Numerical.Interpreter.AsNumericalExpression(data.Current, context);
                 data.MoveNext();
                 if (data.IsEndReached) return null;
-                // V -> v
+                // R -> r
                 string relation = data.Current;
                 if (!RelationalOperation.Values.Contains(relation)) return null;
                 data.MoveNext();

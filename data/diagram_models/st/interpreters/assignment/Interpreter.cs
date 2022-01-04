@@ -33,15 +33,18 @@ namespace Osls.St.Assignment
         {
             string targetWord = data.Current;
             data.MoveNext();
+            // A -> b_REF
             if (data.IsEndReached) return InterpretAsDirectBooleanAssignment(targetWord, context);
             string assignmentSymbol = data.Current;
             data.MoveNext();
             if (!AssignmentSymbol.Contains(assignmentSymbol) || data.IsEndReached) return null;
+            // A -> b_REF O B
             if (context.OutputRegisters.ContainsBoolean(targetWord))
             {
                 BooleanExpression sourceExpression = St.Boolean.Interpreter.InterpretBooleanExpression(data, context);
                 return new Boolean(targetWord, sourceExpression, context);
             }
+            // A -> n_REF O N
             else if (context.OutputRegisters.ContainsInteger(targetWord))
             {
                 string numerical = data.Current;
