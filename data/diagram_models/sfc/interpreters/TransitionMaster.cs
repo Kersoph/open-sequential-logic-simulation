@@ -14,6 +14,7 @@ namespace Osls.SfcEditor.Interpreters
         private static Color StepInputColor      = Color.Color8(150, 100, 0, 255);
         #endregion
         
+        
         #region ==================== Public Methods ====================
         /// <summary>
         /// Fills in the defined color keys of the opened simulation
@@ -44,7 +45,6 @@ namespace Osls.SfcEditor.Interpreters
                 textEdit.AddKeywordColor(key, IntegerInputColor);
             }
             // Godot already forces integer static inputs and colors them. (They can not be deleted so far)
-            textEdit.AddColorOverride("symbol_color", IntegerCommandColor);
             textEdit.AddColorOverride("number_color", IntegerInputColor);
             foreach (string key in St.Boolean.RelationalOperation.Values)
             {
