@@ -63,32 +63,34 @@ namespace Osls.SfcEditor
         /// Loads the file and builds the SFC diagram if the file exists
         /// Creates a default diagram if it could not be loaded
         /// </summary>
-        public void LoadDiagramOrDefault(string filepath)
+        /// <returns>True if the diagram could be loaded, false if it was created from default</returns>
+        public bool LoadDiagramOrDefault(string filepath)
         {
-            if (!System.IO.File.Exists(filepath))
+            bool loadedFromFile = true;
+            if (System.IO.File.Exists(filepath))
             {
-                if (Data.SfcEntity.Lookup(1, 0) == null)
+                bool success = Data.TryLoadData(filepath);
+                if (!success)
                 {
-                    PatchEntity entity = new PatchEntity(1, 1)
-                    {
-                        SfcStepType = StepType.StartingStep
-                    };
-                    Data.SfcEntity.AddPatch(entity);
+                    SetupDefaultSFC();
+                    loadedFromFile = false;
                 }
             }
             else
             {
-                Data.LoadData(filepath);
+                SetupDefaultSFC();
+                loadedFromFile = false;
             }
             InitialiseFromData();
+            return loadedFromFile;
         }
         
         /// <summary>
         /// Saves the SFC diagram to a file
         /// </summary>
-        public void SaveDiagram(string filepath)
+        public Error SaveDiagram(string filepath)
         {
-            Data.SaveData(filepath);
+            return Data.TrySaveData(filepath);
         }
         
         /// <summary>
@@ -105,6 +107,18 @@ namespace Osls.SfcEditor
         
         
         #region ==================== Helpers ====================
+        private void SetupDefaultSFC()
+        {
+            if (Data.SfcEntity.Lookup(1, 0) == null)
+            {
+                PatchEntity entity = new PatchEntity(1, 1)
+                {
+                    SfcStepType = StepType.StartingStep
+                };
+                Data.SfcEntity.AddPatch(entity);
+            }
+        }
+        
         /// <summary>
         /// Loads the data from the stream. Written in "WriteTo".
         /// </summary>

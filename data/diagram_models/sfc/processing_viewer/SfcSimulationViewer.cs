@@ -14,6 +14,7 @@ namespace Osls.SfcSimulation.Viewer
     {
         #region ==================== Fields / Properties ====================
         [Export] private NodePath _sfc2dControlsPath = "HscRelative/Sfc2dViewer/Sfc2dControls";
+        [Export] private NodePath _errorLabelPath = "HscRelative/Sfc2dViewer/ErrorLabel";
         private IMainNode _mainNode;
         
         private LessonView _lessonView;
@@ -47,7 +48,7 @@ namespace Osls.SfcSimulation.Viewer
             InitialiseDiagram(openedLesson);
             InitialiseSimulation(openedLesson);
             _breakpoints = new BreakpointManager(_simulationMaster, _sfc2dEditorNode);
-            if (!_isExecutable) GetNode<Label>("HscRelative/Sfc2dViewer/ErrorLabel").Visible = true;
+            if (!_isExecutable) GetNode<Label>(_errorLabelPath).Visible = true;
         }
         
         public override void _Process(float delta)
@@ -112,7 +113,12 @@ namespace Osls.SfcSimulation.Viewer
             _sfc2dEditorNode = GetNode<Sfc2dEditorNode>("HscRelative/Sfc2dViewer/Sfc2dEditor");
             _sfc2dEditorNode.InitializeEditor(_processingData, false);
             string filepath = openedLesson.TemporaryDiagramFilePath;
-            _sfc2dEditorNode.TryLoadDiagram(filepath);
+            bool success = _sfc2dEditorNode.TryLoadDiagram(filepath);
+            if (!success)
+            {
+                GetNode<Label>(_errorLabelPath).Text = "No file access permission in the lesson folder.";
+                GetNode<Label>(_errorLabelPath).Visible = true;
+            }
         }
         
         /// <summary>

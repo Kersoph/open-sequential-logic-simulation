@@ -51,8 +51,8 @@ namespace Osls.SfcEditor
         public void SaveDiagram()
         {
             string filepath = OpenedLesson.CustomDiagramFilePath;
-            Sfc2dEditorNode.SaveDiagram(filepath);
-            GetNode<EditorControls>(EditorControlsPath).OnSaveDiagram();
+            Error result = Sfc2dEditorNode.SaveDiagram(filepath);
+            GetNode<EditorControls>(EditorControlsPath).OnSaveDiagram(result);
         }
         
         /// <summary>

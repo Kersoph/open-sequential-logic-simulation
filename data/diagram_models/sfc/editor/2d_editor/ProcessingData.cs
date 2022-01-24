@@ -1,4 +1,3 @@
-using System.IO;
 using System.Collections.Generic;
 using Osls.SfcEditor.Interpreters;
 
@@ -75,31 +74,29 @@ namespace Osls.SfcEditor
         }
         
         /// <summary>
-        /// Loads the sfc file and repolaces the current data in the SfcEntity
+        /// Loads the sfc file and if successful, replaces the current SfcEntity
+        /// returns true if it could be loaded and replaced
         /// </summary>
-        public void LoadData(string filepath)
+        public bool TryLoadData(string filepath)
         {
-            using (FileStream stream = File.Open(filepath, FileMode.OpenOrCreate))
+            SfcEntity loaded = SfcEntity.TryLoadFromFile(filepath);
+            if (loaded != null)
             {
-                using (BinaryReader reader = new BinaryReader(stream))
-                {
-                    SfcEntity.ReadFrom(reader);
-                }
+                SfcEntity = loaded;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         
         /// <summary>
         /// Saves the SfcEntity to a file
         /// </summary>
-        public void SaveData(string filepath)
+        public Godot.Error TrySaveData(string filepath)
         {
-            using (FileStream stream = File.Open(filepath, FileMode.OpenOrCreate))
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    SfcEntity.WriteTo(writer);
-                }
-            }
+            return SfcEntity.TryWriteTo(filepath);
         }
         #endregion
     }

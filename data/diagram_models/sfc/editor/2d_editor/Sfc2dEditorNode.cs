@@ -49,18 +49,19 @@ namespace Osls.SfcEditor
         /// <summary>
         /// Saves the SFC diagram to a file
         /// </summary>
-        public void SaveDiagram(string filepath)
+        public Error SaveDiagram(string filepath)
         {
-            Sfc2dEditorControl.SaveDiagram(filepath);
+            return Sfc2dEditorControl.SaveDiagram(filepath);
         }
         
         /// <summary>
         /// Loads the file and builds the SFC diagram if the file exists
         /// Creates a default diagram if it could not be loaded
         /// </summary>
-        public void TryLoadDiagram(string filepath)
+        /// <returns>True if the diagram could be loaded, false if it was created from default</returns>
+        public bool TryLoadDiagram(string filepath)
         {
-            Sfc2dEditorControl.LoadDiagramOrDefault(filepath);
+            return Sfc2dEditorControl.LoadDiagramOrDefault(filepath);
         }
         
         /// <summary>
