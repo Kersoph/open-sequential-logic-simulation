@@ -70,35 +70,30 @@ namespace Osls.SfcEditor
         }
         
         /// <summary>
-        /// Loads the data from the stream. Written in "WriteTo".
-        /// </summary>
-        public void ReadFrom(BinaryReader reader)
-        {
-            PersistenceCheckHelper.CheckSectionNumber(reader, 0x11111111);
-            _patchMap.Clear();
-            int count = reader.ReadInt32();
-            for (int i = 0; i < count; i++)
-            {
-                PatchEntity entity = PatchEntity.CreateFrom(reader);
-                AddPatch(entity);
-            }
-        }
-        
-        /// <summary>
         /// Writes the data from the stream. Read by "ReadFrom".
         /// </summary>
-        public void WriteTo(BinaryWriter writer)
+        public Godot.Error TryWriteTo(string filepath)
         {
-            writer.Write(0x11111111);
-            writer.Write(_patchMap.Count);
-            foreach (PatchEntity entity in _patchMap.Values)
+            Godot.Error progress = Godot.Error.Ok;
+            try
             {
-                entity.WriteTo(writer);
+                using (FileStream stream = File.Open(filepath, FileMode.OpenOrCreate))
+                {
+                    using (BinaryWriter writer = new BinaryWriter(stream))
+                    {
+                        WriteTo(writer);
+                    }
+                }
             }
+            catch (System.UnauthorizedAccessException)
+            {
+                progress = Godot.Error.FileNoPermission;
+            }
+            return progress;
         }
         
         /// <summary>
-        /// Tries to load a new entity from the given filepath. Null if the path is invalid
+        /// Tries to load a new entity from the given filepath. Null if the path is invalid or we do not have access rights.
         /// </summary>
         public static SfcEntity TryLoadFromFile(string filepath)
         {
@@ -106,7 +101,14 @@ namespace Osls.SfcEditor
             {
                 return null;
             }
-            return LoadFromFile(filepath);
+            try
+            {
+                return LoadFromFile(filepath);
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                return null;
+            }
         }
         
         /// <summary>
@@ -123,6 +125,37 @@ namespace Osls.SfcEditor
                 }
             }
             return entity;
+        }
+        #endregion
+        
+        
+        #region ==================== Helpers ====================
+        /// <summary>
+        /// Loads the data from the stream. Written in "WriteTo".
+        /// </summary>
+        private void ReadFrom(BinaryReader reader)
+        {
+            PersistenceCheckHelper.CheckSectionNumber(reader, 0x11111111);
+            _patchMap.Clear();
+            int count = reader.ReadInt32();
+            for (int i = 0; i < count; i++)
+            {
+                PatchEntity entity = PatchEntity.CreateFrom(reader);
+                AddPatch(entity);
+            }
+        }
+        
+        /// <summary>
+        /// Writes the data from the stream. Read by "ReadFrom".
+        /// </summary>
+        private void WriteTo(BinaryWriter writer)
+        {
+            writer.Write(0x11111111);
+            writer.Write(_patchMap.Count);
+            foreach (PatchEntity entity in _patchMap.Values)
+            {
+                entity.WriteTo(writer);
+            }
         }
         #endregion
     }
