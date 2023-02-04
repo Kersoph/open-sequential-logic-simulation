@@ -337,8 +337,8 @@ margin_left = 2.0
 margin_right = 179.0
 margin_bottom = 24.0
 rect_scale = Vector2( 0.7, 0.7 )
-custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 13 )
 text = "Car Arrival Delay"
 __meta__ = {
 "_edit_use_anchors_": false

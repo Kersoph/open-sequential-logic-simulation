@@ -59,8 +59,8 @@ margin_right = 490.0
 margin_top = 20.0
 margin_right = 490.0
 margin_bottom = 50.0
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
 text = "-- Inspection Report --"
 
 [node name="FollowSpacer" type="Control" parent="Panel/VBC"]

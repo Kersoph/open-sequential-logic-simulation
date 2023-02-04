@@ -12,6 +12,3 @@ rounded = true
 allow_greater = true
 allow_lesser = true
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}

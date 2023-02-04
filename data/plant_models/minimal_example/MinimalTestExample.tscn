@@ -16,8 +16,8 @@ margin_left = -71.0
 margin_top = 32.0
 margin_right = 71.0
 margin_bottom = 62.0
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
 text = "Test Page!"
 __meta__ = {
 "_edit_use_anchors_": false
